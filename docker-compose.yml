@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  db:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: snorlax
+      MYSQL_DATABASE: flats
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: bigsnorlax
+    volumes:
+      - mysql-docker:/var/lib/mysql
+    ports:
+    - "3306:3306"
+
+  node:
+    depends_on:
+      - db
+    build: ./backend
+    image: node
+    ports:
+      - "80:80"
+    volumes:
+      - ./backend/src:/app/src
+
+volumes:
+  mysql-docker:
