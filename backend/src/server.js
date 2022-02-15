@@ -2,6 +2,7 @@ const express = require('express');
 const sequelize = require('./util/database');
 
 const app = express();
+const cors = require('cors');
 
 const City = require('./models/city');
 const Property = require('./models/property');
@@ -21,6 +22,8 @@ PropertyType.hasMany(Property);
 // Property.hasOne(PropertyType);
 // PropertyType.belongsToMany(City);
 
+app.use(cors());
+
 app.use('/properties', (req, res) => {
     res.send('properties');
 });
@@ -31,7 +34,7 @@ app.use('/', (req, res) => {
     res.send('home koala');
 });
 
-sequelize.sync({alter: true, force: true})
+sequelize.sync({alter: true})
     .then(
         app.listen(80)
     );
