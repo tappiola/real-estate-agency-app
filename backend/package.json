@@ -10,7 +10,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "mariadb": "^2.5.5",
+    "sequelize": "^6.16.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

@@ -10,5 +10,4 @@ COPY . /app
 
 EXPOSE 80
 
-#CMD ["nodemon", "server.js"]
 CMD ["npm", "start"]
