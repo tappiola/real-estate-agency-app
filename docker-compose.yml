@@ -18,11 +18,19 @@ services:
     depends_on:
       - db
     build: ./backend
-    image: node
     ports:
       - "80:80"
     volumes:
       - ./backend/src:/app/src
+
+  front:
+    depends_on:
+      - node
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src
 
 volumes:
   mysql-docker:

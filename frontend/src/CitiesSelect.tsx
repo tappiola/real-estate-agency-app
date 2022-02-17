@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {HOST} from "./constants";
 
 interface City {
     name: string;
@@ -10,7 +11,8 @@ const CitiesSelect: React.FC = () => {
     const [selectedCity, setSelectedCity] = useState<string>('');
 
     const fetchCities = async () => {
-        let response = await fetch('http://localhost/cities');
+        let response = await fetch(HOST + '/cities');
+        console.log(response);
         return response.json();
     }
 
@@ -29,7 +31,7 @@ const CitiesSelect: React.FC = () => {
             value={selectedCity}
             onChange={(e) => setSelectedCity(e.target.value)}
         >
-            <option selected value=''>Select city</option>
+            <option defaultValue='' value=''>Select city</option>
             {cities.map( ({name, id}) => <option key={id}>{name}</option>)}
         </select>
         <h1>{selectedCity}</h1>
