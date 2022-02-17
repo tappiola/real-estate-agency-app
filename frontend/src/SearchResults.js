@@ -44,6 +44,7 @@ const SearchResults = () => {
                 <p>{p.description}</p>
                 <p>{p.city.name}</p>
                 <p>{p.propertyType.name}</p>
+                <p>{p.inWishlist ? 'IN WISHLIST': 'NOT IN WISHLIST' }</p>
                 </div>)}
     </>
 }
