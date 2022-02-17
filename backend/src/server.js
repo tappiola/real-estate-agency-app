@@ -10,6 +10,11 @@ const Property = require('./models/property');
 const PropertyType = require('./models/propertyType');
 const ClientRequests = require('./models/clientRequests');
 
+const { graphqlHTTP  } = require('express-graphql');
+
+const graphqlSchema = require('./graphql/schema');
+const graphqlResolver = require('./graphql/resolvers');
+
 const citiesRoutes = require('./routes/cities');
 const clientRequestsRoutes = require('./routes/clientRequests');
 
@@ -28,6 +33,15 @@ PropertyType.hasMany(Property);
 app.use(cors());
 
 app.use(bodyParser.json());
+
+app.use(
+    '/graphql',
+    graphqlHTTP({
+        schema: graphqlSchema,
+        rootValue: graphqlResolver,
+        graphiql: true
+    })
+);
 
 app.use('/properties', (req, res) => {
     res.send('properties');

@@ -3,25 +3,78 @@ import { useNavigate } from "react-router-dom";
 
 
 const Register = () => {
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    let navigate = useNavigate();
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
+    const navigate = useNavigate();
 
-        await fetch('http://localhost:7777/array', {
+    // const onSubmit = async (e) => {
+    //     e.preventDefault();
+    //
+    //     await fetch('http://localhost/array', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({name, email, password})
+    //     })
+    //         .then(() => navigate("/"))
+    // };
+
+    const signupHandler = (event) => {
+        event.preventDefault();
+        // this.setState({ authLoading: true });
+        const graphqlQuery = {
+            query: `
+        mutation {
+          createUser(userInput: {email: "${
+                email
+            }", name:"${name}", password:"${
+                password
+            }"}) {
+            id
+            email
+          }
+        }
+      `
+        };
+        fetch('http://localhost/graphql', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({email, password})
+            body: JSON.stringify(graphqlQuery)
         })
-            .then(() => navigate("/"))
+            .then(res => {
+                return res.json();
+            })
+            .then(resData => {
+                if (resData.errors && resData.errors[0].status === 422) {
+                    throw new Error(
+                        "This email is already registered."
+                    );
+                }
+                if (resData.errors) {
+                    throw new Error('User creation failed!');
+                }
+                console.log(resData);
+                // this.setState({ isAuth: false, authLoading: false });
+                navigate('/',  { replace: true });
+            })
+            .catch(err => {
+                console.log(err);
+                // this.setState({
+                //     isAuth: false,
+                //     authLoading: false,
+                //     error: err
+                // });
+            });
     };
 
-    return <form onSubmit={onSubmit}>
-        <input placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
+    return <form onSubmit={signupHandler}>
+        <input placeholder="Name" value={name} onChange={e => setName(e.target.value)}/>
+        <input placeholder="Email" type="email" value={email} onChange={e => setEmail(e.target.value)}/>
         <input placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
         <button type="submit">Register</button>
     </form>

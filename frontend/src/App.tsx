@@ -1,13 +1,22 @@
 import React from 'react';
 import './App.css';
-import CitiesSelect from "./CitiesSelect";
-import ContactUs from "./ContactUs";
+import Register from "./Register";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Login from "./Login";
+import HomePage from "./HomePage";
+import Wishlist from './Wishlist';
 
 function App() {
   return (
     <div className="App">
-      <CitiesSelect/>
-        <ContactUs/>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/register" element={<Register />}/>
+                <Route path="/login" element={<Login />}/>
+                <Route path="/wishlist" element={<Wishlist />}/>
+                <Route path="/" element={<HomePage/>}/>
+            </Routes>
+        </BrowserRouter>
     </div>
   );
 }
