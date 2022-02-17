@@ -7,9 +7,10 @@ const bodyParser = require('body-parser');
 
 const City = require('./models/city');
 const Property = require('./models/property');
-const PropertyType = require('./models/user');
-const User = require('./models/propertyType');
+const PropertyType = require('./models/propertyType');
+const User = require('./models/user');
 const ClientRequests = require('./models/clientRequests');
+const UserWishlist = require('./models/userWishlist');
 
 const { graphqlHTTP  } = require('express-graphql');
 
@@ -24,10 +25,6 @@ City.hasMany(Property);
 
 Property.belongsTo(PropertyType);
 PropertyType.hasMany(Property);
-
-const UserWishlist = sequelize.define('user_wishlist', { }, {timestamps: false});
-User.belongsToMany(Property, { through: UserWishlist });
-Property.belongsToMany(User, { through: UserWishlist });
 
 app.use(cors());
 

@@ -6,6 +6,7 @@ const User = require('../models/user');
 const Property = require("../models/property");
 const City = require("../models/city");
 const PropertyType = require("../models/propertyType");
+const UserWishlist = require("../models/userWishlist");
 
 module.exports = {
   createUser: async ({ userInput })  => {
@@ -63,13 +64,21 @@ module.exports = {
     );
     return { token: token, userId: user.id.toString() };
   },
-  getProperties: async () => {
+  getProperties: async (args, req) => {
+    const authToken = req.headers['authorization'].split(' ')[1]
+    const decodedToken = jwt.verify(authToken, 'somesupersecretsecret');
+    const userId = decodedToken.userId;
+    console.log({userId})
+
     const data =  await Property.findAll( {include: [{
         model: City,
         as: 'city'
       }, {
         model: PropertyType,
         as: 'propertyType'
+      }, {
+        model: UserWishlist,
+        as: 'wishlistData',
       }]});
     console.log(data);
     return data;

@@ -21,6 +21,7 @@ const SearchResults = () => {
                 const response = await fetch('http://localhost/graphql', {
                     method: 'POST',
                     headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('token'),
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(graphqlQuery)
@@ -43,7 +44,7 @@ const SearchResults = () => {
                 <h2>{p.title}</h2>
                 <p>{p.description}</p>
                 <p>{p.city.name}</p>
-                <p>{p.propertyType.name}</p>
+                <p>{p.propertyType?.name}</p>
                 <p>{p.inWishlist ? 'IN WISHLIST': 'NOT IN WISHLIST' }</p>
                 </div>)}
     </>
