@@ -5,6 +5,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Login from "./Login";
 import HomePage from "./HomePage";
 import Wishlist from './Wishlist';
+import SearchResults from "./SearchResults";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
                 <Route path="/register" element={<Register />}/>
                 <Route path="/login" element={<Login />}/>
                 <Route path="/wishlist" element={<Wishlist />}/>
-                <Route path="/" element={<HomePage/>}/>
+                <Route path="/search" element={<SearchResults />}/>
+                <Route path="/" element={<HomePage />}/>
             </Routes>
         </BrowserRouter>
     </div>

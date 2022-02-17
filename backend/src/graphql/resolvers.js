@@ -3,6 +3,9 @@ const validator = require('validator');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
+const Property = require("../models/property");
+const City = require("../models/city");
+const PropertyType = require("../models/propertyType");
 
 module.exports = {
   createUser: async ({ userInput })  => {
@@ -59,5 +62,16 @@ module.exports = {
       { expiresIn: '1h' }
     );
     return { token: token, userId: user.id.toString() };
+  },
+  getProperties: async () => {
+    const data =  await Property.findAll( {include: [{
+        model: City,
+        as: 'city'
+      }, {
+        model: PropertyType,
+        as: 'propertyType'
+      }]});
+    console.log(data);
+    return data;
   }
 };

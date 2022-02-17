@@ -10,6 +10,6 @@ const PropertyType = sequelize.define('propertyType', {
     primaryKey: true
   },
   name: Sequelize.STRING
-});
+}, {timestamps: false});
 
 module.exports = PropertyType;
