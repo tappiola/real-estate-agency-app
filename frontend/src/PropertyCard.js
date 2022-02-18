@@ -1,37 +1,9 @@
 import WishlistIcon from "./WishlistIcon";
 import {useState} from "react";
-import {sendGraphqlRequest} from "./graphql";
+import {addToWishlist, removeFromWishlist} from "./queries";
 
 const PropertyCard = ({property}) => {
     const [isInWishlist, setIsInWishlist] = useState(property.isInWishlist);
-
-    const addToWishlist = (id) => {
-        const graphqlQuery  = {
-            query: `
-        mutation {
-          addToWishlist(propertyId: "${id}") {
-            success
-          }
-        }
-      `
-        };
-
-        return sendGraphqlRequest(graphqlQuery);
-    }
-
-    const removeFromWishlist = (id) => {
-        const graphqlQuery  = {
-            query: `
-        mutation {
-          removeFromWishlist(propertyId: "${id}") {
-            success
-          }
-        }
-      `
-        };
-
-        return sendGraphqlRequest(graphqlQuery);
-    }
 
     const onWishlistToggle = async () => {
 

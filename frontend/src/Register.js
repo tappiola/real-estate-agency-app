@@ -1,6 +1,7 @@
 import {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import {sendGraphqlRequest} from "./graphql";
+import {register} from "./queries";
 
 
 const Register = () => {
@@ -26,22 +27,8 @@ const Register = () => {
     const signupHandler = (event) => {
         event.preventDefault();
         // this.setState({ authLoading: true });
-        const graphqlQuery = {
-            query: `
-        mutation {
-          createUser(userInput: {email: "${
-                email
-            }", name:"${name}", password:"${
-                password
-            }"}) {
-            id
-            email
-          }
-        }
-      `
-        };
-        sendGraphqlRequest(graphqlQuery)
-            .then(res => {
+
+            register(email, name, password).then(res => {
                 return res.json();
             })
             .then(resData => {

@@ -8,6 +8,7 @@ const City = require("../models/city");
 const PropertyType = require("../models/propertyType");
 const UserWishlist = require("../models/userWishlist");
 const {SECRET} = require("../constants");
+const { Op } = require("sequelize");
 
 module.exports = {
   createUser: async ({ userInput })  => {
@@ -90,6 +91,28 @@ module.exports = {
     }
 
     return data;
+  },
+
+  getWishlist: async (args, req) => {
+    const authToken = req.headers['authorization'].split(' ')[1]
+    const decodedToken = jwt.verify(authToken, SECRET);
+    const userId = decodedToken.userId;
+
+    // const data =  await UserWishlist.findAll( {where: {userId}, include: Property});
+    const data =  await UserWishlist.findAll( {where: {userId}});
+    const propertyIds = data.map(({propertyId}) => propertyId);
+
+    const wishlistProperties = Property.findAll({where: {id: {[Op.or]: propertyIds}}, include: [{
+      model: City,
+      as: 'city'
+    }, {
+      model: PropertyType,
+      as: 'propertyType'
+    }]});
+
+    console.log(wishlistProperties);
+
+    return wishlistProperties;
   },
   addToWishlist: async ({propertyId}, req) => {
     const authToken = req.headers['authorization'].split(' ')[1]

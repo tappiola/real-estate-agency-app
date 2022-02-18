@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {sendGraphqlRequest} from "./graphql";
+import {login} from "./queries";
 
 const Login = () => {
         const [email, setEmail] = useState('');
@@ -10,19 +10,8 @@ const Login = () => {
    const loginHandler = (event) => {
         event.preventDefault();
 
-       const graphqlQuery = {
-           query: `
-        query {
-          login(email: "${email}", password: "${password}") {
-            userId
-            token
-          }
-        }
-      `
-       };
-
         // this.setState({ authLoading: true });
-        sendGraphqlRequest(graphqlQuery)
+        login(email, password)
             .then(res => {
                 if (res.status === 422) {
                     throw new Error('Validation failed.');

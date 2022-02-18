@@ -22,6 +22,7 @@ TODO:
 - (R) token expiration
 - (R) 500 error when loading /search unauthorized
 - (R) add protected route /wishlist
+- (R) fix 'property is not associated to user_wishlist!'
 - handle 404
 - add images table
 - add carousel
