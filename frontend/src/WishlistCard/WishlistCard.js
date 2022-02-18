@@ -1,7 +1,5 @@
-import WishlistIcon from "./WishlistIcon";
-import {useState} from "react";
-import {sendGraphqlRequest} from "./graphql";
-import {removeFromWishlist} from "./queries";
+import {removeFromWishlist} from "../queries";
+import './WishlistCard.style.scss';
 
 const PropertyCard = ({property, updatePropertiesList}) => {
 
@@ -18,7 +16,7 @@ const PropertyCard = ({property, updatePropertiesList}) => {
     }
 
     return (
-        <div>
+        <div className="WishlistCard-Wrapper">
             <h2>{property.title}</h2>
             <p>{property.description}</p>
             <p>{property.city.name}</p>
