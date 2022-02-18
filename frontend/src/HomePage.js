@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import CitiesSelect from "./CitiesSelect";
 import ContactUs from "./ContactUs";
 

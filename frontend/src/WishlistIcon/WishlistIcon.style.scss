@@ -2,13 +2,13 @@
     stroke: black;
 
     &:hover {
-        stroke: #308291;
-        fill: #308291;
+        stroke: var(--primary-bright-color);
+        fill: var(--primary-bright-color);
     }
 
     &_isActive {
-        fill: #308291;
-        stroke: #308291;
+        fill: var(--primary-bright-color);
+        stroke: var(--primary-bright-color);
 
         &:hover {
             fill: none;

@@ -1,5 +1,6 @@
 import {removeFromWishlist} from "../queries";
 import './WishlistCard.style.scss';
+import CloseIcon from "../CloseIcon";
 
 const PropertyCard = ({property, updatePropertiesList}) => {
 
@@ -21,7 +22,9 @@ const PropertyCard = ({property, updatePropertiesList}) => {
             <p>{property.description}</p>
             <p>{property.city.name}</p>
             <p>{property.propertyType?.name}</p>
-            <button onClick={onWishlistRemove}>Remove</button>
+            <p className="WishlistCard-Remove" onClick={onWishlistRemove}>
+                <CloseIcon/>
+            </p>
         </div>
     );
 }

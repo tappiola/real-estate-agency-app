@@ -1,7 +1,14 @@
 .WishlistCard {
      &-Wrapper {
-       border: 2px solid #308291;
+       border: 2px solid var(--primary-bright-color);
          margin: 20px;
          padding: 20px;
+         position: relative;
      }
+
+    &-Remove {
+        position: absolute;
+        top: 0;
+        right: 15px;
+    }
  }

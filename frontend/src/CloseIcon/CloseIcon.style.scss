@@ -1,0 +1,11 @@
+.CloseIcon {
+    fill: var(--color-black);
+
+    &:hover {
+        fill: var(--primary-bright-color);
+    }
+
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
