@@ -71,7 +71,9 @@ module.exports = {
     const decodedToken = jwt.verify(authToken, SECRET);
     const userId = decodedToken.userId;
 
-    const data =  await Property.findAll( {include: [{
+    const count = Property.count();
+
+    const items = await Property.findAll( {include: [{
         model: City,
         as: 'city'
       }, {
@@ -81,16 +83,16 @@ module.exports = {
     });
 
     const userWishlistProperties = await UserWishlist.findAll({
-      where: {userId: userId},
+      where: {userId},
       raw: true
     });
     const userWishlistPropertiesIds = userWishlistProperties.map(p => p.propertyId);
 
-    for(p of data){
+    for(p of items){
       p.isInWishlist = userWishlistPropertiesIds.includes(p.id);
     }
 
-    return data;
+    return {count, items};
   },
 
   getWishlist: async (args, req) => {
@@ -116,7 +118,9 @@ module.exports = {
   },
   addToWishlist: async ({propertyId}, req) => {
     const authToken = req.headers['authorization'].split(' ')[1]
+    console.log({authToken});
     const decodedToken = jwt.verify(authToken, SECRET);
+    console.log({decodedToken});
     const userId = decodedToken.userId;
 
     await UserWishlist.create({ userId, propertyId });

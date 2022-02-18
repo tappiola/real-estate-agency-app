@@ -1,11 +1,17 @@
 import WishlistIcon from "./WishlistIcon";
 import {useState} from "react";
 import {addToWishlist, removeFromWishlist} from "./queries";
+import {isAuthorized} from "./graphql";
 
 const PropertyCard = ({property}) => {
     const [isInWishlist, setIsInWishlist] = useState(property.isInWishlist);
 
     const onWishlistToggle = async () => {
+
+        if (!isAuthorized){
+            alert('Please, login to work with wishlist');
+            return;
+        }
 
             const resp = isInWishlist ? await removeFromWishlist(property.id): await addToWishlist(property.id);
 

@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import WishlistCard from "./WishlistCard";
 import {getWishlist} from "./queries";
 import Loader from "./Loader";
+import {isAuthorized} from "./graphql";
 
 const Wishlist = () => {
     const [properties, setProperties] = useState([]);
@@ -25,6 +26,10 @@ const Wishlist = () => {
 
     const updatePropertiesList = (id) => {
         setProperties(properties.filter(p => p.id !== id));
+    }
+
+    if (!isAuthorized){
+        return <h4>Please, login to work with wishlist</h4>
     }
 
     return <>

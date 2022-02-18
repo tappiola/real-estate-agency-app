@@ -42,10 +42,15 @@ module.exports = buildSchema(`
         name: String!
         password: String!
     }
+    
+    type Properties {
+        count: Int!
+        items: [Property!]!
+    }
 
     type RootQuery {
         login(email: String!, password: String!): AuthData!
-        getProperties: [Property!]!
+        getProperties: Properties
         getWishlist: [Property!]!
     }
 

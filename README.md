@@ -18,6 +18,7 @@ TODO:
 - add position storing on navigate back
 - add redux
 
+- replace cities and client requests with gql
 - (R) query isInWishlist only for authorized users
 - (R) token expiration
 - (R) 500 error when loading /search unauthorized

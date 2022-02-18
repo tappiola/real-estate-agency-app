@@ -63,12 +63,15 @@ export const searchProperties = () => {
         query:`
             {
               getProperties {
-                id
-                title
-                description
-                city { id name }
-                propertyType { id name }
-                isInWishlist
+                count
+                items {
+                    id
+                    title
+                    description
+                    city { id name }
+                    propertyType { id name }
+                    isInWishlist
+                }
               }
             }`};
 

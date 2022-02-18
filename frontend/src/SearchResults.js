@@ -11,8 +11,8 @@ const SearchResults = () => {
         const fetchProperties = async () => {
             try {
                 const response = await searchProperties();
-                const {data: {getProperties}} = await response.json();
-                setProperties(getProperties);
+                const {data: {getProperties: {items}}} = await response.json();
+                setProperties(items);
                 setIsLoading(false);
             } catch (e){
                 console.log(e);
