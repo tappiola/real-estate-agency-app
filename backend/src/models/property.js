@@ -7,7 +7,7 @@ const Property = sequelize.define('property', {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
   },
   title: Sequelize.STRING,
   description: Sequelize.STRING

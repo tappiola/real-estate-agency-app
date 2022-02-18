@@ -7,6 +7,7 @@ const Property = require("../models/property");
 const City = require("../models/city");
 const PropertyType = require("../models/propertyType");
 const UserWishlist = require("../models/userWishlist");
+const {SECRET} = require("../constants");
 
 module.exports = {
   createUser: async ({ userInput })  => {
@@ -55,20 +56,19 @@ module.exports = {
     }
 
     const token = jwt.sign(
-      {
-        userId: user.id.toString(),
-        email: user.email
-      },
-      'somesupersecretsecret',
-      { expiresIn: '1h' }
+        {
+          userId: user.id.toString(),
+          email: user.email
+        },
+        SECRET,
+        { expiresIn: '1h' }
     );
     return { token: token, userId: user.id.toString() };
   },
   getProperties: async (args, req) => {
     const authToken = req.headers['authorization'].split(' ')[1]
-    const decodedToken = jwt.verify(authToken, 'somesupersecretsecret');
+    const decodedToken = jwt.verify(authToken, SECRET);
     const userId = decodedToken.userId;
-    console.log({userId})
 
     const data =  await Property.findAll( {include: [{
         model: City,
@@ -76,11 +76,35 @@ module.exports = {
       }, {
         model: PropertyType,
         as: 'propertyType'
-      }, {
-        model: UserWishlist,
-        as: 'wishlistData',
-      }]});
-    console.log(data);
+      }],
+    });
+
+    const userWishlistProperties = await UserWishlist.findAll({
+      where: {userId: userId},
+      raw: true
+    });
+    const userWishlistPropertiesIds = userWishlistProperties.map(p => p.propertyId);
+
+    for(p of data){
+      p.isInWishlist = userWishlistPropertiesIds.includes(p.id);
+    }
+
     return data;
+  },
+  addToWishlist: async ({propertyId}, req) => {
+    const authToken = req.headers['authorization'].split(' ')[1]
+    const decodedToken = jwt.verify(authToken, SECRET);
+    const userId = decodedToken.userId;
+
+    await UserWishlist.create({ userId, propertyId });
+    return {success: true};
+  },
+  removeFromWishlist: async ({propertyId}, req) => {
+    const authToken = req.headers['authorization'].split(' ')[1]
+    const decodedToken = jwt.verify(authToken, SECRET);
+    const userId = decodedToken.userId;
+
+    await UserWishlist.destroy({where: { userId, propertyId }});
+    return {success: true};
   }
 };

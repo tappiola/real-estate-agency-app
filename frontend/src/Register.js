@@ -1,5 +1,6 @@
 import {useState} from "react";
 import { useNavigate } from "react-router-dom";
+import {sendGraphqlRequest} from "./graphql";
 
 
 const Register = () => {
@@ -39,13 +40,7 @@ const Register = () => {
         }
       `
         };
-        fetch('http://localhost/graphql', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(graphqlQuery)
-        })
+        sendGraphqlRequest(graphqlQuery)
             .then(res => {
                 return res.json();
             })

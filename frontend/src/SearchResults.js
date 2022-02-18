@@ -1,4 +1,8 @@
 import {useEffect, useState} from "react";
+import WishlistIconComponent from "./WishlistIcon";
+import WishlistIcon from "./WishlistIcon";
+import PropertyCard from "./PropertyCard";
+import {sendGraphqlRequest} from "./graphql";
 
 const SearchResults = () => {
     const [properties, setProperties] = useState([]);
@@ -14,18 +18,12 @@ const SearchResults = () => {
                 description
                 city { id name }
                 propertyType { id name }
+                isInWishlist
               }
             }`}
 
             try {
-                const response = await fetch('http://localhost/graphql', {
-                    method: 'POST',
-                    headers: {
-                        Authorization: 'Bearer ' + localStorage.getItem('token'),
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(graphqlQuery)
-                });
+                const response = await sendGraphqlRequest(graphqlQuery);
                 const {data: {getProperties}} = await response.json();
                 console.log(getProperties);
                 setProperties(getProperties);
@@ -38,15 +36,8 @@ const SearchResults = () => {
     }, []);
 
     return <>
-    <h1>Search results</h1>
-        {properties.map(p =>
-            <div key={p.id}>
-                <h2>{p.title}</h2>
-                <p>{p.description}</p>
-                <p>{p.city.name}</p>
-                <p>{p.propertyType?.name}</p>
-                <p>{p.inWishlist ? 'IN WISHLIST': 'NOT IN WISHLIST' }</p>
-                </div>)}
+        <h1>Search results</h1>
+        {properties.map(p => <PropertyCard key={p.id} property = {p}/>)}
     </>
 }
 

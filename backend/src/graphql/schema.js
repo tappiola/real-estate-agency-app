@@ -16,7 +16,12 @@ module.exports = buildSchema(`
         title: String!
         description: String!
         city: City
-        propertyType: PropertyType
+        propertyType: PropertyType,
+        isInWishlist: Boolean
+    }
+    
+    type Status {
+        success: Boolean!
     }
     
     type User {
@@ -44,6 +49,8 @@ module.exports = buildSchema(`
 
     type RootMutation {
         createUser(userInput: UserInputData): User!
+        addToWishlist(propertyId: String!): Status!
+        removeFromWishlist(propertyId: String!): Status!
     }
 
     schema {
