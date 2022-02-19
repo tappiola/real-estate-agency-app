@@ -7,8 +7,6 @@ TODO:
 - eslint
 - (R) use library to construct gql requests
 - move gql requests somewhere
-- typescript
-- containers / components
 - pretty loader
 - pretty 404
 - add search form
@@ -29,8 +27,7 @@ TODO:
 - notifications
 - script to fill in properties data
 - (R) refresh token
-- click on property in wishlist
-- click on property in search
+- page number into redux
 - (R) error when importing './WishlistCard' (export 'default' (imported as 'WishlistCard') was not found in './WishlistCard' (module has no exports)
   )
 - (R) imports without ../../

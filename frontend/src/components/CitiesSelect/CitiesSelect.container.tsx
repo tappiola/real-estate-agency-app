@@ -9,7 +9,6 @@ const CitiesSelectContainer: React.FC = () => {
 
     const fetchCities = async () => {
         let response = await fetch(HOST + '/cities');
-        console.log(response);
         return response.json();
     }
 

@@ -79,6 +79,27 @@ export const searchProperties = (page) => {
     return sendGraphqlRequest(graphqlQuery);
 }
 
+export const searchProperties2 = (page, token) => {
+    const graphqlQuery = {
+        query:`
+            {
+              getProperties(page: ${page}) {
+                count
+                pages
+                items {
+                    id
+                    title
+                    description
+                    city { id name }
+                    propertyType { id name }
+                    isInWishlist
+                }
+              }
+            }`};
+
+    return sendGraphqlRequest(graphqlQuery, token);
+}
+
 export const getProperty = (id) => {
     const graphqlQuery = {
         query:`
