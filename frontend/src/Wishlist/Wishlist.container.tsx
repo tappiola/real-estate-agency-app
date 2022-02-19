@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
-import WishlistCard from "./WishlistCard/WishlistCard.container";
-import {getWishlist} from "./queries";
-import Loader from "./Loader";
-import {isAuthorized} from "./graphql";
+import {getWishlist} from "../queries";
+import {isAuthorized} from "../graphql";
+import Wishlist from "./Wishlist.component";
+import {PropertyType} from "../types";
 
-const Wishlist = () => {
+const WishlistContainer = () => {
     const [properties, setProperties] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -24,19 +24,15 @@ const Wishlist = () => {
         fetchWishlist();
     }, []);
 
-    const updatePropertiesList = (id) => {
-        setProperties(properties.filter(p => p.id !== id));
+    const updatePropertiesList = (id: Number) => {
+        setProperties(properties.filter((p: PropertyType) => p.id !== id));
     }
 
     if (!isAuthorized){
         return <h4>Please, login to work with wishlist</h4>
     }
 
-    return <>
-        <h1>Wishlist</h1>
-        {properties.map(p => <WishlistCard key={p.id} property = {p} updatePropertiesList={ updatePropertiesList}/>)}
-        {isLoading && <Loader/>}
-    </>
+    return <Wishlist isLoading={isLoading} properties={properties} updatePropertiesList={updatePropertiesList}/>
 }
 
-export default Wishlist;
+export default WishlistContainer;

@@ -1,30 +1,17 @@
-import {useState} from "react";
+import {FormEvent, useState} from "react";
 import { useNavigate } from "react-router-dom";
-import {sendGraphqlRequest} from "./graphql";
-import {register} from "./queries";
+import {register} from "../queries";
+import Register from "./Register.component";
 
 
-const Register = () => {
+const RegisterContainer = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const navigate = useNavigate();
 
-    // const onSubmit = async (e) => {
-    //     e.preventDefault();
-    //
-    //     await fetch('http://localhost/array', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({name, email, password})
-    //     })
-    //         .then(() => navigate("/"))
-    // };
-
-    const signupHandler = (event) => {
+    const signupHandler = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         // this.setState({ authLoading: true });
 
@@ -54,12 +41,7 @@ const Register = () => {
             });
     };
 
-    return <form onSubmit={signupHandler}>
-        <input placeholder="Name" value={name} onChange={e => setName(e.target.value)}/>
-        <input placeholder="Email" type="email" value={email} onChange={e => setEmail(e.target.value)}/>
-        <input placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
-        <button type="submit">Register</button>
-    </form>
+    return <Register email={email} setEmail={setEmail} name={name} setName={setName} password={password} setPassword={setPassword} signupHandler={signupHandler}/>
 };
 
-export default Register;
+export default RegisterContainer;

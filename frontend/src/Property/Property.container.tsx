@@ -1,9 +1,8 @@
 import {useEffect, useState} from "react";
 import Property from "./Property.component";
-import {addToWishlist, getProperty, removeFromWishlist} from "../queries";
+import {getProperty} from "../queries";
 import Loader from "../Loader";
 import {useParams} from "react-router-dom";
-import {isAuthorized} from "../graphql";
 import {PropertyType} from "../types";
 
 const PropertyContainer = () => {
@@ -35,29 +34,6 @@ const PropertyContainer = () => {
         fetchProperty();
     }, [id]);
 
-    const onWishlistToggle = async () => {
-
-        if (!isAuthorized){
-            alert('Please, login to work with wishlist');
-            return;
-        }
-
-        if(!property){
-            return;
-        }
-
-        const {id} = property;
-
-        const resp = isInWishlist ? await removeFromWishlist(id): await addToWishlist(id);
-
-        const key = isInWishlist ? 'removeFromWishlist' : 'addToWishlist';
-        const {data: {[key]: {success}}} = await resp.json();
-
-        if(success){
-            setIsInWishlist(!isInWishlist);
-        }
-    }
-
     if (isLoading){
         return <Loader/>;
     }
@@ -66,7 +42,7 @@ const PropertyContainer = () => {
         return <p>Not found</p>;
     }
 
-    return <Property property={property} onWishlistToggle={onWishlistToggle} isInWishlist={isInWishlist}/>;
+    return <Property property={property} isInWishlist={isInWishlist}/>;
 }
 
 export default PropertyContainer;

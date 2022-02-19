@@ -1,19 +1,16 @@
 import {useEffect, useState} from "react";
-import PropertyCard from "./PropertyCard";
-import {searchProperties} from "./queries";
-import Loader from "./Loader";
-import Pagination from "./Pagination";
+import {searchProperties} from "../queries";
 import {useSearchParams} from "react-router-dom";
+import SearchResults from "./SearchResults.component";
 
-const SearchResults = () => {
+const SearchResultsContainer = () => {
     const [properties, setProperties] = useState([]);
     const [pages, setPages] = useState(1);
     const [count, setCount] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
 
     const [searchParams] = useSearchParams();
-    const currentPage = +searchParams.get('page') || 1;
-    console.log({currentPage});
+    const currentPage = Number(searchParams.get('page')) || 1;
 
     useEffect(() => {
         const fetchProperties = async () => {
@@ -33,13 +30,7 @@ const SearchResults = () => {
         fetchProperties();
     }, [currentPage]);
 
-    return <>
-        <h1>Search results</h1>
-        <h6>{count || 'No'} items found</h6>
-        {properties.map(property => <PropertyCard key={property.id} property = {property}/>)}
-        {isLoading && <Loader/>}
-        {pages > 1 && <Pagination pages={pages} currentPage={currentPage}/>}
-    </>
+    return <SearchResults count={count} currentPage={currentPage} isLoading={isLoading} pages={pages} properties={properties}/>
 }
 
-export default SearchResults;
+export default SearchResultsContainer;

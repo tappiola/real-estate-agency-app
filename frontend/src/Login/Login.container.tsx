@@ -1,17 +1,23 @@
-import {useState} from "react";
+import {FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {login} from "./queries";
+import {login} from "../queries";
+import Login from "./Login.component";
 
-const Login = () => {
+type LoginDataType = {
+    data: {login: {token: string, userId: number}};
+}
+
+const LoginContainer = () => {
         const [email, setEmail] = useState('');
         const [password, setPassword] = useState('');
         let navigate = useNavigate();
 
-   const loginHandler = (event) => {
+   const loginHandler = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         // this.setState({ authLoading: true });
-        login(email, password)
+        // @ts-ignore
+       login(email, password)
             .then(res => {
                 if (res.status === 422) {
                     throw new Error('Validation failed.');
@@ -22,7 +28,7 @@ const Login = () => {
                 }
                 return res.json();
             })
-            .then(({data: {login}}) => {
+            .then(({data: {login}}: LoginDataType) => {
                 console.log(login);
                 // this.setState({
                 //     isAuth: true,
@@ -31,7 +37,7 @@ const Login = () => {
                 //     userId: resData.userId
                 // });
                 localStorage.setItem('token', login.token);
-                localStorage.setItem('userId', login.userId);
+                localStorage.setItem('userId', String(login.userId));
                 navigate("/", {replace: true});
                 // const remainingMilliseconds = 60 * 60 * 1000;
                 // const expiryDate = new Date(
@@ -40,7 +46,7 @@ const Login = () => {
                 // localStorage.setItem('expiryDate', expiryDate.toISOString());
                 // this.setAutoLogout(remainingMilliseconds);
             })
-            .catch(err => {
+            .catch((err: any) => {
                 console.log(err);
                 // this.setState({
                 //     isAuth: false,
@@ -50,11 +56,7 @@ const Login = () => {
             });
     };
 
-        return <form onSubmit={loginHandler}>
-        <input placeholder="Email" name="email" value={email} onChange={e => setEmail(e.target.value)}/>
-        <input placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
-        <button type="submit">Login</button>
-    </form>
+        return <Login email={email} loginHandler={loginHandler} password={password} setEmail={setEmail} setPassword={setPassword}/>;
 };
 
-export default Login;
+export default LoginContainer;

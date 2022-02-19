@@ -1,6 +1,6 @@
 import React from 'react';
-import CitiesSelect from "./CitiesSelect";
-import ContactUs from "./ContactUs";
+import CitiesSelect from "../CitiesSelect";
+import ContactUs from "../ContactUs";
 
 function App() {
     return (
