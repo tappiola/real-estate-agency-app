@@ -11,7 +11,7 @@ const SearchResults = () => {
     const [count, setCount] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
 
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const currentPage = +searchParams.get('page') || 1;
     console.log({currentPage});
 
@@ -38,7 +38,7 @@ const SearchResults = () => {
         <h6>{count || 'No'} items found</h6>
         {properties.map(property => <PropertyCard key={property.id} property = {property}/>)}
         {isLoading && <Loader/>}
-        <Pagination pages={pages} currentPage={currentPage}/>
+        {pages > 1 && <Pagination pages={pages} currentPage={currentPage}/>}
     </>
 }
 

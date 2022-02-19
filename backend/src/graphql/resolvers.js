@@ -96,13 +96,34 @@ module.exports = {
     });
     const userWishlistPropertiesIds = userWishlistProperties.map(p => p.propertyId);
 
-    for(p of items){
+    for(const p of items){
       p.isInWishlist = userWishlistPropertiesIds.includes(p.id);
     }
 
     return {count, pages, items};
   },
+  getProperty: async ({id}, req) => {
+    const authToken = req.headers['authorization'].split(' ')[1]
+    const decodedToken = jwt.verify(authToken, SECRET);
+    const userId = decodedToken.userId;
 
+    const property = await Property.findOne({where: {id}, include: [{
+        model: City,
+        as: 'city'
+      }, {
+        model: PropertyType,
+        as: 'propertyType'
+      }]
+    });
+
+    const propertyInWishlist = await UserWishlist.findOne({
+      where: {userId, propertyId: id}
+    });
+
+    property.isInWishlist = !!propertyInWishlist;
+
+    return property;
+  },
   getWishlist: async (args, req) => {
     const authToken = req.headers['authorization'].split(' ')[1]
     const decodedToken = jwt.verify(authToken, SECRET);
@@ -119,8 +140,6 @@ module.exports = {
       model: PropertyType,
       as: 'propertyType'
     }]});
-
-    console.log(wishlistProperties);
 
     return wishlistProperties;
   },

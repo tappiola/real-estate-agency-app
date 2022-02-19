@@ -4,16 +4,14 @@ TODO:
 - configure cors whitelist urls
 - inputs validation trim.niy.isempty
 - error handling middleware
-- pagination
 - eslint
-- use library to construct gql requests
+- (R) use library to construct gql requests
 - move gql requests somewhere
 - typescript
 - containers / components
 - loaders
 - add search form
 - add search params
-- add property page
 - add position storing on navigate back
 - add redux
 
@@ -31,4 +29,4 @@ TODO:
 - notifications
 - script to fill in properties data
 - (R) refresh token
-- endpoint + route for loading one property
+- wishlist on single property page

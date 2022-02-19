@@ -79,6 +79,24 @@ export const searchProperties = (page) => {
     return sendGraphqlRequest(graphqlQuery);
 }
 
+export const getProperty = (id) => {
+    const graphqlQuery = {
+        query:`
+            {
+              getProperty(id: ${id})
+                {
+                    id
+                    title
+                    description
+                    city { id name }
+                    propertyType { id name }
+                    isInWishlist
+              }
+            }`};
+
+    return sendGraphqlRequest(graphqlQuery);
+}
+
 export const getWishlist = () => {
     const graphqlQuery = {
         query:`
