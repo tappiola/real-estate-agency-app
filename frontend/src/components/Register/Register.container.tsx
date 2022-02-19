@@ -1,6 +1,6 @@
 import {FormEvent, useState} from "react";
 import { useNavigate } from "react-router-dom";
-import {register} from "../queries";
+import {register} from "../../queries";
 import Register from "./Register.component";
 
 

@@ -1,6 +1,6 @@
-import {removeFromWishlist} from "../queries";
+import {removeFromWishlist} from "../../queries";
 import './WishlistCard.style.scss';
-import {PropertyType} from "../types";
+import {PropertyType} from "../../types";
 import React from "react";
 import WishlistCard from "./WishlistCard.component";
 

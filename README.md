@@ -33,3 +33,4 @@ TODO:
 - click on property in search
 - (R) error when importing './WishlistCard' (export 'default' (imported as 'WishlistCard') was not found in './WishlistCard' (module has no exports)
   )
+- (R) imports without ../../

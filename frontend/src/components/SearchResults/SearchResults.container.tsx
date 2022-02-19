@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {searchProperties} from "../queries";
+import {searchProperties} from "../../queries";
 import {useSearchParams} from "react-router-dom";
 import SearchResults from "./SearchResults.component";
 

@@ -1,6 +1,6 @@
 import {FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {login} from "../queries";
+import {login} from "../../queries";
 import Login from "./Login.component";
 
 type LoginDataType = {

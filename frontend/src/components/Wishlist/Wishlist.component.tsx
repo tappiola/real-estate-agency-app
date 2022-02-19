@@ -1,7 +1,7 @@
 import WishlistCard from "../WishlistCard/WishlistCard.container";
 import Loader from "../Loader";
-import {isAuthorized} from "../graphql";
-import {PropertyType} from "../types";
+import {isAuthorized} from "../../graphql";
+import {PropertyType} from "../../types";
 import React from "react";
 
 const Wishlist: React.FC<{properties: PropertyType[], isLoading: boolean, updatePropertiesList: (id: Number) => void}>

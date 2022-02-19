@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
-import {getWishlist} from "../queries";
-import {isAuthorized} from "../graphql";
+import {getWishlist} from "../../queries";
+import {isAuthorized} from "../../graphql";
 import Wishlist from "./Wishlist.component";
-import {PropertyType} from "../types";
+import {PropertyType} from "../../types";
 
 const WishlistContainer = () => {
     const [properties, setProperties] = useState([]);

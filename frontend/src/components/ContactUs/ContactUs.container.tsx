@@ -1,5 +1,5 @@
 import React, {FormEvent, useState} from "react";
-import {HOST} from "../constants";
+import {HOST} from "../../constants";
 import ContactUs from './ContactUs.component';
 
 const ContactUsContainer = () => {

@@ -1,4 +1,4 @@
-import {PropertyType} from '../types';
+import {PropertyType} from '../../types';
 import React from "react";
 import ToggleWishlist from "../ToggleWishlist";
 

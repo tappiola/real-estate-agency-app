@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import PropertyCard from "../PropertyCard";
 import Loader from "../Loader";
 import Pagination from "../Pagination";
-import {PropertyType} from "../types";
+import {PropertyType} from "../../types";
 
 const SearchResults: React.FC<{
     count: number,

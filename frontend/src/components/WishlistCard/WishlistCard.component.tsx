@@ -1,7 +1,7 @@
 import './WishlistCard.style.scss';
 import CloseIcon from "../CloseIcon";
 import React from "react";
-import {PropertyType} from "../types";
+import {PropertyType} from "../../types";
 
 const WishlistCard: React.FC<{property: PropertyType, onWishlistRemove: () => void}> = ({property, onWishlistRemove}) => {
 

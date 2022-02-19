@@ -1,5 +1,5 @@
 import React from "react";
-import {CityType} from "../types";
+import {CityType} from "../../types";
 
 const CitiesSelect: React.FC<
     {cities: CityType[], selectedCity: string, setSelectedCity: (city: string)=> void}

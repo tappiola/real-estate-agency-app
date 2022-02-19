@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {HOST} from "../constants";
-import {CityType} from "../types";
+import {HOST} from "../../constants";
+import {CityType} from "../../types";
 import CitiesSelect from "./CitiesSelect.component";
 
 const CitiesSelectContainer: React.FC = () => {
