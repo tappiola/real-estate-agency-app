@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import WishlistCard from "./WishlistCard";
+import WishlistCard from "./WishlistCard/WishlistCard.container";
 import {getWishlist} from "./queries";
 import Loader from "./Loader";
 import {isAuthorized} from "./graphql";

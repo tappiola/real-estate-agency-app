@@ -9,7 +9,8 @@ TODO:
 - move gql requests somewhere
 - typescript
 - containers / components
-- loaders
+- pretty loader
+- pretty 404
 - add search form
 - add search params
 - add position storing on navigate back
@@ -22,11 +23,13 @@ TODO:
    - when user logs out, remove token from local storage
    - when token expires, return 401 (?) and frontend should remove token from local storage + redirect to home page
 - (R) add protected route /wishlist. If not authorized (expired token), return 401 and redirect to home page
-- handle 404
 - add images table
 - add carousel
 - add wishlist route returning properties in user's wishlist
 - notifications
 - script to fill in properties data
 - (R) refresh token
-- wishlist on single property page
+- click on property in wishlist
+- click on property in search
+- (R) error when importing './WishlistCard' (export 'default' (imported as 'WishlistCard') was not found in './WishlistCard' (module has no exports)
+  )

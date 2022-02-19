@@ -4,15 +4,20 @@ import {addToWishlist, getProperty, removeFromWishlist} from "../queries";
 import Loader from "../Loader";
 import {useParams} from "react-router-dom";
 import {isAuthorized} from "../graphql";
+import {PropertyType} from "../types";
 
 const PropertyContainer = () => {
-    const [property, setProperty] = useState(null);
+    const [property, setProperty] = useState<PropertyType | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isInWishlist, setIsInWishlist] = useState(false);
     const params = useParams();
     const {id} = params;
 
     useEffect(() => {
+        if (!id){
+            return;
+        }
+
         const fetchProperty = async () => {
             try {
                 const response = await getProperty(+id);
@@ -37,7 +42,13 @@ const PropertyContainer = () => {
             return;
         }
 
-        const resp = isInWishlist ? await removeFromWishlist(property.id): await addToWishlist(property.id);
+        if(!property){
+            return;
+        }
+
+        const {id} = property;
+
+        const resp = isInWishlist ? await removeFromWishlist(id): await addToWishlist(id);
 
         const key = isInWishlist ? 'removeFromWishlist' : 'addToWishlist';
         const {data: {[key]: {success}}} = await resp.json();

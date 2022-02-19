@@ -1,20 +1,9 @@
-import {removeFromWishlist} from "../queries";
 import './WishlistCard.style.scss';
 import CloseIcon from "../CloseIcon";
+import React from "react";
+import {PropertyType} from "../types";
 
-const PropertyCard = ({property, updatePropertiesList}) => {
-
-    const onWishlistRemove = async () => {
-        const {id} = property;
-        try {
-            await removeFromWishlist(id);
-            updatePropertiesList(id);
-        }
-        catch (e){
-            console.log(e);
-        }
-
-    }
+const WishlistCard: React.FC<{property: PropertyType, onWishlistRemove: () => void}> = ({property, onWishlistRemove}) => {
 
     return (
         <div className="WishlistCard-Wrapper">
@@ -29,4 +18,4 @@ const PropertyCard = ({property, updatePropertiesList}) => {
     );
 }
 
-export default PropertyCard;
+export default WishlistCard;

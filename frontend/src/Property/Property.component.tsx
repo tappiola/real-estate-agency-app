@@ -1,6 +1,8 @@
 import WishlistIcon from "../WishlistIcon";
+import {PropertyType} from '../types';
+import React from "react";
 
-const Property = ({property, isInWishlist, onWishlistToggle}) => {
+const Property: React.FC<{property: PropertyType, isInWishlist: boolean, onWishlistToggle: () => void}> = ({property, isInWishlist, onWishlistToggle}) => {
     return (
         <div>
             <h2>{property.title}</h2>
