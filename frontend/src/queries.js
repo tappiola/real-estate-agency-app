@@ -58,12 +58,13 @@ export const register = (email, name, password) => {
     return sendGraphqlRequest(graphqlQuery);
 }
 
-export const searchProperties = () => {
+export const searchProperties = (page) => {
     const graphqlQuery = {
         query:`
             {
-              getProperties {
+              getProperties(page: ${page}) {
                 count
+                pages
                 items {
                     id
                     title

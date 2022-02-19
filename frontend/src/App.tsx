@@ -12,11 +12,15 @@ function App() {
     <div className="App">
         <BrowserRouter>
             <Routes>
-                <Route path="/register" element={<Register />}/>
-                <Route path="/login" element={<Login />}/>
-                <Route path="/favorites" element={<Wishlist />}/>
-                <Route path="/search" element={<SearchResults />}/>
-                <Route path="/" element={<HomePage />}/>
+                {/*<Route path="/">*/}
+                    <Route path="/" element={<HomePage />}/>
+                    <Route path="/register" element={<Register />}/>
+                    <Route path="/login" element={<Login />}/>
+                    <Route path="/favorites" element={<Wishlist />}/>
+                    {/*<Route path="/search&page=:page" element={<SearchResults />}/>*/}
+                    <Route path="/search" element={<SearchResults />}/>
+                    <Route path="*" element={<p>Not found</p>} />
+                {/*</Route>*/}
             </Routes>
         </BrowserRouter>
     </div>

@@ -45,12 +45,13 @@ module.exports = buildSchema(`
     
     type Properties {
         count: Int!
+        pages: Int!
         items: [Property!]!
     }
 
     type RootQuery {
         login(email: String!, password: String!): AuthData!
-        getProperties: Properties
+        getProperties(page: Int!): Properties
         getWishlist: [Property!]!
     }
 

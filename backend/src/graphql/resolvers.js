@@ -7,7 +7,7 @@ const Property = require("../models/property");
 const City = require("../models/city");
 const PropertyType = require("../models/propertyType");
 const UserWishlist = require("../models/userWishlist");
-const {SECRET} = require("../constants");
+const {SECRET, ITEMS_PER_PAGE} = require("../constants");
 const { Op } = require("sequelize");
 
 module.exports = {
@@ -71,9 +71,17 @@ module.exports = {
     const decodedToken = jwt.verify(authToken, SECRET);
     const userId = decodedToken.userId;
 
-    const count = Property.count();
+    const { page } = args;
+    console.log({page});
 
-    const items = await Property.findAll( {include: [{
+    const count = await Property.count();
+    const pages = Math.ceil(count / ITEMS_PER_PAGE);
+    console.log({pages, count});
+
+    const items = await Property.findAll( {
+      offset: (page - 1) * ITEMS_PER_PAGE,
+      limit: ITEMS_PER_PAGE,
+      include: [{
         model: City,
         as: 'city'
       }, {
@@ -92,7 +100,7 @@ module.exports = {
       p.isInWishlist = userWishlistPropertiesIds.includes(p.id);
     }
 
-    return {count, items};
+    return {count, pages, items};
   },
 
   getWishlist: async (args, req) => {
