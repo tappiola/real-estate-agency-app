@@ -15,5 +15,5 @@ export type PropertyType = {
     description: String
     city: CityType
     propertyType: TypeOfPropertyType,
-    isInWishlist: Boolean
+    isInWishlist: boolean
 };

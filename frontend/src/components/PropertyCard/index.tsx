@@ -1,1 +1,1 @@
-export { default } from './PropertyCard.component';
+export { default } from './PropertyCard.container';
