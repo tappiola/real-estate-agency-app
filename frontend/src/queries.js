@@ -1,4 +1,4 @@
-import {sendGraphqlRequest} from "./graphql";
+import {sendGraphqlRequest, sendGraphqlRequest2} from "./graphql";
 
 export const addToWishlist = (id) => {
     const graphqlQuery  = {
@@ -97,7 +97,7 @@ export const searchProperties2 = (page, token) => {
               }
             }`};
 
-    return sendGraphqlRequest(graphqlQuery, token);
+    return sendGraphqlRequest2(graphqlQuery, token);
 }
 
 export const getProperty = (id) => {

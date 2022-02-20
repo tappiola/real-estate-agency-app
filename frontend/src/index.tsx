@@ -15,8 +15,6 @@ const rootReducer = combineReducers({
     navigation: navigationReducer,
     user: userReducer,
     properties: propertiesReducer
-    // firebase: firebaseReducer,
-    // auth: authReducer
 });
 
 export const store = createStore(rootReducer, composeWithDevTools(
