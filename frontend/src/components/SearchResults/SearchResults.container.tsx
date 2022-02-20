@@ -1,9 +1,8 @@
 import {useEffect, useState} from "react";
 import {searchProperties} from "../../queries";
-import {useNavigate, useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import SearchResults from "./SearchResults.component";
 import {useDispatch, useSelector} from "react-redux";
-import {saveScrollPosition} from "../../store/Navigation/actions";
 import {queryProperties} from "../../store/Properties/actions";
 
 const SearchResultsContainer = () => {
