@@ -14,8 +14,8 @@ TODO:
 - add redux
 
 - replace cities and client requests with gql
-- (R) query isInWishlist only for authorized users
-- (R) 500 error when loading /search unauthorized
++ (R) query isInWishlist only for authorized users
++ (R) 500 error when loading /search unauthorized
 - (R) token expiration
    - when user logs out, remove token from local storage
    - when token expires, return 401 (?) and frontend should remove token from local storage + redirect to home page

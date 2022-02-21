@@ -4,6 +4,7 @@ const sequelize = require('./util/database');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const authentication = require('./middlewares/authentication')
 
 const City = require('./models/city');
 const Property = require('./models/property');
@@ -29,6 +30,8 @@ PropertyType.hasMany(Property);
 app.use(cors());
 
 app.use(bodyParser.json());
+
+app.use(authentication);
 
 app.use(
     '/graphql',

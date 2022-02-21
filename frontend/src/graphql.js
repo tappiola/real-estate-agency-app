@@ -1,6 +1,37 @@
-export const sendGraphqlRequest = (graphqlQuery) => {
+import jwt_decode from "jwt-decode";
 
-    const authToken = localStorage.getItem('token');
+export const getToken = () => {
+    let authToken = localStorage.getItem('token');
+
+    if(authToken) {
+        try {
+            const decodedToken = jwt_decode(authToken);
+            console.log({decodedToken});
+
+            // If token has expired, there is no sense to pass it to server
+            // Ideally, we should have token refresh flow here
+            if(decodedToken.exp * 1000 < new Date().getTime()){
+                throw Error('Auth token has expired');
+            }
+        }
+        catch(e){
+            authToken = null;
+            localStorage.removeItem('token');
+        }
+    }
+
+    return authToken;
+}
+
+export const sendGraphqlRequest = (graphqlQuery, requiresAuth = false) => {
+    const authToken = getToken();
+
+    if(requiresAuth && !authToken){
+        // TODO: Redirect doesn't work from plain JS, find workaround
+        // const history = useHistory();
+        // history.push('/login');
+    }
+
     const authHeader = authToken ? {Authorization: 'Bearer ' + authToken} : {};
 
     return fetch('http://localhost/graphql', {
