@@ -3,25 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import {Provider} from "react-redux";
-import {applyMiddleware, combineReducers, createStore} from "redux";
-import thunk from "redux-thunk";
-import {composeWithDevTools} from "redux-devtools-extension";
-import navigationReducer from "./store/Navigation/navigationReducer";
-import userReducer from "./store/User/userReducer";
-import {initUser} from "./store/User/actions";
-import propertiesReducer from "./store/Properties/propertiesReducer";
+// import {initUser} from "./store/User/actions";
+import store from './store';
 
-const rootReducer = combineReducers({
-    navigation: navigationReducer,
-    user: userReducer,
-    properties: propertiesReducer
-});
-
-export const store = createStore(rootReducer, composeWithDevTools(
-    applyMiddleware(thunk)
-));
-
-store.dispatch(initUser());
+// store.dispatch(initUser());
 
 ReactDOM.render(
   <React.StrictMode>

@@ -2,6 +2,9 @@ import {FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {login} from "../../queries";
 import Login from "./Login.component";
+import {TOAST_TYPES} from "../../constants";
+import {enqueueToast} from "../../redux/NotifierReducer";
+import {useDispatch} from "react-redux";
 
 type LoginDataType = {
     data: {login: {token: string, userId: number}};
@@ -11,6 +14,7 @@ const LoginContainer = () => {
         const [email, setEmail] = useState('');
         const [password, setPassword] = useState('');
         let navigate = useNavigate();
+    const dispatch = useDispatch();
 
    const loginHandler = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -23,7 +27,6 @@ const LoginContainer = () => {
                     throw new Error('Validation failed.');
                 }
                 if (res.status !== 200 && res.status !== 201) {
-                    console.log('Error!');
                     throw new Error('Could not authenticate you!');
                 }
                 return res.json();
@@ -36,6 +39,10 @@ const LoginContainer = () => {
                 //     authLoading: false,
                 //     userId: resData.userId
                 // });
+                dispatch(enqueueToast({
+                    message: 'Login successful',
+                    type: TOAST_TYPES.SUCCESS,
+                }));
                 localStorage.setItem('token', login.token);
                 localStorage.setItem('userId', String(login.userId));
                 navigate("/", {replace: true});
@@ -48,6 +55,10 @@ const LoginContainer = () => {
             })
             .catch((err: any) => {
                 console.log(err);
+                dispatch(enqueueToast({
+                    message: err.message || 'Failed to login',
+                    type: TOAST_TYPES.ERROR,
+                }));
                 // this.setState({
                 //     isAuth: false,
                 //     authLoading: false,
