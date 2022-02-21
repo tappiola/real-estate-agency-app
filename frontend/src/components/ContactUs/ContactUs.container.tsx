@@ -1,8 +1,8 @@
 import React, {FormEvent, useState} from "react";
 import {HOST, TOAST_TYPES} from "../../constants";
 import ContactUs from './ContactUs.component';
-import {enqueueToast} from "../../redux/NotifierReducer";
-import {useDispatch} from "react-redux";
+import {enqueueToast} from "../../redux/Notifier";
+import {useAppDispatch} from "../../redux/store";
 
 const ContactUsContainer = () => {
     const [firstName, setFirstName] = useState('');
@@ -10,7 +10,7 @@ const ContactUsContainer = () => {
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();

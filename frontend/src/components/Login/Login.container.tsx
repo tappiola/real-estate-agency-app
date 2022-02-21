@@ -3,8 +3,8 @@ import {useNavigate} from "react-router-dom";
 import {login} from "../../queries";
 import Login from "./Login.component";
 import {TOAST_TYPES} from "../../constants";
-import {enqueueToast} from "../../redux/NotifierReducer";
-import {useDispatch} from "react-redux";
+import {enqueueToast} from "../../redux/Notifier";
+import {useAppDispatch} from "../../redux/store";
 
 type LoginDataType = {
     data: {login: {token: string, userId: number}};
@@ -14,7 +14,7 @@ const LoginContainer = () => {
         const [email, setEmail] = useState('');
         const [password, setPassword] = useState('');
         let navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
    const loginHandler = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();

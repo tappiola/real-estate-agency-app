@@ -1,11 +1,10 @@
-/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   notifications: [],
 };
 
-const notifierReducer = createSlice({
+const notifier = createSlice({
   name: 'notifications',
   initialState,
   reducers: {
@@ -18,6 +17,6 @@ const notifierReducer = createSlice({
   },
 });
 
-export const { enqueueToast, processToast } = notifierReducer.actions;
+export const { enqueueToast, processToast } = notifier.actions;
 
-export default notifierReducer.reducer;
+export default notifier.reducer;

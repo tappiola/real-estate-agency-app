@@ -1,12 +1,12 @@
 import { useContext, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
-import { processToast } from '../../redux/NotifierReducer';
+import { processToast } from '../../redux/Notifier';
 import {ToastQueueContext} from "../Toast";
+import {useAppDispatch, useAppSelector} from "../../redux/store";
 
 function Notification() {
-  const { notifications } = useSelector(({ notifications }) => notifications);
-  const dispatch = useDispatch();
+  const { notifications } = useAppSelector(({ notifications }) => notifications);
+  const dispatch = useAppDispatch();
   const onToastProcess = () => dispatch(processToast());
 
   const { addToast } = useContext(ToastQueueContext);
@@ -19,14 +19,6 @@ function Notification() {
       onToastProcess();
     }
   }, [notifications]);
-
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-
-    return () => {
-      document.body.style.overflow = null;
-    };
-  }, []);
 
   return null;
 }
