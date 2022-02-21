@@ -7,7 +7,6 @@ TODO:
 - eslint
 - (R) use library to construct gql requests
 - move gql requests somewhere
-- pretty loader
 - add search form
 - add search params
 - add position storing on navigate back
@@ -22,7 +21,6 @@ TODO:
 - (R) add protected route /wishlist. If not authorized (expired token), return 401 and redirect to home page
 - add images table
 - add carousel
-- add wishlist route returning properties in user's wishlist
 - notifications
 - script to fill in properties data
 - (R) refresh token
@@ -31,4 +29,4 @@ TODO:
   )
 - (R) imports without ../../
 - map with properties
-- (R) hoe to edit eps
+- (R) how to edit eps
