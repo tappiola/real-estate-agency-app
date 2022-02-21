@@ -2,8 +2,7 @@ import {useEffect, useState} from "react";
 import {searchProperties} from "../../queries";
 import {useSearchParams} from "react-router-dom";
 import SearchResults from "./SearchResults.component";
-import {useAppSelector, useAppDispatch} from '../../redux/store';
-// import {queryProperties} from "../../store/Properties/actions";
+import {useAppSelector} from '../../redux/store';
 
 const SearchResultsContainer = () => {
     const [properties, setProperties] = useState([]);
@@ -11,14 +10,10 @@ const SearchResultsContainer = () => {
     const [count, setCount] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
 
-    // const dispatch = useAppDispatch();
-
     const [searchParams] = useSearchParams();
     const currentPage = Number(searchParams.get('page')) || 1;
 
     const {scrollOffset} = useAppSelector(({ navigation }) => navigation);
-
-    // const {items} = useAppSelector(({ properties }) => properties);
 
         useEffect(() => {
             if (scrollOffset){

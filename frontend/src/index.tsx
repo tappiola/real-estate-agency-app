@@ -3,10 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import {Provider} from "react-redux";
-// import {initUser} from "./store/User/actions";
 import store from './redux/store';
-
-// store.dispatch(initUser());
 
 ReactDOM.render(
   <React.StrictMode>
