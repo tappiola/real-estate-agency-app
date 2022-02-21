@@ -5,7 +5,6 @@ TODO:
 - inputs validation trim.niy.isempty
 - error handling middleware
 - eslint
-- use library to construct gql requests
 - move gql requests somewhere
 - add search form
 - add search params
@@ -24,7 +23,6 @@ TODO:
 - (R) error when importing './WishlistCard' (export 'default' (imported as 'WishlistCard') was not found in './WishlistCard' (module has no exports)
   )
 - (R) imports without ../../
-- (R) how to edit eps
 - (R) rewrite login with await + parse error message from response in case of 500 error
 - (R) search returns empty list for not logged in user
 + (R) query isInWishlist only for authorized users
@@ -34,3 +32,4 @@ TODO:
   - when token expires, return 401 (?) and frontend should remove token from local storage + redirect to home page
 - (R) add protected route /wishlist. If not authorized (expired token), return 401 and redirect to home page
 - (R) error handling for not authorized + wishlist (super ugly now)
+- (R) use library to construct gql requests
