@@ -8,7 +8,6 @@ TODO:
 - (R) use library to construct gql requests
 - move gql requests somewhere
 - pretty loader
-- pretty 404
 - add search form
 - add search params
 - add position storing on navigate back
@@ -31,3 +30,5 @@ TODO:
 - (R) error when importing './WishlistCard' (export 'default' (imported as 'WishlistCard') was not found in './WishlistCard' (module has no exports)
   )
 - (R) imports without ../../
+- map with properties
+- (R) hoe to edit eps

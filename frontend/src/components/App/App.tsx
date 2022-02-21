@@ -7,6 +7,7 @@ import HomePage from "../HomePage";
 import Wishlist from '../Wishlist';
 import SearchResults from "../SearchResults";
 import Property from "../Property";
+import NotFound from "../NotFound";
 
 const App = () => {
   return (
@@ -19,7 +20,7 @@ const App = () => {
                     <Route path="/favorites" element={<Wishlist />}/>
                     <Route path="/search" element={<SearchResults />}/>
                     <Route path="/property/:id" element={<Property />}/>
-                    <Route path="*" element={<p>Not found</p>} />
+                    <Route path="*" element={<NotFound/>} />
             </Routes>
         </BrowserRouter>
     </div>
