@@ -67,10 +67,6 @@ module.exports = {
     return { token: token, userId: user.id.toString() };
   },
   getProperties: async (args, req) => {
-    const authToken = req.headers['authorization'].split(' ')[1]
-    const decodedToken = jwt.verify(authToken, SECRET);
-    const userId = decodedToken.userId;
-
     const { page } = args;
     console.log({page});
 
@@ -90,23 +86,19 @@ module.exports = {
       }],
     });
 
-    const userWishlistProperties = await UserWishlist.findAll({
-      where: {userId},
-      raw: true
-    });
-    const userWishlistPropertiesIds = userWishlistProperties.map(p => p.propertyId);
+    if(req.isAuthenticated){
+      const userWishlistProperties = await UserWishlist.findAll({
+        where: {userId: req.userId},
+        raw: true
+      });
+      const userWishlistPropertiesIds = userWishlistProperties.map(p => p.propertyId);
 
-    for(const p of items){
-      p.isInWishlist = userWishlistPropertiesIds.includes(p.id);
+      items.forEach(p => p.isInWishlist = userWishlistPropertiesIds.includes(p.id))
     }
 
     return {count, pages, items};
   },
   getProperty: async ({id}, req) => {
-    const authToken = req.headers['authorization'].split(' ')[1]
-    const decodedToken = jwt.verify(authToken, SECRET);
-    const userId = decodedToken.userId;
-
     const property = await Property.findOne({where: {id}, include: [{
         model: City,
         as: 'city'
@@ -116,18 +108,20 @@ module.exports = {
       }]
     });
 
-    const propertyInWishlist = await UserWishlist.findOne({
-      where: {userId, propertyId: id}
-    });
+    if(req.isAuthenticated){
+      const propertyInWishlist = await UserWishlist.findOne({
+        where: {userId: req.userId, propertyId: id}
+      });
 
-    property.isInWishlist = !!propertyInWishlist;
+      property.isInWishlist = !!propertyInWishlist;
+    }
 
     return property;
   },
   getWishlist: async (args, req) => {
-    const authToken = req.headers['authorization'].split(' ')[1]
-    const decodedToken = jwt.verify(authToken, SECRET);
-    const userId = decodedToken.userId;
+    if(!req.isAuthenticated){
+      throw new Error('User is not authenticated');
+    }
 
     // const data =  await UserWishlist.findAll( {where: {userId}, include: Property});
     const data =  await UserWishlist.findAll( {where: {userId}});
@@ -144,21 +138,19 @@ module.exports = {
     return wishlistProperties;
   },
   addToWishlist: async ({propertyId}, req) => {
-    const authToken = req.headers['authorization'].split(' ')[1]
-    console.log({authToken});
-    const decodedToken = jwt.verify(authToken, SECRET);
-    console.log({decodedToken});
-    const userId = decodedToken.userId;
+    if(!req.isAuthenticated){
+      throw new Error('User is not authenticated');
+    }
 
-    await UserWishlist.create({ userId, propertyId });
+    await UserWishlist.create({ userId: req.userId, propertyId });
     return {success: true};
   },
   removeFromWishlist: async ({propertyId}, req) => {
-    const authToken = req.headers['authorization'].split(' ')[1]
-    const decodedToken = jwt.verify(authToken, SECRET);
-    const userId = decodedToken.userId;
+    if(!req.isAuthenticated){
+      throw new Error('User is not authenticated');
+    }
 
-    await UserWishlist.destroy({where: { userId, propertyId }});
+    await UserWishlist.destroy({where: { userId: req.userId, propertyId }});
     return {success: true};
   }
 };
