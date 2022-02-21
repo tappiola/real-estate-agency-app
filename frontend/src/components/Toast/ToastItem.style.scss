@@ -1,0 +1,83 @@
+.Toast {
+    &-Container {
+        position: absolute;
+        top: 14px;
+        right: 20px;
+        z-index: 1500;
+        height: min-content;
+        width: auto;
+    }
+
+    &-Item {
+        position: relative;
+        font-size: 0.875rem;
+        color: #ffffff;
+        background-color: #313131;
+        border-radius: 4px;
+        line-height: 1.43;
+        margin: 6px 0;
+        padding: 14px 28px 14px 16px;
+    }
+
+    &-Success {
+        background-color: #43a047;
+        color: #ffffff;
+    }
+
+    &-Info {
+        background-color: #2196f3;
+        color: #ffffff;
+    }
+
+    &-Warning {
+        background-color: #ff9800;
+        color: #ffffff;
+    }
+
+    &-Error {
+        background-color: #d32f2f;
+        color: #ffffff;
+    }
+
+    &-Label {
+        display: flex;
+        align-items: center;
+    }
+
+    &-Close {
+        position: absolute;
+        width: 16px;
+        right: 6px;
+        top: 6px;
+        fill: #ffffff;
+
+        &:hover {
+            transform: scale(1.15);
+        }
+    }
+
+    &-Icon {
+        width: 20px;
+        fill: #ffffff;
+        margin-right: 5px;
+    }
+
+    &-enter {
+        right: -120%;
+        transition: all 500ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    }
+
+    &-enter-active {
+        right: 0;
+    }
+
+    &-exit {
+        right: 0;
+    }
+
+    &-exit-active {
+        right: -120%;
+        transition: all 500ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    }
+}
+

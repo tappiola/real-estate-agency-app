@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import ToastItem from './ToastItem.jsx';
-import './styles.css';
+import './ToastItem.style.scss';
 
 export const ToastQueueContext = React.createContext();
 const { Provider } = ToastQueueContext;
@@ -30,14 +30,14 @@ function ToastQueueProvider({ children }) {
       {children}
 
       {createPortal((
-        <div className="toasts-container">
+        <div className="Toast-Container">
           <TransitionGroup>
             {toasts.map((toast) => (
               <CSSTransition
                 key={toast.id}
                 timeout={500}
                 unmountOnExit
-                classNames="toast"
+                classNames="Toast"
               >
                 <ToastItem
                   {...toast}
