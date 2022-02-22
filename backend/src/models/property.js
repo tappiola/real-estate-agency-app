@@ -10,7 +10,9 @@ const Property = sequelize.define('property', {
     primaryKey: true,
   },
   title: Sequelize.STRING,
-  description: Sequelize.STRING
+  description: Sequelize.STRING,
+  longitude: Sequelize.FLOAT,
+  latitude: Sequelize.FLOAT
 });
 
 module.exports = Property;

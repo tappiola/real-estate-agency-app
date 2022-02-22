@@ -5,7 +5,7 @@
     scroll-snap-type: y proximity;
 }
 
-.list-item {
+.property {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 1.2em;
     line-height: 1.5em;
@@ -13,11 +13,11 @@
     scroll-snap-align: start;
 }
 
-#list-item-0 {
+#property-0 {
     scroll-snap-align: none;
 }
 
-:global(.list-item p:last-child) {
+:global(.property p:last-child) {
     margin: 0;
 }
 

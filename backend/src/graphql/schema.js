@@ -17,10 +17,11 @@ module.exports = buildSchema(`
         description: String!
         city: City
         propertyType: PropertyType,
-        isInWishlist: Boolean
+        isInWishlist: Boolean,
+        longitude: Float,
+        latitude: Float
     }
    
-    
     type Status {
         success: Boolean!
     }

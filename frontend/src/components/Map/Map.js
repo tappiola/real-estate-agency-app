@@ -7,6 +7,8 @@ const Map = ({properties, activeItem, setActiveItem}) => {
 
   const [map, setMap] = useState();
 
+  const getCoordinates = (item) => ([item.longitude, item.latitude]);
+
   const generateFeature = ({ name, image, coordinates }, index) => {
     return {
       type: 'Feature',
@@ -28,7 +30,7 @@ const Map = ({properties, activeItem, setActiveItem}) => {
     const mapRef = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/outdoors-v11?optimize=true',
-      center: properties[0].coordinates,
+      center: getCoordinates(properties[0]),
       zoom: 13
     });
 
@@ -59,7 +61,7 @@ const Map = ({properties, activeItem, setActiveItem}) => {
         // Show popup
         new mapboxgl.Popup()
             .setLngLat(coordinates)
-            .setHTML(match.properties.description)
+            .setHTML(match.properties.title)
             .addTo(mapRef);
 
         // Set new active list item
@@ -82,10 +84,9 @@ const Map = ({properties, activeItem, setActiveItem}) => {
 
   // Update map center when active list item is updated via list
   useEffect(() => {
-    console.log(map, properties[activeItem].coordinates);
     if (map) {
       map.flyTo({
-        center: properties[activeItem].coordinates
+        center: getCoordinates(properties[activeItem])
       });
     }
   }, [activeItem]);

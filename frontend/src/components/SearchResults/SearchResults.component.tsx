@@ -1,9 +1,11 @@
 import React from "react";
-import PropertyCard from "../PropertyCard";
 import Loader from "../Loader";
 import Pagination from "../Pagination";
 import {PropertyType} from "../../types";
 import './SearchResults.style.scss';
+import PropertiesList from "../PropertiesList/PropertiesList";
+import {listItems} from "../Map/consts";
+import Map from "../Map/Map";
 
 const SearchResults: React.FC<{
     count: number,
@@ -22,12 +24,23 @@ const SearchResults: React.FC<{
             activeItem,
             setActiveItem}) => {
 
+    if(isLoading){
+        return <Loader/>
+    }
+
     return <>
-        <h1>Search results</h1>
-        <h6>{count || 'No'} items found</h6>
-        {properties.map(property => <PropertyCard key={property.id} property = {property}/>)}
-        {isLoading && <Loader/>}
-        {pages > 1 && <Pagination pages={pages} currentPage={currentPage}/>}
+
+        <div className="container">
+            <div className="pane left">
+                <h2>Search results</h2>
+                <h6>{count || 'No'} items found</h6>
+                <PropertiesList properties={properties} activeItem={activeItem} setActiveItem={setActiveItem}/>
+                {pages > 1 && <Pagination pages={pages} currentPage={currentPage}/>}
+            </div>
+            <div className="pane right">
+                <Map properties={properties} activeItem={activeItem} setActiveItem={setActiveItem}/>
+            </div>
+        </div>
     </>
 }
 

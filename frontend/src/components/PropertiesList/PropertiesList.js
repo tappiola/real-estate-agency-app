@@ -1,16 +1,17 @@
   import inView from 'in-view';
   import {useEffect, useRef} from "react";
   import './PropertiesList.style.scss';
+  import PropertyCardContainer from "../PropertyCard";
 
-  const Property = ({listItem, index}) => {
-    return <div className="list-item" id={`list-item-${index}`}>
-      <a href={listItem.website}>
-        <img src={listItem.image} alt={listItem.name}/>
-        <h2>{listItem.name}</h2>
-      </a>
-      {listItem.description}
-    </div>
-  };
+  // const Property = ({listItem, index}) => {
+  //   return <div className="list-item" id={`property-${index}`}>
+  //     <a href={listItem.website}>
+  //       <img src={listItem.image} alt={listItem.name}/>
+  //       <h2>{listItem.name}</h2>
+  //     </a>
+  //     {listItem.description}
+  //   </div>
+  // };
 
   const PropertiesList = ({properties, activeItem, setActiveItem}) => {
     const listRef = useRef();
@@ -18,7 +19,7 @@
     const scrollListener = () => {
       // Active list item is top-most fully-visible item
       const visibleListItems = Array.from(
-          document.getElementsByClassName('list-item')
+          document.getElementsByClassName('PropertyCard')
       ).map(inView.is);
 
       // If it's a new one, update active list item
@@ -32,14 +33,18 @@
 
     // Update list scroll position when active list item is updated via map
     useEffect(() => {
-      if (listRef && listRef.current) {
+      if (listRef && listRef.current && properties.length) {
         listRef.current.scrollTop = document.getElementById(
-            `list-item-${activeItem}`
+            `property-${activeItem}`
         ).offsetTop;
       }}, [listRef.current, activeItem]);
 
     return <div id="list-items" ref={listRef} onScroll={scrollListener}>
-      { properties.map((listItem, index) => <Property key={index} listItem={listItem} index={index} />)}
+      { properties.map((property, index) => <PropertyCardContainer
+          key={index}
+          property={property}
+          index={index}
+      />)}
         </div>
   }
 

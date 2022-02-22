@@ -1,3 +1,3 @@
 exports.SECRET ='somesupersecretsecret';
 
-exports.ITEMS_PER_PAGE = 2;
+exports.ITEMS_PER_PAGE = 10;

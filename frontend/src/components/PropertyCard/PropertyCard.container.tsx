@@ -5,7 +5,7 @@ import React from "react";
 import {saveScrollPosition} from "../../redux/Navigation";
 import {useAppDispatch} from "../../redux/store";
 
-const PropertyCardContainer: React.FC<{property: PropertyType}> = ({property}) => {
+const PropertyCardContainer: React.FC<{property: PropertyType, index: number}> = ({property, index}) => {
     const dispatch = useAppDispatch();
     let navigate = useNavigate();
 
@@ -14,7 +14,7 @@ const PropertyCardContainer: React.FC<{property: PropertyType}> = ({property}) =
         navigate(`/property/${property.id}`);
     }
 
-    return <PropertyCard property={property} loadProperty={loadProperty}/>
+    return <PropertyCard property={property} loadProperty={loadProperty} index={index}/>
 }
 
 export default PropertyCardContainer;
