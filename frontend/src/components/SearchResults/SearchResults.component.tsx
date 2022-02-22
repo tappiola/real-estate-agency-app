@@ -1,15 +1,26 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import PropertyCard from "../PropertyCard";
 import Loader from "../Loader";
 import Pagination from "../Pagination";
 import {PropertyType} from "../../types";
+import './SearchResults.style.scss';
 
 const SearchResults: React.FC<{
     count: number,
     properties: PropertyType[],
     isLoading: boolean,
     pages: number,
-    currentPage: number}> = ({count, properties, isLoading, pages, currentPage}) => {
+    currentPage: number,
+    activeItem: number,
+    setActiveItem: (id: number) => void
+}> = (
+        {count,
+            properties,
+            isLoading,
+            pages,
+            currentPage,
+            activeItem,
+            setActiveItem}) => {
 
     return <>
         <h1>Search results</h1>

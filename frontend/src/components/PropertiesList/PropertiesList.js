@@ -1,6 +1,6 @@
   import inView from 'in-view';
   import {useEffect, useRef} from "react";
-  import './List.style.scss';
+  import './PropertiesList.style.scss';
 
   const Property = ({listItem, index}) => {
     return <div className="list-item" id={`list-item-${index}`}>

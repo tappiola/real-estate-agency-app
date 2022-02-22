@@ -9,6 +9,7 @@ const SearchResultsContainer = () => {
     const [pages, setPages] = useState(1);
     const [count, setCount] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
+    const [activeItem, setActiveItem] = useState(0);
 
     const [searchParams] = useSearchParams();
     const currentPage = Number(searchParams.get('page')) || 1;
@@ -39,10 +40,18 @@ const SearchResultsContainer = () => {
 
         fetchProperties();
 
-        // dispatch(queryProperties(currentPage));
     }, [currentPage]);
 
-    return <SearchResults count={count} currentPage={currentPage} isLoading={isLoading} pages={pages} properties={properties}/>
+    return <SearchResults
+        count={count}
+        currentPage={currentPage}
+        isLoading={isLoading}
+        pages={pages}
+        properties={properties}
+        activeItem={activeItem}
+        setActiveItem={setActiveItem}
+
+    />
 }
 
 export default SearchResultsContainer;

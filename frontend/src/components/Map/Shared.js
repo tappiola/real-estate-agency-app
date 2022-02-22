@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import PropertiesList from './PropertiesList';
+import {useState} from "react";
+import PropertiesList from '../PropertiesList/PropertiesList';
 import Map from "./Map";
 import {listItems} from "./consts";
 import './Shared.style.scss';
