@@ -10,7 +10,6 @@ import Property from "../Property";
 import NotFound from "../NotFound";
 import Notification from '../Notification';
 import {ToastQueueProvider} from '../Toast';
-import Shared from "../Map/Shared";
 
 const App = () => {
   return (
@@ -23,7 +22,6 @@ const App = () => {
                             <Route path="/login" element={<Login />}/>
                             <Route path="/favorites" element={<Wishlist />}/>
                             <Route path="/search" element={<SearchResults />}/>
-                            <Route path="/demo" element={<Shared />}/>
                             <Route path="/property/:id" element={<Property />}/>
                             <Route path="*" element={<NotFound/>} />
                     </Routes>

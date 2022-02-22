@@ -4,7 +4,6 @@ import Pagination from "../Pagination";
 import {PropertyType} from "../../types";
 import './SearchResults.style.scss';
 import PropertiesList from "../PropertiesList/PropertiesList";
-import {listItems} from "../Map/consts";
 import Map from "../Map/Map";
 
 const SearchResults: React.FC<{

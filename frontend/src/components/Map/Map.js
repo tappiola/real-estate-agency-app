@@ -1,5 +1,5 @@
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
-import { accessToken } from './consts';
+import { accessToken } from '../../constants';
 import './Map.style.scss';
 import {useEffect, useState} from "react";
 
