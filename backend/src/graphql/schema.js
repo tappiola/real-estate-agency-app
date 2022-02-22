@@ -60,6 +60,7 @@ module.exports = buildSchema(`
         createUser(userInput: UserInputData): User!
         addToWishlist(propertyId: String!): Status!
         removeFromWishlist(propertyId: String!): Status!
+        saveClientRequest(firstName: String!, lastName: String, email: String, phone: String): Status!
     }
 
     schema {

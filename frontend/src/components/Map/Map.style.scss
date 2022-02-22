@@ -1,0 +1,14 @@
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+#map:before {
+    box-shadow: 20px 0 10px -10px rgba(0, 0, 0, 0.15) inset;
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    width: 20px;
+    z-index: 1000;
+}

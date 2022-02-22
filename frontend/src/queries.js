@@ -1,4 +1,4 @@
-import {sendGraphqlRequest, sendGraphqlRequest2} from "./graphql";
+import {sendGraphqlRequest} from "./graphql";
 
 export const addToWishlist = (id) => {
     const graphqlQuery  = {

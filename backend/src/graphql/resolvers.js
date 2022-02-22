@@ -10,124 +10,127 @@ const UserWishlist = require("../models/userWishlist");
 const {SECRET, ITEMS_PER_PAGE} = require("../constants");
 const { Op } = require("sequelize");
 
-module.exports = {
-  createUser: async ({ userInput })  => {
-    const {email, name, password} = userInput;
-    const errors = [];
+const createUser = async ({ userInput })  => {
+  const {email, name, password} = userInput;
+  const errors = [];
 
-    if (!validator.isEmail(email)) {
-      errors.push({ message: 'Invalid email.' });
-    }
+  if (!validator.isEmail(email)) {
+    errors.push({ message: 'Invalid email.' });
+  }
 
-    if (validator.isEmpty(password) || !validator.isLength(password, { min: 6 })) {
-      errors.push({ message: 'Password is too short!' });
-    }
+  if (validator.isEmpty(password) || !validator.isLength(password, { min: 6 })) {
+    errors.push({ message: 'Password is too short!' });
+  }
 
-    if (errors.length > 0) {
-      const error = new Error('Invalid input.');
-      error.data = errors;
-      error.code = 422;
-      throw error;
-    }
+  if (errors.length > 0) {
+    const error = new Error('Invalid input.');
+    error.data = errors;
+    error.code = 422;
+    throw error;
+  }
 
-    const existingUser = await User.findOne({where: { email }});
+  const existingUser = await User.findOne({where: { email }});
 
-    if (existingUser) {
-      throw new Error('User exists already!');
-    }
+  if (existingUser) {
+    throw new Error('User exists already!');
+  }
 
-    const hashedPw = await bcrypt.hash(userInput.password, 12);
-    const user = new User({email, name, password: hashedPw});
+  const hashedPw = await bcrypt.hash(userInput.password, 12);
+  const user = new User({email, name, password: hashedPw});
 
-    return await user.save();
-  },
-  login: async ({ email, password }) => {
-    const user = await User.findOne({where: { email }});
-    if (!user) {
-      const error = new Error('User not found.');
-      error.code = 401;
-      throw error;
-    }
-    const isEqual = await bcrypt.compare(password, user.password);
+  return await user.save();
+};
 
-    if (!isEqual) {
-      const error = new Error('Password is incorrect.');
-      error.code = 401;
-      throw error;
-    }
+const login = async ({ email, password }) => {
+  const user = await User.findOne({where: { email }});
+  if (!user) {
+    const error = new Error('User not found.');
+    error.code = 401;
+    throw error;
+  }
+  const isEqual = await bcrypt.compare(password, user.password);
 
-    const token = jwt.sign(
-        {
-          userId: user.id.toString(),
-          email: user.email
-        },
-        SECRET,
-        { expiresIn: '1h' }
-    );
-    return { token: token, userId: user.id.toString() };
-  },
-  getProperties: async (args, req) => {
-    const { page } = args;
-    console.log({page});
+  if (!isEqual) {
+    const error = new Error('Password is incorrect.');
+    error.code = 401;
+    throw error;
+  }
 
-    const count = await Property.count();
-    const pages = Math.ceil(count / ITEMS_PER_PAGE);
-    console.log({pages, count});
+  const token = jwt.sign(
+      {
+        userId: user.id.toString(),
+        email: user.email
+      },
+      SECRET,
+      { expiresIn: '1h' }
+  );
+  return { token: token, userId: user.id.toString() };
+};
 
-    const items = await Property.findAll( {
-      offset: (page - 1) * ITEMS_PER_PAGE,
-      limit: ITEMS_PER_PAGE,
-      include: [{
-        model: City,
-        as: 'city'
-      }, {
-        model: PropertyType,
-        as: 'propertyType'
-      }],
+const getProperties = async (args, req) => {
+  const { page } = args;
+  console.log({page});
+
+  const count = await Property.count();
+  const pages = Math.ceil(count / ITEMS_PER_PAGE);
+  console.log({pages, count});
+
+  const items = await Property.findAll( {
+    offset: (page - 1) * ITEMS_PER_PAGE,
+    limit: ITEMS_PER_PAGE,
+    include: [{
+      model: City,
+      as: 'city'
+    }, {
+      model: PropertyType,
+      as: 'propertyType'
+    }],
+  });
+
+  if(req.isAuthenticated){
+    const userWishlistProperties = await UserWishlist.findAll({
+      where: {userId: req.userId},
+      raw: true
+    });
+    const userWishlistPropertiesIds = userWishlistProperties.map(p => p.propertyId);
+
+    items.forEach(p => p.isInWishlist = userWishlistPropertiesIds.includes(p.id))
+  }
+
+  return {count, pages, items};
+};
+
+const getProperty = async ({id}, req) => {
+  const property = await Property.findOne({where: {id}, include: [{
+      model: City,
+      as: 'city'
+    }, {
+      model: PropertyType,
+      as: 'propertyType'
+    }]
+  });
+
+  if(req.isAuthenticated){
+    const propertyInWishlist = await UserWishlist.findOne({
+      where: {userId: req.userId, propertyId: id}
     });
 
-    if(req.isAuthenticated){
-      const userWishlistProperties = await UserWishlist.findAll({
-        where: {userId: req.userId},
-        raw: true
-      });
-      const userWishlistPropertiesIds = userWishlistProperties.map(p => p.propertyId);
+    property.isInWishlist = !!propertyInWishlist;
+  }
 
-      items.forEach(p => p.isInWishlist = userWishlistPropertiesIds.includes(p.id))
-    }
+  return property;
+};
 
-    return {count, pages, items};
-  },
-  getProperty: async ({id}, req) => {
-    const property = await Property.findOne({where: {id}, include: [{
-        model: City,
-        as: 'city'
-      }, {
-        model: PropertyType,
-        as: 'propertyType'
-      }]
-    });
+const getWishlist = async (args, req) => {
+  if(!req.isAuthenticated){
+    throw new Error('User is not authenticated');
+  }
 
-    if(req.isAuthenticated){
-      const propertyInWishlist = await UserWishlist.findOne({
-        where: {userId: req.userId, propertyId: id}
-      });
+  // const data =  await UserWishlist.findAll( {where: {userId}, include: Property});
+  const data =  await UserWishlist.findAll( {where: {userId}});
+  const propertyIds = data.map(({propertyId}) => propertyId);
 
-      property.isInWishlist = !!propertyInWishlist;
-    }
-
-    return property;
-  },
-  getWishlist: async (args, req) => {
-    if(!req.isAuthenticated){
-      throw new Error('User is not authenticated');
-    }
-
-    // const data =  await UserWishlist.findAll( {where: {userId}, include: Property});
-    const data =  await UserWishlist.findAll( {where: {userId}});
-    const propertyIds = data.map(({propertyId}) => propertyId);
-
-    const wishlistProperties = Property.findAll({where: {id: {[Op.or]: propertyIds}}, include: [{
+  const wishlistProperties = Property.findAll({where: {id: {[Op.or]: propertyIds}}, include: [{
       model: City,
       as: 'city'
     }, {
@@ -135,22 +138,38 @@ module.exports = {
       as: 'propertyType'
     }]});
 
-    return wishlistProperties;
-  },
-  addToWishlist: async ({propertyId}, req) => {
-    if(!req.isAuthenticated){
-      throw new Error('User is not authenticated');
-    }
+  return wishlistProperties;
+};
 
-    await UserWishlist.create({ userId: req.userId, propertyId });
-    return {success: true};
-  },
-  removeFromWishlist: async ({propertyId}, req) => {
-    if(!req.isAuthenticated){
-      throw new Error('User is not authenticated');
-    }
-
-    await UserWishlist.destroy({where: { userId: req.userId, propertyId }});
-    return {success: true};
+const addToWishlist = async ({propertyId}, req) => {
+  if(!req.isAuthenticated){
+    throw new Error('User is not authenticated');
   }
+
+  await UserWishlist.create({ userId: req.userId, propertyId });
+  return {success: true};
+};
+
+const removeFromWishlist =  async ({propertyId}, req) => {
+  if(!req.isAuthenticated){
+    throw new Error('User is not authenticated');
+  }
+
+  await UserWishlist.destroy({where: { userId: req.userId, propertyId }});
+  return {success: true};
+}
+
+const saveClientRequest = async () => {
+
+};
+
+module.exports = {
+  createUser,
+  login,
+  getProperties,
+  getProperty,
+  getWishlist,
+  addToWishlist,
+  removeFromWishlist,
+  saveClientRequest
 };

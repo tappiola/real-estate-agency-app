@@ -2,14 +2,11 @@ import {useEffect, useState} from "react";
 import {getWishlist} from "../../queries";
 import Wishlist from "./Wishlist.component";
 import {PropertyType} from "../../types";
-import {useAppDispatch} from "../../redux/store";
 
 const WishlistContainer = () => {
     const [properties, setProperties] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
-
-    const dispatch = useAppDispatch();
 
     useEffect(() => {
         const fetchWishlist = async () => {
