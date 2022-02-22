@@ -3,16 +3,6 @@
   import './PropertiesList.style.scss';
   import PropertyCardContainer from "../PropertyCard";
 
-  // const Property = ({listItem, index}) => {
-  //   return <div className="list-item" id={`property-${index}`}>
-  //     <a href={listItem.website}>
-  //       <img src={listItem.image} alt={listItem.name}/>
-  //       <h2>{listItem.name}</h2>
-  //     </a>
-  //     {listItem.description}
-  //   </div>
-  // };
-
   const PropertiesList = ({properties, activeItem, setActiveItem}) => {
     const listRef = useRef();
 
@@ -24,7 +14,7 @@
 
       // If it's a new one, update active list item
       const topMostVisible = visibleListItems.indexOf(true);
-      if (topMostVisible !== activeItem) {
+      if (topMostVisible !== activeItem && topMostVisible !== -1) {
         setActiveItem(topMostVisible);
       }
     };

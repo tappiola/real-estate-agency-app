@@ -9,16 +9,17 @@ const Map = ({properties, activeItem, setActiveItem}) => {
 
   const getCoordinates = (item) => ([item.longitude, item.latitude]);
 
-  const generateFeature = ({ name, image, coordinates }, index) => {
+  const generateFeature = ({ title, image, longitude, latitude }, index) => {
+
     return {
       type: 'Feature',
       properties: {
-        description: `<img width="100%" src="${image}" alt="img"/><b>${name}</b>`,
+        description: `<img width="100%" src="${image || 'https://ichef.bbci.co.uk/news/976/cpsprodpb/02C2/production/_122360700_gettyimages-1280424615.jpg'}" alt="img"/><b>${title}</b>`,
         id: index
       },
       geometry: {
         type: 'Point',
-        coordinates
+        coordinates: [longitude, latitude]
       }
     };
   }
@@ -47,7 +48,7 @@ const Map = ({properties, activeItem, setActiveItem}) => {
           }
         },
         layout: {
-          'icon-image': 'cafe-15',
+          'icon-image': 'bakery-11',
           'icon-size': 1.5,
           'icon-allow-overlap': true
         }
@@ -61,7 +62,7 @@ const Map = ({properties, activeItem, setActiveItem}) => {
         // Show popup
         new mapboxgl.Popup()
             .setLngLat(coordinates)
-            .setHTML(match.properties.title)
+            .setHTML(match.properties.description)
             .addTo(mapRef);
 
         // Set new active list item
