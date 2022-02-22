@@ -24,9 +24,12 @@
     // Update list scroll position when active list item is updated via map
     useEffect(() => {
       if (listRef && listRef.current && properties.length) {
+        console.log(document.getElementById(
+            `property-${activeItem}`
+        ).offsetTop);
         listRef.current.scrollTop = document.getElementById(
             `property-${activeItem}`
-        ).offsetTop;
+        ).offsetTop - 130;
       }}, [listRef.current, activeItem]);
 
     return <div id="list-items" ref={listRef} onScroll={scrollListener}>

@@ -1,7 +1,8 @@
 import WishlistIcon from "../WishlistIcon";
-import React from "react";
+import React, {MouseEventHandler} from "react";
 
-const WishlistToggle : React.FC<{isInWishlist:boolean, onWishlistToggle: () => void}> = ({isInWishlist, onWishlistToggle}) => {
+const WishlistToggle : React.FC<{isInWishlist:boolean, onWishlistToggle: (e: any) => void}> = ({isInWishlist, onWishlistToggle}) => {
+
     return <>
         <p onClick={onWishlistToggle}>
         <WishlistIcon isActive={isInWishlist}/>

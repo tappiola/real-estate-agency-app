@@ -33,11 +33,20 @@ const SearchResults: React.FC<{
             <div className="pane left">
                 <h2>Search results</h2>
                 <h6>{count || 'No'} items found</h6>
-                <PropertiesList properties={properties} activeItem={activeItem} setActiveItem={setActiveItem}/>
+                <PropertiesList
+                    properties={properties}
+                    activeItem={activeItem}
+                    setActiveItem={setActiveItem}
+                />
                 {pages > 1 && <Pagination pages={pages} currentPage={currentPage}/>}
             </div>
             <div className="pane right">
-                <Map properties={properties} activeItem={activeItem} setActiveItem={setActiveItem}/>
+                <Map
+                    properties={properties}
+                    activeItem={activeItem}
+                    setActiveItem={setActiveItem}
+                    currentPage={currentPage}
+                />
             </div>
         </div>
     </>

@@ -13,9 +13,7 @@ TODO:
 - replace cities and client requests with gql
 - add images table
 - add carousel
-- notifications
 - script to fill in properties data
-- map with properties
 - page number into redux
 
 

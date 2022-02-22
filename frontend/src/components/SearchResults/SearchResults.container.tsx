@@ -42,6 +42,8 @@ const SearchResultsContainer = () => {
 
     }, [currentPage]);
 
+    useEffect(() => setActiveItem(0), [currentPage]);
+
     return <SearchResults
         count={count}
         currentPage={currentPage}
@@ -50,7 +52,6 @@ const SearchResultsContainer = () => {
         properties={properties}
         activeItem={activeItem}
         setActiveItem={setActiveItem}
-
     />
 }
 
