@@ -71,6 +71,7 @@ export const searchProperties = (page) => {
                     description
                     city { id name }
                     propertyType { id name }
+                    images { id link position }
                     isInWishlist
                     longitude
                     latitude

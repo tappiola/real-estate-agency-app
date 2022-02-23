@@ -10,6 +10,12 @@ module.exports = buildSchema(`
         id: ID!
         name: String!
      }
+     
+     type Image {
+        id: ID!
+        link: String!
+        position: Int!
+     }
 
     type Property {
         id: ID!
@@ -17,6 +23,7 @@ module.exports = buildSchema(`
         description: String!
         city: City
         propertyType: PropertyType,
+        images: [Image!]!
         isInWishlist: Boolean,
         longitude: Float,
         latitude: Float

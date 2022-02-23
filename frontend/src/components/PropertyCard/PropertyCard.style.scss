@@ -1,6 +1,15 @@
 .PropertyCard {
+    display: flex;
     border: 2px solid var(--primary-bright-color);
     margin: 15px;
     padding: 15px;
-    height: 300px;
+    height: 315px;
+    cursor: pointer;
+
+    &-CarouselImg {
+        width: 100%;
+        object-fit: cover;
+    }
 }
+
+

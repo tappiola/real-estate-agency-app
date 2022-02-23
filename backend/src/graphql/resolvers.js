@@ -7,6 +7,7 @@ const Property = require("../models/property");
 const City = require("../models/city");
 const PropertyType = require("../models/propertyType");
 const UserWishlist = require("../models/userWishlist");
+const Image = require("../models/images");
 const {SECRET, ITEMS_PER_PAGE} = require("../constants");
 const { Op } = require("sequelize");
 const ClientRequest = require("../models/clientRequests");
@@ -83,7 +84,10 @@ const getProperties = async (args, req) => {
     }, {
       model: PropertyType,
       as: 'propertyType'
-    }],
+    }, {
+      model: Image,
+      as: 'images'
+  }],
   });
 
   if(req.isAuthenticated){

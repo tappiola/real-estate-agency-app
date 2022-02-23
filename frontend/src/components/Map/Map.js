@@ -1,5 +1,5 @@
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
-import { accessToken } from '../../constants';
+import {accessToken, IMAGE_PLACEHOLDER} from '../../constants';
 import './Map.style.scss';
 import {useEffect, useState} from "react";
 
@@ -14,7 +14,7 @@ const Map = ({properties, activeItem, setActiveItem, currentPage}) => {
     return {
       type: 'Feature',
       properties: {
-        description: `<img width="100%" src="${image || 'https://ichef.bbci.co.uk/news/976/cpsprodpb/02C2/production/_122360700_gettyimages-1280424615.jpg'}" alt="img"/><b>${title}</b>`,
+        description: `<img width="100%" src="${image || IMAGE_PLACEHOLDER}" alt="img"/><b>${title}</b>`,
         id: index
       },
       geometry: {

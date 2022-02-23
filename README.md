@@ -11,13 +11,12 @@ TODO:
 - add position storing on navigate back
 - don't rerequest on navigate back (check if query params match prev currency params)
 - add redux
-- replace cities and client requests with gql
-- add images table
 - add carousel
 - script to fill in properties data
 - page number into redux
 - react-content-loader for placeholders https://skeletonreact.com/
-
+- adjust Map and PropertiesList
+- adjust carousel
 
 - (R) refresh token
 - (R) imports without ../../

@@ -27,7 +27,7 @@
         listRef.current.scrollTop = document.getElementById(
             `property-${activeItem}`
         ).offsetTop - 130;
-      }}, [listRef.current, activeItem]);
+      }}, [listRef, activeItem]);
 
     return <div id="list-items" ref={listRef} onScroll={scrollListener}>
       { properties.map((property, index) => <PropertyCardContainer
