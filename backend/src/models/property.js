@@ -9,8 +9,12 @@ const Property = sequelize.define('property', {
     allowNull: false,
     primaryKey: true,
   },
+  price: Sequelize.INTEGER,
   title: Sequelize.STRING,
   description: Sequelize.STRING,
+  address: Sequelize.STRING,
+  bedroomCount: Sequelize.INTEGER,
+  bathroomCount: Sequelize.INTEGER,
   longitude: Sequelize.FLOAT,
   latitude: Sequelize.FLOAT
 });

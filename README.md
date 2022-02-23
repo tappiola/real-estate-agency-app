@@ -17,6 +17,8 @@ TODO:
 - react-content-loader for placeholders https://skeletonreact.com/
 - adjust Map and PropertiesList
 - adjust carousel
+- add address, bedroom count, bathroom count
+- add next / prev for pagination
 
 - (R) refresh token
 - (R) imports without ../../

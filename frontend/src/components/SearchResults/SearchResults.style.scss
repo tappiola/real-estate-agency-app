@@ -1,5 +1,21 @@
+.SearchResults {
+    &-Count {
+        background-color: var(--primary-bright-color);
+        padding: 5px 10px;
+        z-index: 4000;
+        border-radius: 22px;
+        color: white;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        font-size: 13px;
+        position: absolute;
+        right: 16px;
+        top: 56px;
+    }
+}
+
 .container {
-    height: 100vh;
+    height: calc(100vh - 50px);
     display: flex;
 }
 

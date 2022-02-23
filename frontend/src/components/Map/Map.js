@@ -9,12 +9,12 @@ const Map = ({properties, activeItem, setActiveItem, currentPage}) => {
 
   const getCoordinates = (item) => ([item.longitude, item.latitude]);
 
-  const generateFeature = ({ title, image, longitude, latitude }, index) => {
+  const generateFeature = ({ title, images, longitude, latitude }, index) => {
 
     return {
       type: 'Feature',
       properties: {
-        description: `<img width="100%" src="${image || IMAGE_PLACEHOLDER}" alt="img"/><b>${title}</b>`,
+        description: `<img width="100%" src="${images[0]?.link || IMAGE_PLACEHOLDER}" alt="img"/><b>${title}</b>`,
         id: index
       },
       geometry: {

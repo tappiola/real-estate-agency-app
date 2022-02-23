@@ -13,6 +13,10 @@ const User = require('./models/user');
 const ClientRequests = require('./models/clientRequests');
 const UserWishlist = require('./models/userWishlist');
 const Image = require('./models/images');
+const Tag = require('./models/tag');
+const Type = require('./models/type');
+const PropertyTag = require('./models/propertyTag');
+
 
 const { graphqlHTTP  } = require('express-graphql');
 
@@ -27,6 +31,9 @@ PropertyType.hasMany(Property);
 
 Image.belongsTo(Property);
 Property.hasMany(Image);
+
+Property.belongsTo(Type);
+Type.hasMany(Property);
 
 app.use(cors());
 

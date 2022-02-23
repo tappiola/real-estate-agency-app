@@ -3,7 +3,7 @@ import ToggleWishlist from "../ToggleWishlist";
 import './PropertyCard.style.scss';
 import {PropertyType} from "../../types";
 import {Carousel, CarouselItem} from "../Carousel/Carousel";
-import {sortByKey} from "../../util";
+import {formatPrice, sortByKey} from "../../util";
 import {IMAGE_PLACEHOLDER} from "../../constants";
 
 const PropertyCardComponent: React.FC<{property: PropertyType, index: number, loadProperty: () => void}> = ({property, index, loadProperty}) => {
@@ -39,8 +39,8 @@ const PropertyCardComponent: React.FC<{property: PropertyType, index: number, lo
                 </Carousel>
                 </div>
                 <div className='PropertyCard-Data'>
+                    <h2 className='PropertyCard-Price'>{formatPrice(property.price)}</h2>
                     <h2>{property.title}</h2>
-                    <p>{property.description}</p>
                     <p>{property.city.name}</p>
                     <p>{property.propertyType?.name}</p>
                     <ToggleWishlist property={property} inWishlist={property.isInWishlist}/>

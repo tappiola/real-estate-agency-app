@@ -1,7 +1,22 @@
 :root {
   --primary-bright-color: #308291;
+  --header-height: 56px;
 }
 
 .App {
   text-align: center;
+}
+
+header {
+  width: 100%;
+  height: var(--header-height);
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: var(--primary-bright-color);
+  z-index: 100;
+}
+
+main {
+  margin-top: var(--header-height);
 }

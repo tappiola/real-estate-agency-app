@@ -11,3 +11,15 @@ export const sortByKey = (values, sortKey) => values.sort(
         return 0;
     }
 );
+
+
+export const formatPrice = (price, currency = 'GBP') => {
+    const language = navigator.languages ? navigator.languages[0] : navigator.language;
+
+    return new Intl.NumberFormat(language, {
+        style: 'currency',
+        currency,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    }).format(price);
+};

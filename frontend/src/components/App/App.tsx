@@ -15,6 +15,8 @@ const App = () => {
   return (
       <ToastQueueProvider>
             <div className="App">
+                <header className="Header"/>
+                <main>
                 <BrowserRouter>
                     <Routes>
                             <Route path="/" element={<HomePage />}/>
@@ -26,6 +28,7 @@ const App = () => {
                             <Route path="*" element={<NotFound/>} />
                     </Routes>
                 </BrowserRouter>
+                </main>
             </div>
           <Notification />
       </ToastQueueProvider>

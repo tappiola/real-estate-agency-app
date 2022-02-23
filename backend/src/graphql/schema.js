@@ -20,13 +20,17 @@ module.exports = buildSchema(`
     type Property {
         id: ID!
         title: String!
+        address: String!
         description: String!
-        city: City
-        propertyType: PropertyType,
+        city: City!
+        propertyType: PropertyType!
         images: [Image!]!
-        isInWishlist: Boolean,
-        longitude: Float,
+        isInWishlist: Boolean
+        longitude: Float
         latitude: Float
+        price: Int!
+        bedroomCount: Int!
+        bathroomCount: Int!
     }
    
     type Status {

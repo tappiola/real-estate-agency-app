@@ -21,5 +21,6 @@ export type PropertyType = {
     city: CityType
     images: Image[]
     propertyType: TypeOfPropertyType,
-    isInWishlist: boolean
+    isInWishlist: boolean,
+    price: number
 };

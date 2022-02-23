@@ -30,9 +30,8 @@ const SearchResults: React.FC<{
     return <>
 
         <div className="container">
+            <p className='SearchResults-Count'>{count || 'No'} results</p>
             <div className="pane left">
-                <h2>Search results</h2>
-                <h6>{count || 'No'} items found</h6>
                 <PropertiesList
                     properties={properties}
                     activeItem={activeItem}

@@ -69,12 +69,16 @@ export const searchProperties = (page) => {
                     id
                     title
                     description
+                    address
+                    bedroomCount
+                    bathroomCount
                     city { id name }
                     propertyType { id name }
                     images { id link position }
                     isInWishlist
                     longitude
                     latitude
+                    price
                 }
               }
             }`};

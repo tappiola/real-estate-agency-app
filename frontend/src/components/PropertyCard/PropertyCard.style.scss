@@ -1,14 +1,26 @@
 .PropertyCard {
+    width: 100%;
     display: flex;
-    border: 2px solid var(--primary-bright-color);
-    margin: 15px;
-    padding: 15px;
+    border: 1px solid var(--controls-color);
+    margin: 15px 20px;
     height: 315px;
     cursor: pointer;
+    border-radius: 5px;
 
     &-CarouselImg {
         width: 100%;
         object-fit: cover;
+    }
+
+    &-Data {
+        margin: 15px;
+        text-align: left;
+    }
+
+    &-Price {
+        margin: 0;
+        font-weight: 600;
+        //font-size: 22px;
     }
 }
 
