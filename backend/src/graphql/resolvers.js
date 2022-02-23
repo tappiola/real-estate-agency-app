@@ -12,6 +12,7 @@ const {SECRET, ITEMS_PER_PAGE} = require("../constants");
 const { Op } = require("sequelize");
 const ClientRequest = require("../models/clientRequests");
 const Type = require("../models/type");
+const Tag = require("../models/tag");
 
 const createUser = async ({ userInput })  => {
   const {email, name, password} = userInput;
@@ -91,7 +92,11 @@ const getProperties = async (args, req) => {
   }, {
       model: Type,
       as: 'type'
-    }],
+    }, {
+      model: Tag,
+      as: 'tags'
+    }
+    ],
   });
 
   if(req.isAuthenticated){
