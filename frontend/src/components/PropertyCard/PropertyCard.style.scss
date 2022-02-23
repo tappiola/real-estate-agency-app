@@ -15,12 +15,38 @@
     &-Data {
         margin: 15px;
         text-align: left;
+        width: 100%;
+        position: relative;
     }
 
     &-Price {
         margin: 0;
         font-weight: 600;
-        //font-size: 22px;
+    }
+
+    &-Amenities {
+        display: flex;
+        color: var(--dark-gray);
+
+        .BedroomIcon {
+            margin-right: 10px;
+        }
+
+        .BathroomIcon {
+            margin: 0 10px 0 18px;
+        }
+    }
+
+    &-Title {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 0 10px;
+    }
+
+    &-Address {
+        color: var(--dark-gray);
+        margin: 0;
+        font-size: 14px;
     }
 }
 

@@ -11,6 +11,7 @@ const Image = require("../models/images");
 const {SECRET, ITEMS_PER_PAGE} = require("../constants");
 const { Op } = require("sequelize");
 const ClientRequest = require("../models/clientRequests");
+const Type = require("../models/type");
 
 const createUser = async ({ userInput })  => {
   const {email, name, password} = userInput;
@@ -87,7 +88,10 @@ const getProperties = async (args, req) => {
     }, {
       model: Image,
       as: 'images'
-  }],
+  }, {
+      model: Type,
+      as: 'type'
+    }],
   });
 
   if(req.isAuthenticated){

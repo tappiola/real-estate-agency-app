@@ -8,6 +8,11 @@ export type TypeOfPropertyType = {
     name: String
 }
 
+export type Type = {
+    id: number
+    name: String
+}
+
 export type Image = {
     id: number,
     position: number,
@@ -22,5 +27,9 @@ export type PropertyType = {
     images: Image[]
     propertyType: TypeOfPropertyType,
     isInWishlist: boolean,
-    price: number
+    price: number,
+    bedroomCount: number,
+    bathroomCount: number,
+    address: string
+    type: Type
 };

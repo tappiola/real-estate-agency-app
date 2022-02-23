@@ -5,6 +5,8 @@ import {PropertyType} from "../../types";
 import {Carousel, CarouselItem} from "../Carousel/Carousel";
 import {formatPrice, sortByKey} from "../../util";
 import {IMAGE_PLACEHOLDER} from "../../constants";
+import BedroomIcon from "../BedroomIcon/BedroomIcon";
+import BathroomIcon from "../App/BathroomIcon/BathroomIcon";
 
 const PropertyCardComponent: React.FC<{property: PropertyType, index: number, loadProperty: () => void}> = ({property, index, loadProperty}) => {
     const loadCarouselImages = () => {
@@ -39,10 +41,15 @@ const PropertyCardComponent: React.FC<{property: PropertyType, index: number, lo
                 </Carousel>
                 </div>
                 <div className='PropertyCard-Data'>
-                    <h2 className='PropertyCard-Price'>{formatPrice(property.price)}</h2>
-                    <h2>{property.title}</h2>
-                    <p>{property.city.name}</p>
-                    <p>{property.propertyType?.name}</p>
+                    <h2 className='PropertyCard-Price'>{formatPrice(property.price) + (property.type.name === 'rent' ? ' pcm' : '')}</h2>
+                    <p className='PropertyCard-Amenities'>
+                        <BedroomIcon/>
+                        {property.bedroomCount}
+                        <BathroomIcon/>
+                        {property.bathroomCount}
+                    </p>
+                    <h4 className='PropertyCard-Title'>{`${property.bedroomCount} bed ${property.propertyType?.name} in ${property.city?.name} ${property.type.name === 'sale' ? 'for': 'to'} ${property.type.name}`}</h4>
+                    <p className='PropertyCard-Address'>{property.address}</p>
                     <ToggleWishlist property={property} inWishlist={property.isInWishlist}/>
                 </div>
             </div>

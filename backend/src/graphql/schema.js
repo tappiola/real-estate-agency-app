@@ -16,6 +16,11 @@ module.exports = buildSchema(`
         link: String!
         position: Int!
      }
+     
+     type Type {
+        id: ID!
+        name: String!
+     }
 
     type Property {
         id: ID!
@@ -31,6 +36,7 @@ module.exports = buildSchema(`
         price: Int!
         bedroomCount: Int!
         bathroomCount: Int!
+        type: Type
     }
    
     type Status {

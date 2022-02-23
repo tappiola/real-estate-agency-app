@@ -79,6 +79,7 @@ export const searchProperties = (page) => {
                     longitude
                     latitude
                     price
+                    type {id name}
                 }
               }
             }`};
