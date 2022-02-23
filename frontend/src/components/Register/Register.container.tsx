@@ -27,7 +27,6 @@ const RegisterContainer = () => {
                 if (resData.errors) {
                     throw new Error('User creation failed!');
                 }
-                console.log(resData);
                 // this.setState({ isAuth: false, authLoading: false });
                 navigate('/',  { replace: true });
             })

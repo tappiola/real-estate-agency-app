@@ -55,6 +55,7 @@ module.exports = buildSchema(`
         getProperties(page: Int!): Properties
         getProperty(id: Int!): Property!
         getWishlist: [Property!]!
+        getCities: [City!]!
     }
 
     type RootMutation {

@@ -114,3 +114,30 @@ export const getWishlist = () => {
 
     return sendGraphqlRequest(graphqlQuery);
 }
+
+export const saveClientRequest = ({firstName, lastName, email, phoneNumber}) => {
+    const graphqlQuery = {
+        query: `
+             mutation {
+              saveClientRequest(firstName: "${firstName}", lastName: "${lastName}", email: "${email}", phone: "${phoneNumber}")
+                {
+                    success
+              }
+            }
+            `};
+
+    return sendGraphqlRequest(graphqlQuery);
+}
+
+export const fetchCities = () => {
+    const graphqlQuery = {
+        query:`
+            {
+              getCities {
+                id
+                name
+              }
+            }`};
+
+    return sendGraphqlRequest(graphqlQuery);
+}

@@ -9,7 +9,6 @@ const navigation = createSlice({
   initialState,
   reducers: {
     saveScrollPosition(state, action) {
-      console.log({state, action});
       state.scrollOffset = action.payload;
     }
   },

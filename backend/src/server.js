@@ -12,20 +12,21 @@ const PropertyType = require('./models/propertyType');
 const User = require('./models/user');
 const ClientRequests = require('./models/clientRequests');
 const UserWishlist = require('./models/userWishlist');
+const Image = require('./models/images');
 
 const { graphqlHTTP  } = require('express-graphql');
 
 const graphqlSchema = require('./graphql/schema');
 const graphqlResolver = require('./graphql/resolvers');
 
-const citiesRoutes = require('./routes/cities');
-const clientRequestsRoutes = require('./routes/clientRequests');
-
 Property.belongsTo(City);
 City.hasMany(Property);
 
 Property.belongsTo(PropertyType);
 PropertyType.hasMany(Property);
+
+Image.belongsTo(Property);
+Property.hasMany(Image);
 
 app.use(cors());
 
@@ -42,15 +43,8 @@ app.use(
     })
 );
 
-app.use('/properties', (req, res) => {
-    res.send('properties');
-});
-
-app.use('/cities', citiesRoutes);
-app.use('/contact', clientRequestsRoutes);
-
 app.use('/', (req, res) => {
-    res.send('home koala');
+    res.send('404');
 });
 
 sequelize.sync({alter: true})

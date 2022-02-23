@@ -32,7 +32,6 @@ const LoginContainer = () => {
                 return res.json();
             })
             .then(({data: {login}}: LoginDataType) => {
-                console.log(login);
                 // this.setState({
                 //     isAuth: true,
                 //     token: resData.token,

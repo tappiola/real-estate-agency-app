@@ -17,7 +17,6 @@ const WishlistCardContainer: React.FC<{
 
     const loadProperty = (event: MouseEvent<HTMLDivElement>) => {
         event.stopPropagation();
-        console.log('save page position');
         navigate(`/property/${property.id}`);
     }
 

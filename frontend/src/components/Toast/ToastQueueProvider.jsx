@@ -18,7 +18,6 @@ function ToastQueueProvider({ children }) {
       id: Date.now(), message, type, duration,
     };
     setToasts((currentToasts) => [toast, ...currentToasts]);
-    console.log(toasts);
   };
 
   const handleRemove = (id) => {

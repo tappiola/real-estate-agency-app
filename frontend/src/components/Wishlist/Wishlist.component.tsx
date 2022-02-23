@@ -1,4 +1,4 @@
-import WishlistCard from "../WishlistCard/WishlistCard.container";
+import WishlistCard from "../WishlistCard";
 import Loader from "../Loader";
 import {isAuthorized} from "../../graphql";
 import {PropertyType} from "../../types";

@@ -1,4 +1,4 @@
-import React, {MouseEventHandler, useState} from "react";
+import React, {useState} from "react";
 import {addToWishlist, removeFromWishlist} from "../../queries";
 import {isAuthorized} from "../../graphql";
 import {PropertyType} from "../../types";

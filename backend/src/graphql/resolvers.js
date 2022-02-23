@@ -9,6 +9,7 @@ const PropertyType = require("../models/propertyType");
 const UserWishlist = require("../models/userWishlist");
 const {SECRET, ITEMS_PER_PAGE} = require("../constants");
 const { Op } = require("sequelize");
+const ClientRequest = require("../models/clientRequests");
 
 const createUser = async ({ userInput })  => {
   const {email, name, password} = userInput;
@@ -69,11 +70,9 @@ const login = async ({ email, password }) => {
 
 const getProperties = async (args, req) => {
   const { page } = args;
-  console.log({page});
 
   const count = await Property.count();
   const pages = Math.ceil(count / ITEMS_PER_PAGE);
-  console.log({pages, count});
 
   const items = await Property.findAll( {
     offset: (page - 1) * ITEMS_PER_PAGE,
@@ -155,13 +154,26 @@ const removeFromWishlist =  async ({propertyId}, req) => {
     throw new Error('User is not authenticated');
   }
 
-  await UserWishlist.destroy({where: { userId: req.userId, propertyId }});
-  return {success: true};
+  try {
+    await UserWishlist.destroy({where: {userId: req.userId, propertyId}});
+    return {success: true};
+  } catch {
+    return {success: false};
+  }
 }
 
-const saveClientRequest = async () => {
-
+const saveClientRequest = async ({firstName, lastName, email, phone}) => {
+  try {
+    await ClientRequest.create({firstName, lastName, email, phone});
+    return {success: true};
+  } catch {
+    return {success: false};
+  }
 };
+
+const getCities = async () => {
+  return await City.findAll();
+}
 
 module.exports = {
   createUser,
@@ -171,5 +183,6 @@ module.exports = {
   getWishlist,
   addToWishlist,
   removeFromWishlist,
-  saveClientRequest
+  saveClientRequest,
+  getCities
 };

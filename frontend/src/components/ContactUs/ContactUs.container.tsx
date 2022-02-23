@@ -3,6 +3,7 @@ import {HOST, TOAST_TYPES} from "../../constants";
 import ContactUs from './ContactUs.component';
 import {enqueueToast} from "../../redux/Notifier";
 import {useAppDispatch} from "../../redux/store";
+import {saveClientRequest} from "../../queries";
 
 const ContactUsContainer = () => {
     const [firstName, setFirstName] = useState('');
@@ -15,13 +16,7 @@ const ContactUsContainer = () => {
     const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        fetch(HOST + '/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({firstName, lastName, email, phoneNumber})
-        }).then(() =>
+        saveClientRequest({firstName, lastName, email, phoneNumber}).then(() =>
         dispatch(enqueueToast({
             message: 'Your request has been submitted',
             type: TOAST_TYPES.SUCCESS,
