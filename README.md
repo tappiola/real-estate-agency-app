@@ -32,3 +32,5 @@ TODO:
 - (R) add protected route /wishlist. If not authorized (expired token), return 401 and redirect to home page
 - (R) error handling for not authorized + wishlist (super ugly now)
 - (R) use library to construct gql requests
+- (R) where: {'$type.id$': 'rent'} doesn't work
+- 

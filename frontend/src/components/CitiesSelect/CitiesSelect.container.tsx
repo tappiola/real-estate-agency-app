@@ -2,10 +2,17 @@ import React, {useEffect, useState} from "react";
 import {CityType} from "../../types";
 import CitiesSelect from "./CitiesSelect.component";
 import {fetchCities} from "../../queries";
+import {enqueueToast} from "../../redux/Notifier";
+import {AdType, ToastTypes} from "../../constants";
+import {useAppDispatch} from "../../redux/store";
+import {useNavigate} from "react-router-dom";
 
 const CitiesSelectContainer: React.FC = () => {
     const [cities, setCities] = useState<CityType[]>([]);
     const [selectedCity, setSelectedCity] = useState<string>('');
+
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const initCities = async () => {
@@ -17,7 +24,19 @@ const CitiesSelectContainer: React.FC = () => {
         initCities();
     }, []);
 
-    return <CitiesSelect cities={cities} selectedCity={selectedCity} setSelectedCity={setSelectedCity}/>
+    const onButtonClick = (adType: AdType) => {
+        if (!selectedCity){
+            dispatch(enqueueToast({
+                message: 'Please, select city',
+                type: ToastTypes.Info,
+            }));
+            return;
+        }
+
+        navigate(`/${adType}?city=${selectedCity}`);
+    };
+
+    return <CitiesSelect cities={cities} selectedCity={selectedCity} setSelectedCity={setSelectedCity} onButtonClick={onButtonClick}/>
 };
 
 export default CitiesSelectContainer;

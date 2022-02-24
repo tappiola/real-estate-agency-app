@@ -1,8 +1,9 @@
-#list-items {
+.Properties-List {
     display: flex;
     flex-wrap: wrap;
-    overflow: scroll;
+    overflow-y: auto;
     scroll-snap-type: y proximity;
+    height: 100%;
 }
 
 .property {

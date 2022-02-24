@@ -11,17 +11,17 @@ const SearchResults: React.FC<{
     properties: PropertyType[],
     isLoading: boolean,
     pages: number,
-    currentPage: number,
     activeItem: number,
-    setActiveItem: (id: number) => void
+    setActiveItem: (id: number) => void,
+    searchParams: object
 }> = (
         {count,
             properties,
             isLoading,
             pages,
-            currentPage,
             activeItem,
-            setActiveItem}) => {
+            setActiveItem,
+            searchParams}) => {
 
     if(isLoading){
         return <Loader/>
@@ -37,14 +37,13 @@ const SearchResults: React.FC<{
                     activeItem={activeItem}
                     setActiveItem={setActiveItem}
                 />
-                {pages > 1 && <Pagination pages={pages} currentPage={currentPage}/>}
+                {pages > 1 && <Pagination pages={pages} searchParams={searchParams}/>}
             </div>
             <div className="pane right">
                 <Map
                     properties={properties}
                     activeItem={activeItem}
                     setActiveItem={setActiveItem}
-                    currentPage={currentPage}
                 />
             </div>
         </div>

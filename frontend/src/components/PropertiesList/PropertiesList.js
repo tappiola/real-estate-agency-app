@@ -29,7 +29,7 @@
         ).offsetTop - 70;
       }}, [listRef, activeItem]);
 
-    return <div id="list-items" ref={listRef} onScroll={scrollListener}>
+    return <div className='Properties-List' ref={listRef} onScroll={scrollListener}>
       { properties.map((property, index) => <PropertyCardContainer
           key={index}
           property={property}

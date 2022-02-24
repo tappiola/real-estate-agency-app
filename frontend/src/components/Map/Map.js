@@ -3,7 +3,7 @@ import {accessToken, IMAGE_PLACEHOLDER} from '../../constants';
 import './Map.style.scss';
 import {useEffect, useState} from "react";
 
-const Map = ({properties, activeItem, setActiveItem, currentPage}) => {
+const Map = ({properties, activeItem, setActiveItem}) => {
 
   const [map, setMap] = useState();
 
@@ -90,7 +90,7 @@ const Map = ({properties, activeItem, setActiveItem, currentPage}) => {
         center: getCoordinates(properties[activeItem])
       });
     }
-  }, [activeItem, currentPage]);
+  }, [activeItem, properties]);
 
   return <div id="map"/>;
 }

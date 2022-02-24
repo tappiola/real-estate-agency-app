@@ -58,11 +58,21 @@ export const register = (email, name, password) => {
     return sendGraphqlRequest(graphqlQuery);
 }
 
-export const searchProperties = (page) => {
+export const searchProperties = (adType, searchParams) => {
+    let params = {};
+
+    for(const [key, value] of searchParams.entries()) {
+        params = ({...params, [key]: value});
+    }
+
+    console.log({params});
+
+    const {page = 1, city} = params;
+
     const graphqlQuery = {
         query:`
             {
-              getProperties(page: ${page}) {
+              getProperties(adType: "${adType}", page: ${+page}, cityId: ${+city}) {
                 count
                 pages
                 items {

@@ -13,7 +13,6 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
     const [activeItem, setActiveItem] = useState(0);
 
     const [searchParams] = useSearchParams();
-    const currentPage = Number(searchParams.get('page')) || 1;
 
     const {scrollOffset} = useAppSelector(({ navigation }) => navigation);
 
@@ -27,7 +26,7 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
     useEffect(() => {
         const fetchProperties = async () => {
             try {
-                const response = await searchProperties(currentPage);
+                const response = await searchProperties(adType, searchParams);
                 const {data: {getProperties: {items, pages, count}}} = await response.json();
                 setProperties(items);
                 setPages(pages);
@@ -41,18 +40,18 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
 
         fetchProperties();
 
-    }, [currentPage]);
+    }, [adType, searchParams]);
 
-    useEffect(() => setActiveItem(0), [currentPage]);
+    useEffect(() => setActiveItem(0), [searchParams]);
 
     return <SearchResults
         count={count}
-        currentPage={currentPage}
         isLoading={isLoading}
         pages={pages}
         properties={properties}
         activeItem={activeItem}
         setActiveItem={setActiveItem}
+        searchParams={searchParams}
     />
 }
 
