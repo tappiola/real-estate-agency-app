@@ -4,9 +4,9 @@ import './PropertyCard.style.scss';
 import {PropertyType} from "../../types";
 import {Carousel, CarouselItem} from "../Carousel/Carousel";
 import {formatPrice, sortByKey} from "../../util";
-import {IMAGE_PLACEHOLDER} from "../../constants";
+import {AdType, IMAGE_PLACEHOLDER} from "../../constants";
 import BedroomIcon from "../BedroomIcon/BedroomIcon";
-import BathroomIcon from "../App/BathroomIcon/BathroomIcon";
+import BathroomIcon from "../BathroomIcon/BathroomIcon";
 
 const PropertyCardComponent: React.FC<{property: PropertyType, index: number, loadProperty: () => void}> = ({property, index, loadProperty}) => {
     const loadCarouselImages = () => {
@@ -41,7 +41,7 @@ const PropertyCardComponent: React.FC<{property: PropertyType, index: number, lo
                 </Carousel>
                 </div>
                 <div className='PropertyCard-Data'>
-                    <h2 className='PropertyCard-Price'>{formatPrice(property.price) + (property.type.name === 'rent' ? ' pcm' : '')}</h2>
+                    <h2 className='PropertyCard-Price'>{formatPrice(property.price) + (property.type.name === AdType.Rent ? ' pcm' : '')}</h2>
                     <p className='PropertyCard-Amenities'>
                         <BedroomIcon/>
                         {property.bedroomCount}

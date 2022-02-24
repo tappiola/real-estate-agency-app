@@ -10,6 +10,7 @@ import Property from "../Property";
 import NotFound from "../NotFound";
 import Notification from '../Notification';
 import {ToastQueueProvider} from '../Toast';
+import {AdType} from "../../constants";
 
 const App = () => {
   return (
@@ -23,7 +24,8 @@ const App = () => {
                             <Route path="/register" element={<Register />}/>
                             <Route path="/login" element={<Login />}/>
                             <Route path="/favorites" element={<Wishlist />}/>
-                            <Route path="/search" element={<SearchResults />}/>
+                            <Route path="/rent" element={<SearchResults adType={AdType.Rent}/>}/>
+                            <Route path="/sale" element={<SearchResults adType={AdType.Sale}/>}/>
                             <Route path="/property/:id" element={<Property />}/>
                             <Route path="*" element={<NotFound/>} />
                     </Routes>

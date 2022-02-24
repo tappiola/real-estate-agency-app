@@ -26,7 +26,7 @@
       if (listRef && listRef.current && properties.length) {
         listRef.current.scrollTop = document.getElementById(
             `property-${activeItem}`
-        ).offsetTop - 130;
+        ).offsetTop - 70;
       }}, [listRef, activeItem]);
 
     return <div id="list-items" ref={listRef} onScroll={scrollListener}>

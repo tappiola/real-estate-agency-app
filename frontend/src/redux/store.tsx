@@ -2,14 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import notificationsReducer, { enqueueToast } from './Notifier';
 import navigationReducer from './Navigation';
 
-import { TOAST_TYPES } from '../constants';
+import {ToastTypes} from '../constants';
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 
 // @ts-ignore
 const errorHandler = (store) => (next) => (action) => {
   if (action?.error?.message === 'Forbidden') {
     store.dispatch(enqueueToast({
-      type: TOAST_TYPES.ERROR,
+      type: ToastTypes.Error,
       message: 'You are not authorized',
     }));
   }

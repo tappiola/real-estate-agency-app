@@ -1,5 +1,5 @@
 import React, {FormEvent, useState} from "react";
-import {HOST, TOAST_TYPES} from "../../constants";
+import {ToastTypes} from "../../constants";
 import ContactUs from './ContactUs.component';
 import {enqueueToast} from "../../redux/Notifier";
 import {useAppDispatch} from "../../redux/store";
@@ -19,7 +19,7 @@ const ContactUsContainer = () => {
         saveClientRequest({firstName, lastName, email, phoneNumber}).then(() =>
         dispatch(enqueueToast({
             message: 'Your request has been submitted',
-            type: TOAST_TYPES.SUCCESS,
+            type: ToastTypes.Success,
         }))
         )
     }

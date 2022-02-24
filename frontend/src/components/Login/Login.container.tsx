@@ -2,7 +2,7 @@ import {FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {login} from "../../queries";
 import Login from "./Login.component";
-import {TOAST_TYPES} from "../../constants";
+import {ToastTypes} from "../../constants";
 import {enqueueToast} from "../../redux/Notifier";
 import {useAppDispatch} from "../../redux/store";
 
@@ -40,7 +40,7 @@ const LoginContainer = () => {
                 // });
                 dispatch(enqueueToast({
                     message: 'Login successful',
-                    type: TOAST_TYPES.SUCCESS,
+                    type: ToastTypes.Success,
                 }));
                 localStorage.setItem('token', login.token);
                 localStorage.setItem('userId', String(login.userId));
@@ -56,7 +56,7 @@ const LoginContainer = () => {
                 console.log(err);
                 dispatch(enqueueToast({
                     message: err.message || 'Failed to login',
-                    type: TOAST_TYPES.ERROR,
+                    type: ToastTypes.Error,
                 }));
                 // this.setState({
                 //     isAuth: false,

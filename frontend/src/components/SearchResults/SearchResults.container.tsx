@@ -1,10 +1,11 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {searchProperties} from "../../queries";
 import {useSearchParams} from "react-router-dom";
 import SearchResults from "./SearchResults.component";
 import {useAppSelector} from '../../redux/store';
+import {AdType} from "../../constants";
 
-const SearchResultsContainer = () => {
+const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
     const [properties, setProperties] = useState([]);
     const [pages, setPages] = useState(1);
     const [count, setCount] = useState(0);
