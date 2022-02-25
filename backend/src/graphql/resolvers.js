@@ -76,9 +76,6 @@ const getProperties = async (args, req) => {
 
   const {id: typeId} = await Type.findOne({where: {name: adType}});
 
-  const count = await Property.count({where: {typeId}});
-  const pages = Math.ceil(count / ITEMS_PER_PAGE);
-
   const items = await Property.findAll( {
     where: {typeId, cityId},
     offset: (page - 1) * ITEMS_PER_PAGE,
@@ -101,6 +98,10 @@ const getProperties = async (args, req) => {
     }
     ]
   });
+
+  const count = items.length;
+
+  const pages = Math.ceil(count / ITEMS_PER_PAGE);
 
   if(req.isAuthenticated){
     const userWishlistProperties = await UserWishlist.findAll({

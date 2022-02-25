@@ -11,14 +11,15 @@ import NotFound from "../NotFound";
 import Notification from '../Notification';
 import {ToastQueueProvider} from '../Toast';
 import {AdType} from "../../constants";
+import Header from "../Header/Header";
 
 const App = () => {
   return (
       <ToastQueueProvider>
             <div className="App">
-                <header className="Header"/>
-                <main>
                 <BrowserRouter>
+                    <Header/>
+                    <main>
                     <Routes>
                             <Route path="/" element={<HomePage />}/>
                             <Route path="/register" element={<Register />}/>
@@ -29,8 +30,9 @@ const App = () => {
                             <Route path="/property/:id" element={<Property />}/>
                             <Route path="*" element={<NotFound/>} />
                     </Routes>
+                    </main>
                 </BrowserRouter>
-                </main>
+
             </div>
           <Notification />
       </ToastQueueProvider>

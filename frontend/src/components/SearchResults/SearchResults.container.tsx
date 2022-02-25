@@ -2,8 +2,9 @@ import React, {useEffect, useState} from "react";
 import {searchProperties} from "../../queries";
 import {useSearchParams} from "react-router-dom";
 import SearchResults from "./SearchResults.component";
-import {useAppSelector} from '../../redux/store';
-import {AdType} from "../../constants";
+import {useAppDispatch, useAppSelector} from '../../redux/store';
+import {AdType, ToastTypes} from "../../constants";
+import {enqueueToast} from "../../redux/Notifier";
 
 const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
     const [properties, setProperties] = useState([]);
@@ -13,6 +14,7 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
     const [activeItem, setActiveItem] = useState(0);
 
     const [searchParams] = useSearchParams();
+    const dispatch = useAppDispatch();
 
     const {scrollOffset} = useAppSelector(({ navigation }) => navigation);
 
@@ -24,6 +26,16 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
         ,[]);
 
     useEffect(() => {
+
+        if (!searchParams.get('city')){
+            dispatch(enqueueToast({
+                message: 'City is required',
+                type: ToastTypes.Warning,
+            }));
+            setIsLoading(false);
+            return;
+        }
+
         const fetchProperties = async () => {
             try {
                 const response = await searchProperties(adType, searchParams);

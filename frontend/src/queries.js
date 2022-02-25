@@ -65,9 +65,9 @@ export const searchProperties = (adType, searchParams) => {
         params = ({...params, [key]: value});
     }
 
-    console.log({params});
-
     const {page = 1, city} = params;
+
+    console.log(new URLSearchParams(searchParams).toString());
 
     const graphqlQuery = {
         query:`
