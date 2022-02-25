@@ -16,3 +16,8 @@ export enum AdType {
     Rent = 'rent',
     Sale = 'sale'
 }
+
+export enum Filter {
+    City = 'city',
+    PropertyType = 'propertyType'
+}

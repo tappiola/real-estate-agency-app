@@ -69,10 +69,11 @@ module.exports = buildSchema(`
 
     type RootQuery {
         login(email: String!, password: String!): AuthData!
-        getProperties(adType: String!, page: Int!, cityId: Int): Properties
+        getProperties(adType: String!, page: Int!, cityId: Int, propertyTypeId: Int): Properties
         getProperty(id: Int!): Property!
         getWishlist: [Property!]!
         getCities: [City!]!
+        getPropertyTypes: [PropertyType!]!
     }
 
     type RootMutation {

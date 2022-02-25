@@ -72,12 +72,12 @@ const login = async ({ email, password }) => {
 };
 
 const getProperties = async (args, req) => {
-  const { adType, page, cityId } = args;
+  const { adType, page, cityId, propertyTypeId } = args;
 
   const {id: typeId} = await Type.findOne({where: {name: adType}});
 
   const items = await Property.findAll( {
-    where: {typeId, cityId},
+    where: {typeId, cityId, propertyTypeId},
     offset: (page - 1) * ITEMS_PER_PAGE,
     limit: ITEMS_PER_PAGE,
     include: [{
@@ -192,6 +192,11 @@ const getCities = async () => {
   return await City.findAll();
 }
 
+
+const getPropertyTypes = async () => {
+  return await PropertyType.findAll();
+}
+
 module.exports = {
   createUser,
   login,
@@ -201,5 +206,6 @@ module.exports = {
   addToWishlist,
   removeFromWishlist,
   saveClientRequest,
-  getCities
+  getCities,
+  getPropertyTypes
 };

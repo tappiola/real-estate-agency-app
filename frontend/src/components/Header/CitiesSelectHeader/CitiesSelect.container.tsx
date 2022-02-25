@@ -1,22 +1,22 @@
 import React, {useEffect, useState} from "react";
 import {CityType} from "../../../types";
-import CitiesSelect from "./CitiesSelect.component";
 import {fetchCities} from "../../../queries";
+import Select from "../Select";
 
-const CitiesSelectContainer: React.FC<{city: string, setCity: (city: string) => void}> = ({city, setCity}) => {
-    const [cities, setCities] = useState<CityType[]>([]);
+const CitiesSelect: React.FC<{selectedOption: string, onOptionSelect: (option: string) => void, placeholder: string}> = ({selectedOption, onOptionSelect, placeholder}) => {
+    const [options, setOptions] = useState<CityType[]>([]);
 
     useEffect(() => {
         const initCities = async () => {
             const response = await fetchCities();
             const {data: {getCities}} = await response.json();
-            setCities(getCities);
+            setOptions(getCities);
         };
 
         initCities();
     }, []);
 
-    return <CitiesSelect cities={cities} selectedCity={city} setSelectedCity={setCity}/>
+    return <Select placeholder={placeholder} options={options} selectedOption={selectedOption} onOptionSelect={onOptionSelect}/>
 };
 
-export default CitiesSelectContainer;
+export default CitiesSelect;

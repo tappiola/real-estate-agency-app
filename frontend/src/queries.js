@@ -65,14 +65,17 @@ export const searchProperties = (adType, searchParams) => {
         params = ({...params, [key]: value});
     }
 
-    const {page = 1, city} = params;
+    const {page = 1, city, propertyType} = params;
 
     console.log(new URLSearchParams(searchParams).toString());
+
+    const cityPart = `, cityId: ${+city}`;
+    const propertyTypePart = `, propertyTypeId: ${+propertyType}`;
 
     const graphqlQuery = {
         query:`
             {
-              getProperties(adType: "${adType}", page: ${+page}, cityId: ${+city}) {
+              getProperties(adType: "${adType}", page: ${+page}${cityPart}${propertyTypePart}) {
                 count
                 pages
                 items {
@@ -150,6 +153,19 @@ export const fetchCities = () => {
         query:`
             {
               getCities {
+                id
+                name
+              }
+            }`};
+
+    return sendGraphqlRequest(graphqlQuery);
+}
+
+export const fetchPropertyTypes = () => {
+    const graphqlQuery = {
+        query:`
+            {
+              getPropertyTypes {
                 id
                 name
               }

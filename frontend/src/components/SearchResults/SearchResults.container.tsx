@@ -29,7 +29,7 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
 
         if (!searchParams.get('city')){
             dispatch(enqueueToast({
-                message: 'City is required',
+                message: 'City is required 2',
                 type: ToastTypes.Warning,
             }));
             setIsLoading(false);
