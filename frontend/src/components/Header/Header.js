@@ -1,7 +1,7 @@
 import React from "react";
 import {useLocation} from "react-router-dom";
 import {AdType} from "../../constants";
-import SearchForm from "./SearchForm/SearchForm";
+import AdvancedSearchForm from "../AdvancedSearchForm/AdvancedSearchForm";
 import './Header.style.scss';
 
 const Header = () => {
@@ -10,10 +10,10 @@ const Header = () => {
 
     const renderChildren = () => {
         if (pathname === '/' + AdType.Rent)
-            return <SearchForm searchType={AdType.Rent}/>;
+            return <AdvancedSearchForm searchType={AdType.Rent}/>;
 
         if (pathname === '/' + AdType.Sale)
-            return <SearchForm searchType={AdType.Sale}/>;
+            return <AdvancedSearchForm searchType={AdType.Sale}/>;
 
         return null;
     }

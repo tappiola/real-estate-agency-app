@@ -1,12 +1,12 @@
-import CitiesSelect from "../CitiesSelectHeader";
-import React, {useEffect, useState} from "react";
+import CitiesSelect from "../CitiesSelect";
+import React, {useState} from "react";
 import {useNavigate, useSearchParams} from "react-router-dom";
-import {enqueueToast} from "../../../redux/Notifier";
-import {Filter, ToastTypes} from "../../../constants";
-import {useAppDispatch} from "../../../redux/store";
+import {enqueueToast} from "../../redux/Notifier";
+import {Filter, ToastTypes} from "../../constants";
+import {useAppDispatch} from "../../redux/store";
 import PropertyTypesSelect from "../PropertyTypesSelect/PropertyTypesSelect.container";
 
-const SearchForm: React.FC<{searchType: String}> = ({searchType}) => {
+const AdvancedSearchForm: React.FC<{searchType: String}> = ({searchType}) => {
 
     const [searchParams] = useSearchParams();
     const dispatch = useAppDispatch();
@@ -38,12 +38,12 @@ const SearchForm: React.FC<{searchType: String}> = ({searchType}) => {
 
     return <>
         <CitiesSelect
-            placeholder='City'
+            placeholder='Any location'
             selectedOption={filterSettings[Filter.City] || ''}
             onOptionSelect={value => setFilterSettings({...filterSettings, [Filter.City]: value})}
         />
             <PropertyTypesSelect
-                placeholder='Property type'
+                placeholder='Any property type'
                 selectedOption={filterSettings[Filter.PropertyType] || ''}
                 onOptionSelect={value => setFilterSettings({...filterSettings, [Filter.PropertyType]: value})}
             />
@@ -51,4 +51,4 @@ const SearchForm: React.FC<{searchType: String}> = ({searchType}) => {
         </>
 }
 
-export default SearchForm;
+export default AdvancedSearchForm;

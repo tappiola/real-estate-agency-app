@@ -7,17 +7,15 @@ TODO:
 - eslint
 - move gql requests somewhere
 - add search form
-- add search params
+- add search params: price, beds
 - add position storing on navigate back
 - don't rerequest on navigate back (check if query params match prev currency params)
 - add redux
-- add carousel
 - script to fill in properties data
 - page number into redux
 - react-content-loader for placeholders https://skeletonreact.com/
 - adjust Map and PropertiesList
 - adjust carousel
-- add address, bedroom count, bathroom count
 - add next / prev for pagination
 
 - (R) refresh token

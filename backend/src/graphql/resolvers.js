@@ -74,10 +74,14 @@ const login = async ({ email, password }) => {
 const getProperties = async (args, req) => {
   const { adType, page, cityId, propertyTypeId } = args;
 
+  const cityCondition = cityId ? {cityId} : {};
+  const propertyTypeCondition = propertyTypeId ? {propertyTypeId} : {};
+
   const {id: typeId} = await Type.findOne({where: {name: adType}});
+  console.log({typeId, ...cityCondition, ...propertyTypeCondition});
 
   const items = await Property.findAll( {
-    where: {typeId, cityId, propertyTypeId},
+    where: {typeId, ...cityCondition, ...propertyTypeCondition},
     offset: (page - 1) * ITEMS_PER_PAGE,
     limit: ITEMS_PER_PAGE,
     include: [{

@@ -1,5 +1,5 @@
 import React from 'react';
-import CitiesSelect from "../CitiesSelect";
+import CitiesSelect from "../BaseSearchForm";
 import ContactUs from "../ContactUs";
 
 function App() {

@@ -69,8 +69,8 @@ export const searchProperties = (adType, searchParams) => {
 
     console.log(new URLSearchParams(searchParams).toString());
 
-    const cityPart = `, cityId: ${+city}`;
-    const propertyTypePart = `, propertyTypeId: ${+propertyType}`;
+    const cityPart = city ?`, cityId: ${+city}` : '';
+    const propertyTypePart = propertyType ?`, propertyTypeId: ${+propertyType}` : '';
 
     const graphqlQuery = {
         query:`

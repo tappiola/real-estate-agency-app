@@ -27,6 +27,18 @@ const SearchResults: React.FC<{
         return <Loader/>
     }
 
+    const renderMap = () => {
+        if (!properties.length){
+            return null;
+        }
+
+        return <Map
+            properties={properties}
+            activeItem={activeItem}
+            setActiveItem={setActiveItem}
+        />
+    }
+
     return <>
 
         <div className="container">
@@ -40,11 +52,7 @@ const SearchResults: React.FC<{
                 {pages > 1 && <Pagination pages={pages} searchParams={searchParams}/>}
             </div>
             <div className="pane right">
-                <Map
-                    properties={properties}
-                    activeItem={activeItem}
-                    setActiveItem={setActiveItem}
-                />
+                {renderMap()}
             </div>
         </div>
     </>

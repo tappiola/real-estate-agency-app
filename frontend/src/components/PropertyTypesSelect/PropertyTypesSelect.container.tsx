@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {CityType} from "../../../types";
-import { fetchPropertyTypes} from "../../../queries";
+import {CityType} from "../../types";
+import { fetchPropertyTypes} from "../../queries";
 import Select from "../Select";
 
 const PropertyTypesSelect: React.FC<{selectedOption: string, onOptionSelect: (option: string) => void, placeholder: string}> = ({selectedOption, onOptionSelect, placeholder}) => {
