@@ -78,10 +78,11 @@ const getProperties = async (args, req) => {
   const propertyTypeCondition = propertyTypeId ? {propertyTypeId} : {};
 
   const {id: typeId} = await Type.findOne({where: {name: adType}});
-  console.log({typeId, ...cityCondition, ...propertyTypeCondition});
+
+  const condition = {typeId, ...cityCondition, ...propertyTypeCondition};
 
   const items = await Property.findAll( {
-    where: {typeId, ...cityCondition, ...propertyTypeCondition},
+    where: condition,
     offset: (page - 1) * ITEMS_PER_PAGE,
     limit: ITEMS_PER_PAGE,
     include: [{
@@ -103,7 +104,18 @@ const getProperties = async (args, req) => {
     ]
   });
 
-  const count = items.length;
+  const allItems = await Property.findAll( {where: condition, include: [{
+    model: City,
+    as: 'city'
+  }, {
+    model: PropertyType,
+    as: 'propertyType'
+  }, {
+    model: Type,
+    as: 'type'
+  }
+  ]});
+  const count = allItems.length;
 
   const pages = Math.ceil(count / ITEMS_PER_PAGE);
 

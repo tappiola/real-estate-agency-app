@@ -37,6 +37,7 @@ module.exports = buildSchema(`
         bedroomCount: Int!
         bathroomCount: Int!
         type: Type
+        floorPlan: String
     }
    
     type Status {

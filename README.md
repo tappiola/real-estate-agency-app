@@ -17,7 +17,8 @@ TODO:
 - adjust Map and PropertiesList
 - adjust carousel
 - add next / prev for pagination
-- longer gql for property page 
+- longer gql for property page
+- shorter title on map
 
 - (R) refresh token
 - (R) imports without ../../
