@@ -1,11 +1,12 @@
 import React from 'react';
 import CitiesSelect from "../BaseSearchForm";
 import ContactUs from "../ContactUs";
+import './Header.style.scss';
 
 function App() {
     return (
         <>
-            <h1>Home page</h1>
+            <div className='TopBanner'></div>
             <CitiesSelect/>
             <ContactUs/>
         </>

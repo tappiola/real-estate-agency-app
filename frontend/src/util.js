@@ -24,6 +24,14 @@ export const formatPrice = (price, currency = 'GBP') => {
     }).format(price);
 };
 
+export const getHouseTitle = (bedroomCount, propertyType) => {
+    if (bedroomCount === 0) {
+        return 'Studio apartment';
+    }
+
+    return `${bedroomCount} bed ${propertyType.toLowerCase()}`;
+}
+
 export const getSavedToken = () => {
     return localStorage.getItem('token');
 }

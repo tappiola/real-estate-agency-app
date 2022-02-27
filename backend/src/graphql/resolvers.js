@@ -141,7 +141,17 @@ const getProperty = async ({id}, req) => {
     }, {
       model: PropertyType,
       as: 'propertyType'
-    }]
+    }, {
+      model: Image,
+      as: 'images'
+    }, {
+      model: Type,
+      as: 'type'
+    }, {
+      model: Tag,
+      as: 'tags'
+    }
+    ]
   });
 
   if(req.isAuthenticated){

@@ -2,6 +2,7 @@ import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 import {accessToken, IMAGE_PLACEHOLDER} from '../../constants';
 import './Map.style.scss';
 import {useEffect, useState} from "react";
+import {getHouseTitle} from "../../util";
 
 const Map = ({properties, activeItem, setActiveItem}) => {
 
@@ -9,12 +10,14 @@ const Map = ({properties, activeItem, setActiveItem}) => {
 
   const getCoordinates = (item) => ([item.longitude, item.latitude]);
 
-  const generateFeature = ({ title, images, longitude, latitude }, index) => {
+  const generateFeature = ({ bedroomCount, images, longitude, latitude, propertyType: {name} = {} }, index) => {
+
+    const heading = getHouseTitle(bedroomCount, name);
 
     return {
       type: 'Feature',
       properties: {
-        description: `<img width="100%" src="${images[0]?.link || IMAGE_PLACEHOLDER}" alt="img"/><b>${title}</b>`,
+        description: `<img width="100%" src="${images[0]?.link || IMAGE_PLACEHOLDER}" alt="img"/><b>${heading}</b>`,
         id: index
       },
       geometry: {
