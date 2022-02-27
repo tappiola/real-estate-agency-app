@@ -23,3 +23,11 @@ export const formatPrice = (price, currency = 'GBP') => {
         maximumFractionDigits: 0
     }).format(price);
 };
+
+export const getHouseTitle = (bedroomCount, propertyType) => {
+    if (bedroomCount === 0) {
+        return 'Studio apartment';
+    }
+
+    return `${bedroomCount} bed ${propertyType.toLowerCase()}`;
+}

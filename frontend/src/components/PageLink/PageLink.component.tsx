@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import './PageLink.style.scss';
 import {Link} from "react-router-dom";
-import React, {useEffect} from "react";
+import React from "react";
 
 const PageLink : React.FC<{pageNumber: number, isCurrent: boolean, searchParams: object}> = ({pageNumber, isCurrent, searchParams}) => {
     const getParams = (searchParams: any) => {

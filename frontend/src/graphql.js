@@ -26,12 +26,6 @@ export const getToken = () => {
 export const sendGraphqlRequest = (graphqlQuery, requiresAuth = false) => {
     const authToken = getToken();
 
-    if(requiresAuth && !authToken){
-        // TODO: Redirect doesn't work from plain JS, find workaround
-        // const history = useHistory();
-        // history.push('/login');
-    }
-
     const authHeader = authToken ? {Authorization: 'Bearer ' + authToken} : {};
 
     return fetch('http://localhost/graphql', {
@@ -42,10 +36,6 @@ export const sendGraphqlRequest = (graphqlQuery, requiresAuth = false) => {
         },
         body: JSON.stringify(graphqlQuery)
     })
-}
-
-export const isAuthorized = () => {
-    return localStorage.getItem('token');
 }
 
 export const getSavedToken = () => {

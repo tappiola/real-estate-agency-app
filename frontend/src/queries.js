@@ -91,7 +91,6 @@ export const searchProperties = (adType, searchParams) => {
                     isInWishlist
                     longitude
                     latitude
-                    floorPlan
                     price
                     type {id name}
                 }
@@ -110,9 +109,18 @@ export const getProperty = (id) => {
                     id
                     title
                     description
+                    address
+                    bedroomCount
+                    bathroomCount
                     city { id name }
                     propertyType { id name }
+                    images { id link position }
                     isInWishlist
+                    longitude
+                    latitude
+                    floorPlan
+                    price
+                    type {id name}
               }
             }`};
 

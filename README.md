@@ -10,15 +10,13 @@ TODO:
 - add search params: price, beds
 - add position storing on navigate back
 - don't rerequest on navigate back (check if query params match prev currency params)
-- add redux
-- script to fill in properties data
 - page number into redux
 - react-content-loader for placeholders https://skeletonreact.com/
 - adjust Map and PropertiesList
 - adjust carousel
 - add next / prev for pagination
 - longer gql for property page
-- shorter title on map
+- add labels
 
 - (R) refresh token
 - (R) imports without ../../

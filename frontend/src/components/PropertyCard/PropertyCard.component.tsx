@@ -3,7 +3,7 @@ import ToggleWishlist from "../ToggleWishlist";
 import './PropertyCard.style.scss';
 import {PropertyType} from "../../types";
 import {Carousel, CarouselItem} from "../Carousel/Carousel";
-import {formatPrice, sortByKey} from "../../util";
+import {formatPrice, getHouseTitle, sortByKey} from "../../util";
 import {AdType, IMAGE_PLACEHOLDER} from "../../constants";
 import BedroomIcon from "../BedroomIcon/BedroomIcon";
 import BathroomIcon from "../BathroomIcon/BathroomIcon";
@@ -48,7 +48,7 @@ const PropertyCardComponent: React.FC<{property: PropertyType, index: number, lo
                         <BathroomIcon/>
                         {property.bathroomCount}
                     </p>
-                    <h4 className='PropertyCard-Title'>{`${property.bedroomCount} bed ${property.propertyType?.name} in ${property.city?.name} ${property.type.name === 'sale' ? 'for': 'to'} ${property.type.name}`}</h4>
+                    <h4 className='PropertyCard-Title'>{`${getHouseTitle(property.bedroomCount, property.propertyType?.name)} in ${property.city?.name} ${property.type.name === 'sale' ? 'for': 'to'} ${property.type.name}`}</h4>
                     <p className='PropertyCard-Address'>{property.address}</p>
                     <ToggleWishlist property={property} inWishlist={property.isInWishlist}/>
                 </div>
