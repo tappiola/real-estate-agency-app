@@ -8,7 +8,7 @@ const BaseSearchForm: React.FC<
     {cities: CityType[], selectedCity: string, setSelectedCity: (city: string) => void, onButtonClick: (type: AdType) => void}
     > = ({cities, selectedCity, setSelectedCity, onButtonClick}) => {
 
-    return <div className="BaseSearch-Container">
+    return <div className="BaseSearch">
         <h1 className="BaseSearch-Heading">Find your new home</h1>
         <h3 className="BaseSearch-SubHeading"> More than 1000 properties across the UK</h3>
         <div>

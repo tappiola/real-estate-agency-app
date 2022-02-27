@@ -22,7 +22,7 @@ const PropertyCardComponent: React.FC<{property: PropertyType, index: number, lo
             </CarouselItem>
         }
 
-        return sortByKey(images, 'position').map((image: any) => {
+        return sortByKey(images, 'position').slice(0, 15).map((image: any) => {
             return <CarouselItem key={image.id}>
             <img
                 className='PropertyCard-CarouselImg'
