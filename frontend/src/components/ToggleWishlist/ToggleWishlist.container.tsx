@@ -2,18 +2,25 @@ import React, {useState} from "react";
 import {addToWishlist, removeFromWishlist} from "../../queries";
 import {PropertyType} from "../../types";
 import ToggleWishlist from "./ToggleWishlist.component";
-import {useAppSelector} from "../../redux/store";
+import {useAppDispatch, useAppSelector} from "../../redux/store";
+import {enqueueToast} from "../../redux/Notifier";
+import {ToastTypes} from "../../constants";
 
 const ToggleWishlistContainer: React.FC<{property: PropertyType, inWishlist: boolean}> = ({property, inWishlist}) => {
     const [isInWishlist, setIsInWishlist] = useState(inWishlist);
     const { isAuthorized } = useAppSelector(({ user }) => user);
+
+    const dispatch = useAppDispatch();
 
     const onWishlistToggle = async (e: MouseEvent) => {
 
         e.stopPropagation();
 
         if (!isAuthorized){
-            alert('Please, login to work with wishlist');
+            dispatch(enqueueToast({
+                message: 'Please, login to work with wishlist',
+                type: ToastTypes.Warning,
+            }));
             return;
         }
 
@@ -24,6 +31,11 @@ const ToggleWishlistContainer: React.FC<{property: PropertyType, inWishlist: boo
         const {id} = property;
 
         const resp = isInWishlist ? await removeFromWishlist(id): await addToWishlist(id);
+
+        dispatch(enqueueToast({
+            message: isInWishlist ? 'Removed from wishlist' : 'Added to wishlist',
+            type: ToastTypes.Success,
+        }));
 
         const key = isInWishlist ? 'removeFromWishlist' : 'addToWishlist';
         const {data: {[key]: {success}}} = await resp.json();
