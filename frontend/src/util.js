@@ -23,3 +23,7 @@ export const formatPrice = (price, currency = 'GBP') => {
         maximumFractionDigits: 0
     }).format(price);
 };
+
+export const getSavedToken = () => {
+    return localStorage.getItem('token');
+}

@@ -3,7 +3,7 @@ import { enqueueToast } from './Notifier';
 import jwtDecode from 'jwt-decode';
 
 import { ToastTypes } from '../constants';
-import {getSavedToken} from '../graphql';
+import {getSavedToken} from '../util';
 import {login} from "../queries";
 
 const initialState = {
@@ -34,7 +34,14 @@ export const loginUser = createAsyncThunk(
 
 export const logoutUser = createAsyncThunk(
   'currentUser/logoutUser',
-  async () => localStorage.removeItem('token'),
+  async (arg, { dispatch }) => {
+      localStorage.removeItem('token');
+
+      dispatch(enqueueToast({
+          message: 'Logout successful',
+          type: ToastTypes.Success,
+      }));
+  },
 );
 
 export const refreshTokenIfExpired = createAsyncThunk(
@@ -60,10 +67,9 @@ const user = createSlice({
   initialState,
   extraReducers: {
     [loginUser.fulfilled]: (state, action) => {
-      const { data: {login: {userId, token}} } = action.payload || {};
+      const { data: {login: {token}} } = action.payload || {};
       state.isAuthorized = true;
       localStorage.setItem('token', token);
-      localStorage.setItem('userId', userId);
     },
     [loginUser.rejected]: (state) => {
       state.isAuthorized = false;

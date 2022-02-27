@@ -14,6 +14,8 @@ const ClientRequest = require("../models/clientRequests");
 const Type = require("../models/type");
 const Tag = require("../models/tag");
 
+const { NotAuthenticatedError, UserAlreadyExistsError } = require('./errors');
+
 const createUser = async ({ userInput })  => {
   const {email, name, password} = userInput;
   const errors = [];
@@ -36,7 +38,7 @@ const createUser = async ({ userInput })  => {
   const existingUser = await User.findOne({where: { email }});
 
   if (existingUser) {
-    throw new Error('User exists already!');
+    throw new UserAlreadyExistsError();
   }
 
   const hashedPw = await bcrypt.hash(userInput.password, 12);
@@ -155,11 +157,11 @@ const getProperty = async ({id}, req) => {
 
 const getWishlist = async (args, req) => {
   if(!req.isAuthenticated){
-    throw new Error('User is not authenticated');
+    throw new NotAuthenticatedError();
   }
 
   // const data =  await UserWishlist.findAll( {where: {userId}, include: Property});
-  const data =  await UserWishlist.findAll( {where: {userId}});
+  const data =  await UserWishlist.findAll( {where: {userId: req.userId}});
   const propertyIds = data.map(({propertyId}) => propertyId);
 
   const wishlistProperties = Property.findAll({where: {id: {[Op.or]: propertyIds}}, include: [{
@@ -175,7 +177,7 @@ const getWishlist = async (args, req) => {
 
 const addToWishlist = async ({propertyId}, req) => {
   if(!req.isAuthenticated){
-    throw new Error('User is not authenticated');
+    throw new NotAuthenticatedError();
   }
 
   await UserWishlist.create({ userId: req.userId, propertyId });
@@ -184,7 +186,7 @@ const addToWishlist = async ({propertyId}, req) => {
 
 const removeFromWishlist =  async ({propertyId}, req) => {
   if(!req.isAuthenticated){
-    throw new Error('User is not authenticated');
+    throw new NotAuthenticatedError();
   }
 
   try {

@@ -47,7 +47,3 @@ export const sendGraphqlRequest = (graphqlQuery, requiresAuth = false) => {
 export const isAuthorized = () => {
     return localStorage.getItem('token');
 }
-
-export const getSavedToken = () => {
-    return localStorage.getItem('token');
-}
