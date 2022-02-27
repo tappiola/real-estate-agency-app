@@ -16,7 +16,8 @@ const Property = sequelize.define('property', {
   bedroomCount: Sequelize.INTEGER,
   bathroomCount: Sequelize.INTEGER,
   longitude: Sequelize.FLOAT,
-  latitude: Sequelize.FLOAT
+  latitude: Sequelize.FLOAT,
+  floorPlan: Sequelize.STRING
 });
 
 module.exports = Property;

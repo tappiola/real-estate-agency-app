@@ -91,6 +91,7 @@ export const searchProperties = (adType, searchParams) => {
                     isInWishlist
                     longitude
                     latitude
+                    floorPlan
                     price
                     type {id name}
                 }

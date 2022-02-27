@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.style.scss';
 import Register from "../Register";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes, useNavigate} from "react-router-dom";
 import Login from "../Login";
 import HomePage from "../HomePage";
 import Wishlist from '../Wishlist';
@@ -12,8 +12,15 @@ import Notification from '../Notification';
 import {ToastQueueProvider} from '../Toast';
 import {AdType} from "../../constants";
 import Header from "../Header/Header";
+import { refreshTokenIfExpired } from '../../redux/User';
+import {useAppSelector} from "../../redux/store";
 
 const App = () => {
+    // @ts-ignore
+    useEffect(() => refreshTokenIfExpired(), []);
+
+    const { isAuthorized } = useAppSelector(({ user }) => user);
+
   return (
       <ToastQueueProvider>
             <div className="App">
@@ -23,7 +30,7 @@ const App = () => {
                     <Routes>
                             <Route path="/" element={<HomePage />}/>
                             <Route path="/register" element={<Register />}/>
-                            <Route path="/login" element={<Login />}/>
+                            {!isAuthorized && <Route path="/login" element={<Login />}/>}
                             <Route path="/favorites" element={<Wishlist />}/>
                             <Route path="/rent" element={<SearchResults adType={AdType.Rent}/>}/>
                             <Route path="/sale" element={<SearchResults adType={AdType.Sale}/>}/>

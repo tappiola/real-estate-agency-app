@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import notificationsReducer, { enqueueToast } from './Notifier';
 import navigationReducer from './Navigation';
+import userReducer from './User';
 
 import {ToastTypes} from '../constants';
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
@@ -20,7 +21,8 @@ const errorHandler = (store) => (next) => (action) => {
 const store = configureStore({
   reducer: {
     notifications: notificationsReducer,
-    navigation: navigationReducer
+    navigation: navigationReducer,
+    user: userReducer
   },
   devTools: process.env.NODE_ENV !== 'production',
   middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), errorHandler],
