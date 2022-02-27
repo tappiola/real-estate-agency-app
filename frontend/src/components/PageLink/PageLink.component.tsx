@@ -6,15 +6,15 @@ import React, {useEffect} from "react";
 const PageLink : React.FC<{pageNumber: number, isCurrent: boolean, searchParams: object}> = ({pageNumber, isCurrent, searchParams}) => {
     const getParams = (searchParams: any) => {
         const pageKey = 'page';
-        const page = searchParams.get(pageKey) || 1;
+        const params = new URLSearchParams(searchParams.toString());
 
         if(+pageNumber === 1){
-            searchParams.delete(pageKey);
+            params.delete(pageKey);
         } else {
-            searchParams.set(pageKey, pageNumber);
+            params.set(pageKey, pageNumber.toString());
         }
 
-        return searchParams;
+        return params;
     }
 
     return <Link

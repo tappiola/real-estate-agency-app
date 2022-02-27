@@ -4,7 +4,7 @@ import React from "react";
 
 const Pagination : React.FC<{pages: number, searchParams: object}> = ({pages, searchParams}) => {
     // @ts-ignore
-    const { page: currentPage } = searchParams;
+    const currentPage = +searchParams.get('page') || 1;
 
     return <div className="Pagination">
         {Array.apply(null, Array(pages))
