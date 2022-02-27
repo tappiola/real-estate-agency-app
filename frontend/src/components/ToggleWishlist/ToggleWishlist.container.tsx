@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import {addToWishlist, removeFromWishlist} from "../../queries";
-import {isAuthorized} from "../../graphql";
 import {PropertyType} from "../../types";
 import ToggleWishlist from "./ToggleWishlist.component";
+import {useAppSelector} from "../../redux/store";
 
 const ToggleWishlistContainer: React.FC<{property: PropertyType, inWishlist: boolean}> = ({property, inWishlist}) => {
     const [isInWishlist, setIsInWishlist] = useState(inWishlist);
+    const { isAuthorized } = useAppSelector(({ user }) => user);
 
     const onWishlistToggle = async (e: MouseEvent) => {
 

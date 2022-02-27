@@ -1,11 +1,10 @@
 import WishlistCard from "../WishlistCard";
 import Loader from "../Loader";
-import {isAuthorized} from "../../graphql";
 import {PropertyType} from "../../types";
 import React from "react";
 
-const Wishlist: React.FC<{properties: PropertyType[], isLoading: boolean, updatePropertiesList: (id: Number) => void}>
-    = ({properties, isLoading, updatePropertiesList}) => {
+const Wishlist: React.FC<{properties: PropertyType[], isLoading: boolean, updatePropertiesList: (id: Number) => void, isAuthorized: boolean}>
+    = ({properties, isLoading, updatePropertiesList, isAuthorized}) => {
     if (!isAuthorized){
         return <h4>Please, login to work with wishlist</h4>
     }

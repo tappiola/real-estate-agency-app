@@ -2,11 +2,14 @@ import {useEffect, useState} from "react";
 import {getWishlist} from "../../queries";
 import Wishlist from "./Wishlist.component";
 import {PropertyType} from "../../types";
+import {useAppSelector} from "../../redux/store";
 
 const WishlistContainer = () => {
     const [properties, setProperties] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
+
+    const { isAuthorized } = useAppSelector(({ user }) => user);
 
     useEffect(() => {
         const fetchWishlist = async () => {
@@ -35,7 +38,7 @@ const WishlistContainer = () => {
         return <h4>Please, login to access wishlist</h4>
     }
 
-    return <Wishlist isLoading={isLoading} properties={properties} updatePropertiesList={updatePropertiesList}/>
+    return <Wishlist isLoading={isLoading} properties={properties} updatePropertiesList={updatePropertiesList} isAuthorized={isAuthorized}/>
 }
 
 export default WishlistContainer;
