@@ -23,5 +23,9 @@ header {
   select {
     font-size: 14px;
     padding: 10px 30px 10px 10px;
+
+    & + .ChevronIcon {
+      top: 1px;
+    }
   }
 }

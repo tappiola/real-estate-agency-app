@@ -22,4 +22,6 @@ export enum Filter {
     PropertyType = 'propertyType',
     MinPrice = 'minPrice',
     MaxPrice = 'maxPrice',
+    MinBeds = 'minBeds',
+    MaxBeds = 'maxBeds',
 }

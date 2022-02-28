@@ -6,7 +6,7 @@ import {AdType, Filter, ToastTypes} from "../../constants";
 import {useAppDispatch} from "../../redux/store";
 import PropertyTypesSelect from "../PropertyTypesSelect/PropertyTypesSelect.container";
 import Select from "../Select";
-import {PRICE_RANGE} from "./AdvancedSearchForm.config";
+import {MAX_BEDROOMS, PRICE_RANGE} from "./AdvancedSearchForm.config";
 import {formatPrice} from "../../util";
 
 const AdvancedSearchForm: React.FC<{searchType: AdType}> = ({searchType}) => {
@@ -55,6 +55,34 @@ const AdvancedSearchForm: React.FC<{searchType: AdType}> = ({searchType}) => {
             .map(price => ({id: price, name: formatPrice(price)}));
     }
 
+    const getBedroomsLabel = (count: number) => {
+        if (count === MAX_BEDROOMS ){
+            return `${count}+`;
+        }
+
+        if (count === 0) {
+            return 'Studio';
+        }
+
+        return count;
+    }
+
+    const getMinBedroomsOptions = () => {
+        const maxBeds = filterSettings[Filter.MaxBeds];
+
+        return Array.from(Array(MAX_BEDROOMS + 1).keys())
+            .filter(beds => !maxBeds || beds <= Number(maxBeds))
+            .map(count => ({id: count, name: getBedroomsLabel(count)}));
+    }
+
+    const getMaxBedroomsOptions = () => {
+        const minBeds = filterSettings[Filter.MinBeds];
+
+        return Array.from(Array(MAX_BEDROOMS + 1).keys())
+            .filter(beds => !minBeds || beds >= Number(minBeds))
+            .map(count => ({id: count, name: getBedroomsLabel(count)}));
+    }
+
     return <>
             <CitiesSelect
                 placeholder='Any location'
@@ -78,6 +106,18 @@ const AdvancedSearchForm: React.FC<{searchType: AdType}> = ({searchType}) => {
                 selectedOption={filterSettings[Filter.MaxPrice] || ''}
                 onOptionSelect={value => setFilterSettings({...filterSettings, [Filter.MaxPrice]: value})}
             />
+        <Select
+            placeholder='Min beds'
+            options={getMinBedroomsOptions()}
+            selectedOption={filterSettings[Filter.MinBeds] || ''}
+            onOptionSelect={value => setFilterSettings({...filterSettings, [Filter.MinBeds]: value})}
+        />
+        <Select
+            placeholder='Max beds'
+            options={getMaxBedroomsOptions()}
+            selectedOption={filterSettings[Filter.MaxBeds] || ''}
+            onOptionSelect={value => setFilterSettings({...filterSettings, [Filter.MaxBeds]: value})}
+        />
             <button onClick={onButtonClick}>Search</button>
         </>
 }

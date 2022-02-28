@@ -6,16 +6,12 @@ TODO:
 - error handling middleware
 - eslint
 - move gql requests somewhere
-- add search form
-- add search params: price, beds
 - add position storing on navigate back
 - don't rerequest on navigate back (check if query params match prev currency params)
-- page number into redux
 - react-content-loader for placeholders https://skeletonreact.com/
-- adjust Map and PropertiesList
+- component / container + tsx
 - adjust carousel
 - add next / prev for pagination
-- longer gql for property page
 - add labels
 
 - (R) refresh token

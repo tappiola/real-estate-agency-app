@@ -9,3 +9,6 @@ export const PRICE_RANGE = {
     4500000, 4750000, 5000000],
     [AdType.Rent]: []
     }
+
+
+export const MAX_BEDROOMS = 5;
