@@ -6,6 +6,9 @@ header {
   top: 0;
   background-color: var(--primary-bright-color);
   z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .AuthButton {
     position: absolute;
@@ -15,5 +18,10 @@ header {
     &:hover {
       background-color: white;
     }
+  }
+
+  select {
+    font-size: 14px;
+    padding: 10px 30px 10px 10px;
   }
 }

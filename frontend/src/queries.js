@@ -65,17 +65,19 @@ export const searchProperties = (adType, searchParams) => {
         params = ({...params, [key]: value});
     }
 
-    const {page = 1, city, propertyType} = params;
+    const {page = 1, city, propertyType, minPrice, maxPrice} = params;
 
     console.log(new URLSearchParams(searchParams).toString());
 
-    const cityPart = city ?`, cityId: ${+city}` : '';
+    const cityPart = city ? `, cityId: ${+city}` : '';
     const propertyTypePart = propertyType ?`, propertyTypeId: ${+propertyType}` : '';
+    const minPricePart = minPrice ? `, minPrice: ${+minPrice}` : '';
+    const maxPricePart = maxPrice ? `, maxPrice: ${+maxPrice}` : '';
 
     const graphqlQuery = {
         query:`
             {
-              getProperties(adType: "${adType}", page: ${+page}${cityPart}${propertyTypePart}) {
+              getProperties(adType: "${adType}", page: ${+page}${cityPart}${propertyTypePart}${minPricePart}${maxPricePart}) {
                 count
                 pages
                 items {

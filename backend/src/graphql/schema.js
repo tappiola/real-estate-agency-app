@@ -70,7 +70,7 @@ module.exports = buildSchema(`
 
     type RootQuery {
         login(email: String!, password: String!): AuthData!
-        getProperties(adType: String!, page: Int!, cityId: Int, propertyTypeId: Int): Properties
+        getProperties(adType: String!, page: Int!, cityId: Int, propertyTypeId: Int, minPrice: Int, maxPrice: Int): Properties
         getProperty(id: Int!): Property!
         getWishlist: [Property!]!
         getCities: [City!]!

@@ -2,11 +2,14 @@ import CitiesSelect from "../CitiesSelect";
 import React, {useState} from "react";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {enqueueToast} from "../../redux/Notifier";
-import {Filter, ToastTypes} from "../../constants";
+import {AdType, Filter, ToastTypes} from "../../constants";
 import {useAppDispatch} from "../../redux/store";
 import PropertyTypesSelect from "../PropertyTypesSelect/PropertyTypesSelect.container";
+import Select from "../Select";
+import {PRICE_RANGE} from "./AdvancedSearchForm.config";
+import {formatPrice} from "../../util";
 
-const AdvancedSearchForm: React.FC<{searchType: String}> = ({searchType}) => {
+const AdvancedSearchForm: React.FC<{searchType: AdType}> = ({searchType}) => {
 
     const [searchParams] = useSearchParams();
     const dispatch = useAppDispatch();
@@ -36,16 +39,44 @@ const AdvancedSearchForm: React.FC<{searchType: String}> = ({searchType}) => {
         navigate('?' + queryString);
     }
 
+    const getMinPriceOptions = () => {
+        const maxPrice = filterSettings[Filter.MaxPrice];
+
+        return PRICE_RANGE[searchType]
+            .filter(price => !maxPrice || price <= Number(filterSettings[Filter.MaxPrice]))
+            .map(price => ({id: price, name: formatPrice(price)}));
+    }
+
+    const getMaxPriceOptions = () => {
+        const minPrice = filterSettings[Filter.MinPrice];
+
+        return PRICE_RANGE[searchType]
+            .filter(price => !minPrice || price >= Number(minPrice))
+            .map(price => ({id: price, name: formatPrice(price)}));
+    }
+
     return <>
-        <CitiesSelect
-            placeholder='Any location'
-            selectedOption={filterSettings[Filter.City] || ''}
-            onOptionSelect={value => setFilterSettings({...filterSettings, [Filter.City]: value})}
-        />
+            <CitiesSelect
+                placeholder='Any location'
+                selectedOption={filterSettings[Filter.City] || ''}
+                onOptionSelect={value => setFilterSettings({...filterSettings, [Filter.City]: value})}
+            />
             <PropertyTypesSelect
                 placeholder='Any property type'
                 selectedOption={filterSettings[Filter.PropertyType] || ''}
                 onOptionSelect={value => setFilterSettings({...filterSettings, [Filter.PropertyType]: value})}
+            />
+            <Select
+                placeholder='Min Price'
+                options={getMinPriceOptions()}
+                selectedOption={filterSettings[Filter.MinPrice] || ''}
+                onOptionSelect={value => setFilterSettings({...filterSettings, [Filter.MinPrice]: value})}
+            />
+            <Select
+                placeholder='Max Price'
+                options={getMaxPriceOptions()}
+                selectedOption={filterSettings[Filter.MaxPrice] || ''}
+                onOptionSelect={value => setFilterSettings({...filterSettings, [Filter.MaxPrice]: value})}
             />
             <button onClick={onButtonClick}>Search</button>
         </>

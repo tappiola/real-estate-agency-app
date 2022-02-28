@@ -72,14 +72,16 @@ const login = async ({ email, password }) => {
 };
 
 const getProperties = async (args, req) => {
-  const { adType, page, cityId, propertyTypeId } = args;
+  const { adType, page, cityId, propertyTypeId, minPrice, maxPrice } = args;
 
   const cityCondition = cityId ? {cityId} : {};
   const propertyTypeCondition = propertyTypeId ? {propertyTypeId} : {};
+  const minPriceCondition = minPrice ? {price: {[Op.gte]: minPrice}}: {};
+  const maxPriceCondition = maxPrice ? {price: {[Op.lte]: maxPrice}}: {};
 
   const {id: typeId} = await Type.findOne({where: {name: adType}});
 
-  const condition = {typeId, ...cityCondition, ...propertyTypeCondition};
+  const condition = {typeId, ...cityCondition, ...propertyTypeCondition, ...minPriceCondition, ...maxPriceCondition};
 
   const items = await Property.findAll( {
     where: condition,

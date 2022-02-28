@@ -19,5 +19,7 @@ export enum AdType {
 
 export enum Filter {
     City = 'city',
-    PropertyType = 'propertyType'
+    PropertyType = 'propertyType',
+    MinPrice = 'minPrice',
+    MaxPrice = 'maxPrice',
 }
