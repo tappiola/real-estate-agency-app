@@ -83,40 +83,49 @@ const AdvancedSearchForm: React.FC<{searchType: AdType}> = ({searchType}) => {
             .map(count => ({id: count, name: getBedroomsLabel(count)}));
     }
 
+    const updateParam = (name: Filter, value: any) => {
+        if (value){
+            setFilterSettings({...filterSettings, [name]: value});
+        } else {
+            const {[name] : paramToDelete, ...otherSettings} = filterSettings;
+            return setFilterSettings(otherSettings);
+        }
+    }
+
     return <>
             <CitiesSelect
                 placeholder='Any location'
                 selectedOption={filterSettings[Filter.City] || ''}
-                onOptionSelect={value => setFilterSettings({...filterSettings, [Filter.City]: value})}
+                onOptionSelect={(value) => updateParam(Filter.City, value)}
             />
             <PropertyTypesSelect
                 placeholder='Any property type'
                 selectedOption={filterSettings[Filter.PropertyType] || ''}
-                onOptionSelect={value => setFilterSettings({...filterSettings, [Filter.PropertyType]: value})}
+                onOptionSelect={(value) => updateParam(Filter.PropertyType, value)}
             />
             <Select
                 placeholder='Min Price'
                 options={getMinPriceOptions()}
                 selectedOption={filterSettings[Filter.MinPrice] || ''}
-                onOptionSelect={value => setFilterSettings({...filterSettings, [Filter.MinPrice]: value})}
+                onOptionSelect={(value) => updateParam(Filter.MinPrice, value)}
             />
             <Select
                 placeholder='Max Price'
                 options={getMaxPriceOptions()}
                 selectedOption={filterSettings[Filter.MaxPrice] || ''}
-                onOptionSelect={value => setFilterSettings({...filterSettings, [Filter.MaxPrice]: value})}
+                onOptionSelect={(value) => updateParam(Filter.MaxPrice, value)}
             />
         <Select
             placeholder='Min beds'
             options={getMinBedroomsOptions()}
             selectedOption={filterSettings[Filter.MinBeds] || ''}
-            onOptionSelect={value => setFilterSettings({...filterSettings, [Filter.MinBeds]: value})}
+            onOptionSelect={(value) => updateParam(Filter.MinBeds, value)}
         />
         <Select
             placeholder='Max beds'
             options={getMaxBedroomsOptions()}
             selectedOption={filterSettings[Filter.MaxBeds] || ''}
-            onOptionSelect={value => setFilterSettings({...filterSettings, [Filter.MaxBeds]: value})}
+            onOptionSelect={(value) => updateParam(Filter.MaxBeds, value)}
         />
             <button onClick={onButtonClick}>Search</button>
         </>
