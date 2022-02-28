@@ -22,3 +22,17 @@ button {
   letter-spacing: 0.05em;
   font-size: 14px;
 }
+
+input {
+  border: none;
+  border-bottom: 1px solid #4d4d4d;
+  padding: 10px;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+
+  &::placeholder {
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+}

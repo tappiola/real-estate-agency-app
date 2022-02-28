@@ -1,7 +1,38 @@
+.HomePage {
+    background-color: #d0d4d4;
+
+    &-Bottom {
+        display: flex;
+        margin-top: 100px;
+        height: 450px;
+        padding: 0 70px 120px 70px;
+    }
+}
+
 .TopBanner {
-    background-image: url('topBanner.jpg');
-    height: 300px;
+    background-image: url('midBanner.png');
+    height: 400px;
     background-repeat: no-repeat;
-    background-position: 0 20%;
+    background-position: 0 80%;
     background-size: cover;
+}
+
+.MidBanner {
+    background-image: url('img.png');
+    height: 500px;
+    width: 60%;
+    background-repeat: no-repeat;
+    background-position: 0 80%;
+    background-size: cover;
+}
+
+.Banner3 {
+    background-image: url('plants.png');
+    height: 450px;
+    width: 60%;
+    background-repeat: no-repeat;
+    background-position: 0 80%;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: 0;
 }

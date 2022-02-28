@@ -14,6 +14,7 @@ import {AdType} from "../../constants";
 import Header from "../Header/Header";
 import { refreshTokenIfExpired } from '../../redux/User';
 import {useAppSelector} from "../../redux/store";
+import { ParallaxProvider } from 'react-scroll-parallax';
 
 const App = () => {
     // @ts-ignore
@@ -28,7 +29,7 @@ const App = () => {
                     <Header/>
                     <main>
                     <Routes>
-                            <Route path="/" element={<HomePage />}/>
+                            <Route path="/" element={<ParallaxProvider><HomePage /></ParallaxProvider>}/>
                             <Route path="/register" element={<Register />}/>
                             {!isAuthorized && <Route path="/login" element={<Login />}/>}
                             <Route path="/favorites" element={<Wishlist />}/>
