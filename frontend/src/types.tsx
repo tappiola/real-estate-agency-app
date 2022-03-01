@@ -1,16 +1,16 @@
 export type CityType = {
     id: number
-    name: String
+    name: string
 }
 
 export type TypeOfPropertyType = {
     id: number
-    name: String
+    name: string
 }
 
 export type Type = {
     id: number
-    name: String
+    name: string
 }
 
 export type Image = {
@@ -21,8 +21,8 @@ export type Image = {
 
 export type PropertyType = {
     id: number,
-    title: String
-    description: String
+    title: string
+    description: string
     city: CityType
     images: Image[]
     propertyType: TypeOfPropertyType,

@@ -1,3 +1,5 @@
+import {AdType} from "./constants";
+
 export const sortByKey = (values, sortKey) => values.sort(
     (a, b) => {
         if (a[sortKey] < b[sortKey]) {
@@ -23,6 +25,10 @@ export const formatPrice = (price, currency = 'GBP') => {
         maximumFractionDigits: 0
     }).format(price);
 };
+
+export const getFullTitle = (property) => {
+    return `${getHouseTitle(property.bedroomCount, property.propertyType?.name)} in ${property.city?.name} ${property.type.name === AdType.Sale ? 'for': 'to'} ${property.type.name}`
+}
 
 export const getHouseTitle = (bedroomCount, propertyType) => {
     if (bedroomCount === 0) {
