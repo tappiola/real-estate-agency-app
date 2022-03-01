@@ -185,7 +185,7 @@ const getWishlist = async (args, req) => {
   }
 
   // const data =  await UserWishlist.findAll( {where: {userId}, include: Property});
-  const data =  await UserWishlist.findAll( {where: {userId}});
+  const data =  await UserWishlist.findAll( {where: {userId: req.userId}});
   const propertyIds = data.map(({propertyId}) => propertyId);
 
   const wishlistProperties = Property.findAll({where: {id: {[Op.or]: propertyIds}}, include: [{

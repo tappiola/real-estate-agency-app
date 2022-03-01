@@ -17,7 +17,9 @@ const WishlistContainer = () => {
                 const response = await getWishlist();
                 const {data, errors} = await response.json();
 
-                setError(errors[0].message);
+                if (errors) {
+                    setError(errors[0].message);
+                }
 
                 setProperties(data.getWishlist);
                 setIsLoading(false);

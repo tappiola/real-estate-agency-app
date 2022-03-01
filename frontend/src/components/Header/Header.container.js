@@ -20,6 +20,9 @@ const HeaderContainer = () => {
     const onLogoutClick = () => {
         dispatch(logoutUser());
     }
+    const onWishlistIconClick = () => {
+        navigate('/favorites');
+    }
 
     return <Header
         onLogoutClick={onLogoutClick}
@@ -27,6 +30,7 @@ const HeaderContainer = () => {
         isAuthorized={isAuthorized}
         isRentSearch={pathname === '/' + AdType.Rent}
         isSaleSearch={pathname === '/' + AdType.Sale}
+        onWishlistIconClick={onWishlistIconClick}
     />;
 }
 

@@ -2,8 +2,9 @@ import React from "react";
 import {AdType} from "../../constants";
 import AdvancedSearchFormComponent from "../AdvancedSearchForm";
 import './Header.style.scss';
+import WishlistIcon from "../WishlistIcon";
 
-const HeaderComponent = ({onLogoutClick, onLoginClick, isRentSearch, isSaleSearch, isAuthorized}) => {
+const HeaderComponent = ({onLogoutClick, onLoginClick, isRentSearch, isSaleSearch, isAuthorized, onWishlistIconClick}) => {
     const renderChildren = () => {
         if (isRentSearch)
             return <AdvancedSearchFormComponent searchType={AdType.Rent}/>;
@@ -24,7 +25,12 @@ const HeaderComponent = ({onLogoutClick, onLoginClick, isRentSearch, isSaleSearc
 
     return <header className="Header">
         {renderChildren()}
-        {isAuthorized ? renderLogout() : renderLogin()}
+        <div className="Actions">
+            <div className="WishlistIcon-Container" onClick={onWishlistIconClick}>
+            <WishlistIcon isActive={true}/>
+            </div>
+            {isAuthorized ? renderLogout() : renderLogin()}
+        </div>
     </header>;
 }
 

@@ -2,7 +2,7 @@ import React from "react";
 import Pagination from "../Pagination";
 import {PropertyType} from "../../types";
 import './SearchResults.style.scss';
-import PropertiesList from "../PropertiesList/PropertiesList";
+import PropertiesListContainer from "../PropertiesList";
 import MapContainer from "../Map";
 
 const SearchResults: React.FC<{
@@ -38,7 +38,7 @@ const SearchResults: React.FC<{
         <div className="SearchResults-Container">
             <p className='SearchResults-Count'>{count || 'No'} results</p>
             <div className="pane left">
-                <PropertiesList
+                <PropertiesListContainer
                     isLoading={isLoading}
                     properties={properties}
                     activeItem={activeItem}

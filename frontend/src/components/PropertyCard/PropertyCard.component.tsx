@@ -7,7 +7,6 @@ import {formatPrice, getFullTitle, sortByKey} from "../../util";
 import {AdType, IMAGE_PLACEHOLDER} from "../../constants";
 import BedroomIconComponent from "../BedroomIcon";
 import BathroomIconComponent from "../BathroomIcon";
-import temp from './plants.png';
 
 const PropertyCardComponent: React.FC<{property: PropertyType, index: number, loadProperty: () => void}> = ({property, index, loadProperty}) => {
     const loadCarouselImages = () => {
@@ -27,8 +26,7 @@ const PropertyCardComponent: React.FC<{property: PropertyType, index: number, lo
             return <CarouselItem key={image.id}>
             <img
                 className='PropertyCard-CarouselImg'
-                // src={image.link}
-                src={temp}
+                src={image.link}
                 alt={`Image${image.position}`}
             />
         </CarouselItem>

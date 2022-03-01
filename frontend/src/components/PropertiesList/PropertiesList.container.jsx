@@ -1,11 +1,10 @@
   import inView from 'in-view';
   import React, {useEffect, useRef} from "react";
   import './PropertiesList.style.scss';
-  import PropertyCardContainer from "../PropertyCard";
-  import ContentLoader from "react-content-loader";
   import PropertiesLoader from "../PropertiesLoader/PropertiesLoader.component";
+  import PropertiesList from "./PropertiesList.component";
 
-  const PropertiesList = ({properties, activeItem, setActiveItem, isLoading}) => {
+  const PropertiesListContainer = ({properties, activeItem, setActiveItem, isLoading}) => {
     const listRef = useRef();
 
     const scrollListener = () => {
@@ -35,13 +34,12 @@
       return <PropertiesLoader/>
     }
 
-    return <div className='Properties-List' ref={listRef} onScroll={scrollListener}>
-      { properties.map((property, index) => <PropertyCardContainer
-          key={index}
-          property={property}
-          index={index}
-      />)}
-        </div>
+    return <PropertiesList
+        properties={properties}
+        isLoading={isLoading}
+        listRef={listRef}
+        scrollListener={scrollListener}
+        />
   }
 
-  export default PropertiesList;
+  export default PropertiesListContainer;

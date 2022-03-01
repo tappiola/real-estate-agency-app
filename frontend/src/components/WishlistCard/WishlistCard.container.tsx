@@ -4,6 +4,9 @@ import {PropertyType} from "../../types";
 import React, {MouseEvent} from "react";
 import WishlistCard from "./WishlistCard.component";
 import {useNavigate} from "react-router-dom";
+import {useAppDispatch} from "../../redux/store";
+import {enqueueToast} from "../../redux/Notifier";
+import {ToastTypes} from "../../constants";
 
 const WishlistCardContainer: React.FC<{
     property: PropertyType,
@@ -14,6 +17,7 @@ const WishlistCardContainer: React.FC<{
         }) => {
 
     let navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     const loadProperty = (event: MouseEvent<HTMLDivElement>) => {
         event.stopPropagation();
@@ -27,6 +31,11 @@ const WishlistCardContainer: React.FC<{
         try {
             await removeFromWishlist(id);
             updatePropertiesList(id);
+
+            dispatch(enqueueToast({
+                message: 'Removed from wishlist',
+                type: ToastTypes.Success,
+            }));
         }
         catch (e){
             console.log(e);

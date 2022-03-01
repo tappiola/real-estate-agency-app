@@ -10,13 +10,28 @@ header {
   align-items: center;
   justify-content: center;
 
+  .Actions {
+    margin-left: auto;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+  }
+
   .AuthButton {
-    position: absolute;
-    right: 10px;
-    top: 10px;
+    margin-left: 15px;
 
     &:hover {
       background-color: white;
+    }
+  }
+
+  .WishlistIcon {
+    fill: white;
+    width: 32px;
+    height: 32px;
+
+    &-Container {
+      height: 32px;
     }
   }
 

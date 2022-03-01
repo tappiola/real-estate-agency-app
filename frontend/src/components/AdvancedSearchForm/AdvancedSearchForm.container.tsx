@@ -38,13 +38,14 @@ const AdvancedSearchFormContainer: React.FC<{searchType: AdType}> = ({searchType
 
         navigate('?' + queryString);
     }
+    const getPriceOption = (price: number) => `${formatPrice(price)}${searchType === AdType.Rent ? ' pcm ' : ''}`;
 
     const getMinPriceOptions = () => {
         const maxPrice = filterSettings[Filter.MaxPrice];
 
         return PRICE_RANGE[searchType]
             .filter(price => !maxPrice || price <= Number(filterSettings[Filter.MaxPrice]))
-            .map(price => ({id: price, name: formatPrice(price)}));
+            .map(price => ({id: price, name: getPriceOption(price)}));
     }
 
     const getMaxPriceOptions = () => {
@@ -52,7 +53,7 @@ const AdvancedSearchFormContainer: React.FC<{searchType: AdType}> = ({searchType
 
         return PRICE_RANGE[searchType]
             .filter(price => !minPrice || price >= Number(minPrice))
-            .map(price => ({id: price, name: formatPrice(price)}));
+            .map(price => ({id: price, name: getPriceOption(price)}));
     }
 
     const getBedroomsLabel = (count: number) => {
