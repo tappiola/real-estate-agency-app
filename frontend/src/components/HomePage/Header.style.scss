@@ -3,9 +3,19 @@
 
     &-Bottom {
         display: flex;
-        margin-top: 100px;
+        margin-top: 120px;
         height: 450px;
         padding: 0 70px 120px 70px;
+        position: relative;
+        z-index: 5;
+    }
+
+    .PuddleShape{
+        position: absolute;
+        left: 80px;
+        width: 750px;
+        z-index: 0;
+        top: -330px;
     }
 }
 
@@ -24,12 +34,13 @@
     background-repeat: no-repeat;
     background-position: 0 80%;
     background-size: cover;
+    z-index: 10;
 }
 
 .Banner3 {
     background-image: url('plants.png');
-    height: 450px;
-    width: 60%;
+    height: 550px;
+    width: 63%;
     background-repeat: no-repeat;
     background-position: 0 80%;
     background-size: cover;

@@ -1,5 +1,7 @@
 :root {
   --primary-bright-color: #308291;
+  --pale-yellow-color: #eae1cf;
+  --perfect-salmon-color: #ffb3aa;
   --header-height: 56px;
   --dark-gray: #767676;
   --controls-color: #c6c6c6;
@@ -9,11 +11,16 @@
   text-align: center;
 }
 
+h1, h2 {
+  font-family: "Gilroy-Bold", sans-serif;
+}
+
 main {
   margin-top: var(--header-height);
 }
 
 button {
+  font-family: "Gilroy-Bold", sans-serif;
   border-radius: 5px;
   border: none;
   padding: 10px;

@@ -17,7 +17,7 @@ const ContactUsComponent: React.FC<{
         <h2>Contact us</h2>
         <input placeholder="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
         <input placeholder="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
-        <input type="email" placeholder="Email name" value={email} onChange={(e) => setEmail(e.target.value)}/>
+        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
         <input placeholder="Phone number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}/>
         <button type="submit">Send message</button>
     </form>
