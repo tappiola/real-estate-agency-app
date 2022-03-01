@@ -27,7 +27,8 @@ const PropertyCardComponent: React.FC<{property: PropertyType, index: number, lo
             return <CarouselItem key={image.id}>
             <img
                 className='PropertyCard-CarouselImg'
-                src={image.link}
+                // src={image.link}
+                src={temp}
                 alt={`Image${image.position}`}
             />
         </CarouselItem>

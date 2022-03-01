@@ -1,12 +1,11 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import  './Carousel.style.scss';
-import clsx from 'clsx';
+import {CarouselComponent as Carousel} from "./Carousel.component";
 
 export const CarouselItem = ({children}) => {
     return <>{children}</>;
 }
 
-export const Carousel = (
+const CarouselContainer = (
     {
         children,
         autoplay = true,
@@ -30,6 +29,7 @@ export const Carousel = (
     const virtualSlidesCount = 2;
 
     const getLeftOffset = useCallback((slideIndex, moveBy = 0) => {
+        console.log({activeIndex, slideIndex});
         return `${carouselWidth * -(slideIndex + virtualSlidesCount / 2) + moveBy}px`;
     }, [carouselWidth]);
 
@@ -78,6 +78,7 @@ export const Carousel = (
         if (!infinite && activeIndex === items.length - 1){
             return
         }
+
         changeSlide(activeIndex + 1);
     }, [activeIndex, changeSlide, infinite, items.length]);
 
@@ -128,60 +129,34 @@ export const Carousel = (
         }
     }
 
-    return <div
-        className='Carousel'
-        style={{width: '100%', height: '50%', ...style}}
-        onMouseEnter={() => setIsMouseOver(true)}
-        onMouseLeave={() => setIsMouseOver(false)}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        ref={carouselRef}
-    >
-        <div
-            onClick={toPrevSlide}
-            className={clsx('Carousel-Arrow', 'Carousel-Arrow_InnerLeft', {
-                'Carousel-Arrow_Disabled': !infinite && activeIndex === 0,
-            })}
-        >
-            <i className="fa fa-angle-left"/>
-        </div>
+    const getCarouselWidth = () => (items.length + virtualSlidesCount) * carouselWidth;
 
+    const getIsSlideActive = (index) => ((activeIndex + items.length) % items.length) === index;
 
-        <div className='Carousel-Items'
-             ref={slidesRef}
-             style={{
-                 width: `${(items.length + virtualSlidesCount) * carouselWidth}px`,
-                 left: getLeftOffset(activeIndex),
-                 height: '100%'
-             }}>
-                 {[items[items.length - 1], ...items, items[0]].map((item, index) =>
-                    <div key={index} className='Carousel-Item'>{item}</div>
-                 )}
-        </div>
+    const getIsNextArrowDisabled = () => !infinite && activeIndex === items.length - 1;
 
-        <div
-            onClick={toNextSlide}
-            className={clsx('Carousel-Arrow', 'Carousel-Arrow_InnerRight', {
-                'Carousel-Arrow_Disabled': !infinite && activeIndex === items.length - 1,
-            })}
-        >
-            <i className="fa fa-angle-right"/>
-        </div>
+    const getIsPrevArrowDisabled = () => !infinite && activeIndex === 0;
 
-        <div className={clsx('Carousel-Nav', 'Carousel-Nav_Inner')}>
-            { items.length > 1 && items.map((_, index) =>
-                <span
-                    className={clsx('Carousel-DotIcon', {
-                        // Make dot active immediately, including cases with infinite scroll and virtual slides
-                        'Carousel-DotIcon_Active': ((activeIndex + items.length) % items.length) === index
-                    })}
-                    key={index}
-                    onClick={() => changeSlide(index)}
-                >
-                    <i className="fa fa-circle"/>
-                </span>
-            )}
-        </div>
-    </div>
+    return <Carousel
+        handleTouchEnd={handleTouchEnd}
+        handleTouchStart={handleTouchStart}
+        handleTouchMove={handleTouchMove}
+        toNextSlide={toNextSlide}
+        toPrevSlide={toPrevSlide}
+        changeSlide={changeSlide}
+        activeIndex={activeIndex}
+        getLeftOffset={getLeftOffset}
+        setIsMouseOver={setIsMouseOver}
+        getCarouselWidth={getCarouselWidth}
+        getIsSlideActive={getIsSlideActive}
+        getIsNextArrowDisabled={getIsNextArrowDisabled}
+        getIsPrevArrowDisabled={getIsPrevArrowDisabled}
+        style={style}
+        setCarouselWidth={setCarouselWidth}
+        items={items}
+        carouselRef={carouselRef}
+        slidesRef={slidesRef}
+    />
 }
+
+export default CarouselContainer;

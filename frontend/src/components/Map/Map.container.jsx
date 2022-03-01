@@ -4,7 +4,7 @@ import './Map.style.scss';
 import {useEffect, useState} from "react";
 import {getHouseTitle} from "../../util";
 
-const Map = ({properties, activeItem, setActiveItem}) => {
+const MapContainer = ({properties, activeItem, setActiveItem}) => {
 
   const [map, setMap] = useState();
 
@@ -98,4 +98,4 @@ const Map = ({properties, activeItem, setActiveItem}) => {
   return <div id="map"/>;
 }
 
-export default Map;
+export default MapContainer;

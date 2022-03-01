@@ -11,7 +11,7 @@ import NotFound from "../NotFound";
 import Notification from '../Notification';
 import {ToastQueueProvider} from '../Toast';
 import {AdType} from "../../constants";
-import Header from "../Header/Header";
+import HeaderComponent from "../Header";
 import { refreshTokenIfExpired } from '../../redux/User';
 import {useAppSelector} from "../../redux/store";
 import { ParallaxProvider } from 'react-scroll-parallax';
@@ -26,7 +26,7 @@ const App = () => {
       <ToastQueueProvider>
             <div className="App">
                 <BrowserRouter>
-                    <Header/>
+                    <HeaderComponent/>
                     <main>
                     <Routes>
                             <Route path="/" element={<ParallaxProvider><HomePage /></ParallaxProvider>}/>

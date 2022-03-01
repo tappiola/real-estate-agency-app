@@ -1,7 +1,7 @@
 import {PropertyType} from '../../types';
 import React, {useEffect, useRef} from "react";
 import ToggleWishlist from "../ToggleWishlist";
-import MultiPreview from "../MultiPreview/MultiPreview.component";
+import MultiPreview from "../MultiPreview";
 import {getFullTitle, sortByKey} from "../../util";
 import './Property.style.scss';
 

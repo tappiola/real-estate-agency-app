@@ -1,10 +1,9 @@
 import React from "react";
-import Loader from "../Loader";
 import Pagination from "../Pagination";
 import {PropertyType} from "../../types";
 import './SearchResults.style.scss';
 import PropertiesList from "../PropertiesList/PropertiesList";
-import Map from "../Map/Map";
+import MapContainer from "../Map";
 
 const SearchResults: React.FC<{
     count: number,
@@ -23,16 +22,12 @@ const SearchResults: React.FC<{
             setActiveItem,
             searchParams}) => {
 
-    // if(isLoading){
-    //     return <Loader/>
-    // }
-
     const renderMap = () => {
         if (!properties.length){
             return null;
         }
 
-        return <Map
+        return <MapContainer
             properties={properties}
             activeItem={activeItem}
             setActiveItem={setActiveItem}
