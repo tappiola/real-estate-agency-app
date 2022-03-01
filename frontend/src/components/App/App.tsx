@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import './App.style.scss';
 import Register from "../Register";
-import {BrowserRouter, Route, Routes, useNavigate} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Login from "../Login";
 import HomePage from "../HomePage";
 import Wishlist from '../Wishlist';

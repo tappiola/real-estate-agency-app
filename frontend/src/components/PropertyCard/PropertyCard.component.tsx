@@ -2,11 +2,12 @@ import React from "react";
 import ToggleWishlist from "../ToggleWishlist";
 import './PropertyCard.style.scss';
 import {PropertyType} from "../../types";
-import {Carousel, CarouselItem} from "../Carousel/Carousel";
-import {formatPrice, getFullTitle, getHouseTitle, sortByKey} from "../../util";
+import {Carousel, CarouselItem} from "../Carousel";
+import {formatPrice, getFullTitle, sortByKey} from "../../util";
 import {AdType, IMAGE_PLACEHOLDER} from "../../constants";
-import BedroomIcon from "../BedroomIcon/BedroomIcon";
-import BathroomIcon from "../BathroomIcon/BathroomIcon";
+import BedroomIconComponent from "../BedroomIcon";
+import BathroomIconComponent from "../BathroomIcon";
+import temp from './plants.png';
 
 const PropertyCardComponent: React.FC<{property: PropertyType, index: number, loadProperty: () => void}> = ({property, index, loadProperty}) => {
     const loadCarouselImages = () => {
@@ -43,9 +44,9 @@ const PropertyCardComponent: React.FC<{property: PropertyType, index: number, lo
                 <div className='PropertyCard-Data'>
                     <h2 className='PropertyCard-Price'>{formatPrice(property.price) + (property.type.name === AdType.Rent ? ' pcm' : '')}</h2>
                     <p className='PropertyCard-Amenities'>
-                        <BedroomIcon/>
+                        <BedroomIconComponent/>
                         {property.bedroomCount}
-                        <BathroomIcon/>
+                        <BathroomIconComponent/>
                         {property.bathroomCount}
                     </p>
                     <h4 className='PropertyCard-Title'>{getFullTitle(property)}</h4>

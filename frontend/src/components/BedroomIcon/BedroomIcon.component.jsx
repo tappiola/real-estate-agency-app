@@ -1,6 +1,6 @@
 import './BedroomIcon.style.scss';
 
-const BedroomIcon = () => {
+const BedroomIconComponent = () => {
     return <svg
         className="BedroomIcon"
         xmlns="http://www.w3.org/2000/svg"
@@ -9,4 +9,4 @@ const BedroomIcon = () => {
     </svg>
 }
 
-export default BedroomIcon;
+export default BedroomIconComponent;

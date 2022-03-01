@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {AdType} from "../../constants";
-import AdvancedSearchForm from "../AdvancedSearchForm/AdvancedSearchForm";
+import AdvancedSearchFormComponent from "../AdvancedSearchForm";
 import './Header.style.scss';
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {logoutUser} from "../../redux/User";
@@ -15,10 +15,10 @@ const Header = () => {
 
     const renderChildren = () => {
         if (pathname === '/' + AdType.Rent)
-            return <AdvancedSearchForm searchType={AdType.Rent}/>;
+            return <AdvancedSearchFormComponent searchType={AdType.Rent}/>;
 
         if (pathname === '/' + AdType.Sale)
-            return <AdvancedSearchForm searchType={AdType.Sale}/>;
+            return <AdvancedSearchFormComponent searchType={AdType.Sale}/>;
 
         return null;
     }

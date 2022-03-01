@@ -9,7 +9,7 @@ import Select from "../Select";
 import {MAX_BEDROOMS, PRICE_RANGE} from "./AdvancedSearchForm.config";
 import {formatPrice} from "../../util";
 
-const AdvancedSearchForm: React.FC<{searchType: AdType}> = ({searchType}) => {
+const AdvancedSearchFormContainer: React.FC<{searchType: AdType}> = ({searchType}) => {
 
     const [searchParams] = useSearchParams();
     const dispatch = useAppDispatch();
@@ -24,7 +24,7 @@ const AdvancedSearchForm: React.FC<{searchType: AdType}> = ({searchType}) => {
 
     const [filterSettings, setFilterSettings] = useState<{ [key in Filter]?: string}>(getFilterParams(Object.values(Filter)));
 
-    const onButtonClick = () => {
+    const onSearchButtonClick = () => {
         // @ts-ignore
         if (!filterSettings[Filter.City]){
             dispatch(enqueueToast({
@@ -127,8 +127,8 @@ const AdvancedSearchForm: React.FC<{searchType: AdType}> = ({searchType}) => {
             selectedOption={filterSettings[Filter.MaxBeds] || ''}
             onOptionSelect={(value) => updateParam(Filter.MaxBeds, value)}
         />
-            <button onClick={onButtonClick}>Search</button>
+            <button onClick={onSearchButtonClick}>Search</button>
         </>
 }
 
-export default AdvancedSearchForm;
+export default AdvancedSearchFormContainer;

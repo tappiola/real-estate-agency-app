@@ -1,6 +1,6 @@
 import './BathroomIcon.style.scss';
 
-const BathroomIcon = () => {
+const BathroomIconComponent = () => {
     return <svg
         className="BathroomIcon"
         xmlns="http://www.w3.org/2000/svg"
@@ -9,4 +9,4 @@ const BathroomIcon = () => {
     </svg>
 }
 
-export default BathroomIcon;
+export default BathroomIconComponent;

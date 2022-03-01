@@ -33,3 +33,9 @@ export type PropertyType = {
     address: string
     type: Type
 };
+
+export type SelectOption = {
+    id: number,
+    value: string
+    name: string
+}
