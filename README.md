@@ -13,6 +13,7 @@ TODO:
 - adjust carousel
 - add next / prev for pagination
 - add labels
+- liverpool and edinburgh for sale
 
 - (R) refresh token
 - (R) imports without ../../

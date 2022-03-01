@@ -44,7 +44,7 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
                 setProperties(items);
                 setPages(pages);
                 setCount(count);
-                // setIsLoading(false);
+                setIsLoading(false);
             } catch (e){
                 console.log(e);
                 setIsLoading(false);
