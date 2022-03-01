@@ -1,4 +1,6 @@
 import React, {FormEvent} from "react";
+import './Login.style.scss';
+import {Link} from "react-router-dom";
 
 const Login : React.FC<{
     loginHandler: (event: FormEvent<HTMLFormElement>) => void,
@@ -8,10 +10,11 @@ const Login : React.FC<{
     setPassword: (password: string) => void}>
     = ({loginHandler, email, setEmail, password, setPassword}) => {
 
-    return <form onSubmit={loginHandler}>
-        <input placeholder="Email" name="email" value={email} onChange={e => setEmail(e.target.value)}/>
-        <input placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
+    return <form className="Login" onSubmit={loginHandler}>
+        <input type="email" placeholder="Email" name="email" value={email} onChange={e => setEmail(e.target.value)}/>
+        <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
         <button type="submit">Login</button>
+        <p className="NotRegistered">Not registered yet? <Link className="RegistrationLink" to='/register'>Register</Link></p>
     </form>
 };
 

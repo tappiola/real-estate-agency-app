@@ -18,8 +18,8 @@ const Property: React.FC<{property: PropertyType, isInWishlist: boolean}> = ({pr
         <div className="Property-Container">
             <MultiPreview images={sortByKey(property.images, 'position')}/>
             <h1>{getFullTitle(property)}</h1>
-            <div ref={descRef}>{property.title}</div>
-            <p>{property.description}</p>
+            <div className='Property-Description' ref={descRef}>{property.title}</div>
+            {/*<p>{property.description}</p>*/}
             <ToggleWishlist property={property} inWishlist={isInWishlist}/>
         </div>
     );
