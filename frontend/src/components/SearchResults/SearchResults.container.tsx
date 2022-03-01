@@ -5,6 +5,7 @@ import SearchResults from "./SearchResults.component";
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {AdType, ToastTypes} from "../../constants";
 import {enqueueToast} from "../../redux/Notifier";
+import ContentLoader from "react-content-loader";
 
 const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
     const [properties, setProperties] = useState([]);
@@ -43,7 +44,7 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
                 setProperties(items);
                 setPages(pages);
                 setCount(count);
-                setIsLoading(false);
+                // setIsLoading(false);
             } catch (e){
                 console.log(e);
                 setIsLoading(false);

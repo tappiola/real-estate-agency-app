@@ -23,9 +23,9 @@ const SearchResults: React.FC<{
             setActiveItem,
             searchParams}) => {
 
-    if(isLoading){
-        return <Loader/>
-    }
+    // if(isLoading){
+    //     return <Loader/>
+    // }
 
     const renderMap = () => {
         if (!properties.length){
@@ -40,11 +40,11 @@ const SearchResults: React.FC<{
     }
 
     return <>
-
         <div className="SearchResults-Container">
             <p className='SearchResults-Count'>{count || 'No'} results</p>
             <div className="pane left">
                 <PropertiesList
+                    isLoading={isLoading}
                     properties={properties}
                     activeItem={activeItem}
                     setActiveItem={setActiveItem}
