@@ -4,7 +4,7 @@ import ChevronIcon from "../ChevronIcon";
 import './Select.style.scss';
 
 
-const Select: React.FC<{options: Array<any>, selectedOption: string, onOptionSelect: (value: string) => void, placeholder: string}> = ({options, selectedOption, onOptionSelect, placeholder}) => {
+const Select: React.FC<{options: { id: number, name: string | number }[], selectedOption: string, onOptionSelect: (value: string) => void, placeholder: string}> = ({options, selectedOption, onOptionSelect, placeholder}) => {
     const isExpanded = false;
 
     return <>

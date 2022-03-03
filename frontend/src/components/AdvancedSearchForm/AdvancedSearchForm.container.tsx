@@ -8,6 +8,7 @@ import PropertyTypesSelect from "../PropertyTypesSelect/PropertyTypesSelect.cont
 import Select from "../Select";
 import {MAX_BEDROOMS, PRICE_RANGE} from "./AdvancedSearchForm.config";
 import {formatPrice} from "../../util";
+import {FilterParams} from "../../types";
 
 const AdvancedSearchFormContainer: React.FC<{searchType: AdType}> = ({searchType}) => {
 
@@ -22,7 +23,7 @@ const AdvancedSearchFormContainer: React.FC<{searchType: AdType}> = ({searchType
         }
     , {});
 
-    const [filterSettings, setFilterSettings] = useState<{ [key in Filter]?: string}>(getFilterParams(Object.values(Filter)));
+    const [filterSettings, setFilterSettings] = useState<FilterParams>(getFilterParams(Object.values(Filter)));
 
     const onSearchButtonClick = () => {
         // @ts-ignore
@@ -84,7 +85,7 @@ const AdvancedSearchFormContainer: React.FC<{searchType: AdType}> = ({searchType
             .map(count => ({id: count, name: getBedroomsLabel(count)}));
     }
 
-    const updateParam = (name: Filter, value: any) => {
+    const updateParam = (name: Filter, value: string) => {
         if (value){
             setFilterSettings({...filterSettings, [name]: value});
         } else {

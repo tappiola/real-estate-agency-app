@@ -2,9 +2,10 @@ import clsx from "clsx";
 import './PageLink.style.scss';
 import {Link} from "react-router-dom";
 import React from "react";
+import {FilterParams} from "../../types";
 
 const PageLink : React.FC<{pageNumber: number, isCurrent: boolean, searchParams: object}> = ({pageNumber, isCurrent, searchParams}) => {
-    const getParams = (searchParams: any) => {
+    const getParams = (searchParams: FilterParams) => {
         const pageKey = 'page';
         const params = new URLSearchParams(searchParams.toString());
 

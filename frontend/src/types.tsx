@@ -1,3 +1,5 @@
+import {Filter} from "./constants";
+
 export type CityType = {
     id: number
     name: string
@@ -39,3 +41,5 @@ export type SelectOption = {
     value: string
     name: string
 }
+
+export type FilterParams = { [key in Filter]?: string};

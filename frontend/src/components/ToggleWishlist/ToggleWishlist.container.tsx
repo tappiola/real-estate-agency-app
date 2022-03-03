@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {MouseEvent, useState} from "react";
 import {addToWishlist, removeFromWishlist} from "../../queries";
 import {PropertyType} from "../../types";
 import ToggleWishlist from "./ToggleWishlist.component";
@@ -12,7 +12,7 @@ const ToggleWishlistContainer: React.FC<{property: PropertyType, inWishlist: boo
 
     const dispatch = useAppDispatch();
 
-    const onWishlistToggle = async (e: MouseEvent) => {
+    const onWishlistToggle: (e: MouseEvent<HTMLParagraphElement>) => Promise<void> = async (e: MouseEvent) => {
 
         e.stopPropagation();
 

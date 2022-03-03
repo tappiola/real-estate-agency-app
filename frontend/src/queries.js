@@ -68,8 +68,6 @@ export const searchProperties = (adType, searchParams) => {
 
     const {page = 1, city, propertyType, minPrice, maxPrice, minBeds, maxBeds} = params;
 
-    console.log(new URLSearchParams(searchParams).toString());
-
     const cityPart = city ? `, cityId: ${+city}` : '';
     const propertyTypePart = propertyType ?`, propertyTypeId: ${+propertyType}` : '';
     const minPricePart = minPrice ? `, minPrice: ${+minPrice}` : '';

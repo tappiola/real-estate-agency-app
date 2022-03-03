@@ -1,9 +1,9 @@
 import WishlistIcon from "../WishlistIcon";
-import React from "react";
+import React, {MouseEvent} from "react";
 import './ToggleWishlist.container';
 import './WishlistToggle.style.scss';
 
-const WishlistToggle : React.FC<{isInWishlist:boolean, onWishlistToggle: (e: any) => void}> = ({isInWishlist, onWishlistToggle}) => {
+const WishlistToggle : React.FC<{isInWishlist:boolean, onWishlistToggle: (e: MouseEvent<HTMLParagraphElement>) =>  Promise<void>}> = ({isInWishlist, onWishlistToggle}) => {
 
     return <div className='WishlistToggle-Container'>
         <p className='WishlistToggle-Heart' onClick={onWishlistToggle}>

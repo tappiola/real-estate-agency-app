@@ -1,7 +1,7 @@
 import React from "react";
 import ToggleWishlist from "../ToggleWishlist";
 import './PropertyCard.style.scss';
-import {PropertyType} from "../../types";
+import {PropertyType, Image} from "../../types";
 import {Carousel, CarouselItem} from "../Carousel";
 import {formatPrice, getFullTitle, sortByKey} from "../../util";
 import {AdType, IMAGE_PLACEHOLDER} from "../../constants";
@@ -22,7 +22,7 @@ const PropertyCardComponent: React.FC<{property: PropertyType, index: number, lo
             </CarouselItem>
         }
 
-        return sortByKey(images, 'position').slice(0, 15).map((image: any) => {
+        return sortByKey(images, 'position').slice(0, 15).map((image: Image) => {
             return <CarouselItem key={image.id}>
             <img
                 className='PropertyCard-CarouselImg'

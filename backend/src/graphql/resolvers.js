@@ -83,8 +83,6 @@ const getProperties = async (args, req) => {
   const minBedsCondition = minBeds ? {bedroomCount: {[Op.gte]: +minBeds}}: {};
   const maxBedsCondition = maxBeds && !maxBeds.endsWith('+') ? {bedroomCount: {[Op.lte]: maxBeds}}: {};
 
-  console.log(minBedsCondition, maxBedsCondition);
-
   const {id: typeId} = await Type.findOne({where: {name: adType}});
 
   const condition = {

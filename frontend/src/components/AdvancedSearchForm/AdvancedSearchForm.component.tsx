@@ -1,8 +1,8 @@
 import React from "react";
 import { Filter} from "../../constants";
-import {SelectOption} from "../../types";
+import {FilterParams, SelectOption} from "../../types";
 
-const AdvancedSearchForm: React.FC<{filterSettings: any,
+const AdvancedSearchForm: React.FC<{filterSettings: FilterParams,
     updateParam: (name: Filter, value: string) => void,
     getMinPriceOptions: () => SelectOption[],
     getMaxPriceOptions: () =>  SelectOption[],

@@ -29,7 +29,6 @@ const CarouselContainer = (
     const virtualSlidesCount = 2;
 
     const getLeftOffset = useCallback((slideIndex, moveBy = 0) => {
-        console.log({activeIndex, slideIndex});
         return `${carouselWidth * -(slideIndex + virtualSlidesCount / 2) + moveBy}px`;
     }, [carouselWidth]);
 
