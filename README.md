@@ -28,4 +28,4 @@ TODO:
 - (R) error handling for not authorized + wishlist (super ugly now)
 - (R) use library to construct gql requests
 - (R) where: {'$type.id$': 'rent'} doesn't work
-- 
+- (R) change User.js to *.ts (https://redux-toolkit.js.org/usage/usage-with-typescript)
