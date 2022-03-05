@@ -1,4 +1,4 @@
-import React, {FormEvent, useState} from "react";
+import {FormEvent, useState} from "react";
 import {ToastTypes} from "../../constants";
 import ContactUs from './ContactUs.component';
 import {enqueueToast} from "../../redux/Notifier";

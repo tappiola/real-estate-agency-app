@@ -1,46 +1,62 @@
-import {useEffect, useState} from "react";
-import {getWishlist} from "../../queries";
+import {useState} from "react";
 import Wishlist from "./Wishlist.component";
+import Loader from "../Loader";
 import {PropertyType} from "../../types";
 import {useAppSelector} from "../../redux/store";
 
+import {useQuery} from "@apollo/client";
+import {GET_WISHLIST} from "../../apollo/queries";
+
 const WishlistContainer = () => {
-    const [properties, setProperties] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState('');
-
     const { isAuthorized } = useAppSelector(({ user }) => user);
+    const {loading: wishlistLoading, error: gqlError, data: wishlistData} = useQuery(GET_WISHLIST)
+    const [properties, setProperties] = useState([]);
 
-    useEffect(() => {
-        const fetchWishlist = async () => {
-            try {
-                const response = await getWishlist();
-                const {data, errors = null} = await response.json();
+    console.log({wishlistLoading, gqlError, wishlistData});
 
-                if (errors) {
-                    setError(errors[0].message);
-                }
+    if(wishlistLoading){
+        return <Loader/>;
+    }
 
-                setProperties(data.getWishlist);
-                setIsLoading(false);
-            } catch (e){
-                console.log(e);
-                setIsLoading(false);
-            }
-        };
+    if (gqlError){
+        return <h4>Something went wrong...</h4>
+    }
 
-        fetchWishlist();
-    }, []);
+    // useEffect(() => {
+    //     const fetchWishlist = async () => {
+    //         try {
+    //             const response = await getWishlist();
+    //             const {data, errors = null} = await response.json();
+    //
+    //             console.log({data, errors});
+    //
+    //             if(errors){
+    //                 setError(errors[0].extensions?.code ?? errors[0].message);
+    //             }
+    //
+    //             setProperties(data.getWishlist);
+    //             setIsLoading(false);
+    //         } catch (e){
+    //             console.log(e);
+    //             setIsLoading(false);
+    //         }
+    //     };
+    //
+    //     fetchWishlist();
+    // }, []);
 
     const updatePropertiesList = (id: Number) => {
+        console.log({updatePropertiesList: properties});
         setProperties(properties.filter((p: PropertyType) => p.id !== id));
     }
 
-    if (error === 'User is not authenticated'){
-        return <h4>Please, login to access wishlist</h4>
-    }
-
-    return <Wishlist isLoading={isLoading} properties={properties} updatePropertiesList={updatePropertiesList} isAuthorized={isAuthorized}/>
+    return (
+        <Wishlist
+            properties={wishlistData.getWishlist}
+            updatePropertiesList={updatePropertiesList}
+            isAuthorized={isAuthorized}
+        />
+    )
 }
 
 export default WishlistContainer;
