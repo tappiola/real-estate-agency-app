@@ -43,3 +43,5 @@ export type SelectOption = {
 }
 
 export type FilterParams = { [key in Filter]?: string};
+
+export type LoginData = { email: string, password: string };
