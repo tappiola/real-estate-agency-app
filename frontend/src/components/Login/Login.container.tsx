@@ -1,7 +1,7 @@
 import {FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import Login from "./Login.component";
-import {useAppDispatch} from "../../redux/store";
+import {useAppDispatch} from "../../redux/hooks";
 import {loginUser} from "../../redux/User";
 
 const LoginContainer = () => {

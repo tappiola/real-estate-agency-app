@@ -1,7 +1,7 @@
 import {useQuery} from "@apollo/client";
 import Wishlist from "./Wishlist.component";
 import Loader from "../Loader";
-import {useAppSelector} from "../../redux/store";
+import {useAppSelector} from "../../redux/hooks";
 import {GET_WISHLIST} from "../../apollo/queries";
 
 const WishlistContainer = () => {

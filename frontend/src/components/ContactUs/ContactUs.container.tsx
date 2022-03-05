@@ -2,7 +2,7 @@ import {FormEvent, useState} from "react";
 import {ToastTypes} from "../../constants";
 import ContactUs from './ContactUs.component';
 import {enqueueToast} from "../../redux/Notifier";
-import {useAppDispatch} from "../../redux/store";
+import {useAppDispatch} from "../../redux/hooks";
 import {saveClientRequest} from "../../queries";
 
 const ContactUsContainer = () => {

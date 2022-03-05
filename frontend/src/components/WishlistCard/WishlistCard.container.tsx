@@ -3,7 +3,7 @@ import {PropertyType} from "../../types";
 import React, {MouseEvent} from "react";
 import WishlistCard from "./WishlistCard.component";
 import {useNavigate} from "react-router-dom";
-import {useAppDispatch} from "../../redux/store";
+import {useAppDispatch} from "../../redux/hooks";
 import {enqueueToast} from "../../redux/Notifier";
 import {ToastTypes} from "../../constants";
 import {useMutation} from "@apollo/client";

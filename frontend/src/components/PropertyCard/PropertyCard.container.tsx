@@ -3,7 +3,7 @@ import PropertyCard from "./PropertyCard.component";
 import {PropertyType} from "../../types";
 import React from "react";
 import {saveScrollPosition} from "../../redux/Navigation";
-import {useAppDispatch} from "../../redux/store";
+import {useAppDispatch} from "../../redux/hooks";
 
 const PropertyCardContainer: React.FC<{property: PropertyType, index: number}> = ({property, index}) => {
     const dispatch = useAppDispatch();

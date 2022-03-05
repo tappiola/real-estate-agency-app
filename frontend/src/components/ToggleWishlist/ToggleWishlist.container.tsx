@@ -2,7 +2,7 @@ import React, {MouseEvent, useState} from "react";
 import {addToWishlist, removeFromWishlist} from "../../queries";
 import {PropertyType} from "../../types";
 import ToggleWishlist from "./ToggleWishlist.component";
-import {useAppDispatch, useAppSelector} from "../../redux/store";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {enqueueToast} from "../../redux/Notifier";
 import {ToastTypes} from "../../constants";
 

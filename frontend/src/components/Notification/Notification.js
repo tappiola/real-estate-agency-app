@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 
 import { processToast } from '../../redux/Notifier';
 import {ToastQueueContext} from "../Toast";
-import {useAppDispatch, useAppSelector} from "../../redux/store";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 
 const Notification = () => {
   const { notifications } = useAppSelector(({ notifications }) => notifications);

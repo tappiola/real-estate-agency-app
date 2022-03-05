@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {searchProperties} from "../../queries";
 import {useSearchParams} from "react-router-dom";
 import SearchResults from "./SearchResults.component";
-import {useAppDispatch, useAppSelector} from '../../redux/store';
+import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 import {AdType, ToastTypes} from "../../constants";
 import {enqueueToast} from "../../redux/Notifier";
 

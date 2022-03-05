@@ -2,7 +2,7 @@ import React from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {AdType, ToastTypes} from "../../constants";
 import './Header.style.scss';
-import {useAppDispatch, useAppSelector} from "../../redux/store";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {logoutUser} from "../../redux/User";
 import Header from "./Header.component";
 import {enqueueToast} from "../../redux/Notifier";

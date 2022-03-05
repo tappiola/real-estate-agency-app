@@ -13,7 +13,7 @@ import {ToastQueueProvider} from '../Toast';
 import {AdType} from "../../constants";
 import HeaderComponent from "../Header";
 import { refreshTokenIfExpired } from '../../redux/User';
-import {useAppSelector} from "../../redux/store";
+import {useAppSelector} from "../../redux/hooks";
 import { ParallaxProvider } from 'react-scroll-parallax';
 
 const App = () => {

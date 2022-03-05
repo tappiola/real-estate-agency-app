@@ -4,7 +4,7 @@ import CitiesSelect from "./BaseSearchForm.component";
 import {fetchCities} from "../../queries";
 import {enqueueToast} from "../../redux/Notifier";
 import {AdType, ToastTypes} from "../../constants";
-import {useAppDispatch} from "../../redux/store";
+import {useAppDispatch} from "../../redux/hooks";
 import {useNavigate} from "react-router-dom";
 
 const BaseSearchFormContainer: React.FC = () => {
