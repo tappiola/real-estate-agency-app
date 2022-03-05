@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState, TouchEvent, MouseEvent} from 'react';
+import React, {useCallback, useEffect, useRef, useState, TouchEvent, MouseEvent, ReactChild} from 'react';
 import {CarouselComponent as Carousel} from "./Carousel.component";
 
 export const CarouselItem: React.FC = ({children}) => {
@@ -20,15 +20,15 @@ const CarouselContainer: React.FC<{
         automaticSlideInterval = 5000,
         ...style
     }) => {
-    const carouselRef = useRef<HTMLDivElement>();
-    const slidesRef = useRef<HTMLDivElement>();
+    const carouselRef = useRef<HTMLDivElement>(null);
+    const slidesRef = useRef<HTMLDivElement>(null);
     const [carouselWidth, setCarouselWidth] = useState(0);
     const [activeIndex, setActiveIndex] = useState(0);
     const [isMouseOver, setIsMouseOver] = useState(false);
 
     const [ touchStartX, setTouchStartX] = useState<number>(0);
 
-     useEffect(() => setCarouselWidth(carouselRef.current?.offsetWidth || 0), [carouselRef]);
+     useEffect(() => setCarouselWidth(carouselRef.current!.offsetWidth || 0), [carouselRef]);
 
      // In order to support infinite scroll, first and last slides are duplicated
     // We need to take these virtual slides into account when calculate offsets
@@ -50,7 +50,7 @@ const CarouselContainer: React.FC<{
     const removeAnimation = () => slidesRef.current!.style.transition = 'none';
 
     // @ts-ignore
-    const items = React.Children.toArray(children).filter(child => child.type === CarouselItem);
+    const items: ReactChild[] = React.Children.toArray(children).filter(child => child.type === CarouselItem);
 
     const changeSlide = useCallback(newSlideIndex => {
 
