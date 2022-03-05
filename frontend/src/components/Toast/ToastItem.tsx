@@ -18,8 +18,7 @@ const ToastItem: React.FC<{
 }) => {
   const toastRef = useRef<HTMLDivElement>(null);
 
-  // @ts-ignore
-  useEffect(() => setTimeout(() => onExpire(), duration), []);
+  useEffect(() => {setTimeout(() => onExpire(), duration)}, []);
 
   return (
     <div

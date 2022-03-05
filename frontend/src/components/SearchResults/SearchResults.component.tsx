@@ -12,7 +12,7 @@ const SearchResults: React.FC<{
     pages: number,
     activeItem: number,
     setActiveItem: (id: number) => void,
-    searchParams: object
+    searchParams: URLSearchParams
 }> = (
         {count,
             properties,
