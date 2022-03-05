@@ -13,7 +13,7 @@ TODO:
 - adjust carousel
 - add next / prev for pagination
 - add labels
-- edinburgh for sale
+- favicon
 
 - (R) refresh token
 - (R) imports without ../../

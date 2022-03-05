@@ -1,10 +1,10 @@
 export const HOST = 'http://localhost';
 
 export enum ToastTypes {
-    Success = 'Success',
-    Error = 'Error',
-    Warning = 'Warning',
-    Info = 'Info'
+    Success,
+    Error,
+    Warning,
+    Info
 }
 
 export const accessToken =
