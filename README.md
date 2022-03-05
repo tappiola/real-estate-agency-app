@@ -5,11 +5,10 @@ TODO:
 - inputs validation trim.niy.isempty
 - error handling middleware
 - eslint
-- move gql requests somewhere
 - add position storing on navigate back
 - don't rerequest on navigate back (check if query params match prev currency params)
 - react-content-loader for placeholders https://skeletonreact.com/
-- component / container + tsx
+- tsx
 - adjust carousel
 - add next / prev for pagination
 - add labels
