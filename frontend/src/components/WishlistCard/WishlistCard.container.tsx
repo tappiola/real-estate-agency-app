@@ -1,6 +1,6 @@
 import {removeFromWishlist} from "../../queries";
 import './WishlistCard.style.scss';
-import {PropertyType} from "../../types";
+import {Property} from "../../types";
 import React, {MouseEvent} from "react";
 import WishlistCard from "./WishlistCard.component";
 import {useNavigate} from "react-router-dom";
@@ -9,7 +9,7 @@ import {enqueueToast} from "../../redux/Notifier";
 import {ToastTypes} from "../../constants";
 
 const WishlistCardContainer: React.FC<{
-    property: PropertyType,
+    property: Property,
     updatePropertiesList: (id: Number) => void}
     > = ({
             property,

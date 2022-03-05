@@ -1,4 +1,4 @@
-import {PropertyType} from '../../types';
+import {Property as PropertyType} from '../../types';
 import React, {useEffect, useRef} from "react";
 import ToggleWishlist from "../ToggleWishlist";
 import MultiPreview from "../MultiPreview";
@@ -19,7 +19,6 @@ const Property: React.FC<{property: PropertyType, isInWishlist: boolean}> = ({pr
             <MultiPreview images={sortByKey(property.images, 'position')}/>
             <h1>{getFullTitle(property)}</h1>
             <div className='Property-Description' ref={descRef}>{property.title}</div>
-            {/*<p>{property.description}</p>*/}
             <ToggleWishlist property={property} inWishlist={isInWishlist}/>
         </div>
     );

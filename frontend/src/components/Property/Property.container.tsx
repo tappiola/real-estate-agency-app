@@ -3,7 +3,7 @@ import Property from "./Property.component";
 import {getProperty} from "../../queries";
 import Loader from "../Loader";
 import {useParams} from "react-router-dom";
-import {PropertyType} from "../../types";
+import {Property as PropertyType} from "../../types";
 
 const PropertyContainer = () => {
     const [property, setProperty] = useState<PropertyType | null>(null);

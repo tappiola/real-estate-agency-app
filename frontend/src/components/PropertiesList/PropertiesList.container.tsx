@@ -1,11 +1,15 @@
+  // @ts-ignore
   import inView from 'in-view';
   import React, {useEffect, useRef} from "react";
   import './PropertiesList.style.scss';
   import PropertiesLoader from "../PropertiesLoader/PropertiesLoader.component";
   import PropertiesList from "./PropertiesList.component";
+  import {Property} from "../../types";
 
-  const PropertiesListContainer = ({properties, activeItem, setActiveItem, isLoading}) => {
-    const listRef = useRef();
+  const PropertiesListContainer: React.FC<{
+    properties: Property[], activeItem: number, setActiveItem: (index: number) => void, isLoading: boolean
+  }> = ({properties, activeItem, setActiveItem, isLoading}) => {
+    const listRef = useRef<HTMLDivElement>(null);
 
     const scrollListener = () => {
       // Active list item is top-most fully-visible item
@@ -27,7 +31,7 @@
       if (listRef && listRef.current && properties.length) {
         listRef.current.scrollTop = document.getElementById(
             `property-${activeItem}`
-        ).offsetTop - 70;
+        )!.offsetTop - 70;
       }}, [listRef, activeItem]);
 
     if(isLoading){

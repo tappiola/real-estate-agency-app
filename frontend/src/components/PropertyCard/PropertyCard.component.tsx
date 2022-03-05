@@ -1,14 +1,14 @@
 import React from "react";
 import ToggleWishlist from "../ToggleWishlist";
 import './PropertyCard.style.scss';
-import {PropertyType, Image} from "../../types";
+import {Property, Image} from "../../types";
 import {Carousel, CarouselItem} from "../Carousel";
 import {formatPrice, getFullTitle, sortByKey} from "../../util";
 import {AdType, IMAGE_PLACEHOLDER} from "../../constants";
 import BedroomIconComponent from "../BedroomIcon";
 import BathroomIconComponent from "../BathroomIcon";
 
-const PropertyCardComponent: React.FC<{property: PropertyType, index: number, loadProperty: () => void}> = ({property, index, loadProperty}) => {
+const PropertyCardComponent: React.FC<{property: Property, index: number, loadProperty: () => void}> = ({property, index, loadProperty}) => {
     const loadCarouselImages = () => {
         const {images} = property;
 

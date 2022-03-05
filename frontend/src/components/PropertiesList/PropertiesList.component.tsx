@@ -1,9 +1,11 @@
-  import React from "react";
+  import React, {RefObject} from "react";
   import './PropertiesList.style.scss';
   import PropertyCardContainer from "../PropertyCard";
   import PropertiesLoader from "../PropertiesLoader/PropertiesLoader.component";
+  import {Property} from "../../types";
 
-  const PropertiesList = ({properties, isLoading, listRef, scrollListener}) => {
+  const PropertiesList: React.FC<{properties: Property[], isLoading: boolean, listRef: RefObject<HTMLDivElement>, scrollListener: () => void}>
+      = ({properties, isLoading, listRef, scrollListener}) => {
     if(isLoading){
       return <PropertiesLoader/>
     }

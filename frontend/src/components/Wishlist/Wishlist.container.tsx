@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {getWishlist} from "../../queries";
 import Wishlist from "./Wishlist.component";
-import {PropertyType} from "../../types";
+import {Property} from "../../types";
 import {useAppSelector} from "../../redux/store";
 
 const WishlistContainer = () => {
@@ -33,7 +33,7 @@ const WishlistContainer = () => {
     }, []);
 
     const updatePropertiesList = (id: Number) => {
-        setProperties(properties.filter((p: PropertyType) => p.id !== id));
+        setProperties(properties.filter((p: Property) => p.id !== id));
     }
 
     if (error === 'User is not authenticated'){

@@ -1,13 +1,13 @@
 import React from "react";
 import Pagination from "../Pagination";
-import {PropertyType} from "../../types";
+import {Property} from "../../types";
 import './SearchResults.style.scss';
 import PropertiesListContainer from "../PropertiesList";
 import MapContainer from "../Map";
 
 const SearchResults: React.FC<{
     count: number,
-    properties: PropertyType[],
+    properties: Property[],
     isLoading: boolean,
     pages: number,
     activeItem: number,
