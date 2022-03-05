@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GET_WISHLIST = gql`
-{
+query {
     getWishlist {
         id
         title
