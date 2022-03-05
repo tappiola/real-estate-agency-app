@@ -50,7 +50,7 @@ const CarouselContainer: React.FC<{
     const removeAnimation = () => slidesRef.current!.style.transition = 'none';
 
     const items: ReactChild[] = React.Children.toArray(children)
-        .map(child => (child as ReactElement))
+        .map(child => child as ReactElement)
         .filter(child => child.type === CarouselItem);
 
     const changeSlide = useCallback(newSlideIndex => {
