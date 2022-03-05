@@ -3,7 +3,7 @@ import {Property} from "../../types";
 import React from "react";
 
 const Wishlist: React.FC<{
-    properties: PropertyType[],
+    properties: Property[],
     isAuthorized: boolean,
     hasError: boolean,
 }> = ({properties, isAuthorized, hasError}) => {
