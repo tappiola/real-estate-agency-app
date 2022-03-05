@@ -1,4 +1,3 @@
-import {removeFromWishlist} from "../../queries";
 import './WishlistCard.style.scss';
 import {PropertyType} from "../../types";
 import React, {MouseEvent} from "react";
@@ -7,17 +6,19 @@ import {useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../../redux/store";
 import {enqueueToast} from "../../redux/Notifier";
 import {ToastTypes} from "../../constants";
+import {useMutation} from "@apollo/client";
+import {GET_WISHLIST, REMOVE_WISHLIST_ITEM} from "../../apollo/queries";
 
 const WishlistCardContainer: React.FC<{
     property: PropertyType,
-    updatePropertiesList: (id: Number) => void}
-    > = ({
-            property,
-            updatePropertiesList
-        }) => {
+}> = ({property}) => {
 
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
+
+    const [removeWishlistItem] = useMutation(REMOVE_WISHLIST_ITEM, {
+        refetchQueries: [GET_WISHLIST],
+    });
 
     const loadProperty = (event: MouseEvent<HTMLDivElement>) => {
         event.stopPropagation();
@@ -28,19 +29,15 @@ const WishlistCardContainer: React.FC<{
         e.stopPropagation();
 
         const {id} = property;
-        try {
-            await removeFromWishlist(id);
-            updatePropertiesList(id);
-
-            dispatch(enqueueToast({
-                message: 'Removed from wishlist',
-                type: ToastTypes.Success,
-            }));
-        }
-        catch (e){
-            console.log(e);
-        }
-
+        await removeWishlistItem({
+            variables: {propertyId: id},
+            onCompleted: data => {
+                dispatch(enqueueToast({
+                    message: 'Removed from wishlist',
+                    type: ToastTypes.Success,
+                }));
+            }
+        });
     }
 
     return (

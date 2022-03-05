@@ -4,11 +4,15 @@ import React from "react";
 
 const Wishlist: React.FC<{
     properties: PropertyType[],
-    updatePropertiesList: (id: Number) => void,
-    isAuthorized: boolean
-}> = ({properties, updatePropertiesList, isAuthorized}) => {
+    isAuthorized: boolean,
+    hasError: boolean,
+}> = ({properties, isAuthorized, hasError}) => {
     if (!isAuthorized){
         return <h4>Please, login to work with wishlist</h4>
+    }
+
+    if(hasError){
+        return <h4>Wishlist fetching failed...</h4>
     }
 
     if(!properties.length){
@@ -17,7 +21,7 @@ const Wishlist: React.FC<{
 
     return <>
         <h1>Wishlist</h1>
-        {properties.map((p: PropertyType) => <WishlistCard key={p.id} property = {p} updatePropertiesList={ updatePropertiesList}/>)}
+        {properties.map((p: PropertyType) => <WishlistCard key={p.id} property = {p} />)}
     </>
 }
 

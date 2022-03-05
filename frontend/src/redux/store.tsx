@@ -8,7 +8,6 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 
 // @ts-ignore
 const errorHandler = (store) => (next) => (action) => {
-  console.log({actionFromErrorHandler: action});
 
   if (action?.error?.message === 'Forbidden') {
     store.dispatch(enqueueToast({

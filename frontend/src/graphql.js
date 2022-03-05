@@ -6,7 +6,6 @@ export const getToken = () => {
     if(authToken) {
         try {
             const decodedToken = jwt_decode(authToken);
-            console.log({decodedToken});
 
             // If token has expired, there is no sense to pass it to server
             // Ideally, we should have token refresh flow here

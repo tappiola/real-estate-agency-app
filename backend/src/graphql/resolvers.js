@@ -188,6 +188,10 @@ const getWishlist = async (args, req) => {
   const data =  await UserWishlist.findAll( {where: {userId: req.userId}});
   const propertyIds = data.map(({propertyId}) => propertyId);
 
+  if(!propertyIds.length){
+    return [];
+  }
+
   const wishlistProperties = Property.findAll({where: {id: {[Op.or]: propertyIds}}, include: [{
       model: City,
       as: 'city'

@@ -11,3 +11,11 @@ export const GET_WISHLIST = gql`
     }
 }
 `;
+
+export const REMOVE_WISHLIST_ITEM = gql`
+mutation RemoveFromWishlist($propertyId: String!) {
+    removeFromWishlist(propertyId: $propertyId) {
+        success
+    }
+}
+`;

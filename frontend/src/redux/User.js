@@ -37,11 +37,6 @@ export const logoutUser = createAsyncThunk(
   'currentUser/logoutUser',
   async (arg, { dispatch }) => {
       localStorage.removeItem('token');
-
-      dispatch(enqueueToast({
-          message: 'Logout successful',
-          type: ToastTypes.Success,
-      }));
   },
 );
 

@@ -1,10 +1,11 @@
 import React from "react";
 import {useLocation, useNavigate} from "react-router-dom";
-import {AdType} from "../../constants";
+import {AdType, ToastTypes} from "../../constants";
 import './Header.style.scss';
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {logoutUser} from "../../redux/User";
 import Header from "./Header.component";
+import {enqueueToast} from "../../redux/Notifier";
 
 const HeaderContainer = () => {
     const { pathname } = useLocation();
@@ -17,8 +18,13 @@ const HeaderContainer = () => {
         navigate('/login');
     }
 
-    const onLogoutClick = () => {
-        dispatch(logoutUser());
+    const onLogoutClick = async () => {
+        await dispatch(logoutUser());
+
+        dispatch(enqueueToast({
+            message: 'Logout successful',
+            type: ToastTypes.Success,
+        }));
     }
     const onWishlistIconClick = () => {
         navigate('/favorites');
