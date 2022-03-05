@@ -36,7 +36,7 @@ const PropertyCardComponent: React.FC<{property: PropertyType, index: number, lo
     return (
             <div className="PropertyCard" id={`property-${index}`} onClick={loadProperty}>
                 <div className='PropertyCard-Carousel'>
-                <Carousel width="485px" height="100%" infinite={false} autoplay={false}>
+                <Carousel width="485px" height="100%" infinite={true} autoplay={false}>
                     {loadCarouselImages()}
                 </Carousel>
                 </div>

@@ -16,7 +16,17 @@
         }
     }
 
+    &_isClicked {
+        animation: pulse 1s 0s;
+    }
+
     height: 24px;
     min-width: 24px;
     cursor: pointer;
+}
+
+@keyframes pulse {
+    0% { -webkit-transform: scale(1); -webkit-animation-timing-function: ease-out; }
+    50% { -webkit-transform: scale(1.2); -webkit-animation-timing-function: ease-in; }
+    100% { -webkit-transform: scale(1); -webkit-animation-timing-function: ease-out; }
 }

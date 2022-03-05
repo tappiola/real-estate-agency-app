@@ -1,8 +1,6 @@
 import React from 'react';
 import  './Carousel.style.scss';
 import clsx from 'clsx';
-import ChevronIcon from "../ChevronIcon";
-import {Direction} from "../ChevronIcon/ChevronIcon.config";
 
 export const CarouselComponent = (
     {
@@ -42,7 +40,6 @@ export const CarouselComponent = (
             })}
         >
             <i className="fa fa-angle-left"/>
-            {/*<ChevronIcon direction={Direction.Left}/>*/}
         </div>
 
 

@@ -9,6 +9,7 @@ import {ToastTypes} from "../../constants";
 const ToggleWishlistContainer: React.FC<{property: PropertyType, inWishlist: boolean}> = ({property, inWishlist}) => {
     const [isInWishlist, setIsInWishlist] = useState(inWishlist);
     const { isAuthorized } = useAppSelector(({ user }) => user);
+    const [isClicked, setIsClicked] = useState<boolean>(false);
 
     const dispatch = useAppDispatch();
 
@@ -30,7 +31,8 @@ const ToggleWishlistContainer: React.FC<{property: PropertyType, inWishlist: boo
 
         const {id} = property;
 
-        const resp = isInWishlist ? await removeFromWishlist(id): await addToWishlist(id);
+        const resp = isInWishlist ? await removeFromWishlist(id) : await addToWishlist(id);
+        setIsClicked(!isClicked);
 
         dispatch(enqueueToast({
             message: isInWishlist ? 'Removed from wishlist' : 'Added to wishlist',
@@ -45,7 +47,7 @@ const ToggleWishlistContainer: React.FC<{property: PropertyType, inWishlist: boo
         }
     }
 
-    return <ToggleWishlist onWishlistToggle={onWishlistToggle} isInWishlist={isInWishlist}/>;
+    return <ToggleWishlist onWishlistToggle={onWishlistToggle} isInWishlist={isInWishlist} isClicked={isClicked}/>;
 }
 
 export default ToggleWishlistContainer;

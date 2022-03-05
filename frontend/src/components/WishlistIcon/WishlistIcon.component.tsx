@@ -3,10 +3,10 @@ import clsx from "clsx";
 import './WishlistIcon.style.scss';
 import React from "react";
 
-export const WishlistIcon: React.FC<{isActive?: boolean}> = ({isActive = false}) => {
+export const WishlistIcon: React.FC<{isActive?: boolean,  isClicked?: boolean}> = ({isActive = false,  isClicked}) => {
         return (
             <svg
-              className={clsx('WishlistIcon', isActive && 'WishlistIcon_isActive')}
+              className={clsx('WishlistIcon', isActive && 'WishlistIcon_isActive', isClicked && 'WishlistIcon_isClicked')}
               width="21"
               height="19"
               viewBox="0 0 21 19"
