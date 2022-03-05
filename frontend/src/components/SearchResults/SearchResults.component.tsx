@@ -12,16 +12,8 @@ const SearchResults: React.FC<{
     pages: number,
     activeItem: number,
     setActiveItem: (id: number) => void,
-    searchParams: object
-}> = (
-        {count,
-            properties,
-            isLoading,
-            pages,
-            activeItem,
-            setActiveItem,
-            searchParams}) => {
-
+    searchParams: URLSearchParams
+}> = ({count, properties, isLoading, pages, activeItem, setActiveItem, searchParams}) => {
     const renderMap = () => {
         if (!properties.length){
             return null;

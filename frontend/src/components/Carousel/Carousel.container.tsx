@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState, TouchEvent, MouseEvent, ReactChild} from 'react';
+import React, {useCallback, useEffect, useRef, useState, TouchEvent, MouseEvent, ReactChild, ReactElement} from 'react';
 import {CarouselComponent as Carousel} from "./Carousel.component";
 
 export const CarouselItem: React.FC = ({children}) => {
@@ -49,8 +49,9 @@ const CarouselContainer: React.FC<{
     [slideDuration]);
     const removeAnimation = () => slidesRef.current!.style.transition = 'none';
 
-    // @ts-ignore
-    const items: ReactChild[] = React.Children.toArray(children).filter(child => child.type === CarouselItem);
+    const items: ReactChild[] = React.Children.toArray(children)
+        .map(child => (child as ReactElement))
+        .filter(child => child.type === CarouselItem);
 
     const changeSlide = useCallback(newSlideIndex => {
 

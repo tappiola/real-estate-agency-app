@@ -7,8 +7,13 @@ import './ToastItem.style.scss';
 import {Toast} from "../../types";
 import {ToastTypes} from "../../constants";
 
-// @ts-ignore
-export const ToastQueueContext = React.createContext();
+interface IToastQueueContext {
+  addToast: (message: string, type: ToastTypes, duration: number) => void,
+  remove: (id: number) => void,
+  toasts: Toast[],
+}
+
+export const ToastQueueContext = React.createContext({} as IToastQueueContext);
 const { Provider } = ToastQueueContext;
 
 const DEFAULT_DURATION = 3000;

@@ -18,7 +18,6 @@ const HeaderContainer = () => {
     }
 
     const onLogoutClick = async () => {
-        // @ts-ignore
         await dispatch(logoutUser());
 
         dispatch(enqueueToast({
