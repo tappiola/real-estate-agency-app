@@ -1,5 +1,5 @@
 import WishlistCard from "../WishlistCard";
-import {PropertyType} from "../../types";
+import {Property} from "../../types";
 import React from "react";
 
 const Wishlist: React.FC<{
@@ -21,7 +21,7 @@ const Wishlist: React.FC<{
 
     return <>
         <h1>Wishlist</h1>
-        {properties.map((p: PropertyType) => <WishlistCard key={p.id} property = {p} />)}
+        {properties.map((p: Property) => <WishlistCard key={p.id} property = {p} />)}
     </>
 }
 

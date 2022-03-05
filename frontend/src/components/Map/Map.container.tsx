@@ -1,17 +1,24 @@
-import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
+import mapboxgl, {LngLatLike} from 'mapbox-gl';
 import {accessToken, IMAGE_PLACEHOLDER} from '../../constants';
 import './Map.style.scss';
 import {useEffect, useState} from "react";
 import {getHouseTitle} from "../../util";
+import {Property} from "../../types";
+import {Feature, Point} from "geojson";
+import React from "react";
 
-const MapContainer = ({properties, activeItem, setActiveItem}) => {
+const MapContainer : React.FC<{
+  properties: Property[],
+  activeItem: number,
+  setActiveItem:(index: number) => void
+}> = ({properties, activeItem, setActiveItem}) => {
 
-  const [map, setMap] = useState();
+  const [map, setMap] = useState<mapboxgl.Map>();
 
-  const getCoordinates = (item) => ([item.longitude, item.latitude]);
+  const getCoordinates = (item: Property) => ([item.longitude, item.latitude] as LngLatLike);
 
-  const generateFeature = ({ bedroomCount, images, longitude, latitude, propertyType: {name} = {} }, index) => {
-
+  const generateFeature = (property: Property, index: number) => {
+    const { bedroomCount, images, longitude, latitude, propertyType: {name} = {} } = property;
     const heading = getHouseTitle(bedroomCount, name);
 
     return {
@@ -24,10 +31,10 @@ const MapContainer = ({properties, activeItem, setActiveItem}) => {
         type: 'Point',
         coordinates: [longitude, latitude]
       }
-    };
+    } as Feature<Point>;
   }
 
-  useEffect(async () => {
+  useEffect(() => {
     mapboxgl.accessToken = accessToken;
 
     // Create the map
@@ -58,18 +65,22 @@ const MapContainer = ({properties, activeItem, setActiveItem}) => {
       });
 
       // When clicking on a map marker
-      mapRef.on('click', 'places', function({ features }) {
-        const match = features[0];
+      mapRef.on('click', 'places', ({ features }) => {
+        if(!features){
+          return;
+        }
+
+        const match = features[0] as Feature<Point>;
         const coordinates = match.geometry.coordinates.slice();
 
         // Show popup
         new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(match.properties.description)
+            .setLngLat(coordinates as LngLatLike)
+            .setHTML(match.properties?.description)
             .addTo(mapRef);
 
         // Set new active list item
-        setActiveItem(match.properties.id);
+        setActiveItem(match.properties?.id);
       });
 
       // Change the cursor to a pointer when the mouse is over the places layer.

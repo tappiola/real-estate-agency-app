@@ -21,7 +21,7 @@ export type Image = {
     link: string
 }
 
-export type PropertyType = {
+export type Property = {
     id: number,
     title: string
     description: string
@@ -33,7 +33,9 @@ export type PropertyType = {
     bedroomCount: number,
     bathroomCount: number,
     address: string
-    type: Type
+    type: Type,
+    longitude: number,
+    latitude: number
 };
 
 export type SelectOption = {

@@ -1,12 +1,12 @@
 import React, {MouseEvent, useState} from "react";
 import {addToWishlist, removeFromWishlist} from "../../queries";
-import {PropertyType} from "../../types";
+import {Property} from "../../types";
 import ToggleWishlist from "./ToggleWishlist.component";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {enqueueToast} from "../../redux/notifier";
 import {ToastTypes} from "../../constants";
 
-const ToggleWishlistContainer: React.FC<{property: PropertyType, inWishlist: boolean}> = ({property, inWishlist}) => {
+const ToggleWishlistContainer: React.FC<{property: Property, inWishlist: boolean}> = ({property, inWishlist}) => {
     const [isInWishlist, setIsInWishlist] = useState(inWishlist);
     const { isAuthorized } = useAppSelector(({ user }) => user);
     const [isClicked, setIsClicked] = useState<boolean>(false);

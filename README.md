@@ -1,3 +1,6 @@
+Create backup: `docker exec real-estate-agency-db-1 sh -c 'exec mysqldump -uadmin -pbigsnorlax flats' > ./flats-dump.sql`
+Restore backup: `docker exec -i real-estate-agency-db-1 sh -c 'exec mysql -uadmin -pbigsnorlax flats' < ./flats-dump.sql`
+
 TODO:
 
 - not use volumes on prod
@@ -26,3 +29,5 @@ TODO:
 - (R) use library to construct gql requests
 - (R) where: {'$type.id$': 'rent'} doesn't work
 - (R) change User.js to *.ts (https://redux-toolkit.js.org/usage/usage-with-typescript)
+- (R) replace croissant
+- (R) typings for in-view

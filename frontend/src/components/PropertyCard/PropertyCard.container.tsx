@@ -1,11 +1,11 @@
 import {useNavigate} from "react-router-dom";
 import PropertyCard from "./PropertyCard.component";
-import {PropertyType} from "../../types";
+import {Property} from "../../types";
 import React from "react";
 import {saveScrollPosition} from "../../redux/navigation";
 import {useAppDispatch} from "../../redux/hooks";
 
-const PropertyCardContainer: React.FC<{property: PropertyType, index: number}> = ({property, index}) => {
+const PropertyCardContainer: React.FC<{property: Property, index: number}> = ({property, index}) => {
     const dispatch = useAppDispatch();
     let navigate = useNavigate();
 

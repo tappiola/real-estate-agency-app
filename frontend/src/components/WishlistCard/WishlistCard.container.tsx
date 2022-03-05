@@ -1,5 +1,5 @@
 import './WishlistCard.style.scss';
-import {PropertyType} from "../../types";
+import {Property} from "../../types";
 import React, {MouseEvent} from "react";
 import WishlistCard from "./WishlistCard.component";
 import {useNavigate} from "react-router-dom";
@@ -10,7 +10,7 @@ import {useMutation} from "@apollo/client";
 import {GET_WISHLIST, REMOVE_WISHLIST_ITEM} from "../../apollo/queries";
 
 const WishlistCardContainer: React.FC<{
-    property: PropertyType,
+    property: Property,
 }> = ({property}) => {
 
     const navigate = useNavigate();
