@@ -1,7 +1,7 @@
 import CitiesSelect from "../CitiesSelect";
 import React, {useState} from "react";
 import {useNavigate, useSearchParams} from "react-router-dom";
-import {enqueueToast} from "../../redux/Notifier";
+import {enqueueToast} from "../../redux/notifier";
 import {AdType, Filter, ToastTypes} from "../../constants";
 import {useAppDispatch} from "../../redux/hooks";
 import PropertyTypesSelect from "../PropertyTypesSelect/PropertyTypesSelect.container";

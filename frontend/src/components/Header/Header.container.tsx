@@ -2,9 +2,9 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {AdType, ToastTypes} from "../../constants";
 import './Header.style.scss';
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {logoutUser} from "../../redux/User";
+import {logoutUser} from "../../redux/user";
 import Header from "./Header.component";
-import {enqueueToast} from "../../redux/Notifier";
+import {enqueueToast} from "../../redux/notifier";
 
 const HeaderContainer = () => {
     const { pathname } = useLocation();

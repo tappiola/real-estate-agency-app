@@ -4,7 +4,7 @@ import React, {MouseEvent} from "react";
 import WishlistCard from "./WishlistCard.component";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../../redux/hooks";
-import {enqueueToast} from "../../redux/Notifier";
+import {enqueueToast} from "../../redux/notifier";
 import {ToastTypes} from "../../constants";
 import {useMutation} from "@apollo/client";
 import {GET_WISHLIST, REMOVE_WISHLIST_ITEM} from "../../apollo/queries";

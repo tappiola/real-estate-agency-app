@@ -3,7 +3,7 @@ import {addToWishlist, removeFromWishlist} from "../../queries";
 import {PropertyType} from "../../types";
 import ToggleWishlist from "./ToggleWishlist.component";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {enqueueToast} from "../../redux/Notifier";
+import {enqueueToast} from "../../redux/notifier";
 import {ToastTypes} from "../../constants";
 
 const ToggleWishlistContainer: React.FC<{property: PropertyType, inWishlist: boolean}> = ({property, inWishlist}) => {

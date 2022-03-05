@@ -4,7 +4,7 @@ import {useSearchParams} from "react-router-dom";
 import SearchResults from "./SearchResults.component";
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 import {AdType, ToastTypes} from "../../constants";
-import {enqueueToast} from "../../redux/Notifier";
+import {enqueueToast} from "../../redux/notifier";
 
 const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
     const [properties, setProperties] = useState([]);

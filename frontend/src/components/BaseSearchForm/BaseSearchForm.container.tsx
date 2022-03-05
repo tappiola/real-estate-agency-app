@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {CityType} from "../../types";
 import CitiesSelect from "./BaseSearchForm.component";
 import {fetchCities} from "../../queries";
-import {enqueueToast} from "../../redux/Notifier";
+import {enqueueToast} from "../../redux/notifier";
 import {AdType, ToastTypes} from "../../constants";
 import {useAppDispatch} from "../../redux/hooks";
 import {useNavigate} from "react-router-dom";

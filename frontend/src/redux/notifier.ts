@@ -1,6 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {ToastTypes} from "../constants";
 
-const initialState = {
+type Notification = {
+  message: string;
+  type: ToastTypes
+}
+
+interface NotifierState {
+  notifications: Notification[],
+}
+
+const initialState: NotifierState = {
   notifications: [],
 };
 
@@ -8,7 +18,7 @@ const notifier = createSlice({
   name: 'notifications',
   initialState,
   reducers: {
-    enqueueToast(state, action) {
+    enqueueToast(state, action: PayloadAction<Notification>) {
       state.notifications.push(action.payload);
     },
     processToast(state) {

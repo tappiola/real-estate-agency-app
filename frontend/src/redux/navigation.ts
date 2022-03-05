@@ -1,6 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-const initialState = {
+interface NavigationState {
+  scrollOffset: number,
+}
+
+const initialState: NavigationState = {
   scrollOffset: 0,
 };
 
@@ -8,7 +12,7 @@ const navigation = createSlice({
   name: 'navigation',
   initialState,
   reducers: {
-    saveScrollPosition(state, action) {
+    saveScrollPosition(state, action: PayloadAction<number>) {
       state.scrollOffset = action.payload;
     }
   },

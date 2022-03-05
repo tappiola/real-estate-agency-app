@@ -1,7 +1,7 @@
 import {FormEvent, useState} from "react";
 import {ToastTypes} from "../../constants";
 import ContactUs from './ContactUs.component';
-import {enqueueToast} from "../../redux/Notifier";
+import {enqueueToast} from "../../redux/notifier";
 import {useAppDispatch} from "../../redux/hooks";
 import {saveClientRequest} from "../../queries";
 

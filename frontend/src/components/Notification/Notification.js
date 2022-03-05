@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 
-import { processToast } from '../../redux/Notifier';
+import { processToast } from '../../redux/notifier';
 import {ToastQueueContext} from "../Toast";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 
