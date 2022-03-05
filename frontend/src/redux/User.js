@@ -7,7 +7,8 @@ import {getSavedToken} from '../util';
 import {login} from "../queries";
 
 const initialState = {
-  isAuthorized: !!getSavedToken(),
+    authToken: getSavedToken(),
+    isAuthorized: !!getSavedToken(),
 };
 
 export const loginUser = createAsyncThunk(
@@ -69,6 +70,7 @@ const user = createSlice({
     [loginUser.fulfilled]: (state, action) => {
       const { data: {login: {token}} } = action.payload || {};
       state.isAuthorized = true;
+      state.authToken = token;
       localStorage.setItem('token', token);
     },
     [loginUser.rejected]: (state) => {
@@ -76,6 +78,7 @@ const user = createSlice({
     },
     [logoutUser.fulfilled]: (state) => {
       state.isAuthorized = false;
+      state.authToken = null;
     },
   },
 });

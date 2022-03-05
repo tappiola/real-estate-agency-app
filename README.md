@@ -31,4 +31,13 @@ TODO:
 - (R) error handling for not authorized + wishlist (super ugly now)
 - (R) use library to construct gql requests
 - (R) where: {'$type.id$': 'rent'} doesn't work
-- 
+
+How auth should work:
+- Tokens are generated during login for 24 hours and stored in localstorage
+- No token refresh flow
+- There are mix of private and public endpoints
+- If token expired, FRONTEND should detect it before making request, remove token from local storage and redirect user to Home Page
+- /logout endpoint removes token from local storage and redirects to home page
+- Any occurrence of 401 for graphql request should trigger logout process
+- App has query to return current user data. It shouldn't return 401 even if user is not authenticated
+- User data is stored in the redux
