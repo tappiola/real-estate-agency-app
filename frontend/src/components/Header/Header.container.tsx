@@ -1,4 +1,3 @@
-import React from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {AdType, ToastTypes} from "../../constants";
 import './Header.style.scss';
@@ -19,6 +18,7 @@ const HeaderContainer = () => {
     }
 
     const onLogoutClick = async () => {
+        // @ts-ignore
         await dispatch(logoutUser());
 
         dispatch(enqueueToast({

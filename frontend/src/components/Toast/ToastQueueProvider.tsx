@@ -2,25 +2,28 @@ import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import ToastItem from './ToastItem.jsx';
+import ToastItem from './ToastItem';
 import './ToastItem.style.scss';
+import {Toast} from "../../types";
+import {ToastTypes} from "../../constants";
 
+// @ts-ignore
 export const ToastQueueContext = React.createContext();
 const { Provider } = ToastQueueContext;
 
 const DEFAULT_DURATION = 3000;
 
-function ToastQueueProvider({ children }) {
-  const [toasts, setToasts] = useState([]);
+const ToastQueueProvider: React.FC = ({ children }) => {
+  const [toasts, setToasts] = useState<Toast[]>([]);
 
-  const addToast = (message, type = 'default', duration = DEFAULT_DURATION) => {
+  const addToast = (message: string, type: ToastTypes, duration = DEFAULT_DURATION) => {
     const toast = {
-      id: Date.now(), message, type, duration,
+      id: Date.now(), message, type, duration
     };
-    setToasts((currentToasts) => [toast, ...currentToasts]);
+    setToasts([toast, ...toasts]);
   };
 
-  const handleRemove = (id) => {
+  const handleRemove = (id: number) => {
     setToasts((currentToasts) => [...currentToasts.filter((toast) => toast.id !== id)]);
   };
 

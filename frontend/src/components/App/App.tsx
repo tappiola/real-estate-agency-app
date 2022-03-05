@@ -30,7 +30,7 @@ const App = () => {
                     <main>
                     <Routes>
                             <Route path="/" element={<ParallaxProvider><HomePage /></ParallaxProvider>}/>
-                            <Route path="/register" element={<Register />}/>
+                            {!isAuthorized && <Route path="/register" element={<Register />}/>}
                             {!isAuthorized && <Route path="/login" element={<Login />}/>}
                             <Route path="/favorites" element={<Wishlist />}/>
                             <Route path="/rent" element={<SearchResults adType={AdType.Rent}/>}/>

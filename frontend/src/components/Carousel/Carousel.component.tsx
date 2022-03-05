@@ -1,10 +1,26 @@
-import React from 'react';
+import React, {ReactChild, RefObject, TouchEvent, MouseEvent} from 'react';
 import  './Carousel.style.scss';
 import clsx from 'clsx';
-import ChevronIcon from "../ChevronIcon";
-import {Direction} from "../ChevronIcon/ChevronIcon.config";
 
-export const CarouselComponent = (
+export const CarouselComponent: React.FC<{
+    handleTouchEnd: (e: TouchEvent<HTMLDivElement>) => void,
+    handleTouchStart:  (e: TouchEvent<HTMLDivElement>) => void,
+    handleTouchMove: (e: TouchEvent<HTMLDivElement>) => void,
+    toNextSlide: (e?: MouseEvent<HTMLDivElement>) => void,
+    toPrevSlide: (e?: MouseEvent<HTMLDivElement>) => void,
+    changeSlide: (index: number) => void,
+    activeIndex: number,
+    getLeftOffset: (slideIndex: number, moveBy?: number) => string,
+    setIsMouseOver: (status: boolean) => void,
+    getCarouselWidth: () => number,
+    getIsSlideActive: (index: number) => boolean,
+    getIsNextArrowDisabled: () => boolean,
+    getIsPrevArrowDisabled: () => boolean,
+    style: object,
+    items: ReactChild[],
+    carouselRef : RefObject<HTMLDivElement>,
+    slidesRef: RefObject<HTMLDivElement>
+}> = (
     {
         handleTouchEnd,
         handleTouchStart,
@@ -42,7 +58,6 @@ export const CarouselComponent = (
             })}
         >
             <i className="fa fa-angle-left"/>
-            {/*<ChevronIcon direction={Direction.Left}/>*/}
         </div>
 
 

@@ -1,3 +1,3 @@
-import ToastQueueProvider, { ToastQueueContext } from './ToastQueueProvider.jsx';
+import ToastQueueProvider, { ToastQueueContext } from './ToastQueueProvider';
 
 export { ToastQueueProvider, ToastQueueContext };
