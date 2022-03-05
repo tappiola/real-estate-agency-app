@@ -4,7 +4,14 @@ import AdvancedSearchFormComponent from "../AdvancedSearchForm";
 import './Header.style.scss';
 import WishlistIcon from "../WishlistIcon";
 
-const HeaderComponent = ({onLogoutClick, onLoginClick, isRentSearch, isSaleSearch, isAuthorized, onWishlistIconClick}) => {
+const HeaderComponent: React.FC<{
+    onLogoutClick: () => void,
+    onLoginClick: () => void,
+    isRentSearch: boolean,
+    isSaleSearch: boolean,
+    isAuthorized: boolean,
+    onWishlistIconClick: () => void
+}> = ({onLogoutClick, onLoginClick, isRentSearch, isSaleSearch, isAuthorized, onWishlistIconClick}) => {
     const renderChildren = () => {
         if (isRentSearch)
             return <AdvancedSearchFormComponent searchType={AdType.Rent}/>;

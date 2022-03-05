@@ -1,4 +1,3 @@
-import React from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {AdType} from "../../constants";
 import './Header.style.scss';
@@ -18,6 +17,7 @@ const HeaderContainer = () => {
     }
 
     const onLogoutClick = () => {
+        // @ts-ignore
         dispatch(logoutUser());
     }
     const onWishlistIconClick = () => {

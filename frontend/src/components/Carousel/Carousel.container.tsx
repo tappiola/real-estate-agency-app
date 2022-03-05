@@ -96,7 +96,6 @@ const CarouselContainer: React.FC<{
     useEffect(() => {
         if (autoplay && !isMouseOver) {
             const id = setTimeout(() => {
-                // @ts-ignore
                 toNextSlide();
             }, automaticSlideInterval);
 

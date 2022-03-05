@@ -26,7 +26,6 @@ const AdvancedSearchFormContainer: React.FC<{searchType: AdType}> = ({searchType
     const [filterSettings, setFilterSettings] = useState<FilterParams>(getFilterParams(Object.values(Filter)));
 
     const onSearchButtonClick = () => {
-        // @ts-ignore
         if (!filterSettings[Filter.City]){
             dispatch(enqueueToast({
                 message: 'City is required',

@@ -1,4 +1,4 @@
-import {Filter} from "./constants";
+import {Filter, ToastTypes} from "./constants";
 
 export type CityType = {
     id: number
@@ -44,4 +44,9 @@ export type SelectOption = {
 
 export type FilterParams = { [key in Filter]?: string};
 
-export type LoginData = { email: string, password: string };
+export type Toast = {
+    id: number,
+    message: string,
+    type: ToastTypes,
+    duration: number
+}
