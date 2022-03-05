@@ -1,16 +1,18 @@
+import {Filter} from "./constants";
+
 export type CityType = {
     id: number
-    name: String
+    name: string
 }
 
 export type TypeOfPropertyType = {
     id: number
-    name: String
+    name: string
 }
 
 export type Type = {
     id: number
-    name: String
+    name: string
 }
 
 export type Image = {
@@ -21,8 +23,8 @@ export type Image = {
 
 export type PropertyType = {
     id: number,
-    title: String
-    description: String
+    title: string
+    description: string
     city: CityType
     images: Image[]
     propertyType: TypeOfPropertyType,
@@ -33,3 +35,13 @@ export type PropertyType = {
     address: string
     type: Type
 };
+
+export type SelectOption = {
+    id: number,
+    value: string
+    name: string
+}
+
+export type FilterParams = { [key in Filter]?: string};
+
+export type LoginData = { email: string, password: string };

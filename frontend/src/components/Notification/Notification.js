@@ -4,7 +4,7 @@ import { processToast } from '../../redux/Notifier';
 import {ToastQueueContext} from "../Toast";
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 
-function Notification() {
+const Notification = () => {
   const { notifications } = useAppSelector(({ notifications }) => notifications);
   const dispatch = useAppDispatch();
   const onToastProcess = () => dispatch(processToast());

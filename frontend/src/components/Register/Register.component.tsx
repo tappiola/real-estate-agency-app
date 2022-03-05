@@ -1,5 +1,6 @@
 import React, {FormEvent} from "react";
-
+import {Link} from "react-router-dom";
+import './Register.style.scss';
 
 const Register: React.FC<{
     signupHandler: (event: FormEvent<HTMLFormElement>) => void,
@@ -11,11 +12,12 @@ const Register: React.FC<{
     setPassword: (password: string) => void
 }> = ({signupHandler, name, setName, email, setEmail, password, setPassword}) => {
 
-    return <form onSubmit={signupHandler}>
+    return <form className="Register" onSubmit={signupHandler}>
         <input placeholder="Name" value={name} onChange={e => setName(e.target.value)}/>
         <input placeholder="Email" type="email" value={email} onChange={e => setEmail(e.target.value)}/>
         <input placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
         <button type="submit">Register</button>
+        <p className="AlreadyRegistered">Already registered? <Link className="LoginLink" to='/login'>Login</Link></p>
     </form>
 };
 

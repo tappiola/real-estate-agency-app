@@ -1,4 +1,5 @@
 import {sendGraphqlRequest} from "./graphql";
+import {MAX_BEDROOMS} from "./components/AdvancedSearchForm/AdvancedSearchForm.config";
 
 export const addToWishlist = (id) => {
     const graphqlQuery  = {
@@ -65,17 +66,19 @@ export const searchProperties = (adType, searchParams) => {
         params = ({...params, [key]: value});
     }
 
-    const {page = 1, city, propertyType} = params;
+    const {page = 1, city, propertyType, minPrice, maxPrice, minBeds, maxBeds} = params;
 
-    console.log(new URLSearchParams(searchParams).toString());
-
-    const cityPart = city ?`, cityId: ${+city}` : '';
+    const cityPart = city ? `, cityId: ${+city}` : '';
     const propertyTypePart = propertyType ?`, propertyTypeId: ${+propertyType}` : '';
+    const minPricePart = minPrice ? `, minPrice: ${+minPrice}` : '';
+    const maxPricePart = maxPrice ? `, maxPrice: ${+maxPrice}` : '';
+    const minBedsPart = minBeds ? `, minBeds: "${minBeds}"` : '';
+    const maxBedsPart = maxBeds ? `, maxBeds: "${+maxBeds === MAX_BEDROOMS ? `${maxBeds}+` : maxBeds}"` : '';
 
     const graphqlQuery = {
         query:`
             {
-              getProperties(adType: "${adType}", page: ${+page}${cityPart}${propertyTypePart}) {
+              getProperties(adType: "${adType}", page: ${+page}${cityPart}${propertyTypePart}${minPricePart}${maxPricePart}${minBedsPart}${maxBedsPart}) {
                 count
                 pages
                 items {

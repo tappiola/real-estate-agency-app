@@ -1,0 +1,15 @@
+select {
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 14px 30px 14px 8px;
+    outline: none;
+    font-weight: 500;
+    appearance: none;
+    letter-spacing: 0.05em;
+
+    + .ChevronIcon {
+        position: relative;
+        right: 25px;
+        top: 3px;
+    }
+}

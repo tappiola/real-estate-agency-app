@@ -64,22 +64,23 @@ export const refreshTokenIfExpired = createAsyncThunk(
 );
 
 const user = createSlice({
-  name: 'currentUser',
-  initialState,
-  extraReducers: {
-    [loginUser.fulfilled]: (state, action) => {
-      const { data: {login: {token}} } = action.payload || {};
-      state.isAuthorized = true;
-      state.authToken = token;
-      localStorage.setItem('token', token);
-    },
-    [loginUser.rejected]: (state) => {
-      state.isAuthorized = false;
-    },
-    [logoutUser.fulfilled]: (state) => {
-      state.isAuthorized = false;
-      state.authToken = null;
-    },
+    name: 'currentUser',
+    initialState,
+    reducers: {},
+    extraReducers: {
+        [loginUser.fulfilled]: (state, action) => {
+          const { data: {login: {token}} } = action.payload || {};
+          state.isAuthorized = true;
+          state.authToken = token;
+          localStorage.setItem('token', token);
+        },
+        [loginUser.rejected]: (state) => {
+          state.isAuthorized = false;
+        },
+        [logoutUser.fulfilled]: (state) => {
+          state.isAuthorized = false;
+          state.authToken = null;
+        },
   },
 });
 

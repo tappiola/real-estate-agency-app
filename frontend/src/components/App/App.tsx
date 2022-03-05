@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import './App.style.scss';
 import Register from "../Register";
-import {BrowserRouter, Route, Routes, useNavigate} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Login from "../Login";
 import HomePage from "../HomePage";
 import Wishlist from '../Wishlist';
@@ -11,9 +11,10 @@ import NotFound from "../NotFound";
 import Notification from '../Notification';
 import {ToastQueueProvider} from '../Toast';
 import {AdType} from "../../constants";
-import Header from "../Header/Header";
+import HeaderComponent from "../Header";
 import { refreshTokenIfExpired } from '../../redux/User';
 import {useAppSelector} from "../../redux/store";
+import { ParallaxProvider } from 'react-scroll-parallax';
 
 const App = () => {
     // @ts-ignore
@@ -25,10 +26,10 @@ const App = () => {
       <ToastQueueProvider>
             <div className="App">
                 <BrowserRouter>
-                    <Header/>
+                    <HeaderComponent/>
                     <main>
                     <Routes>
-                            <Route path="/" element={<HomePage />}/>
+                            <Route path="/" element={<ParallaxProvider><HomePage /></ParallaxProvider>}/>
                             <Route path="/register" element={<Register />}/>
                             {!isAuthorized && <Route path="/login" element={<Login />}/>}
                             <Route path="/favorites" element={<Wishlist />}/>

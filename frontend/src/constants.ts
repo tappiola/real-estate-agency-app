@@ -1,10 +1,10 @@
 export const HOST = 'http://localhost';
 
 export enum ToastTypes {
-    Success = 'Success',
-    Error = 'Error',
-    Warning = 'Warning',
-    Info = 'Info'
+    Success,
+    Error,
+    Warning,
+    Info
 }
 
 export const accessToken =
@@ -19,5 +19,9 @@ export enum AdType {
 
 export enum Filter {
     City = 'city',
-    PropertyType = 'propertyType'
+    PropertyType = 'propertyType',
+    MinPrice = 'minPrice',
+    MaxPrice = 'maxPrice',
+    MinBeds = 'minBeds',
+    MaxBeds = 'maxBeds',
 }

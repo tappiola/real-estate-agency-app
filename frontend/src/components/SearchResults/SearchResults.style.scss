@@ -1,4 +1,9 @@
 .SearchResults {
+    &-Container {
+        height: calc(100vh - var(--header-height));
+        display: flex;
+    }
+
     &-Count {
         background-color: var(--primary-bright-color);
         padding: 5px 10px;
@@ -8,21 +13,16 @@
         font-weight: 600;
         letter-spacing: 0.08em;
         font-size: 13px;
-        position: absolute;
+        position: fixed;
         right: 16px;
         top: 56px;
     }
 }
 
-.container {
-    height: calc(100vh - 50px);
-    display: flex;
-}
-
 .pane {
     display: flex;
     flex-direction: column;
-    max-height: 100vh;
+    height: 100vh;
 }
 
 .left {

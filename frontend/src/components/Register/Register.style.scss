@@ -1,0 +1,26 @@
+.Register {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: auto;
+
+    input {
+        margin: 15px 0;
+    }
+
+    button {
+        background-color: var(--primary-bright-color);
+        color:white;
+    }
+
+    .LoginLink {
+        margin-top: 15px;
+        font-family: "Gilroy-Bold", sans-serif;
+        color: var(--primary-bright-color);
+    }
+
+    .AlreadyRegistered {
+        font-weight: 500;
+    }
+}
+

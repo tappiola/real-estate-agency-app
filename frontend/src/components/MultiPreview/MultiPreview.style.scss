@@ -1,0 +1,51 @@
+.Preview {
+    &-Container {
+        padding-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .ChevronIcon {
+            width: 36px;
+            height: 36px;
+            opacity: 0.5;
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+    }
+
+    &-Images {
+        display: grid;
+        grid-template-areas: 'first second'
+                            'first third';
+        height: 500px;
+        grid-template-columns: 4fr 2fr;
+        grid-template-rows: 1fr 1fr;
+        width: 80%;
+        grid-gap: 15px;
+    }
+
+    &-Image1 {
+        grid-area: first;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+
+    }
+
+    &-Image2 {
+        grid-area: second;
+        object-fit: cover;
+        height: 250px;
+        width: 100%;
+    }
+
+    &-Image3 {
+        grid-area: third;
+        object-fit: cover;
+        height: 250px;
+        width: 100%;
+    }
+}
