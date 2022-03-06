@@ -7,6 +7,12 @@
   --controls-color: #c6c6c6;
 }
 
+@mixin mobile {
+  @media (max-width: 810px) {
+    @content;
+  }
+}
+
 .App {
   text-align: center;
 }

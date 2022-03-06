@@ -1,7 +1,17 @@
+@mixin mobile {
+    @media (max-width: 810px) {
+        @content;
+    }
+}
+
 .SearchResults {
     &-Container {
         height: calc(100vh - var(--header-height));
         display: flex;
+
+        @include mobile {
+            display: initial;
+        }
     }
 
     &-Count {
@@ -17,21 +27,50 @@
         right: 16px;
         top: 56px;
     }
-}
 
-.pane {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
+    &-Pane {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
 
-.left {
-    align-items: center;
-    width: 60%;
-    justify-content: center;
-}
+        @include mobile {
+            z-index: 1
+        };
+    }
 
-.right {
-    justify-content: space-between;
-    width: 40%;
+    &-Map {
+        justify-content: space-between;
+        width: 40%;
+
+        @include mobile {
+            width: 100%;
+            height: calc(100vh - var(--header-height));
+            //height: 100vh;
+        }
+    }
+
+    &-Properties {
+        align-items: center;
+        width: 60%;
+        justify-content: center;
+
+        @include mobile {
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 250px;
+        }
+    }
+
+    &Mobile {
+        &-Map {
+            width: 100%;
+            height: 100%;
+        }
+
+        &-Container {
+            height: calc(100vh - var(--header-height));
+        }
+    }
 }

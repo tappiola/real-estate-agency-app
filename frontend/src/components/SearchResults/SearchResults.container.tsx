@@ -5,6 +5,7 @@ import SearchResults from "./SearchResults.component";
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 import {AdType, ToastTypes} from "../../constants";
 import {enqueueToast} from "../../redux/notifier";
+import {useIsMobile} from "../IsMobile";
 
 const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
     const [properties, setProperties] = useState([]);
@@ -12,6 +13,8 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
     const [count, setCount] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [activeItem, setActiveItem] = useState(0);
+
+    const isMobile = useIsMobile();
 
     const [searchParams] = useSearchParams();
     const dispatch = useAppDispatch();
@@ -64,6 +67,7 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
         activeItem={activeItem}
         setActiveItem={setActiveItem}
         searchParams={searchParams}
+        isMobile={isMobile}
     />
 }
 

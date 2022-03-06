@@ -1,7 +1,23 @@
+@mixin mobile {
+    @media (max-width: 810px) {
+        @content;
+    }
+}
+
 .Properties-List {
     display: flex;
     flex-wrap: wrap;
     overflow-y: auto;
     scroll-snap-type: y proximity;
     height: 100%;
+
+    @include mobile {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        width: 100vw;
+        height: 300px;
+        overflow-y: hidden;
+        margin-bottom: 15px;
+    }
 }

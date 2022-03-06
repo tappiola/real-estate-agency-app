@@ -8,7 +8,7 @@ import {AdType, IMAGE_PLACEHOLDER} from "../../constants";
 import BedroomIconComponent from "../BedroomIcon";
 import BathroomIconComponent from "../BathroomIcon";
 
-const PropertyCardComponent: React.FC<{property: Property, index: number, loadProperty: () => void}> = ({property, index, loadProperty}) => {
+const PropertyCardComponent: React.FC<{property: Property, index: number, loadProperty: () => void, isMobile: boolean}> = ({property, index, loadProperty, isMobile}) => {
     const loadCarouselImages = () => {
         const {images} = property;
 
@@ -32,13 +32,30 @@ const PropertyCardComponent: React.FC<{property: Property, index: number, loadPr
         </CarouselItem>
         })
     }
+    const loadSingleImage = () => {
+        const {images} = property;
+
+        return <img
+                    className='PropertyCard-CarouselImg'
+                    src={images[0]?.link || IMAGE_PLACEHOLDER}
+                    alt={`Property-Image`}
+                />
+    }
+
+    const loadImages = () => {
+        if (isMobile){
+            return loadSingleImage();
+        }
+
+        return <Carousel width="485px" height="100%" infinite={true} autoplay={false}>
+            {loadCarouselImages()}
+        </Carousel>
+    }
 
     return (
             <div className="PropertyCard" id={`property-${index}`} onClick={loadProperty}>
-                <div className='PropertyCard-Carousel'>
-                <Carousel width="485px" height="100%" infinite={true} autoplay={false}>
-                    {loadCarouselImages()}
-                </Carousel>
+                <div className='PropertyCard-Images'>
+                    {loadImages()}
                 </div>
                 <div className='PropertyCard-Data'>
                     <h2 className='PropertyCard-Price'>{formatPrice(property.price) + (property.type.name === AdType.Rent ? ' pcm' : '')}</h2>

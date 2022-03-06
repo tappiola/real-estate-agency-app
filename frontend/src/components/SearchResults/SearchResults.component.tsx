@@ -12,8 +12,9 @@ const SearchResults: React.FC<{
     pages: number,
     activeItem: number,
     setActiveItem: (id: number) => void,
-    searchParams: URLSearchParams
-}> = ({count, properties, isLoading, pages, activeItem, setActiveItem, searchParams}) => {
+    searchParams: URLSearchParams,
+    isMobile: boolean
+}> = ({count, properties, isLoading, pages, activeItem, setActiveItem, searchParams, isMobile}) => {
     const renderMap = () => {
         if (!properties.length){
             return null;
@@ -26,19 +27,27 @@ const SearchResults: React.FC<{
         />
     }
 
+    const renderPagination = () => {
+        if (isMobile || pages <=1 ){
+            return null;
+        }
+
+        return <Pagination pages={pages} searchParams={searchParams}/>;
+    }
+
     return <>
         <div className="SearchResults-Container">
             <p className='SearchResults-Count'>{count || 'No'} results</p>
-            <div className="pane left">
+            <div className="SearchResults-Pane SearchResults-Properties">
                 <PropertiesListContainer
                     isLoading={isLoading}
                     properties={properties}
                     activeItem={activeItem}
                     setActiveItem={setActiveItem}
                 />
-                {pages > 1 && <Pagination pages={pages} searchParams={searchParams}/>}
+                {renderPagination()}
             </div>
-            <div className="pane right">
+            <div className="SearchResults-Pane SearchResults-Map">
                 {renderMap()}
             </div>
         </div>
