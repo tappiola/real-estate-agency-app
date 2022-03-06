@@ -10,6 +10,7 @@ const CarouselContainer: React.FC<{
     infinite: boolean,
     slideDuration?: number,
     automaticSlideInterval?: number,
+    changeHandler?: (index: number) => void,
     [styleProp: string]: any
 }> = (
     {
@@ -18,6 +19,7 @@ const CarouselContainer: React.FC<{
         infinite = false,
         slideDuration = 500,
         automaticSlideInterval = 5000,
+        changeHandler,
         ...style
     }) => {
     const carouselRef = useRef<HTMLDivElement>(null);
@@ -62,10 +64,18 @@ const CarouselContainer: React.FC<{
 
         setActiveIndex(newSlideIndex);
 
+        if(changeHandler){
+            changeHandler(newSlideIndex);
+        }
+
         if (realNewIndex !== newSlideIndex){
              setTimeout(() => {
                 removeAnimation();
                 setActiveIndex(realNewIndex);
+
+                 if(changeHandler){
+                     changeHandler(newSlideIndex);
+                 }
             }, slideDuration);
         }
     }, [addAnimation, adjustPosition, items.length, slideDuration]);

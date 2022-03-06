@@ -19,7 +19,7 @@ export const CarouselComponent: React.FC<{
     style: object,
     items: ReactChild[],
     carouselRef : RefObject<HTMLDivElement>,
-    slidesRef: RefObject<HTMLDivElement>
+    slidesRef: RefObject<HTMLDivElement>,
 }> = (
     {
         handleTouchEnd,
@@ -38,7 +38,7 @@ export const CarouselComponent: React.FC<{
         style,
         items,
         carouselRef,
-        slidesRef
+        slidesRef,
     }) => {
 
     return <div

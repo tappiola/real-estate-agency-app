@@ -4,8 +4,8 @@ import './PropertiesLoader.style.scss';
 const PropertiesLoader = () => {
     return (
         <div className='Properties-List'>
-            {[...Array(5)].map(() => (
-                <div className="Loader-Container">
+            {[...Array(5)].map((_, i) => (
+                <div className="Loader-Container" key={i}>
                     <ContentLoader
                         speed={2}
                         width={800}

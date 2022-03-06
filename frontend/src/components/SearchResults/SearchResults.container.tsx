@@ -64,10 +64,7 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
             return;
         }
 
-        console.log(activeItem);
-
         if (properties.length && activeItem + 1 === properties.length && virtualPage < pages){
-            console.log('test');
             const fetchMoreProperties = async () => {
                 try {
                     const pageToFetch = virtualPage + 1;

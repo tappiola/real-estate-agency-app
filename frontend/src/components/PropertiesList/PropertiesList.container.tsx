@@ -5,11 +5,17 @@
   import PropertiesLoader from "../PropertiesLoader/PropertiesLoader.component";
   import PropertiesList from "./PropertiesList.component";
   import {Property} from "../../types";
+  import {useIsMobile} from "../IsMobile";
 
   const PropertiesListContainer: React.FC<{
-    properties: Property[], activeItem: number, setActiveItem: (index: number) => void, isLoading: boolean
-  }> = ({properties, activeItem, setActiveItem, isLoading}) => {
+    properties: Property[],
+    activeItem: number,
+    setActiveItem: (index: number) => void,
+    isLoading: boolean}
+  > = ({properties, activeItem, setActiveItem, isLoading}) => {
     const listRef = useRef<HTMLDivElement>(null);
+
+    const isMobile = useIsMobile();
 
     const scrollListener = () => {
       // Active list item is top-most fully-visible item
@@ -20,10 +26,13 @@
       // If it's a new one, update active list item
       const topMostVisible = visibleListItems.indexOf(true);
       if (topMostVisible !== activeItem && topMostVisible !== -1) {
-        console.log('setActiveItem', topMostVisible);
         setActiveItem(topMostVisible);
       }
     };
+
+    const changeListener = (index: number) => {
+      setActiveItem(index);
+    }
 
     useEffect(() => inView.offset(200), []);
 
@@ -44,6 +53,8 @@
         isLoading={isLoading}
         listRef={listRef}
         scrollListener={scrollListener}
+        changeListener={changeListener}
+        isMobile={isMobile}
         />
   }
 
