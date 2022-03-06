@@ -20,6 +20,7 @@ TODO:
 - responsive layout
 - fix big heart
 - fix heart animation
+- save active item on navigate back
 
 - (R) refresh token
 - (R) imports without ../../

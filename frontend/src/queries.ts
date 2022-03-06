@@ -60,14 +60,14 @@ export const register = (email: string, name: string, password: string) => {
     return sendGraphqlRequest(graphqlQuery);
 }
 
-export const searchProperties = (adType: AdType, searchParams: URLSearchParams) => {
+export const searchProperties = (adType: AdType, searchParams: URLSearchParams, virtualPage: number = 1) => {
     let params: any = {};
 
     for(const [key, value] of searchParams.entries()) {
         params = ({...params, [key]: value});
     }
 
-    const {page = 1, city, propertyType, minPrice, maxPrice, minBeds, maxBeds} = params;
+    const {page = virtualPage, city, propertyType, minPrice, maxPrice, minBeds, maxBeds} = params;
 
     const cityPart = city ? `, cityId: ${+city}` : '';
     const propertyTypePart = propertyType ?`, propertyTypeId: ${+propertyType}` : '';

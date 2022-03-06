@@ -6,13 +6,15 @@ import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 import {AdType, ToastTypes} from "../../constants";
 import {enqueueToast} from "../../redux/notifier";
 import {useIsMobile} from "../IsMobile";
+import {Property} from "../../types";
 
 const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
-    const [properties, setProperties] = useState([]);
+    const [properties, setProperties] = useState<Property[]>([]);
     const [pages, setPages] = useState(1);
     const [count, setCount] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [activeItem, setActiveItem] = useState(0);
+    const [virtualPage, setVirtualPage] = useState(1);
 
     const isMobile = useIsMobile();
 
@@ -56,6 +58,35 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
         fetchProperties();
 
     }, [adType, searchParams]);
+
+    useEffect(() => {
+        if (!isMobile){
+            return;
+        }
+
+        console.log(activeItem);
+
+        if (properties.length && activeItem + 1 === properties.length && virtualPage < pages){
+            console.log('test');
+            const fetchMoreProperties = async () => {
+                try {
+                    const pageToFetch = virtualPage + 1;
+                    const response = await searchProperties(adType, searchParams, pageToFetch);
+                    const {data: {getProperties: {items, pages, count}}} = await response.json();
+                    setProperties([...properties, ...items]);
+                    setPages(pages);
+                    setCount(count);
+                    setIsLoading(false);
+                    setVirtualPage(pageToFetch);
+                } catch (e){
+                    console.log(e);
+                    setIsLoading(false);
+                }
+            };
+
+            fetchMoreProperties();
+        }
+    }, [isMobile, activeItem, properties, count]);
 
     useEffect(() => setActiveItem(0), [searchParams]);
 

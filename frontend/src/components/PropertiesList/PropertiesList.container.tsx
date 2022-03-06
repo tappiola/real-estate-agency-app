@@ -20,6 +20,7 @@
       // If it's a new one, update active list item
       const topMostVisible = visibleListItems.indexOf(true);
       if (topMostVisible !== activeItem && topMostVisible !== -1) {
+        console.log('setActiveItem', topMostVisible);
         setActiveItem(topMostVisible);
       }
     };
