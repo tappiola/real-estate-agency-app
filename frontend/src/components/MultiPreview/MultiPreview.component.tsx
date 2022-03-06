@@ -1,9 +1,16 @@
-import {useState} from "react";
+import React from "react";
 import './MultiPreview.style.scss';
 import ChevronIcon from "../ChevronIcon";
 import {Direction} from "../ChevronIcon/ChevronIcon.config";
+import {Image} from "../../types";
 
-const MultiPreview = ({firstImage, secondImage, thirdImage, scrollBack, scrollForward }) => {
+const MultiPreview: React.FC<{
+    firstImage: Image,
+    secondImage: Image,
+    thirdImage: Image,
+    scrollBack: () => void,
+    scrollForward: () => void
+}> = ({firstImage, secondImage, thirdImage, scrollBack, scrollForward }) => {
 
     return <div className="Preview-Container">
         <div onClick={scrollBack}>

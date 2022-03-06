@@ -1,8 +1,11 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import './MultiPreview.style.scss';
 import MultiPreview from "./MultiPreview.component";
+import {Image} from "../../types";
 
-const MultiPreviewContainer = ({images = []}) => {
+const MultiPreviewContainer : React.FC<{
+    images: Image[]
+}> = ({images = []}) => {
     const [firstImageIndex, setFirstImageIndex] = useState(0);
 
     const scrollBack = () => setFirstImageIndex((images.length + firstImageIndex - 1) % images.length);

@@ -2,8 +2,9 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {ToastTypes} from "../constants";
 
 type Notification = {
-  message: string;
-  type: ToastTypes
+  message: string,
+  type: ToastTypes,
+  duration?: number,
 }
 
 interface NotifierState {

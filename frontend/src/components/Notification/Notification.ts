@@ -13,7 +13,7 @@ const Notification = () => {
 
   useEffect(() => {
     if (notifications.length > 0) {
-      const { message, type, duration } = notifications[0];
+      const { message, type, duration = 0 } = notifications[0];
 
       addToast(message, type, duration);
       onToastProcess();

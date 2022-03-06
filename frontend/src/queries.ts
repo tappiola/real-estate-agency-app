@@ -1,7 +1,8 @@
 import {sendGraphqlRequest} from "./graphql";
 import {MAX_BEDROOMS} from "./components/AdvancedSearchForm/AdvancedSearchForm.config";
+import {AdType} from "./constants";
 
-export const addToWishlist = (id) => {
+export const addToWishlist = (id: number) => {
     const graphqlQuery  = {
         query: `
         mutation {
@@ -15,7 +16,7 @@ export const addToWishlist = (id) => {
     return sendGraphqlRequest(graphqlQuery);
 }
 
-export const removeFromWishlist = (id) => {
+export const removeFromWishlist = (id: number) => {
     const graphqlQuery  = {
         query: `
         mutation {
@@ -29,7 +30,7 @@ export const removeFromWishlist = (id) => {
     return sendGraphqlRequest(graphqlQuery);
 }
 
-export const login = (email, password) => {
+export const login = (email: string, password: string) => {
     const graphqlQuery = {
         query: `
         query {
@@ -44,7 +45,7 @@ export const login = (email, password) => {
     return sendGraphqlRequest(graphqlQuery);
 }
 
-export const register = (email, name, password) => {
+export const register = (email: string, name: string, password: string) => {
     const graphqlQuery = {
         query: `
         mutation {
@@ -59,8 +60,8 @@ export const register = (email, name, password) => {
     return sendGraphqlRequest(graphqlQuery);
 }
 
-export const searchProperties = (adType, searchParams) => {
-    let params = {};
+export const searchProperties = (adType: AdType, searchParams: URLSearchParams) => {
+    let params: any = {};
 
     for(const [key, value] of searchParams.entries()) {
         params = ({...params, [key]: value});
@@ -103,7 +104,7 @@ export const searchProperties = (adType, searchParams) => {
     return sendGraphqlRequest(graphqlQuery);
 }
 
-export const getProperty = (id) => {
+export const getProperty = (id: number) => {
     const graphqlQuery = {
         query:`
             {
@@ -146,7 +147,14 @@ export const getWishlist = () => {
     return sendGraphqlRequest(graphqlQuery);
 }
 
-export const saveClientRequest = ({firstName, lastName, email, phoneNumber}) => {
+type SaveClientRequest = {
+    firstName: string,
+    lastName: string,
+    email: string,
+    phoneNumber: string,
+}
+
+export const saveClientRequest = ({firstName, lastName, email, phoneNumber}: SaveClientRequest) => {
     const graphqlQuery = {
         query: `
              mutation {

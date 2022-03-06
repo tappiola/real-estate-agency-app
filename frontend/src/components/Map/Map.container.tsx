@@ -18,7 +18,7 @@ const MapContainer : React.FC<{
   const getCoordinates = (item: Property) => ([item.longitude, item.latitude] as LngLatLike);
 
   const generateFeature = (property: Property, index: number) => {
-    const { bedroomCount, images, longitude, latitude, propertyType: {name} = {} } = property;
+    const { bedroomCount, images, longitude, latitude, propertyType: {name}} = property;
     const heading = getHouseTitle(bedroomCount, name);
 
     return {

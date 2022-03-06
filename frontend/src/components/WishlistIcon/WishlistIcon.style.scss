@@ -11,8 +11,10 @@
         stroke: var(--primary-bright-color);
 
         &:hover {
-            fill: none;
-            stroke: black;
+            .WishlistIcon_isClicked {
+                fill: none;
+                stroke: black;
+            }
         }
     }
 

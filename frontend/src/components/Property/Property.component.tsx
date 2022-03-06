@@ -5,7 +5,10 @@ import MultiPreview from "../MultiPreview";
 import {getFullTitle, sortByKey} from "../../util";
 import './Property.style.scss';
 
-const Property: React.FC<{property: PropertyType, isInWishlist: boolean}> = ({property, isInWishlist}) => {
+const Property: React.FC<{
+    property: PropertyType,
+    isInWishlist: boolean
+}> = ({property, isInWishlist}) => {
     const descRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {

@@ -1,9 +1,9 @@
 .Toast {
     &-Container {
-        position: absolute;
+        position: fixed;
         top: 14px;
         right: 20px;
-        z-index: 1500;
+        z-index: 5000;
         height: min-content;
         width: auto;
     }

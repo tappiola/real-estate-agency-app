@@ -1,6 +1,7 @@
 import {AdType} from "./constants";
+import {Property} from "./types";
 
-export const sortByKey = (values, sortKey) => values.sort(
+export const sortByKey = <T extends object, U extends keyof T> (values: T[], sortKey: U) => values.sort(
     (a, b) => {
         if (a[sortKey] < b[sortKey]) {
             return -1;
@@ -14,8 +15,7 @@ export const sortByKey = (values, sortKey) => values.sort(
     }
 );
 
-
-export const formatPrice = (price, currency = 'GBP') => {
+export const formatPrice = (price: number, currency = 'GBP') => {
     const language = navigator.languages ? navigator.languages[0] : navigator.language;
 
     return new Intl.NumberFormat(language, {
@@ -26,11 +26,11 @@ export const formatPrice = (price, currency = 'GBP') => {
     }).format(price);
 };
 
-export const getFullTitle = (property) => {
+export const getFullTitle = (property : Property) => {
     return `${getHouseTitle(property.bedroomCount, property.propertyType?.name)} in ${property.city?.name} ${property.type.name === AdType.Sale ? 'for': 'to'} ${property.type.name}`
 }
 
-export const getHouseTitle = (bedroomCount, propertyType) => {
+export const getHouseTitle = (bedroomCount: number, propertyType: string) => {
     if (bedroomCount === 0) {
         return 'Studio apartment';
     }

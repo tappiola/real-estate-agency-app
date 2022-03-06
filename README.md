@@ -16,6 +16,10 @@ TODO:
 - add next / prev for pagination
 - add labels
 - favicon
+- add price to map
+- responsive layout
+- fix big heart
+- fix heart animation
 
 - (R) refresh token
 - (R) imports without ../../
