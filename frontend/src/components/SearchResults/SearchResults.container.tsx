@@ -31,7 +31,7 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
 
         const fetchProperties = async () => {
             try {
-                await dispatch(getProperties({adType, searchParams}));
+                await dispatch(getProperties({adType, searchParams, isMobile}));
                 setIsLoading(false);
             } catch (e){
                 console.log(e);
@@ -53,7 +53,7 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
             const fetchMoreProperties = async () => {
                 try {
                     const pageToFetch = virtualPage + 1;
-                    dispatch(getProperties({adType, searchParams, virtualPage: pageToFetch}));
+                    dispatch(getProperties({adType, searchParams, virtualPage: pageToFetch, isMobile}));
                     setIsLoading(false);
                     setVirtualPage(pageToFetch);
                 } catch (e){

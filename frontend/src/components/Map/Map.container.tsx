@@ -109,7 +109,7 @@ const MapContainer : React.FC = () => {
   }, [activeProperty, properties]);
 
   useEffect(() => {
-    if(!map) {
+    if(!map || !map.getSource('places')) {
       return;
     }
     const data = [...properties];

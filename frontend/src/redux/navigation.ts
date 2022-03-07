@@ -14,7 +14,7 @@ interface NavigationState {
 }
 
 interface SearchState {
-adType: AdType, searchParams: URLSearchParams, virtualPage?: number
+adType: AdType, searchParams: URLSearchParams, virtualPage?: number, isMobile?: boolean
 }
 
 const initialState: NavigationState = {
@@ -32,7 +32,7 @@ const lastUpdatedSelector = (state: any) => state.navigation.lastUpdated;
 
 export const getProperties = createAsyncThunk(
     'navigation/getProperties',
-    async ({adType, searchParams, virtualPage}: SearchState, { dispatch, getState }) => {
+    async ({adType, searchParams, virtualPage, isMobile}: SearchState, { dispatch, getState }) => {
             let params: any = {};
 
             for(const [key, value] of searchParams.entries()) {
@@ -41,11 +41,15 @@ export const getProperties = createAsyncThunk(
 
             const {page, city, propertyType, minPrice, maxPrice, minBeds, maxBeds} = params;
 
-            const search = {adType, page: page || virtualPage || 1, city, propertyType, minPrice, maxPrice, minBeds, maxBeds};
-
             const state = getState();
             const oldSearch = searchSelector(state);
             const lastUpdated = lastUpdatedSelector(state);
+
+            console.log(virtualPage);
+
+            const pageNumber = isMobile ? virtualPage || oldSearch.page || 1 : page || 1;
+
+            const search = {adType, page: pageNumber, city, propertyType, minPrice, maxPrice, minBeds, maxBeds};
 
             if(JSON.stringify(oldSearch) === JSON.stringify(search) && Date.now() - lastUpdated < 600000){
                 throw new Error('No need to rerequest');
@@ -62,7 +66,7 @@ export const getProperties = createAsyncThunk(
           });
 
       const {data} = await response.json();
-      return {data, search, hasPagination: !virtualPage};
+      return {data, search, hasPagination: !isMobile};
     },
 );
 

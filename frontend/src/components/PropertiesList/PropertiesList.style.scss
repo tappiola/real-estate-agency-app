@@ -5,19 +5,14 @@
 }
 
 .Properties-List {
-    display: flex;
     flex-wrap: wrap;
     overflow-y: auto;
     scroll-snap-type: y proximity;
     height: 100%;
 
     @include mobile {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        overflow-x: auto;
         width: 100vw;
         height: 50vw;
-        overflow-y: hidden;
         //margin-bottom: calc(15px + env(safe-area-inset-bottom));
     }
 }
