@@ -7,8 +7,6 @@ TODO:
 - inputs validation trim.niy.isempty
 - error handling middleware
 - eslint
-- add position storing on navigate back
-- don't rerequest on navigate back (check if query params match prev currency params)
 - react-content-loader for placeholders on property page https://skeletonreact.com/
 - add next / prev for pagination
 - favicon
@@ -16,9 +14,9 @@ TODO:
 - responsive layout
 - fix big heart
 - fix heart animation
-- save active item on navigate back
 - cities and property types to redux
 - wishlist UI
+- rename navigation reducet
 
 - (R) refresh token
 - (R) imports without ../../
