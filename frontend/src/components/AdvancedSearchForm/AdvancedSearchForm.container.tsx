@@ -9,7 +9,7 @@ import Select from "../Select";
 import {MAX_BEDROOMS, PRICE_RANGE} from "./AdvancedSearchForm.config";
 import {formatPrice} from "../../util";
 import {FilterParams} from "../../types";
-import {setActiveProperty} from "../../redux/navigation";
+import {setActiveProperty} from "../../redux/search";
 
 const AdvancedSearchFormContainer: React.FC<{searchType: AdType}> = ({searchType}) => {
 

@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Property} from "../types";
-import {searchPropertiesQuery} from "../queries";
+import {searchProperties} from "../queries";
 import {enqueueToast} from "./notifier";
 import {AdType, ToastTypes} from "../constants";
 
@@ -27,11 +27,11 @@ const initialState: NavigationState = {
 
 };
 
-const searchSelector = (state: any) => state.navigation.activeSearch;
-const lastUpdatedSelector = (state: any) => state.navigation.lastUpdated;
+const searchSelector = (state: any) => state.search.activeSearch;
+const lastUpdatedSelector = (state: any) => state.search.lastUpdated;
 
 export const getProperties = createAsyncThunk(
-    'navigation/getProperties',
+    'search/getProperties',
     async ({adType, searchParams, virtualPage, isMobile}: SearchState, { dispatch, getState }) => {
             let params: any = {};
 
@@ -55,7 +55,7 @@ export const getProperties = createAsyncThunk(
                 throw new Error('No need to rerequest');
             }
 
-      const response = await searchPropertiesQuery(search)
+      const response = await searchProperties(search)
           .catch((err) => {
             dispatch(enqueueToast({
               message: err.message || 'Failed to fetch properties',
@@ -70,8 +70,8 @@ export const getProperties = createAsyncThunk(
     },
 );
 
-const navigation = createSlice({
-  name: 'navigation',
+const search = createSlice({
+  name: 'search',
   initialState,
   reducers: {
     setActiveProperty(state, action: PayloadAction<number>) {
@@ -98,6 +98,6 @@ const navigation = createSlice({
   },
 });
 
-export const { setActiveProperty } = navigation.actions;
+export const { setActiveProperty } = search.actions;
 
-export default navigation.reducer;
+export default search.reducer;

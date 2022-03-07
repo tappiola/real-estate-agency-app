@@ -7,13 +7,13 @@ import {Property} from "../../types";
 import {Feature, Point} from "geojson";
 import React from "react";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {setActiveProperty} from "../../redux/navigation";
+import {setActiveProperty} from "../../redux/search";
 
 const MapContainer : React.FC = () => {
 
   const [map, setMap] = useState<mapboxgl.Map>();
   const dispatch = useAppDispatch();
-  const {activeProperty, properties} = useAppSelector(({ navigation }) => navigation);
+  const {activeProperty, properties} = useAppSelector(({ search }) => search);
 
   const getCoordinates = (item: Property) => ([item.longitude, item.latitude] as LngLatLike);
 

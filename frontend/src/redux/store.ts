@@ -1,12 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit';
-import navigationReducer from './navigation';
+import searchReducer from './search';
 import notificationsReducer from './notifier';
 import userReducer from './user';
 
 const store = configureStore({
   reducer: {
     notifications: notificationsReducer,
-    navigation: navigationReducer,
+    search: searchReducer,
     user: userReducer
   },
   devTools: process.env.NODE_ENV !== 'production',

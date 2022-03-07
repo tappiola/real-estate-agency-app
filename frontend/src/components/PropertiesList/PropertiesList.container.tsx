@@ -6,7 +6,7 @@
   import PropertiesList from "./PropertiesList.component";
   import {useIsMobile} from "../IsMobile";
   import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-  import {setActiveProperty} from "../../redux/navigation";
+  import {setActiveProperty} from "../../redux/search";
 
   const PropertiesListContainer: React.FC<{
     isLoading: boolean}
@@ -15,7 +15,7 @@
 
     const isMobile = useIsMobile();
     const dispatch = useAppDispatch();
-    const {activeProperty, properties} = useAppSelector(({ navigation }) => navigation);
+    const {activeProperty, properties} = useAppSelector(({ search }) => search);
 
     const getTopVisible = () => {
       // Active list item is top-most fully-visible item
