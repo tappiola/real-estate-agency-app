@@ -1,4 +1,5 @@
 import jwt_decode from "jwt-decode";
+import {HOST} from "./constants";
 
 type JwtDecodeResult = {
     exp: number,
@@ -40,7 +41,7 @@ export const sendGraphqlRequest = (graphqlQuery: SendGraphqlParams) => {
         headers.set('Authorization', 'Bearer ' + authToken);
     }
 
-    return fetch('http://localhost/graphql', {
+    return fetch(HOST + '/graphql', {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(graphqlQuery)

@@ -3,11 +3,11 @@ import {setContext} from "@apollo/client/link/context";
 import {onError} from "@apollo/client/link/error";
 import store from "../redux/store";
 import {enqueueToast} from "../redux/notifier";
-import {ToastTypes} from "../constants";
+import {HOST, ToastTypes} from "../constants";
 import {logoutUser} from "../redux/user";
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost/graphql',
+    uri: HOST + '/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
