@@ -29,6 +29,5 @@ TODO:
 - (R) use library to construct gql requests
 - (R) where: {'$type.id$': 'rent'} doesn't work
 - (R) replace croissant
-- (R) fix 100vh
 - (R) move mixins to one file
 - (R) ts-ignore inView
