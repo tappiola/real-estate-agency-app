@@ -6,8 +6,9 @@ export const CarouselItem: React.FC = ({children}) => {
 }
 
 const CarouselContainer: React.FC<{
-    autoplay: boolean,
-    infinite: boolean,
+    autoplay?: boolean,
+    infinite?: boolean,
+    showIndicators?: boolean,
     slideDuration?: number,
     automaticSlideInterval?: number,
     changeHandler?: (index: number) => void,
@@ -17,6 +18,7 @@ const CarouselContainer: React.FC<{
         children,
         autoplay = true,
         infinite = false,
+        showIndicators = true,
         slideDuration = 500,
         automaticSlideInterval = 5000,
         changeHandler,
@@ -30,7 +32,15 @@ const CarouselContainer: React.FC<{
 
     const [ touchStartX, setTouchStartX] = useState<number>(0);
 
-     useEffect(() => setCarouselWidth(carouselRef.current!.offsetWidth || 0), [carouselRef]);
+    const updateWidth = () => setCarouselWidth(carouselRef.current!.offsetWidth);
+
+    useEffect(updateWidth, [carouselRef]);
+
+    useEffect(() => {
+        window.addEventListener('resize', updateWidth);
+
+        return () => window.removeEventListener('resize', updateWidth);
+    }, []);
 
      // In order to support infinite scroll, first and last slides are duplicated
     // We need to take these virtual slides into account when calculate offsets
@@ -176,6 +186,7 @@ const CarouselContainer: React.FC<{
         items={items}
         carouselRef={carouselRef}
         slidesRef={slidesRef}
+        showIndicators={showIndicators}
     />
 }
 

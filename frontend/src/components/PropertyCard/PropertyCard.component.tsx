@@ -47,7 +47,7 @@ const PropertyCardComponent: React.FC<{property: Property, index: number, loadPr
             return loadSingleImage();
         }
 
-        return <Carousel width="485px" height="100%" infinite={true} autoplay={false}>
+        return <Carousel width="35vw" height="100%" infinite={true} autoplay={false}>
             {loadCarouselImages()}
         </Carousel>
     }

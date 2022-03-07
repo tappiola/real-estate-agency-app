@@ -7,13 +7,18 @@
 
   const PropertiesList: React.FC<{properties: Property[], isLoading: boolean, listRef: RefObject<HTMLDivElement>, scrollListener: () => void, changeListener: (index: number) => void, isMobile: boolean}>
       = ({properties, isLoading, listRef, scrollListener, changeListener, isMobile}) => {
+
     if(isLoading){
       return <PropertiesLoader/>
     }
 
+    if(!properties.length){
+      return null;
+    }
+
     if (isMobile){
       return <div className='Properties-List' ref={listRef}>
-        <Carousel width="100vw" height="300px" autoplay={false} infinite={false} changeHandler={changeListener}>
+        <Carousel width="100vw" height="50vw" autoplay={false} showIndicators={false} changeHandler={changeListener}>
         { properties.map((property, index) =>(
             <CarouselItem key={index}>
               <PropertyCardContainer
