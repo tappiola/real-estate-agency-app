@@ -32,16 +32,16 @@ const lastUpdatedSelector = (state: any) => state.navigation.lastUpdated;
 
 export const getProperties = createAsyncThunk(
     'navigation/getProperties',
-    async ({adType, searchParams, virtualPage = 1}: SearchState, { dispatch, getState }) => {
+    async ({adType, searchParams, virtualPage}: SearchState, { dispatch, getState }) => {
             let params: any = {};
 
             for(const [key, value] of searchParams.entries()) {
                 params = ({...params, [key]: value});
             }
 
-            const {page = virtualPage, city, propertyType, minPrice, maxPrice, minBeds, maxBeds} = params;
+            const {page, city, propertyType, minPrice, maxPrice, minBeds, maxBeds} = params;
 
-            const search = {adType, page, city, propertyType, minPrice, maxPrice, minBeds, maxBeds};
+            const search = {adType, page: page || virtualPage || 1, city, propertyType, minPrice, maxPrice, minBeds, maxBeds};
 
             const state = getState();
             const oldSearch = searchSelector(state);
@@ -62,7 +62,7 @@ export const getProperties = createAsyncThunk(
           });
 
       const {data} = await response.json();
-      return {data, search};
+      return {data, search, hasPagination: !virtualPage};
     },
 );
 
@@ -79,12 +79,17 @@ const navigation = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getProperties.fulfilled, (state, action) => {
-        const { data: {getProperties : {items, pages, count}}, search } = action.payload || {};
-        state.properties = items;
+        const { data: {getProperties : {items, pages, count}}, search, hasPagination } = action.payload || {};
+
+        state.properties = hasPagination ? items: [...state.properties, ...items];
         state.pages = pages;
         state.count = count;
         state.activeSearch = search;
         state.lastUpdated = Date.now();
+
+        if (hasPagination){
+            state.activeProperty = 0;
+        }
     });
   },
 });

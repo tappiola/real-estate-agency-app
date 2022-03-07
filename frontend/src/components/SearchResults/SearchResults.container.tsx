@@ -66,8 +66,6 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
         }
     }, [isMobile, activeProperty, properties, count]);
 
-    // useEffect(() => {dispatch(setActiveProperty(0))}, [searchParams]);
-
     return <SearchResults
         count={count}
         isLoading={isLoading}
