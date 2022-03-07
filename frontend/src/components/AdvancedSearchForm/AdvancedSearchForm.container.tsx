@@ -9,6 +9,7 @@ import Select from "../Select";
 import {MAX_BEDROOMS, PRICE_RANGE} from "./AdvancedSearchForm.config";
 import {formatPrice} from "../../util";
 import {FilterParams} from "../../types";
+import {setActiveProperty} from "../../redux/navigation";
 
 const AdvancedSearchFormContainer: React.FC<{searchType: AdType}> = ({searchType}) => {
 
@@ -37,6 +38,7 @@ const AdvancedSearchFormContainer: React.FC<{searchType: AdType}> = ({searchType
         const queryString = new URLSearchParams(filterSettings).toString();
 
         navigate('?' + queryString);
+        dispatch(setActiveProperty(0));
     }
     const getPriceOption = (price: number) => `${formatPrice(price)}${searchType === AdType.Rent ? ' pcm ' : ''}`;
 

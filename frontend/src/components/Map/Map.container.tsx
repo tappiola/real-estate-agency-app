@@ -6,14 +6,16 @@ import {getHouseTitle} from "../../util";
 import {Property} from "../../types";
 import {Feature, Point} from "geojson";
 import React from "react";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {setActiveProperty} from "../../redux/navigation";
 
 const MapContainer : React.FC<{
   properties: Property[],
-  activeItem: number,
-  setActiveItem:(index: number) => void
-}> = ({properties, activeItem, setActiveItem}) => {
+}> = ({properties}) => {
 
   const [map, setMap] = useState<mapboxgl.Map>();
+  const dispatch = useAppDispatch();
+  const {activeProperty} = useAppSelector(({ navigation }) => navigation);
 
   const getCoordinates = (item: Property) => ([item.longitude, item.latitude] as LngLatLike);
 
@@ -80,7 +82,8 @@ const MapContainer : React.FC<{
             .addTo(mapRef);
 
         // Set new active list item
-        setActiveItem(match.properties?.id);
+        // setActiveItem(match.properties?.id);
+        dispatch(setActiveProperty(match.properties?.id));
       });
 
       // Change the cursor to a pointer when the mouse is over the places layer.
@@ -101,10 +104,10 @@ const MapContainer : React.FC<{
   useEffect(() => {
     if (map) {
       map.flyTo({
-        center: getCoordinates(properties[activeItem])
+        center: getCoordinates(properties[activeProperty])
       });
     }
-  }, [activeItem, properties]);
+  }, [activeProperty, properties]);
 
   return <div id="map"/>;
 }

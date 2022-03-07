@@ -10,11 +10,9 @@ const SearchResults: React.FC<{
     properties: Property[],
     isLoading: boolean,
     pages: number,
-    activeItem: number,
-    setActiveItem: (id: number) => void,
     searchParams: URLSearchParams,
     isMobile: boolean
-}> = ({count, properties, isLoading, pages, activeItem, setActiveItem, searchParams, isMobile}) => {
+}> = ({count, properties, isLoading, pages, searchParams, isMobile}) => {
     const renderMap = () => {
         if (!properties.length){
             return null;
@@ -22,8 +20,6 @@ const SearchResults: React.FC<{
 
         return <MapContainer
             properties={properties}
-            activeItem={activeItem}
-            setActiveItem={setActiveItem}
         />
     }
 
@@ -42,8 +38,6 @@ const SearchResults: React.FC<{
                 <PropertiesListContainer
                     isLoading={isLoading}
                     properties={properties}
-                    activeItem={activeItem}
-                    setActiveItem={setActiveItem}
                 />
                 {renderPagination()}
             </div>

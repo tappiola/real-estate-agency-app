@@ -13,15 +13,15 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
     const [pages, setPages] = useState(1);
     const [count, setCount] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
-    const [activeItem, setActiveItem] = useState(0);
     const [virtualPage, setVirtualPage] = useState(1);
+    const dispatch = useAppDispatch();
 
     const isMobile = useIsMobile();
 
     const [searchParams] = useSearchParams();
-    const dispatch = useAppDispatch();
 
     const {scrollOffset} = useAppSelector(({ navigation }) => navigation);
+    const {activeProperty} = useAppSelector(({ navigation }) => navigation);
 
         useEffect(() => {
             if (scrollOffset){
@@ -64,7 +64,7 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
             return;
         }
 
-        if (properties.length && activeItem + 1 === properties.length && virtualPage < pages){
+        if (properties.length && activeProperty + 1 === properties.length && virtualPage < pages){
             const fetchMoreProperties = async () => {
                 try {
                     const pageToFetch = virtualPage + 1;
@@ -83,17 +83,15 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
 
             fetchMoreProperties();
         }
-    }, [isMobile, activeItem, properties, count]);
+    }, [isMobile, activeProperty, properties, count]);
 
-    useEffect(() => setActiveItem(0), [searchParams]);
+    // useEffect(() => {dispatch(setActiveProperty(0))}, [searchParams]);
 
     return <SearchResults
         count={count}
         isLoading={isLoading}
         pages={pages}
         properties={properties}
-        activeItem={activeItem}
-        setActiveItem={setActiveItem}
         searchParams={searchParams}
         isMobile={isMobile}
     />

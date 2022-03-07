@@ -6,16 +6,18 @@
   import PropertiesList from "./PropertiesList.component";
   import {Property} from "../../types";
   import {useIsMobile} from "../IsMobile";
+  import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+  import {setActiveProperty} from "../../redux/navigation";
 
   const PropertiesListContainer: React.FC<{
     properties: Property[],
-    activeItem: number,
-    setActiveItem: (index: number) => void,
     isLoading: boolean}
-  > = ({properties, activeItem, setActiveItem, isLoading}) => {
+  > = ({properties, isLoading}) => {
     const listRef = useRef<HTMLDivElement>(null);
 
     const isMobile = useIsMobile();
+    const dispatch = useAppDispatch();
+    const {activeProperty} = useAppSelector(({ navigation }) => navigation);
 
     const scrollListener = () => {
       // Active list item is top-most fully-visible item
@@ -25,13 +27,15 @@
 
       // If it's a new one, update active list item
       const topMostVisible = visibleListItems.indexOf(true);
-      if (topMostVisible !== activeItem && topMostVisible !== -1) {
-        setActiveItem(topMostVisible);
+      if (topMostVisible !== activeProperty && topMostVisible !== -1) {
+        // setActiveItem(topMostVisible);
+        dispatch(setActiveProperty(topMostVisible));
       }
     };
 
     const changeListener = (index: number) => {
-      setActiveItem(index);
+      // setActiveItem(index);
+      dispatch(setActiveProperty(index));
     }
 
     useEffect(() => inView.offset(200), []);
@@ -40,9 +44,9 @@
     useEffect(() => {
       if (listRef && listRef.current && properties.length) {
         listRef.current.scrollTop = document.getElementById(
-            `property-${activeItem}`
+            `property-${activeProperty}`
         )!.offsetTop - 70;
-      }}, [listRef, activeItem]);
+      }}, [listRef, activeProperty, properties]);
 
     if(isLoading){
       return <PropertiesLoader/>
@@ -55,6 +59,7 @@
         scrollListener={scrollListener}
         changeListener={changeListener}
         isMobile={isMobile}
+        activeProperty={activeProperty}
         />
   }
 

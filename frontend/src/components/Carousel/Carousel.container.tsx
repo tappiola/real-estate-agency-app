@@ -12,6 +12,7 @@ const CarouselContainer: React.FC<{
     slideDuration?: number,
     automaticSlideInterval?: number,
     changeHandler?: (index: number) => void,
+    initialIndex?: number,
     [styleProp: string]: any
 }> = (
     {
@@ -21,13 +22,14 @@ const CarouselContainer: React.FC<{
         showIndicators = true,
         slideDuration = 500,
         automaticSlideInterval = 5000,
+        initialIndex = 0,
         changeHandler,
         ...style
     }) => {
     const carouselRef = useRef<HTMLDivElement>(null);
     const slidesRef = useRef<HTMLDivElement>(null);
     const [carouselWidth, setCarouselWidth] = useState(0);
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(initialIndex);
     const [isMouseOver, setIsMouseOver] = useState(false);
 
     const [ touchStartX, setTouchStartX] = useState<number>(0);

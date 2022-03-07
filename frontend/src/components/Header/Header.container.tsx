@@ -5,11 +5,13 @@ import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {logoutUser} from "../../redux/user";
 import Header from "./Header.component";
 import {enqueueToast} from "../../redux/notifier";
+import {useIsMobile} from "../IsMobile";
 
 const HeaderContainer = () => {
     const { pathname } = useLocation();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const isMobile = useIsMobile();
 
     const { isAuthorized } = useAppSelector(({ user }) => user);
 
@@ -35,6 +37,7 @@ const HeaderContainer = () => {
         isAuthorized={isAuthorized}
         isRentSearch={pathname === '/' + AdType.Rent}
         isSaleSearch={pathname === '/' + AdType.Sale}
+        isMobile={isMobile}
         onWishlistIconClick={onWishlistIconClick}
     />;
 }

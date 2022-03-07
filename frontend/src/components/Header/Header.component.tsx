@@ -10,9 +10,14 @@ const HeaderComponent: React.FC<{
     isRentSearch: boolean,
     isSaleSearch: boolean,
     isAuthorized: boolean,
+    isMobile: boolean
     onWishlistIconClick: () => void
-}> = ({onLogoutClick, onLoginClick, isRentSearch, isSaleSearch, isAuthorized, onWishlistIconClick}) => {
+}> = ({onLogoutClick, onLoginClick, isRentSearch, isSaleSearch, isAuthorized, onWishlistIconClick, isMobile}) => {
     const renderChildren = () => {
+        if (isMobile){
+            return 'filter';
+        }
+
         if (isRentSearch)
             return <AdvancedSearchFormComponent searchType={AdType.Rent}/>;
 

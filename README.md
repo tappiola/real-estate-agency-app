@@ -34,3 +34,4 @@ TODO:
 
 - (R) fix 100vh
 - (R) move mixins to one file
+- (R) ts-ignore inView
