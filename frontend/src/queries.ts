@@ -104,6 +104,45 @@ export const searchProperties = (adType: AdType, searchParams: URLSearchParams, 
     return sendGraphqlRequest(graphqlQuery);
 }
 
+export const searchPropertiesQuery = (params: any) => {
+
+    const {adType, page, city, propertyType, minPrice, maxPrice, minBeds, maxBeds} = params;
+
+    const cityPart = city ? `, cityId: ${+city}` : '';
+    const propertyTypePart = propertyType ?`, propertyTypeId: ${+propertyType}` : '';
+    const minPricePart = minPrice ? `, minPrice: ${+minPrice}` : '';
+    const maxPricePart = maxPrice ? `, maxPrice: ${+maxPrice}` : '';
+    const minBedsPart = minBeds ? `, minBeds: "${minBeds}"` : '';
+    const maxBedsPart = maxBeds ? `, maxBeds: "${+maxBeds === MAX_BEDROOMS ? `${maxBeds}+` : maxBeds}"` : '';
+
+    const graphqlQuery = {
+        query:`
+            {
+              getProperties(adType: "${adType}", page: ${+page}${cityPart}${propertyTypePart}${minPricePart}${maxPricePart}${minBedsPart}${maxBedsPart}) {
+                count
+                pages
+                items {
+                    id
+                    title
+                    description
+                    address
+                    bedroomCount
+                    bathroomCount
+                    city { id name }
+                    propertyType { id name }
+                    images { id link position }
+                    isInWishlist
+                    longitude
+                    latitude
+                    price
+                    type {id name}
+                }
+              }
+            }`};
+
+    return sendGraphqlRequest(graphqlQuery);
+}
+
 export const getProperty = (id: number) => {
     const graphqlQuery = {
         query:`

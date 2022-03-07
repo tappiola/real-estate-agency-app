@@ -1,19 +1,21 @@
 import {AdType} from "./constants";
 import {Property} from "./types";
 
-export const sortByKey = <T extends object, U extends keyof T> (values: T[], sortKey: U) => values.sort(
-    (a, b) => {
-        if (a[sortKey] < b[sortKey]) {
-            return -1;
-        }
+export const sortByKey = <T extends object, U extends keyof T> (values: T[], sortKey: U) => {
+    return [...values].sort(
+        (a, b) => {
+            if (a[sortKey] < b[sortKey]) {
+                return -1;
+            }
 
-        if (a[sortKey] > b[sortKey]) {
-            return 1;
-        }
+            if (a[sortKey] > b[sortKey]) {
+                return 1;
+            }
 
-        return 0;
-    }
-);
+            return 0;
+        }
+    );
+}
 
 export const formatPrice = (price: number, currency = 'GBP') => {
     const language = navigator.languages ? navigator.languages[0] : navigator.language;

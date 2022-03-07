@@ -2,7 +2,6 @@ Create backup: `docker exec real-estate-agency-db-1 sh -c 'exec mysqldump -uadmi
 Restore backup: `docker exec -i real-estate-agency-db-1 sh -c 'exec mysql -uadmin -pbigsnorlax flats' < ./flats-dump.sql`
 
 TODO:
-
 - not use volumes on prod
 - configure cors whitelist urls
 - inputs validation trim.niy.isempty
@@ -10,15 +9,16 @@ TODO:
 - eslint
 - add position storing on navigate back
 - don't rerequest on navigate back (check if query params match prev currency params)
-- react-content-loader for placeholders https://skeletonreact.com/
+- react-content-loader for placeholders on property page https://skeletonreact.com/
 - add next / prev for pagination
-- add labels
 - favicon
 - add price to map
 - responsive layout
 - fix big heart
 - fix heart animation
 - save active item on navigate back
+- cities and property types to redux
+- wishlist UI
 
 - (R) refresh token
 - (R) imports without ../../
@@ -31,7 +31,6 @@ TODO:
 - (R) use library to construct gql requests
 - (R) where: {'$type.id$': 'rent'} doesn't work
 - (R) replace croissant
-
 - (R) fix 100vh
 - (R) move mixins to one file
 - (R) ts-ignore inView

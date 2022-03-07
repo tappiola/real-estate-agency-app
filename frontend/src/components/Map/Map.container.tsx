@@ -2,31 +2,29 @@ import mapboxgl, {LngLatLike} from 'mapbox-gl';
 import {accessToken, IMAGE_PLACEHOLDER} from '../../constants';
 import './Map.style.scss';
 import {useEffect, useState} from "react";
-import {getHouseTitle} from "../../util";
+import {formatPrice, getHouseTitle} from "../../util";
 import {Property} from "../../types";
 import {Feature, Point} from "geojson";
 import React from "react";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {setActiveProperty} from "../../redux/navigation";
 
-const MapContainer : React.FC<{
-  properties: Property[],
-}> = ({properties}) => {
+const MapContainer : React.FC = () => {
 
   const [map, setMap] = useState<mapboxgl.Map>();
   const dispatch = useAppDispatch();
-  const {activeProperty} = useAppSelector(({ navigation }) => navigation);
+  const {activeProperty, properties} = useAppSelector(({ navigation }) => navigation);
 
   const getCoordinates = (item: Property) => ([item.longitude, item.latitude] as LngLatLike);
 
   const generateFeature = (property: Property, index: number) => {
-    const { bedroomCount, images, longitude, latitude, propertyType: {name}} = property;
+    const { bedroomCount, images, longitude, latitude, propertyType: {name}, price} = property;
     const heading = getHouseTitle(bedroomCount, name);
 
     return {
       type: 'Feature',
       properties: {
-        description: `<img width="100%" src="${images[0]?.link || IMAGE_PLACEHOLDER}" alt="img"/><b>${heading}</b>`,
+        description: `<img width="100%" src="${images[0]?.link || IMAGE_PLACEHOLDER}" alt="img"/><b>${heading}</b><p class="Map-Price">${formatPrice(price)}</p>`,
         id: index
       },
       geometry: {
@@ -48,6 +46,7 @@ const MapContainer : React.FC<{
     });
 
     mapRef.on('load', () => {
+      console.log('load');
       // Add markers to map
       mapRef.addLayer({
         id: 'places',
@@ -108,6 +107,19 @@ const MapContainer : React.FC<{
       });
     }
   }, [activeProperty, properties]);
+
+  useEffect(() => {
+    if(!map) {
+      return;
+    }
+    const data = [...properties];
+
+    // @ts-ignore
+    map.getSource('places').setData({
+      type: 'FeatureCollection',
+      features: data.map(generateFeature)
+    })
+  }, [properties]);
 
   return <div id="map"/>;
 }

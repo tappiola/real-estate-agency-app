@@ -18,9 +18,7 @@ const SearchResults: React.FC<{
             return null;
         }
 
-        return <MapContainer
-            properties={properties}
-        />
+        return <MapContainer/>
     }
 
     const renderPagination = () => {
@@ -37,7 +35,6 @@ const SearchResults: React.FC<{
             <div className="SearchResults-Pane SearchResults-Properties">
                 <PropertiesListContainer
                     isLoading={isLoading}
-                    properties={properties}
                 />
                 {renderPagination()}
             </div>

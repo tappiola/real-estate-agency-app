@@ -1,17 +1,13 @@
 import React, {useEffect, useState} from "react";
-import {searchProperties} from "../../queries";
 import {useSearchParams} from "react-router-dom";
 import SearchResults from "./SearchResults.component";
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 import {AdType, ToastTypes} from "../../constants";
 import {enqueueToast} from "../../redux/notifier";
 import {useIsMobile} from "../IsMobile";
-import {Property} from "../../types";
+import {getProperties} from "../../redux/navigation";
 
 const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
-    const [properties, setProperties] = useState<Property[]>([]);
-    const [pages, setPages] = useState(1);
-    const [count, setCount] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [virtualPage, setVirtualPage] = useState(1);
     const dispatch = useAppDispatch();
@@ -21,7 +17,7 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
     const [searchParams] = useSearchParams();
 
     const {scrollOffset} = useAppSelector(({ navigation }) => navigation);
-    const {activeProperty} = useAppSelector(({ navigation }) => navigation);
+    const {activeProperty, properties, pages, count} = useAppSelector(({ navigation }) => navigation);
 
         useEffect(() => {
             if (scrollOffset){
@@ -43,11 +39,7 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
 
         const fetchProperties = async () => {
             try {
-                const response = await searchProperties(adType, searchParams);
-                const {data: {getProperties: {items, pages, count}}} = await response.json();
-                setProperties(items);
-                setPages(pages);
-                setCount(count);
+                await dispatch(getProperties({adType, searchParams}));
                 setIsLoading(false);
             } catch (e){
                 console.log(e);
@@ -56,6 +48,7 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
         };
 
         fetchProperties();
+        setIsLoading(false);
 
     }, [adType, searchParams]);
 
@@ -68,11 +61,7 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
             const fetchMoreProperties = async () => {
                 try {
                     const pageToFetch = virtualPage + 1;
-                    const response = await searchProperties(adType, searchParams, pageToFetch);
-                    const {data: {getProperties: {items, pages, count}}} = await response.json();
-                    setProperties([...properties, ...items]);
-                    setPages(pages);
-                    setCount(count);
+                    dispatch(getProperties({adType, searchParams, virtualPage: pageToFetch}));
                     setIsLoading(false);
                     setVirtualPage(pageToFetch);
                 } catch (e){

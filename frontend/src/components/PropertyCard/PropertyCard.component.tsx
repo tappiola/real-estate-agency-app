@@ -24,11 +24,13 @@ const PropertyCardComponent: React.FC<{property: Property, index: number, loadPr
 
         return sortByKey(images, 'position').slice(0, 15).map((image: Image) => {
             return <CarouselItem key={image.id}>
+                <div className='PropertyCard-ImageContainer'>
             <img
                 className='PropertyCard-CarouselImg'
                 src={image.link}
                 alt={`Image${image.position}`}
             />
+                </div>
         </CarouselItem>
         })
     }
