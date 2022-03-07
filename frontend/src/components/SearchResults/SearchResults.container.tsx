@@ -16,15 +16,7 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
 
     const [searchParams] = useSearchParams();
 
-    const {scrollOffset} = useAppSelector(({ navigation }) => navigation);
     const {activeProperty, properties, pages, count} = useAppSelector(({ navigation }) => navigation);
-
-        useEffect(() => {
-            if (scrollOffset){
-                setTimeout(() => window.scrollTo({top: scrollOffset, behavior: 'smooth'}), 100);
-            }
-        }
-        ,[]);
 
     useEffect(() => {
 

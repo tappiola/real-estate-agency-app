@@ -5,7 +5,6 @@ import {enqueueToast} from "./notifier";
 import {AdType, ToastTypes} from "../constants";
 
 interface NavigationState {
-  scrollOffset: number,
   activeProperty: number,
   activeSearch: any,
   properties: Property[],
@@ -19,7 +18,6 @@ adType: AdType, searchParams: URLSearchParams, virtualPage?: number
 }
 
 const initialState: NavigationState = {
-  scrollOffset: 0,
   activeProperty: 0,
   activeSearch: {},
   properties: [],
@@ -72,9 +70,6 @@ const navigation = createSlice({
   name: 'navigation',
   initialState,
   reducers: {
-    saveScrollPosition(state, action: PayloadAction<number>) {
-      state.scrollOffset = action.payload;
-    },
     setActiveProperty(state, action: PayloadAction<number>) {
       state.activeProperty = action.payload;
     },
@@ -94,6 +89,6 @@ const navigation = createSlice({
   },
 });
 
-export const { saveScrollPosition, setActiveProperty } = navigation.actions;
+export const { setActiveProperty } = navigation.actions;
 
 export default navigation.reducer;

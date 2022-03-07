@@ -41,7 +41,6 @@
     &-Map {
         justify-content: space-between;
         width: 40%;
-        height: calc(100vh - 50vw);
 
         @include mobile {
             width: 100%;
