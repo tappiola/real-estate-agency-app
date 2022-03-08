@@ -18,7 +18,7 @@
 
     if (isMobile){
       return <div className='Properties-List' ref={listRef}>
-        <Carousel key={searchKey} width="100vw" height="50vw" autoplay={false} showIndicators={false} changeHandler={changeListener} initialIndex={activeProperty}>
+        <Carousel key={searchKey} width="100vw" height="50vw" showIndicators={false} changeHandler={changeListener} initialIndex={activeProperty}>
         { properties.map((property, index) =>(
             <CarouselItem key={index}>
               <PropertyCardContainer

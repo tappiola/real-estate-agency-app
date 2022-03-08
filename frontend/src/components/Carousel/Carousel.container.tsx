@@ -17,7 +17,7 @@ const CarouselContainer: React.FC<{
 }> = (
     {
         children,
-        autoplay = true,
+        autoplay = false,
         infinite = false,
         showIndicators = true,
         slideDuration = 500,

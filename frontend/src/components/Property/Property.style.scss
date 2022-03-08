@@ -1,11 +1,61 @@
+@mixin mobile {
+    @media (max-width: 810px) {
+        @content;
+    }
+}
+
 .Property {
     &-Container {
         width: 100%;
     }
 
+    &-Price {
+        text-align: left;
+    }
+
+    &-Title {
+        text-align: left;
+        font-size: 18px;
+        margin: 10px 0;
+        font-weight: 600;
+    }
+
+    &-Information {
+        @include mobile {
+            padding: 0 30px;
+        }
+    }
+
+    &-Address {
+        color: var(--dark-gray);
+        margin: 0;
+        font-size: 18px;
+        text-align: left;
+    }
+
     &-Description {
-        margin: 0 30px 50px 80px;
-        width: 60%;
+        //margin: 0 30px 50px 80px;
+        //width: 60%;
         text-align: justify;
+    }
+
+    &-CarouselImg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &-ImageContainer {
+        height: 100%;
+    }
+
+    &-Summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .WishlistToggle-Label {
+            //display: none;
+        }
     }
 }

@@ -94,4 +94,12 @@
             font-size: 14px;
         }
     }
+
+    .WishlistToggle {
+        &-Container {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+    }
 }

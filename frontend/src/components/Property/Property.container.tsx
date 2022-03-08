@@ -4,6 +4,7 @@ import {getProperty} from "../../queries";
 import Loader from "../Loader";
 import {useParams} from "react-router-dom";
 import {Property as PropertyType} from "../../types";
+import {useIsMobile} from "../IsMobile";
 
 const PropertyContainer = () => {
     const [property, setProperty] = useState<PropertyType | null>(null);
@@ -11,6 +12,7 @@ const PropertyContainer = () => {
     const [isInWishlist, setIsInWishlist] = useState(false);
     const params = useParams();
     const {id} = params;
+    const isMobile = useIsMobile();
 
     useEffect(() => {
         if (!id){
@@ -42,7 +44,7 @@ const PropertyContainer = () => {
         return <p>Not found</p>;
     }
 
-    return <Property property={property} isInWishlist={isInWishlist}/>;
+    return <Property property={property} isInWishlist={isInWishlist} isMobile={isMobile}/>;
 }
 
 export default PropertyContainer;

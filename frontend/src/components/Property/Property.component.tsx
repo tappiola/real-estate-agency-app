@@ -1,14 +1,16 @@
-import {Property as PropertyType} from '../../types';
+import {Image, Property as PropertyType} from '../../types';
 import React, {useEffect, useRef} from "react";
 import ToggleWishlist from "../ToggleWishlist";
 import MultiPreview from "../MultiPreview";
-import {getFullTitle, sortByKey} from "../../util";
+import {formatPrice, getFullTitle, sortByKey} from "../../util";
 import './Property.style.scss';
+import {Carousel, CarouselItem} from "../Carousel";
 
 const Property: React.FC<{
     property: PropertyType,
-    isInWishlist: boolean
-}> = ({property, isInWishlist}) => {
+    isInWishlist: boolean,
+    isMobile: boolean
+}> = ({property, isInWishlist, isMobile}) => {
     const descRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -17,12 +19,46 @@ const Property: React.FC<{
         }
     }, [descRef.current, descRef]);
 
+    const renderImage = (image:Image) => {
+        return <CarouselItem key={image.id}>
+            <div className='Property-ImageContainer'>
+                <img
+                    className='Property-CarouselImg'
+                    src={image.link}
+                    alt={`Image${image.position}`}
+                />
+            </div>
+        </CarouselItem>
+    }
+
+    const renderImages = () => {
+        const {images } = property;
+        if (!images) {
+            return null;
+        }
+        const sortedImages = sortByKey(images, 'position');
+
+        if (isMobile){
+            return <Carousel width="100vw" height="65vw">
+                {images.map((image: Image) => renderImage(image))}
+            </Carousel>;
+        }
+
+        return <MultiPreview images={sortedImages}/>;
+    }
+
     return (
         <div className="Property-Container">
-            <MultiPreview images={sortByKey(property.images, 'position')}/>
-            <h1>{getFullTitle(property)}</h1>
-            <div className='Property-Description' ref={descRef}>{property.title}</div>
-            <ToggleWishlist property={property} inWishlist={isInWishlist}/>
+            {renderImages()}
+            <div className='Property-Information'>
+                <div className="Property-Summary">
+                    <h2 className='Property-Price'>{formatPrice(property.price)}</h2>
+                    <ToggleWishlist property={property} inWishlist={isInWishlist}/>
+                </div>
+                <p className='Property-Title'>{getFullTitle(property)}</p>
+                <p className='Property-Address'>{property.address}</p>
+                <div className='Property-Description' ref={descRef}>{property.title}</div>
+            </div>
         </div>
     );
 }
