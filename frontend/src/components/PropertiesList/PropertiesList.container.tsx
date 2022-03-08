@@ -37,7 +37,6 @@
     };
 
     const changeListener = (index: number) => {
-      // setActiveItem(index);
       dispatch(setActiveProperty(index));
     }
 

@@ -80,7 +80,6 @@ const MapContainer : React.FC = () => {
             .addTo(mapRef);
 
         // Set new active list item
-        // setActiveItem(match.properties?.id);
         dispatch(setActiveProperty(match.properties?.id));
       });
 

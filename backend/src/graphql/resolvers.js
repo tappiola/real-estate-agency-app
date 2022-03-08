@@ -184,7 +184,6 @@ const getWishlist = async (args, req) => {
     throw new NotAuthenticatedError();
   }
 
-  // const data =  await UserWishlist.findAll( {where: {userId}, include: Property});
   const data =  await UserWishlist.findAll( {where: {userId: req.userId}});
   const propertyIds = data.map(({propertyId}) => propertyId);
 

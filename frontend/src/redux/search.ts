@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Property} from "../types";
 import {searchProperties} from "../queries";
 import {enqueueToast} from "./notifier";
-import {AdType, ToastTypes} from "../constants";
+import {AdType, TEN_MINUTES, ToastTypes} from "../constants";
 
 interface NavigationState {
   activeProperty: number,
@@ -28,7 +28,6 @@ const initialState: NavigationState = {
 
 const searchSelector = (state: any) => state.search.activeSearch;
 const lastUpdatedSelector = (state: any) => state.search.lastUpdated;
-// const virtualPageSelector = (state: any) => state.search.virtualPage;
 
 export const getProperties = createAsyncThunk(
     'search/getProperties',
@@ -52,7 +51,7 @@ export const getProperties = createAsyncThunk(
 
             const hasSearchChanged = JSON.stringify(oldSearch) !== JSON.stringify(search);
 
-            if(!hasSearchChanged && Date.now() - lastUpdated < 600000){
+            if(!hasSearchChanged && Date.now() - lastUpdated < TEN_MINUTES){
                 throw new Error('No need to rerequest');
             }
 

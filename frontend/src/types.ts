@@ -1,18 +1,18 @@
-import {Filter, ToastTypes} from "./constants";
+import {AdType, Filter, ToastTypes} from "./constants";
 
 export type CityType = {
     id: number
     name: string
 }
 
-export type TypeOfPropertyType = {
+export type PropertyType = {
     id: number
     name: string
 }
 
 export type Type = {
     id: number
-    name: string
+    name: AdType
 }
 
 export type Image = {
@@ -27,7 +27,7 @@ export type Property = {
     description: string
     city: CityType
     images: Image[]
-    propertyType: TypeOfPropertyType,
+    propertyType: PropertyType,
     isInWishlist: boolean,
     price: number,
     bedroomCount: number,

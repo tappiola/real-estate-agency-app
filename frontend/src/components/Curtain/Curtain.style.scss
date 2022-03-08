@@ -9,7 +9,6 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
   height: calc(100% - var(--header-height));
   transform: translateY(-100%);
   transition: 600ms ease-in-out;

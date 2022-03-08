@@ -10,6 +10,8 @@ export enum ToastTypes {
 export const accessToken =
     'pk.eyJ1IjoidGFwcGlvbGEiLCJhIjoiY2t6eHhuM2N6MDYyMTJ2cDcxcDVsem8zNiJ9.OByK2fsCvb8XsvT2OYUEjA';
 
+export const TEN_MINUTES = 600000;
+
 export const IMAGE_PLACEHOLDER = 'https://homes.madeeasy.app/img/no-propertyfound.png';
 
 export enum AdType {

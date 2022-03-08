@@ -12,6 +12,9 @@ TODO:
 - cities and property types to redux
 - wishlist UI
 - AdvancedSearchForm add component
+- property page UI
+- home page UI
+- add logo
 
 - (R) refresh token
 - (R) imports without ../../
@@ -31,3 +34,4 @@ TODO:
 - configure cors whitelist urls
 - not use volumes on prod
 - (R) login with wrong password
+- remove User is not authentificated when opening wishlist 

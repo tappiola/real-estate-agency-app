@@ -11,12 +11,10 @@ import Notification from '../Notification';
 import {ToastQueueProvider} from '../Toast';
 import {AdType} from "../../constants";
 import HeaderComponent from "../Header";
-import {useAppSelector} from "../../redux/hooks";
 import { ParallaxProvider } from 'react-scroll-parallax';
+import React from "react";
 
-const App = () => {
-    const { isAuthorized } = useAppSelector(({ user }) => user);
-
+const App : React.FC<{isAuthorized: boolean}> = ({isAuthorized}) => {
     return (
       <ToastQueueProvider>
             <div className="App">

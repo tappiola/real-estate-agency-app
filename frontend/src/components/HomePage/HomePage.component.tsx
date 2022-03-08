@@ -1,7 +1,7 @@
 import React from 'react';
 import CitiesSelect from "../BaseSearchForm";
 import ContactUs from "../ContactUs";
-import './Header.style.scss';
+import './HomePage.style.scss';
 import {useParallax} from "react-scroll-parallax";
 
 function HomePage() {

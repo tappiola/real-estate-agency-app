@@ -27,16 +27,10 @@ const RegisterContainer = () => {
                 if (resData.errors) {
                     throw new Error('User creation failed!');
                 }
-                // this.setState({ isAuth: false, authLoading: false });
                 navigate('/',  { replace: true });
             })
             .catch(err => {
                 console.log(err);
-                // this.setState({
-                //     isAuth: false,
-                //     authLoading: false,
-                //     error: err
-                // });
             });
     };
 

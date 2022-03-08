@@ -1,22 +1,11 @@
-import React, {useEffect, useState} from "react";
-import {CityType} from "../../types";
-import {fetchCities} from "../../queries";
+import React from "react";
 import Select from "../Select";
+import {useAppSelector} from "../../redux/hooks";
 
 const CitiesSelect: React.FC<{selectedOption: string, onOptionSelect: (option: string) => void, placeholder: string}> = ({selectedOption, onOptionSelect, placeholder}) => {
-    const [options, setOptions] = useState<CityType[]>([]);
+    const { cities } = useAppSelector(({ referenceData }) => referenceData);
 
-    useEffect(() => {
-        const initCities = async () => {
-            const response = await fetchCities();
-            const {data: {getCities}} = await response.json();
-            setOptions(getCities);
-        };
-
-        initCities();
-    }, []);
-
-    return <Select placeholder={placeholder} options={options} selectedOption={selectedOption} onOptionSelect={onOptionSelect}/>
+    return <Select placeholder={placeholder} options={cities} selectedOption={selectedOption} onOptionSelect={onOptionSelect}/>
 };
 
 export default CitiesSelect;

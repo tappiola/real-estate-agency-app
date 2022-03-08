@@ -4,6 +4,7 @@ import AdvancedSearchForm from "../AdvancedSearchForm";
 import './Header.style.scss';
 import WishlistIcon from "../WishlistIcon";
 import Curtain from "../Curtain";
+import FilterIcon from "../FilterIcon";
 
 const HeaderComponent: React.FC<{
     onLogoutClick: () => void,
@@ -21,7 +22,7 @@ const HeaderComponent: React.FC<{
         }
 
         if (isMobile){
-            return <button onClick={() => setIsCurtainActive(true)}>filter</button>;
+            return <div onClick={() => setIsCurtainActive(true)}><FilterIcon/></div>;
         }
 
         return <AdvancedSearchForm searchType={searchType}/>;
