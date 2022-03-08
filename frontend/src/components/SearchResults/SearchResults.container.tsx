@@ -9,14 +9,13 @@ import {getProperties} from "../../redux/search";
 
 const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
     const [isLoading, setIsLoading] = useState(true);
-    const [virtualPage, setVirtualPage] = useState(1);
     const dispatch = useAppDispatch();
 
     const isMobile = useIsMobile();
 
     const [searchParams] = useSearchParams();
 
-    const {activeProperty, properties, pages, count} = useAppSelector(({ search }) => search);
+    const {activeProperty, properties, pages, count, activeSearch} = useAppSelector(({ search }) => search);
 
     useEffect(() => {
 
@@ -31,7 +30,7 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
 
         const fetchProperties = async () => {
             try {
-                await dispatch(getProperties({adType, searchParams, isMobile}));
+                await dispatch(getProperties({adType, searchParams}));
                 setIsLoading(false);
             } catch (e){
                 console.log(e);
@@ -49,13 +48,13 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
             return;
         }
 
-        if (properties.length && activeProperty + 1 === properties.length && virtualPage < pages){
+        if (properties.length && activeProperty + 1 === properties.length && activeSearch.page < pages){
             const fetchMoreProperties = async () => {
                 try {
-                    const pageToFetch = virtualPage + 1;
-                    dispatch(getProperties({adType, searchParams, virtualPage: pageToFetch, isMobile}));
+                    // const pageToFetch = virtualPage + 1;
+                    dispatch(getProperties({adType, searchParams, requestMore: true}));
                     setIsLoading(false);
-                    setVirtualPage(pageToFetch);
+                    // setVirtualPage(pageToFetch);
                 } catch (e){
                     console.log(e);
                     setIsLoading(false);

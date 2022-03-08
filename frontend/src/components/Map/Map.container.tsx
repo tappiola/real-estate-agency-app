@@ -46,7 +46,6 @@ const MapContainer : React.FC = () => {
     });
 
     mapRef.on('load', () => {
-      console.log('load');
       // Add markers to map
       mapRef.addLayer({
         id: 'places',

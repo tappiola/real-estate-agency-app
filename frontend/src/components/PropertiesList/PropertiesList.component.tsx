@@ -5,8 +5,8 @@
   import {Property} from "../../types";
   import {Carousel, CarouselItem} from "../Carousel";
 
-  const PropertiesList: React.FC<{properties: Property[], isLoading: boolean, listRef: RefObject<HTMLDivElement>, scrollListener: () => void, changeListener: (index: number) => void, isMobile: boolean, activeProperty: number}>
-      = ({properties, isLoading, listRef, scrollListener, changeListener, isMobile, activeProperty}) => {
+  const PropertiesList: React.FC<{properties: Property[], isLoading: boolean, listRef: RefObject<HTMLDivElement>, scrollListener: () => void, changeListener: (index: number) => void, isMobile: boolean, activeProperty: number, searchKey: string}>
+      = ({properties, isLoading, listRef, scrollListener, changeListener, isMobile, activeProperty, searchKey}) => {
 
     if(isLoading){
       return <PropertiesLoader/>
@@ -18,7 +18,7 @@
 
     if (isMobile){
       return <div className='Properties-List' ref={listRef}>
-        <Carousel width="100vw" height="50vw" autoplay={false} showIndicators={false} changeHandler={changeListener} initialIndex={activeProperty}>
+        <Carousel key={searchKey} width="100vw" height="50vw" autoplay={false} showIndicators={false} changeHandler={changeListener} initialIndex={activeProperty}>
         { properties.map((property, index) =>(
             <CarouselItem key={index}>
               <PropertyCardContainer

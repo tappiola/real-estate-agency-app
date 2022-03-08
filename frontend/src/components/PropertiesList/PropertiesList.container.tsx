@@ -15,7 +15,8 @@
 
     const isMobile = useIsMobile();
     const dispatch = useAppDispatch();
-    const {activeProperty, properties} = useAppSelector(({ search }) => search);
+    const {activeProperty, properties, activeSearch} = useAppSelector(({ search }) => search);
+    const {page, ...otherParams} = activeSearch;
 
     const getTopVisible = () => {
       // Active list item is top-most fully-visible item
@@ -71,6 +72,7 @@
         changeListener={changeListener}
         isMobile={isMobile}
         activeProperty={activeProperty}
+        searchKey={JSON.stringify(otherParams)}
         />
   }
 

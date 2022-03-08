@@ -14,7 +14,7 @@ interface NavigationState {
 }
 
 interface SearchState {
-adType: AdType, searchParams: URLSearchParams, virtualPage?: number, isMobile?: boolean
+adType: AdType, searchParams: URLSearchParams, requestMore?: boolean
 }
 
 const initialState: NavigationState = {
@@ -24,15 +24,15 @@ const initialState: NavigationState = {
     count: 0,
     pages: 1,
     lastUpdated: 0
-
 };
 
 const searchSelector = (state: any) => state.search.activeSearch;
 const lastUpdatedSelector = (state: any) => state.search.lastUpdated;
+// const virtualPageSelector = (state: any) => state.search.virtualPage;
 
 export const getProperties = createAsyncThunk(
     'search/getProperties',
-    async ({adType, searchParams, virtualPage, isMobile}: SearchState, { dispatch, getState }) => {
+    async ({adType, searchParams, requestMore = false}: SearchState, { dispatch, getState }) => {
             let params: any = {};
 
             for(const [key, value] of searchParams.entries()) {
@@ -44,14 +44,15 @@ export const getProperties = createAsyncThunk(
             const state = getState();
             const oldSearch = searchSelector(state);
             const lastUpdated = lastUpdatedSelector(state);
+            const {page: oldPage} = oldSearch;
 
-            console.log(virtualPage);
+            const pageNumber = requestMore ? oldPage + 1 : (page || oldPage || 1);
 
-            const pageNumber = isMobile ? virtualPage || oldSearch.page || 1 : page || 1;
+            const search = {adType, city, propertyType, minPrice, maxPrice, minBeds, maxBeds, page: pageNumber};
 
-            const search = {adType, page: pageNumber, city, propertyType, minPrice, maxPrice, minBeds, maxBeds};
+            const hasSearchChanged = JSON.stringify(oldSearch) !== JSON.stringify(search);
 
-            if(JSON.stringify(oldSearch) === JSON.stringify(search) && Date.now() - lastUpdated < 600000){
+            if(!hasSearchChanged && Date.now() - lastUpdated < 600000){
                 throw new Error('No need to rerequest');
             }
 
@@ -66,7 +67,7 @@ export const getProperties = createAsyncThunk(
           });
 
       const {data} = await response.json();
-      return {data, search, hasPagination: !isMobile};
+      return {data, search, shouldExtend: requestMore};
     },
 );
 
@@ -83,15 +84,15 @@ const search = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getProperties.fulfilled, (state, action) => {
-        const { data: {getProperties : {items, pages, count}}, search, hasPagination } = action.payload || {};
+        const { data: {getProperties : {items, pages, count}}, search, shouldExtend } = action.payload || {};
 
-        state.properties = hasPagination ? items: [...state.properties, ...items];
+        state.properties = shouldExtend ? [...state.properties, ...items] : items;
         state.pages = pages;
         state.count = count;
         state.activeSearch = search;
         state.lastUpdated = Date.now();
 
-        if (hasPagination){
+        if (!shouldExtend){
             state.activeProperty = 0;
         }
     });
