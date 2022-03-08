@@ -10,12 +10,15 @@ import {MAX_BEDROOMS, PRICE_RANGE} from "./AdvancedSearchForm.config";
 import {formatPrice} from "../../util";
 import {FilterParams} from "../../types";
 import {setActiveProperty} from "../../redux/search";
+import {useIsMobile} from "../IsMobile";
+import './AdvancedSearchForm.style.scss';
 
-const AdvancedSearchFormContainer: React.FC<{searchType: AdType}> = ({searchType}) => {
+const AdvancedSearchFormContainer: React.FC<{searchType: AdType, setIsCurtainActive?: (status: boolean) => void}> = ({searchType, setIsCurtainActive}) => {
 
     const [searchParams] = useSearchParams();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const isMobile = useIsMobile();
 
     const getFilterParams = (params: Filter[]) =>  params.reduce((prev, param) => {
             const value = searchParams.get(param);
@@ -95,6 +98,20 @@ const AdvancedSearchFormContainer: React.FC<{searchType: AdType}> = ({searchType
         }
     }
 
+    const renderButtons = () => {
+        if(isMobile) {
+            return <div className="AdvancedSearch-Buttons">
+                <button className='AdvancedSearch-Cancel' onClick={() => setIsCurtainActive && setIsCurtainActive(false)}>Cancel</button>
+                <button className='AdvancedSearch-Search' onClick={() => {
+                    onSearchButtonClick();
+                    setIsCurtainActive && setIsCurtainActive(false);
+                }}>Search</button>
+            </div>
+        }
+
+        return <button onClick={onSearchButtonClick}>Search</button>;
+    }
+
     return <>
             <CitiesSelect
                 placeholder='Any location'
@@ -130,7 +147,7 @@ const AdvancedSearchFormContainer: React.FC<{searchType: AdType}> = ({searchType
             selectedOption={filterSettings[Filter.MaxBeds] || ''}
             onOptionSelect={(value) => updateParam(Filter.MaxBeds, value)}
         />
-            <button onClick={onSearchButtonClick}>Search</button>
+        {renderButtons()}
         </>
 }
 

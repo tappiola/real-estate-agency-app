@@ -7,7 +7,7 @@ import './Select.style.scss';
 const Select: React.FC<{options: { id: number, name: string | number }[], selectedOption: string, onOptionSelect: (value: string) => void, placeholder: string}> = ({options, selectedOption, onOptionSelect, placeholder}) => {
     const isExpanded = false;
 
-    return <>
+    return <div className="Select">
         <select
             placeholder={placeholder}
             value={selectedOption}
@@ -17,7 +17,7 @@ const Select: React.FC<{options: { id: number, name: string | number }[], select
             {options.map( ({name, id}) => <option key={id} value={id}>{name}</option>)}
         </select>
         <ChevronIcon direction={ isExpanded ? Direction.Top : Direction.Bottom } />
-    </>
+    </div>
 };
 
 export default Select;

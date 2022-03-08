@@ -1,30 +1,30 @@
 import React from "react";
 import {AdType} from "../../constants";
-import AdvancedSearchFormComponent from "../AdvancedSearchForm";
+import AdvancedSearchForm from "../AdvancedSearchForm";
 import './Header.style.scss';
 import WishlistIcon from "../WishlistIcon";
+import Curtain from "../Curtain";
 
 const HeaderComponent: React.FC<{
     onLogoutClick: () => void,
     onLoginClick: () => void,
-    isRentSearch: boolean,
-    isSaleSearch: boolean,
+    searchType: AdType | null,
     isAuthorized: boolean,
     isMobile: boolean
-    onWishlistIconClick: () => void
-}> = ({onLogoutClick, onLoginClick, isRentSearch, isSaleSearch, isAuthorized, onWishlistIconClick, isMobile}) => {
+    onWishlistIconClick: () => void,
+    isCurtainActive: boolean,
+    setIsCurtainActive: (status: boolean) => void
+}> = ({onLogoutClick, onLoginClick, searchType, isAuthorized, onWishlistIconClick, isMobile, isCurtainActive, setIsCurtainActive}) => {
     const renderChildren = () => {
-        if (isMobile){
-            return 'filter';
+        if (!searchType || (isMobile && isCurtainActive)) {
+            return null;
         }
 
-        if (isRentSearch)
-            return <AdvancedSearchFormComponent searchType={AdType.Rent}/>;
+        if (isMobile){
+            return <button onClick={() => setIsCurtainActive(true)}>filter</button>;
+        }
 
-        if (isSaleSearch)
-            return <AdvancedSearchFormComponent searchType={AdType.Sale}/>;
-
-        return null;
+        return <AdvancedSearchForm searchType={searchType}/>;
     }
 
     const renderLogin = () => {
@@ -35,7 +35,7 @@ const HeaderComponent: React.FC<{
         return <button className='AuthButton' onClick={onLogoutClick}>Logout</button>
     }
 
-    return <header className="Header">
+    return <><header className="Header">
         {renderChildren()}
         <div className="Actions">
             <div className="WishlistIcon-Container" onClick={onWishlistIconClick}>
@@ -43,7 +43,9 @@ const HeaderComponent: React.FC<{
             </div>
             {isAuthorized ? renderLogout() : renderLogin()}
         </div>
-    </header>;
+    </header>
+        {isMobile && searchType && <Curtain searchType={searchType} isCurtainActive={isCurtainActive} setIsCurtainActive={setIsCurtainActive}/>}
+        </>
 }
 
 export default HeaderComponent;

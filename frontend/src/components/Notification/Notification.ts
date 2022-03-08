@@ -3,6 +3,7 @@ import { useContext, useEffect } from 'react';
 import { processToast } from '../../redux/notifier';
 import {ToastQueueContext} from "../Toast";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {DEFAULT_DURATION} from "../Toast/ToastQueueProvider";
 
 const Notification = () => {
   const { notifications } = useAppSelector(({ notifications }) => notifications);
@@ -13,7 +14,7 @@ const Notification = () => {
 
   useEffect(() => {
     if (notifications.length > 0) {
-      const { message, type, duration = 0 } = notifications[0];
+      const { message, type, duration = DEFAULT_DURATION } = notifications[0];
 
       addToast(message, type, duration);
       onToastProcess();

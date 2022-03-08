@@ -11,7 +11,7 @@ TODO:
 - fix heart animation
 - cities and property types to redux
 - wishlist UI
-- rename navigation reducer
+- AdvancedSearchForm add component
 
 - (R) refresh token
 - (R) imports without ../../
@@ -30,3 +30,4 @@ TODO:
 - queries to apollo gql
 - configure cors whitelist urls
 - not use volumes on prod
+- (R) login with wrong password

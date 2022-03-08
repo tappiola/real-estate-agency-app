@@ -16,7 +16,7 @@ interface IToastQueueContext {
 export const ToastQueueContext = React.createContext({} as IToastQueueContext);
 const { Provider } = ToastQueueContext;
 
-const DEFAULT_DURATION = 3000;
+export const DEFAULT_DURATION = 3000;
 
 const ToastQueueProvider: React.FC = ({ children }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);

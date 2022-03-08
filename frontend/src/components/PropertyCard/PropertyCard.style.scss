@@ -17,7 +17,6 @@
 }
 
 .PropertyCard {
-    width: 100%;
     display: flex;
     border: 1px solid var(--controls-color);
     margin: 15px 20px;
@@ -34,6 +33,7 @@
         margin: 0;
         border: none;
         border-top: 1px solid var(--controls-color);
+        width: 100%;
     }
 
     &-Images {

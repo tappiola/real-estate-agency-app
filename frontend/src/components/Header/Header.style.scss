@@ -20,6 +20,7 @@ header {
 
   .AuthButton {
     margin-left: 15px;
+    height: 40px;
 
     &:hover {
       background-color: white;
@@ -36,12 +37,16 @@ header {
     }
   }
 
-  select {
-    font-size: 14px;
-    padding: 10px 30px 10px 10px;
+  .Select {
+    margin-right: 12px;
 
-    & + .ChevronIcon {
-      top: 1px;
+    select {
+      font-size: 14px;
+      padding: 10px 30px 10px 10px;
+
+      & + .ChevronIcon {
+        top: 12px;
+      }
     }
   }
 }

@@ -1,15 +1,20 @@
-select {
-    font-size: 16px;
-    border-radius: 5px;
-    padding: 14px 30px 14px 12px;
-    outline: none;
-    font-weight: 500;
-    appearance: none;
-    letter-spacing: 0.05em;
+.Select  {
+    position: relative;
+    width: min-content;
 
-    + .ChevronIcon {
-        position: relative;
-        right: 25px;
-        top: 3px;
+    select {
+        font-size: 16px;
+        border-radius: 5px;
+        outline: none;
+        font-weight: 500;
+        appearance: none;
+        letter-spacing: 0.05em;
+        color: black;
+
+        + .ChevronIcon {
+            position: absolute;
+            right: 10px;
+            top: 13px;
+        }
     }
 }
