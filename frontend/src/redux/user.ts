@@ -1,9 +1,10 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+/* eslint-disable no-param-reassign */
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import {ToastTypes} from '../constants';
-import {login} from "../queries";
-import {getSavedToken} from '../util';
-import {enqueueToast} from './notifier';
+import { ToastTypes } from '../constants';
+import { login } from '../queries';
+import { getSavedToken } from '../util';
+import { enqueueToast } from './notifier';
 
 interface UserState {
     authToken: string | null,
@@ -12,7 +13,7 @@ interface UserState {
 
 const initialState: UserState = {
     authToken: getSavedToken(),
-    isAuthorized: !!getSavedToken(),
+    isAuthorized: !!getSavedToken()
 };
 
 interface LoginUserPayload {
@@ -21,32 +22,30 @@ interface LoginUserPayload {
 }
 
 export const loginUser = createAsyncThunk(
-  'currentUser/loginUser',
-  async ({ email, password } : LoginUserPayload, { dispatch }) => {
-    const response = await login(email, password)
-      .catch((err) => {
+    'currentUser/loginUser',
+    async ({ email, password } : LoginUserPayload, { dispatch }) => {
+        const response = await login(email, password)
+            .catch((err) => {
+                dispatch(enqueueToast({
+                    message: err.message || 'Something went wrong',
+                    type: ToastTypes.Error
+                }));
+
+                throw err;
+            });
+
         dispatch(enqueueToast({
-          message: err.message || 'Something went wrong',
-          type: ToastTypes.Error,
+            message: 'Login successful',
+            type: ToastTypes.Success
         }));
 
-        throw err;
-      });
-
-    dispatch(enqueueToast({
-      message: 'Login successful',
-      type: ToastTypes.Success,
-    }));
-
-    return response.json();
-  },
+        return response.json();
+    }
 );
 
 export const logoutUser = createAsyncThunk(
-  'currentUser/logoutUser',
-  async (arg, { dispatch }) => {
-      localStorage.removeItem('token');
-  },
+    'currentUser/logoutUser',
+    () => localStorage.removeItem('token')
 );
 
 const user = createSlice({
@@ -55,7 +54,7 @@ const user = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(loginUser.fulfilled, (state, action) => {
-            const { data: {login: {token}} } = action.payload || {};
+            const { data: { login: { token } } } = action.payload || {};
             state.isAuthorized = true;
             state.authToken = token;
             localStorage.setItem('token', token);
@@ -67,7 +66,7 @@ const user = createSlice({
             state.isAuthorized = false;
             state.authToken = null;
         });
-    },
+    }
 });
 
 export default user.reducer;

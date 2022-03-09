@@ -1,34 +1,34 @@
-import {useEffect, useState} from "react";
-import Property from "./Property.component";
-import {getProperty} from "../../queries";
-import Loader from "../Loader";
-import {useNavigate, useParams} from "react-router-dom";
-import {Property as PropertyType} from "../../types";
-import {useIsMobile} from "../IsMobile";
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import Property from './Property.component';
+import { getProperty } from '../../queries';
+import Loader from '../Loader';
+import { Property as PropertyType } from '../../types';
+import useIsMobile from '../IsMobile';
 
 const PropertyContainer = () => {
     const [property, setProperty] = useState<PropertyType | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isInWishlist, setIsInWishlist] = useState(false);
     const params = useParams();
-    const {id} = params;
+    const { id } = params;
     const isMobile = useIsMobile();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!id){
+        if (!id) {
             return;
         }
 
         const fetchProperty = async () => {
             try {
                 const response = await getProperty(+id);
-                const {data} = await response.json();
+                const { data } = await response.json();
                 const property = data.getProperty;
                 setProperty(property);
                 setIsInWishlist(property.isInWishlist);
                 setIsLoading(false);
-            } catch (e){
+            } catch (e) {
                 console.log(e);
                 setIsLoading(false);
             }
@@ -39,15 +39,15 @@ const PropertyContainer = () => {
 
     const navigateBack = () => navigate(-1);
 
-    if (isLoading){
-        return <Loader/>;
+    if (isLoading) {
+        return <Loader />;
     }
 
-    if (!property){
+    if (!property) {
         return <p>Not found</p>;
     }
 
-    return <Property property={property} isInWishlist={isInWishlist} isMobile={isMobile} navigateBack={navigateBack}/>;
-}
+    return <Property property={property} isInWishlist={isInWishlist} isMobile={isMobile} navigateBack={navigateBack} />;
+};
 
 export default PropertyContainer;

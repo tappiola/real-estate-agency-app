@@ -1,9 +1,9 @@
-import React, {useCallback, useEffect, useRef, useState, TouchEvent, MouseEvent, ReactChild, ReactElement} from 'react';
-import {CarouselComponent as Carousel} from "./Carousel.component";
+import React, {
+    useCallback, useEffect, useRef, useState, TouchEvent, MouseEvent, ReactChild, ReactElement
+} from 'react';
+import { CarouselComponent as Carousel } from './Carousel.component';
 
-export const CarouselItem: React.FC = ({children}) => {
-    return <>{children}</>;
-}
+export const CarouselItem: React.FC = ({ children }) => <>{children}</>;
 
 const CarouselContainer: React.FC<{
     autoplay?: boolean,
@@ -25,14 +25,15 @@ const CarouselContainer: React.FC<{
         initialIndex = 0,
         changeHandler,
         ...style
-    }) => {
+    }
+) => {
     const carouselRef = useRef<HTMLDivElement>(null);
     const slidesRef = useRef<HTMLDivElement>(null);
     const [carouselWidth, setCarouselWidth] = useState(0);
     const [activeIndex, setActiveIndex] = useState(initialIndex);
     const [isMouseOver, setIsMouseOver] = useState(false);
 
-    const [ touchStartX, setTouchStartX] = useState<number>(0);
+    const [touchStartX, setTouchStartX] = useState<number>(0);
 
     const updateWidth = () => setCarouselWidth(carouselRef.current!.offsetWidth);
 
@@ -44,50 +45,51 @@ const CarouselContainer: React.FC<{
         return () => window.removeEventListener('resize', updateWidth);
     }, []);
 
-     // In order to support infinite scroll, first and last slides are duplicated
+    // In order to support infinite scroll, first and last slides are duplicated
     // We need to take these virtual slides into account when calculate offsets
     const virtualSlidesCount = 2;
 
-    const getLeftOffset = useCallback((slideIndex, moveBy = 0) => {
-        return `${carouselWidth * -(slideIndex + virtualSlidesCount / 2) + moveBy}px`;
-    }, [carouselWidth]);
-
-    const resetPosition = () => adjustPosition(activeIndex, 0);
+    const getLeftOffset = useCallback(
+        (slideIndex, moveBy = 0) => `${carouselWidth * -(slideIndex + virtualSlidesCount / 2) + moveBy}px`,
+        [carouselWidth]
+    );
 
     const adjustPosition = useCallback((slideIndex, moveBy = 0) => {
         slidesRef.current!.style.left = getLeftOffset(slideIndex, moveBy);
     }, [getLeftOffset]);
 
+    const resetPosition = () => adjustPosition(activeIndex, 0);
+
     const addAnimation = useCallback(
-        () => slidesRef.current!.style.transition = `left ${slideDuration}ms ease 0s`,
-    [slideDuration]);
-    const removeAnimation = () => slidesRef.current!.style.transition = 'none';
+        () => { slidesRef.current!.style.transition = `left ${slideDuration}ms ease 0s`; },
+        [slideDuration]
+    );
+    const removeAnimation = () => { slidesRef.current!.style.transition = 'none'; };
 
     const items: ReactChild[] = React.Children.toArray(children)
-        .map(child => child as ReactElement)
-        .filter(child => child.type === CarouselItem);
+        .map((child) => child as ReactElement)
+        .filter((child) => child.type === CarouselItem);
 
-    const changeSlide = useCallback(newSlideIndex => {
-
+    const changeSlide = useCallback((newSlideIndex) => {
         addAnimation();
         adjustPosition(newSlideIndex);
 
-        let realNewIndex = (newSlideIndex + items.length) % items.length;
+        const realNewIndex = (newSlideIndex + items.length) % items.length;
 
         setActiveIndex(newSlideIndex);
 
-        if(changeHandler){
+        if (changeHandler) {
             changeHandler(newSlideIndex);
         }
 
-        if (realNewIndex !== newSlideIndex){
-             setTimeout(() => {
+        if (realNewIndex !== newSlideIndex) {
+            setTimeout(() => {
                 removeAnimation();
                 setActiveIndex(realNewIndex);
 
-                 if(changeHandler){
-                     changeHandler(newSlideIndex);
-                 }
+                if (changeHandler) {
+                    changeHandler(newSlideIndex);
+                }
             }, slideDuration);
         }
     }, [addAnimation, adjustPosition, items.length, slideDuration]);
@@ -97,8 +99,8 @@ const CarouselContainer: React.FC<{
             e.stopPropagation();
         }
 
-        if (!infinite && activeIndex === 0){
-            return
+        if (!infinite && activeIndex === 0) {
+            return;
         }
         changeSlide(activeIndex - 1);
     }, [activeIndex, changeSlide, infinite]);
@@ -108,8 +110,8 @@ const CarouselContainer: React.FC<{
             e.stopPropagation();
         }
 
-        if (!infinite && activeIndex === items.length - 1){
-            return
+        if (!infinite && activeIndex === items.length - 1) {
+            return;
         }
 
         changeSlide(activeIndex + 1);
@@ -128,7 +130,7 @@ const CarouselContainer: React.FC<{
 
     const handleTouchStart = (e: TouchEvent<HTMLDivElement>) => {
         setTouchStartX(e.changedTouches[0]?.clientX);
-    }
+    };
 
     const handleTouchMove = (e: TouchEvent<HTMLDivElement>) => {
         const moveBy = e.changedTouches[0]?.clientX - touchStartX;
@@ -142,7 +144,7 @@ const CarouselContainer: React.FC<{
         const moveBy = touchEndX - touchStartX;
 
         // Don't react on screen taps
-        if(moveBy === 0){
+        if (moveBy === 0) {
             return;
         }
 
@@ -150,17 +152,15 @@ const CarouselContainer: React.FC<{
         if (Math.abs(moveBy) >= carouselWidth * 0.35) {
             if (moveBy < 0) {
                 toNextSlide();
-            }
-            else {
+            } else {
                 toPrevSlide();
             }
-        }
-        else {
+        } else {
             // Restore slide position
             addAnimation();
             resetPosition();
         }
-    }
+    };
 
     const getCarouselWidth = () => (items.length + virtualSlidesCount) * carouselWidth;
 
@@ -170,7 +170,8 @@ const CarouselContainer: React.FC<{
 
     const getIsPrevArrowDisabled = () => !infinite && activeIndex === 0;
 
-    return <Carousel
+    return (
+      <Carousel
         handleTouchEnd={handleTouchEnd}
         handleTouchStart={handleTouchStart}
         handleTouchMove={handleTouchMove}
@@ -189,7 +190,8 @@ const CarouselContainer: React.FC<{
         carouselRef={carouselRef}
         slidesRef={slidesRef}
         showIndicators={showIndicators}
-    />
-}
+      />
+    );
+};
 
 export default CarouselContainer;

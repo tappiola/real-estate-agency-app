@@ -1,3 +1,3 @@
-import Carousel, {CarouselItem} from './Carousel.container';
+import Carousel, { CarouselItem } from './Carousel.container';
 
-export {Carousel, CarouselItem};
+export { Carousel, CarouselItem };

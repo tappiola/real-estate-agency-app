@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
-import {useSearchParams} from "react-router-dom";
-import SearchResults from "./SearchResults.component";
-import {useAppDispatch, useAppSelector} from '../../redux/hooks';
-import {AdType, ToastTypes} from "../../constants";
-import {enqueueToast} from "../../redux/notifier";
-import {useIsMobile} from "../IsMobile";
-import {getProperties} from "../../redux/search";
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import SearchResults from './SearchResults.component';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { AdType, ToastTypes } from '../../constants';
+import { enqueueToast } from '../../redux/notifier';
+import useIsMobile from '../IsMobile';
+import { getProperties } from '../../redux/search';
 
-const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
+const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
     const [isLoading, setIsLoading] = useState(true);
     const dispatch = useAppDispatch();
 
@@ -15,14 +15,15 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
 
     const [searchParams] = useSearchParams();
 
-    const {activeProperty, properties, pages, count, activeSearch} = useAppSelector(({ search }) => search);
+    const {
+        activeProperty, properties, pages, count, activeSearch
+    } = useAppSelector(({ search }) => search);
 
     useEffect(() => {
-
-        if (!searchParams.get('city')){
+        if (!searchParams.get('city')) {
             dispatch(enqueueToast({
                 message: 'City is required 2',
-                type: ToastTypes.Warning,
+                type: ToastTypes.Warning
             }));
             setIsLoading(false);
             return;
@@ -30,9 +31,9 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
 
         const fetchProperties = async () => {
             try {
-                await dispatch(getProperties({adType, searchParams}));
+                await dispatch(getProperties({ adType, searchParams }));
                 setIsLoading(false);
-            } catch (e){
+            } catch (e) {
                 console.log(e);
                 setIsLoading(false);
             }
@@ -40,20 +41,19 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
 
         fetchProperties();
         setIsLoading(false);
-
     }, [adType, searchParams]);
 
     useEffect(() => {
-        if (!isMobile){
+        if (!isMobile) {
             return;
         }
 
-        if (properties.length && activeProperty + 1 === properties.length && activeSearch.page < pages){
+        if (properties.length && activeProperty + 1 === properties.length && activeSearch.page < pages) {
             const fetchMoreProperties = async () => {
                 try {
-                    dispatch(getProperties({adType, searchParams, requestMore: true}));
+                    dispatch(getProperties({ adType, searchParams, requestMore: true }));
                     setIsLoading(false);
-                } catch (e){
+                } catch (e) {
                     console.log(e);
                     setIsLoading(false);
                 }
@@ -63,14 +63,16 @@ const SearchResultsContainer: React.FC<{adType: AdType}> = ({adType}) => {
         }
     }, [isMobile, activeProperty, properties, count]);
 
-    return <SearchResults
+    return (
+      <SearchResults
         count={count}
         isLoading={isLoading}
         pages={pages}
         properties={properties}
         searchParams={searchParams}
         isMobile={isMobile}
-    />
-}
+      />
+    );
+};
 
 export default SearchResultsContainer;

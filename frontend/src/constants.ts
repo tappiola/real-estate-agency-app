@@ -7,8 +7,7 @@ export enum ToastTypes {
     Info
 }
 
-export const accessToken =
-    'pk.eyJ1IjoidGFwcGlvbGEiLCJhIjoiY2t6eHhuM2N6MDYyMTJ2cDcxcDVsem8zNiJ9.OByK2fsCvb8XsvT2OYUEjA';
+export const accessToken = 'pk.eyJ1IjoidGFwcGlvbGEiLCJhIjoiY2t6eHhuM2N6MDYyMTJ2cDcxcDVsem8zNiJ9.OByK2fsCvb8XsvT2OYUEjA';
 
 export const TEN_MINUTES = 600000;
 
@@ -25,5 +24,5 @@ export enum Filter {
     MinPrice = 'minPrice',
     MaxPrice = 'maxPrice',
     MinBeds = 'minBeds',
-    MaxBeds = 'maxBeds',
+    MaxBeds = 'maxBeds'
 }

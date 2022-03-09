@@ -1,12 +1,12 @@
-import {useLocation, useNavigate} from "react-router-dom";
-import {AdType, ToastTypes} from "../../constants";
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { AdType, ToastTypes } from '../../constants';
 import './Header.style.scss';
-import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {logoutUser} from "../../redux/user";
-import Header from "./Header.component";
-import {enqueueToast} from "../../redux/notifier";
-import {useIsMobile} from "../IsMobile";
-import {useState} from "react";
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { logoutUser } from '../../redux/user';
+import Header from './Header.component';
+import { enqueueToast } from '../../redux/notifier';
+import useIsMobile from '../IsMobile';
 
 const HeaderContainer = () => {
     const { pathname } = useLocation();
@@ -19,33 +19,34 @@ const HeaderContainer = () => {
 
     const onLoginClick = () => {
         navigate('/login');
-    }
+    };
 
     const onLogoutClick = async () => {
         await dispatch(logoutUser());
 
         dispatch(enqueueToast({
             message: 'Logout successful',
-            type: ToastTypes.Success,
+            type: ToastTypes.Success
         }));
-    }
+    };
     const onWishlistIconClick = () => {
         navigate('/favorites');
-    }
+    };
 
     const getSearchType = () => {
-        if (pathname === '/' + AdType.Rent){
-            return AdType.Rent
+        if (pathname === `/${AdType.Rent}`) {
+            return AdType.Rent;
         }
 
-        if (pathname === '/' + AdType.Sale){
-            return AdType.Sale
+        if (pathname === `/${AdType.Sale}`) {
+            return AdType.Sale;
         }
 
         return null;
-    }
+    };
 
-    return <Header
+    return (
+      <Header
         onLogoutClick={onLogoutClick}
         onLoginClick={onLoginClick}
         isAuthorized={isAuthorized}
@@ -54,7 +55,8 @@ const HeaderContainer = () => {
         onWishlistIconClick={onWishlistIconClick}
         isCurtainActive={isCurtainActive}
         setIsCurtainActive={setIsCurtainActive}
-    />;
-}
+      />
+    );
+};
 
 export default HeaderContainer;

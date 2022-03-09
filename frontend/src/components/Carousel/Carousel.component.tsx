@@ -1,10 +1,12 @@
-import React, {ReactChild, RefObject, TouchEvent, MouseEvent} from 'react';
-import  './Carousel.style.scss';
+import React, {
+    ReactChild, RefObject, TouchEvent, MouseEvent
+} from 'react';
+import './Carousel.style.scss';
 import clsx from 'clsx';
 
 export const CarouselComponent: React.FC<{
     handleTouchEnd: (e: TouchEvent<HTMLDivElement>) => void,
-    handleTouchStart:  (e: TouchEvent<HTMLDivElement>) => void,
+    handleTouchStart: (e: TouchEvent<HTMLDivElement>) => void,
     handleTouchMove: (e: TouchEvent<HTMLDivElement>) => void,
     toNextSlide: (e?: MouseEvent<HTMLDivElement>) => void,
     toPrevSlide: (e?: MouseEvent<HTMLDivElement>) => void,
@@ -41,77 +43,92 @@ export const CarouselComponent: React.FC<{
         carouselRef,
         slidesRef,
         showIndicators
-    }) => {
-
+    }
+) => {
     const renderCarouselIndicators = () => {
-        if (!showIndicators){
+        if (!showIndicators) {
             return null;
         }
-        return <div className={clsx('Carousel-Nav', 'Carousel-Nav_Inner')}>
-            { items.length > 1 && items.map((_, index) =>
-                <span
-                    className={clsx('Carousel-DotIcon', {
-                        // Make dot active immediately, including cases with infinite scroll and virtual slides
-                        'Carousel-DotIcon_Active': getIsSlideActive(index)
-                    })}
-                    key={index}
-                    onClick={() => changeSlide(index)}
-                >
-                    <i className="fa fa-circle"/>
-                </span>
-            )}
-        </div>
-    }
 
-    const renderPrevArrow = () => {
-        return <div
-            onClick={toPrevSlide}
-            className={clsx('Carousel-Arrow', 'Carousel-Arrow_InnerLeft', {
-                'Carousel-Arrow_Disabled': getIsPrevArrowDisabled(),
-            })}
-        >
-            <i className="fa fa-angle-left"/>
-        </div>
-    }
+        return (
+          <div className={clsx('Carousel-Nav', 'Carousel-Nav_Inner')}>
+            { items.length > 1 && items.map((_, index) => (
+              <span
+                className={clsx('Carousel-DotIcon', {
+                // Make dot active immediately, including cases with infinite scroll and virtual slides
+                    'Carousel-DotIcon_Active': getIsSlideActive(index)
+                })}
+                key={index}
+                onClick={() => changeSlide(index)}
+              >
+                <i className="fa fa-circle" />
+              </span>
+            ))}
+          </div>
+        );
+    };
 
-    const renderNextArrow = () => {
-        return <div
-            onClick={toNextSlide}
-            className={clsx('Carousel-Arrow', 'Carousel-Arrow_InnerRight', {
-                'Carousel-Arrow_Disabled': getIsNextArrowDisabled(),
-            })}
-        >
-            <i className="fa fa-angle-right"/>
-        </div>
-    }
+    const renderPrevArrow = () => (
+      <div
+        onClick={toPrevSlide}
+        className={clsx('Carousel-Arrow', 'Carousel-Arrow_InnerLeft', {
+            'Carousel-Arrow_Disabled': getIsPrevArrowDisabled()
+        })}
+      >
+        <i className="fa fa-angle-left" />
+      </div>
+    );
+
+    const renderNextArrow = () => (
+      <div
+        onClick={toNextSlide}
+        className={clsx('Carousel-Arrow', 'Carousel-Arrow_InnerRight', {
+            'Carousel-Arrow_Disabled': getIsNextArrowDisabled()
+        })}
+      >
+        <i className="fa fa-angle-right" />
+      </div>
+    );
+
+    const renderCarouselItem = (item: ReactChild, index: number) => (
+      <div key={index} className="Carousel-Item">
+        {item}
+      </div>
+    );
 
     const renderCarouselItems = () => {
-        return <div className='Carousel-Items'
-                            ref={slidesRef}
-                            style={{
-                                width: `${getCarouselWidth()}px`,
-                                left: getLeftOffset(activeIndex),
-                                height: '100%'
-                            }}>
-            {[items[items.length - 1], ...items, items[0]].map((item, index) =>
-                <div key={index} className='Carousel-Item'>{item}</div>
-            )}
-        </div>
-    }
+        const carouselItems = [items[items.length - 1], ...items, items[0]];
 
-    return <div
-        className='Carousel'
-        style={{width: '100%', height: '50%', ...style}}
+        return (
+          <div
+            className="Carousel-Items"
+            ref={slidesRef}
+            style={{
+                width: `${getCarouselWidth()}px`,
+                left: getLeftOffset(activeIndex),
+                height: '100%'
+            }}
+          >
+            {carouselItems.map((item, index) => renderCarouselItem(item, index))}
+          </div>
+        );
+    };
+
+    return (
+      <div
+        className="Carousel"
+        style={{ width: '100%', height: '50%', ...style }}
         onMouseEnter={() => setIsMouseOver(true)}
         onMouseLeave={() => setIsMouseOver(false)}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
         ref={carouselRef}
-    >
+      >
         {renderPrevArrow()}
         {renderCarouselItems()}
         {renderNextArrow()}
         {renderCarouselIndicators()}
-    </div>
-}
+      </div>
+    );
+};

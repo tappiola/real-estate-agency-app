@@ -1,44 +1,45 @@
-import {ApolloClient, InMemoryCache, createHttpLink, from} from "@apollo/client";
-import {setContext} from "@apollo/client/link/context";
-import {onError} from "@apollo/client/link/error";
-import store from "../redux/store";
-import {enqueueToast} from "../redux/notifier";
-import {HOST, ToastTypes} from "../constants";
-import {logoutUser} from "../redux/user";
+import {
+    ApolloClient, InMemoryCache, createHttpLink, from
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { onError } from '@apollo/client/link/error';
+import store from '../redux/store';
+import { enqueueToast } from '../redux/notifier';
+import { HOST, ToastTypes } from '../constants';
+import { logoutUser } from '../redux/user';
 
 const httpLink = createHttpLink({
-    uri: HOST + '/graphql',
+    uri: `${HOST}/graphql`
 });
 
 const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem('token');
 
-    const authorization = token ? {authorization: `Bearer ${token}`} : {};
+    const authorization = token ? { authorization: `Bearer ${token}` } : {};
 
     return {
         headers: {
             ...headers,
             ...authorization
         }
-    }
+    };
 });
 
-const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
-    console.log('Caught GraphQL error', {graphQLErrors, networkError});
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+    console.log('Caught GraphQL error', { graphQLErrors, networkError });
 
-    if (graphQLErrors){
-        if(graphQLErrors[0].extensions.code === 'NOT_AUTHENTICATED'){
+    if (graphQLErrors) {
+        if (graphQLErrors[0].extensions.code === 'NOT_AUTHENTICATED') {
             store.dispatch(enqueueToast({
                 message: graphQLErrors[0].message,
-                type: ToastTypes.Error,
+                type: ToastTypes.Error
             }));
 
             store.dispatch(logoutUser());
-        }
-        else {
+        } else {
             store.dispatch(enqueueToast({
                 message: `Something went wrong: ${graphQLErrors[0].message}`,
-                type: ToastTypes.Error,
+                type: ToastTypes.Error
             }));
         }
     }
@@ -49,4 +50,4 @@ const client = new ApolloClient({
     cache: new InMemoryCache()
 });
 
-export {client};
+export default client;

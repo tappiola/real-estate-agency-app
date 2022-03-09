@@ -1,8 +1,9 @@
-import {sendGraphqlRequest} from "./graphql";
-import {MAX_BEDROOMS} from "./components/AdvancedSearchForm/AdvancedSearchForm.config";
+import { sendGraphqlRequest } from './graphql';
+import { MAX_BEDROOMS } from './components/AdvancedSearchForm/AdvancedSearchForm.config';
+import { SaveClientRequest } from './types';
 
 export const addToWishlist = (id: number) => {
-    const graphqlQuery  = {
+    const graphqlQuery = {
         query: `
         mutation {
           addToWishlist(propertyId: "${id}") {
@@ -13,10 +14,10 @@ export const addToWishlist = (id: number) => {
     };
 
     return sendGraphqlRequest(graphqlQuery);
-}
+};
 
 export const removeFromWishlist = (id: number) => {
-    const graphqlQuery  = {
+    const graphqlQuery = {
         query: `
         mutation {
           removeFromWishlist(propertyId: "${id}") {
@@ -27,7 +28,7 @@ export const removeFromWishlist = (id: number) => {
     };
 
     return sendGraphqlRequest(graphqlQuery);
-}
+};
 
 export const login = (email: string, password: string) => {
     const graphqlQuery = {
@@ -42,7 +43,7 @@ export const login = (email: string, password: string) => {
     };
 
     return sendGraphqlRequest(graphqlQuery);
-}
+};
 
 export const register = (email: string, name: string, password: string) => {
     const graphqlQuery = {
@@ -57,23 +58,25 @@ export const register = (email: string, name: string, password: string) => {
     };
 
     return sendGraphqlRequest(graphqlQuery);
-}
+};
 
 export const searchProperties = (params: any) => {
-
-    const {adType, page, city, propertyType, minPrice, maxPrice, minBeds, maxBeds} = params;
+    const {
+        adType, page, city, propertyType, minPrice, maxPrice, minBeds, maxBeds
+    } = params;
 
     const cityPart = city ? `, cityId: ${+city}` : '';
-    const propertyTypePart = propertyType ?`, propertyTypeId: ${+propertyType}` : '';
+    const propertyTypePart = propertyType ? `, propertyTypeId: ${+propertyType}` : '';
     const minPricePart = minPrice ? `, minPrice: ${+minPrice}` : '';
     const maxPricePart = maxPrice ? `, maxPrice: ${+maxPrice}` : '';
     const minBedsPart = minBeds ? `, minBeds: "${minBeds}"` : '';
     const maxBedsPart = maxBeds ? `, maxBeds: "${+maxBeds === MAX_BEDROOMS ? `${maxBeds}+` : maxBeds}"` : '';
 
     const graphqlQuery = {
-        query:`
+        query: `
             {
-              getProperties(adType: "${adType}", page: ${+page}${cityPart}${propertyTypePart}${minPricePart}${maxPricePart}${minBedsPart}${maxBedsPart}) {
+              getProperties(adType: "${adType}", page: ${+page}${cityPart}${propertyTypePart}${minPricePart}
+              ${maxPricePart}${minBedsPart}${maxBedsPart}) {
                 count
                 pages
                 items {
@@ -93,14 +96,15 @@ export const searchProperties = (params: any) => {
                     type {id name}
                 }
               }
-            }`};
+            }`
+    };
 
     return sendGraphqlRequest(graphqlQuery);
-}
+};
 
 export const getProperty = (id: number) => {
     const graphqlQuery = {
-        query:`
+        query: `
             {
               getProperty(id: ${id})
                 {
@@ -120,14 +124,15 @@ export const getProperty = (id: number) => {
                     price
                     type {id name}
               }
-            }`};
+            }`
+    };
 
     return sendGraphqlRequest(graphqlQuery);
-}
+};
 
 export const getWishlist = () => {
     const graphqlQuery = {
-        query:`
+        query: `
             {
               getWishlist {
                 id
@@ -136,54 +141,54 @@ export const getWishlist = () => {
                 city { id name }
                 propertyType { id name }
               }
-            }`};
+            }`
+    };
 
     return sendGraphqlRequest(graphqlQuery);
-}
+};
 
-type SaveClientRequest = {
-    firstName: string,
-    lastName: string,
-    email: string,
-    phoneNumber: string,
-}
-
-export const saveClientRequest = ({firstName, lastName, email, phoneNumber}: SaveClientRequest) => {
+export const saveClientRequest = ({
+    firstName, lastName, email, phoneNumber
+}: SaveClientRequest) => {
     const graphqlQuery = {
         query: `
              mutation {
-              saveClientRequest(firstName: "${firstName}", lastName: "${lastName}", email: "${email}", phone: "${phoneNumber}")
+              saveClientRequest(
+              firstName: "${firstName}", lastName: "${lastName}", email: "${email}", phone: "${phoneNumber}")
                 {
                     success
               }
             }
-            `};
+            `
+    };
 
     return sendGraphqlRequest(graphqlQuery);
-}
+};
 
 export const fetchCities = () => {
     const graphqlQuery = {
-        query:`
+        query: `
             {
               getCities {
                 id
                 name
               }
-            }`};
+            }`
+    };
 
     return sendGraphqlRequest(graphqlQuery);
-}
+};
 
 export const fetchPropertyTypes = () => {
     const graphqlQuery = {
-        query:`
+        query: `
             {
               getPropertyTypes {
                 id
                 name
               }
-            }`};
+            }`
+    };
 
     return sendGraphqlRequest(graphqlQuery);
-}
+};

@@ -1,23 +1,26 @@
-import React from "react";
-import {Direction} from "../ChevronIcon/ChevronIcon.config";
-import ChevronIcon from "../ChevronIcon";
+import React from 'react';
+import { Direction } from '../ChevronIcon/ChevronIcon.config';
+import ChevronIcon from '../ChevronIcon';
 import './Select.style.scss';
 
-
-const Select: React.FC<{options: { id: number, name: string | number }[], selectedOption: string, onOptionSelect: (value: string) => void, placeholder: string}> = ({options, selectedOption, onOptionSelect, placeholder}) => {
+const Select: React.FC<{ options: { id: number, name: string | number }[], selectedOption: string, onOptionSelect: (value: string) => void, placeholder: string }> = ({
+    options, selectedOption, onOptionSelect, placeholder
+}) => {
     const isExpanded = false;
 
-    return <div className="Select">
+    return (
+      <div className="Select">
         <select
-            placeholder={placeholder}
-            value={selectedOption}
-            onChange={(e) => onOptionSelect(e.target.value)}
+          placeholder={placeholder}
+          value={selectedOption}
+          onChange={(e) => onOptionSelect(e.target.value)}
         >
-            <option defaultValue='' value=''>{placeholder}</option>
-            {options.map( ({name, id}) => <option key={id} value={id}>{name}</option>)}
+          <option defaultValue="" value="">{placeholder}</option>
+          {options.map(({ name, id }) => <option key={id} value={id}>{name}</option>)}
         </select>
-        <ChevronIcon direction={ isExpanded ? Direction.Top : Direction.Bottom } />
-    </div>
+        <ChevronIcon direction={isExpanded ? Direction.Top : Direction.Bottom} />
+      </div>
+    );
 };
 
 export default Select;

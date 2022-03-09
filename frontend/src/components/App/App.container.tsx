@@ -1,8 +1,8 @@
 import './App.style.scss';
-import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {useEffect} from "react";
-import {getCities, getPropertyTypes} from "../../redux/referenceData";
-import App from "./App.component";
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { getCities, getPropertyTypes } from '../../redux/referenceData';
+import App from './App.component';
 
 const AppContainer = () => {
     const { isAuthorized } = useAppSelector(({ user }) => user);
@@ -14,7 +14,7 @@ const AppContainer = () => {
         dispatch(getPropertyTypes());
     }, []);
 
-    return <App isAuthorized={isAuthorized}/>
-}
+    return <App isAuthorized={isAuthorized} />;
+};
 
 export default AppContainer;
