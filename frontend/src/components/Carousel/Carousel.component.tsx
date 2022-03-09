@@ -4,7 +4,7 @@ import React, {
 import './Carousel.style.scss';
 import clsx from 'clsx';
 
-export const CarouselComponent: React.FC<{
+const CarouselComponent: React.FC<{
     handleTouchEnd: (e: TouchEvent<HTMLDivElement>) => void,
     handleTouchStart: (e: TouchEvent<HTMLDivElement>) => void,
     handleTouchMove: (e: TouchEvent<HTMLDivElement>) => void,
@@ -54,6 +54,8 @@ export const CarouselComponent: React.FC<{
           <div className={clsx('Carousel-Nav', 'Carousel-Nav_Inner')}>
             { items.length > 1 && items.map((_, index) => (
               <span
+                role="button"
+                tabIndex={-1}
                 className={clsx('Carousel-DotIcon', {
                 // Make dot active immediately, including cases with infinite scroll and virtual slides
                     'Carousel-DotIcon_Active': getIsSlideActive(index)
@@ -71,6 +73,8 @@ export const CarouselComponent: React.FC<{
     const renderPrevArrow = () => (
       <div
         onClick={toPrevSlide}
+        role="button"
+        tabIndex={0}
         className={clsx('Carousel-Arrow', 'Carousel-Arrow_InnerLeft', {
             'Carousel-Arrow_Disabled': getIsPrevArrowDisabled()
         })}
@@ -82,6 +86,8 @@ export const CarouselComponent: React.FC<{
     const renderNextArrow = () => (
       <div
         onClick={toNextSlide}
+        role="button"
+        tabIndex={0}
         className={clsx('Carousel-Arrow', 'Carousel-Arrow_InnerRight', {
             'Carousel-Arrow_Disabled': getIsNextArrowDisabled()
         })}
@@ -132,3 +138,5 @@ export const CarouselComponent: React.FC<{
       </div>
     );
 };
+
+export default CarouselComponent;

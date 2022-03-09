@@ -12,14 +12,24 @@ const WishlistCard: React.FC<{
     onWishlistRemove,
     loadProperty
 }) => (
-  <div className="WishlistCard-Wrapper" onClick={loadProperty}>
+  <div
+    className="WishlistCard-Wrapper"
+    onClick={loadProperty}
+    role="link"
+    tabIndex={0}
+  >
     <h2>{property.title}</h2>
     <p>{property.description}</p>
     <p>{property.city.name}</p>
     <p>{property.propertyType?.name}</p>
-    <p className="WishlistCard-Remove" onClick={onWishlistRemove}>
+    <div
+      role="button"
+      tabIndex={0}
+      className="WishlistCard-Remove"
+      onClick={onWishlistRemove}
+    >
       <CloseIcon />
-    </p>
+    </div>
   </div>
 );
 

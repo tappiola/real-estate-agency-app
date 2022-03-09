@@ -24,9 +24,9 @@ const PropertyContainer = () => {
             try {
                 const response = await getProperty(+id);
                 const { data } = await response.json();
-                const property = data.getProperty;
-                setProperty(property);
-                setIsInWishlist(property.isInWishlist);
+                const propertyData = data.getProperty;
+                setProperty(propertyData);
+                setIsInWishlist(propertyData.isInWishlist);
                 setIsLoading(false);
             } catch (e) {
                 console.log(e);

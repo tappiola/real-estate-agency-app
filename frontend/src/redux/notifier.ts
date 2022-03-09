@@ -16,7 +16,7 @@ const initialState: NotifierState = {
 };
 
 const notifier = createSlice({
-    name: 'notifications',
+    name: 'notifier',
     initialState,
     reducers: {
         enqueueToast(state, action: PayloadAction<Notification>) {

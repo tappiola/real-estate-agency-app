@@ -17,7 +17,15 @@ const LoginContainer = () => {
         navigate('/', { replace: true });
     };
 
-    return <Login email={email} loginHandler={loginHandler} password={password} setEmail={setEmail} setPassword={setPassword} />;
+    return (
+      <Login
+        email={email}
+        loginHandler={loginHandler}
+        password={password}
+        setEmail={setEmail}
+        setPassword={setPassword}
+      />
+    );
 };
 
 export default LoginContainer;

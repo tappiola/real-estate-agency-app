@@ -40,8 +40,7 @@ export type Property = {
 
 export type SelectOption = {
     id: number,
-    value: string
-    name: string
+    name: string | number
 };
 
 export type FilterParams = { [key in Filter]?: string };

@@ -24,5 +24,6 @@ export enum Filter {
     MinPrice = 'minPrice',
     MaxPrice = 'maxPrice',
     MinBeds = 'minBeds',
-    MaxBeds = 'maxBeds'
+    MaxBeds = 'maxBeds',
+    Page = 'page'
 }

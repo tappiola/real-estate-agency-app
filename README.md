@@ -14,6 +14,7 @@ TODO:
 - property page UI
 - home page UI
 - add logo
+- GA?
 
 - (R) refresh token
 - (R) imports without ../../
@@ -27,8 +28,7 @@ TODO:
 - (R) where: {'$type.id$': 'rent'} doesn't work
 - (R) replace croissant
 - (R) move mixins to one file
-- (R) ts-ignore inView
-- fix any
+- fix any and ts-ignore
 - queries to apollo gql
 - configure cors whitelist urls
 - not use volumes on prod

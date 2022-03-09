@@ -55,7 +55,12 @@ const Property: React.FC<{
 
     return (
       <div className="Property-Container">
-        <div className="Property-NavigateBack" onClick={navigateBack}>
+        <div
+          className="Property-NavigateBack"
+          onClick={navigateBack}
+          role="link"
+          tabIndex={0}
+        >
           <i className="fa-solid fa-arrow-left" />
           Back to search results
         </div>

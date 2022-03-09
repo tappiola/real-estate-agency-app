@@ -1,9 +1,9 @@
 import React, {
     useCallback, useEffect, useRef, useState, TouchEvent, MouseEvent, ReactChild, ReactElement
 } from 'react';
-import { CarouselComponent as Carousel } from './Carousel.component';
+import Carousel from './Carousel.component';
 
-export const CarouselItem: React.FC = ({ children }) => <>{children}</>;
+export const CarouselItem: React.FC<{ children: ReactElement }> = ({ children }) => children;
 
 const CarouselContainer: React.FC<{
     autoplay?: boolean,
@@ -118,6 +118,7 @@ const CarouselContainer: React.FC<{
     }, [activeIndex, changeSlide, infinite, items.length]);
 
     // Automatic switch between slides
+    // eslint-disable-next-line consistent-return
     useEffect(() => {
         if (autoplay && !isMouseOver) {
             const id = setTimeout(() => {
@@ -133,7 +134,7 @@ const CarouselContainer: React.FC<{
     };
 
     const handleTouchMove = (e: TouchEvent<HTMLDivElement>) => {
-        const moveBy = e.changedTouches[0]?.clientX - touchStartX;
+        const moveBy = e.changedTouches[0]!.clientX - touchStartX;
 
         removeAnimation();
         adjustPosition(activeIndex, moveBy);

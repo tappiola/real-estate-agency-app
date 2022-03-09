@@ -31,7 +31,15 @@ const HeaderComponent: React.FC<{
         }
 
         if (isMobile) {
-            return <div onClick={() => setIsCurtainActive(true)}><FilterIcon /></div>;
+            return (
+              <div
+                role="menu"
+                tabIndex={0}
+                onClick={() => setIsCurtainActive(true)}
+              >
+                <FilterIcon />
+              </div>
+            );
         }
 
         return <AdvancedSearchForm searchType={searchType} />;
@@ -46,7 +54,12 @@ const HeaderComponent: React.FC<{
         <header className="Header">
           {renderChildren()}
           <div className="Actions">
-            <div className="WishlistIcon-Container" onClick={onWishlistIconClick}>
+            <div
+              role="link"
+              tabIndex={0}
+              className="WishlistIcon-Container"
+              onClick={onWishlistIconClick}
+            >
               <WishlistIcon isActive />
             </div>
             {isAuthorized ? renderLogout() : renderLogin()}

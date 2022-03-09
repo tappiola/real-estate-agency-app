@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Property } from '../types';
+import { FilterParams, Property } from '../types';
 import { searchProperties } from '../queries';
 import { enqueueToast } from './notifier';
 import { AdType, TEN_MINUTES, ToastTypes } from '../constants';
@@ -33,11 +33,8 @@ const lastUpdatedSelector = (state: any) => state.search.lastUpdated;
 export const getProperties = createAsyncThunk(
     'search/getProperties',
     async ({ adType, searchParams, requestMore = false }: SearchState, { dispatch, getState }) => {
-        let params: any = {};
-
-        for (const [key, value] of searchParams.entries()) {
-            params = ({ ...params, [key]: value });
-        }
+        const params: FilterParams = Array.from(searchParams.keys())
+            .reduce((acc, value) => ({ ...acc, [value]: searchParams.get(value) }), {});
 
         const {
             page, city, propertyType, minPrice, maxPrice, minBeds, maxBeds

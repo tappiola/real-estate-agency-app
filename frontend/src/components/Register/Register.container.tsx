@@ -12,7 +12,6 @@ const RegisterContainer = () => {
 
     const signupHandler = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        // this.setState({ authLoading: true });
 
         register(email, name, password).then((res) => res.json())
             .then((resData) => {
@@ -32,7 +31,17 @@ const RegisterContainer = () => {
             });
     };
 
-    return <Register email={email} setEmail={setEmail} name={name} setName={setName} password={password} setPassword={setPassword} signupHandler={signupHandler} />;
+    return (
+      <Register
+        email={email}
+        setEmail={setEmail}
+        name={name}
+        setName={setName}
+        password={password}
+        setPassword={setPassword}
+        signupHandler={signupHandler}
+      />
+    );
 };
 
 export default RegisterContainer;

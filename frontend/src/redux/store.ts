@@ -6,7 +6,7 @@ import referenceData from './referenceData';
 
 const store = configureStore({
     reducer: {
-        notifications: notificationsReducer,
+        notifier: notificationsReducer,
         referenceData,
         search: searchReducer,
         user: userReducer

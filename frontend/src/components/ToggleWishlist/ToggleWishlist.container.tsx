@@ -47,7 +47,13 @@ const ToggleWishlistContainer: React.FC<{ property: Property, inWishlist: boolea
         }
     };
 
-    return <ToggleWishlist onWishlistToggle={onWishlistToggle} isInWishlist={isInWishlist} isClicked={isClicked} />;
+    return (
+      <ToggleWishlist
+        onWishlistToggle={onWishlistToggle}
+        isInWishlist={isInWishlist}
+        isClicked={isClicked}
+      />
+    );
 };
 
 export default ToggleWishlistContainer;

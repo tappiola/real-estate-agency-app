@@ -1,6 +1,6 @@
+import React from 'react';
 import PageLink from '../PageLink';
 import './Pagination.style.scss';
-import React from 'react';
 
 const Pagination : React.FC<{
     pages: number,
@@ -10,7 +10,7 @@ const Pagination : React.FC<{
 
     return (
       <div className="Pagination">
-        {Array.apply(null, Array(pages))
+        {[...Array(pages)]
             .map((_, i) => (
               <PageLink
                 key={i}

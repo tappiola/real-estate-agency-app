@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useEffect, useRef } from 'react';
 
 import clsx from 'clsx';

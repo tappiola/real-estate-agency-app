@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { DEFAULT_DURATION } from '../Toast/ToastQueueProvider';
 
 const Notification = () => {
-    const { notifications } = useAppSelector(({ notifications }) => notifications);
+    const { notifications } = useAppSelector(({ notifier }) => notifier);
     const dispatch = useAppDispatch();
     const onToastProcess = () => dispatch(processToast());
 

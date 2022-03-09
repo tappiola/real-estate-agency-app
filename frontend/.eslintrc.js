@@ -125,6 +125,7 @@ module.exports = {
                 ]
             }
         ],
-        "react/no-array-index-key": "off"
+        "react/no-array-index-key": "off",
+        "jsx-a11y/click-events-have-key-events": "off"
     },
 };

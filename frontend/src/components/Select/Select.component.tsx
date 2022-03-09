@@ -2,8 +2,14 @@ import React from 'react';
 import { Direction } from '../ChevronIcon/ChevronIcon.config';
 import ChevronIcon from '../ChevronIcon';
 import './Select.style.scss';
+import { SelectOption } from '../../types';
 
-const Select: React.FC<{ options: { id: number, name: string | number }[], selectedOption: string, onOptionSelect: (value: string) => void, placeholder: string }> = ({
+const Select: React.FC<{
+    options: SelectOption[],
+    selectedOption: string,
+    onOptionSelect: (value: string) => void,
+    placeholder: string
+}> = ({
     options, selectedOption, onOptionSelect, placeholder
 }) => {
     const isExpanded = false;

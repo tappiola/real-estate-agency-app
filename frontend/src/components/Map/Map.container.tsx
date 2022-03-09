@@ -1,10 +1,10 @@
 import mapboxgl, { LngLatLike } from 'mapbox-gl';
-import { accessToken, IMAGE_PLACEHOLDER } from '../../constants';
 import './Map.style.scss';
-import React, { useEffect, useState } from 'react';
-import { formatPrice, getHouseTitle } from '../../util';
-import { Property } from '../../types';
 import { Feature, Point } from 'geojson';
+import React, { useEffect, useState } from 'react';
+import { accessToken, IMAGE_PLACEHOLDER } from '../../constants';
+import { formatPrice, getHouseTitle } from '../../util';
+import { Image, Property } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { setActiveProperty } from '../../redux/search';
 
@@ -15,6 +15,12 @@ const MapContainer : React.FC = () => {
 
     const getCoordinates = (item: Property) => ([item.longitude, item.latitude] as LngLatLike);
 
+    const getDescription = (heading: string, price: number, images: Image[]) => {
+        const imgSrc = images[0]?.link || IMAGE_PLACEHOLDER;
+        const priceStr = formatPrice(price);
+        return `<img width="100%" src="${imgSrc}" alt="img"/><b>${heading}</b><p class="Map-Price">${priceStr}</p>`;
+    };
+
     const generateFeature = (property: Property, index: number) => {
         const {
             bedroomCount, images, longitude, latitude, propertyType: { name }, price
@@ -24,7 +30,7 @@ const MapContainer : React.FC = () => {
         return {
             type: 'Feature',
             properties: {
-                description: `<img width="100%" src="${images[0]?.link || IMAGE_PLACEHOLDER}" alt="img"/><b>${heading}</b><p class="Map-Price">${formatPrice(price)}</p>`,
+                description: getDescription(heading, price, images),
                 id: index
             },
             geometry: {

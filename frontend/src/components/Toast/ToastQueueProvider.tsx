@@ -49,7 +49,9 @@ const ToastQueueProvider: React.FC = ({ children }) => {
                       classNames="Toast"
                     >
                       <ToastItem
-                        {...toast}
+                        message={toast.message}
+                        duration={toast.duration}
+                        type={toast.type}
                         onExpire={() => handleRemove(toast.id)}
                         onRemove={() => handleRemove(toast.id)}
                       />

@@ -8,8 +8,16 @@ import { AdType, IMAGE_PLACEHOLDER } from '../../constants';
 import BedroomIconComponent from '../BedroomIcon';
 import BathroomIconComponent from '../BathroomIcon';
 
-const PropertyCardComponent: React.FC<{ property: Property, index: number, loadProperty: () => void, isMobile: boolean }> = ({
-    property, index, loadProperty, isMobile
+const PropertyCardComponent: React.FC<{
+    property: Property,
+    index: number,
+    loadProperty: () => void,
+    isMobile: boolean
+}> = ({
+    property,
+    index,
+    loadProperty,
+    isMobile
 }) => {
     const loadCarouselImages = () => {
         const { images } = property;
@@ -46,7 +54,7 @@ const PropertyCardComponent: React.FC<{ property: Property, index: number, loadP
           <img
             className="PropertyCard-CarouselImg"
             src={images[0]?.link || IMAGE_PLACEHOLDER}
-            alt="Property-Image"
+            alt="Property"
           />
         );
     };
@@ -64,12 +72,20 @@ const PropertyCardComponent: React.FC<{ property: Property, index: number, loadP
     };
 
     return (
-      <div className="PropertyCard" id={`property-${index}`} onClick={loadProperty}>
+      <div
+        className="PropertyCard"
+        id={`property-${index}`}
+        onClick={loadProperty}
+        role="link"
+        tabIndex={0}
+      >
         <div className="PropertyCard-Images">
           {loadImages()}
         </div>
         <div className="PropertyCard-Data">
-          <h2 className="PropertyCard-Price">{formatPrice(property.price) + (property.type.name === AdType.Rent ? ' pcm' : '')}</h2>
+          <h2 className="PropertyCard-Price">
+            {formatPrice(property.price) + (property.type.name === AdType.Rent ? ' pcm' : '')}
+          </h2>
           <p className="PropertyCard-Amenities">
             <BedroomIconComponent />
             {property.bedroomCount}
