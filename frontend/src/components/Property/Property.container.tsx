@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import Property from "./Property.component";
 import {getProperty} from "../../queries";
 import Loader from "../Loader";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {Property as PropertyType} from "../../types";
 import {useIsMobile} from "../IsMobile";
 
@@ -13,6 +13,7 @@ const PropertyContainer = () => {
     const params = useParams();
     const {id} = params;
     const isMobile = useIsMobile();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!id){
@@ -36,6 +37,8 @@ const PropertyContainer = () => {
         fetchProperty();
     }, [id]);
 
+    const navigateBack = () => navigate(-1);
+
     if (isLoading){
         return <Loader/>;
     }
@@ -44,7 +47,7 @@ const PropertyContainer = () => {
         return <p>Not found</p>;
     }
 
-    return <Property property={property} isInWishlist={isInWishlist} isMobile={isMobile}/>;
+    return <Property property={property} isInWishlist={isInWishlist} isMobile={isMobile} navigateBack={navigateBack}/>;
 }
 
 export default PropertyContainer;

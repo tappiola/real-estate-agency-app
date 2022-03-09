@@ -9,8 +9,9 @@ import {Carousel, CarouselItem} from "../Carousel";
 const Property: React.FC<{
     property: PropertyType,
     isInWishlist: boolean,
-    isMobile: boolean
-}> = ({property, isInWishlist, isMobile}) => {
+    isMobile: boolean,
+    navigateBack: () => void
+}> = ({property, isInWishlist, isMobile, navigateBack}) => {
     const descRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -49,6 +50,9 @@ const Property: React.FC<{
 
     return (
         <div className="Property-Container">
+            <div className='Property-NavigateBack' onClick={navigateBack}>
+                <i className="fa-solid fa-arrow-left"/>
+                Back to search results</div>
             {renderImages()}
             <div className='Property-Information'>
                 <div className="Property-Summary">

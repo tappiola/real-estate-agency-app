@@ -4,6 +4,12 @@
     }
 }
 
+@mixin desktop {
+    @media (min-width: 1025px) {
+        @content;
+    }
+}
+
 .Property {
     &-Container {
         width: 100%;
@@ -21,8 +27,13 @@
     }
 
     &-Information {
+        width: 80%;
+        margin: auto;
+        padding-top: 20px;
+
         @include mobile {
             padding: 0 30px;
+            width: 100%;
         }
     }
 
@@ -34,8 +45,6 @@
     }
 
     &-Description {
-        //margin: 0 30px 50px 80px;
-        //width: 60%;
         text-align: justify;
     }
 
@@ -56,6 +65,20 @@
 
         .WishlistToggle-Label {
             //display: none;
+        }
+    }
+
+    &-NavigateBack {
+        font-family: 'Gilroy-Bold', sans-serif;
+        color: var(--primary-bright-color);
+        font-size: 15px;
+        padding-top: 16px;
+        text-align: left;
+        width: 80%;
+        margin: auto;
+
+        i {
+            margin-right: 13px;
         }
     }
 }

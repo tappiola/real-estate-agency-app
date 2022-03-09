@@ -9,7 +9,6 @@ TODO:
 - responsive layout
 - fix big heart
 - fix heart animation
-- cities and property types to redux
 - wishlist UI
 - AdvancedSearchForm add component
 - property page UI
@@ -34,4 +33,4 @@ TODO:
 - configure cors whitelist urls
 - not use volumes on prod
 - (R) login with wrong password
-- remove User is not authentificated when opening wishlist 
+- remove User is not authentificated when opening wishlist
