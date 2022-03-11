@@ -2,11 +2,10 @@ Create backup: `docker exec real-estate-agency-db-1 sh -c 'exec mysqldump -uadmi
 Restore backup: `docker exec -i real-estate-agency-db-1 sh -c 'exec mysql -uadmin -pbigsnorlax flats' < ./flats-dump.sql`
 
 TODO:
-- eslint
+- eslint for BE
 - react-content-loader for placeholders on property page https://skeletonreact.com/
 - add next / prev for pagination
 - favicon
-- responsive layout
 - fix big heart
 - fix heart animation
 - wishlist UI
@@ -33,4 +32,4 @@ TODO:
 - configure cors whitelist urls
 - not use volumes on prod
 - (R) login with wrong password
-- remove User is not authentificated when opening wishlist
+- remove User is not authenticated when opening wishlist

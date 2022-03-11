@@ -11,12 +11,10 @@ import BathroomIconComponent from '../BathroomIcon';
 const PropertyCardComponent: React.FC<{
     property: Property,
     index: number,
-    loadProperty: () => void,
     isMobile: boolean
 }> = ({
     property,
     index,
-    loadProperty,
     isMobile
 }) => {
     const loadCarouselImages = () => {
@@ -75,9 +73,6 @@ const PropertyCardComponent: React.FC<{
       <div
         className="PropertyCard"
         id={`property-${index}`}
-        onClick={loadProperty}
-        role="link"
-        tabIndex={0}
       >
         <div className="PropertyCard-Images">
           {loadImages()}

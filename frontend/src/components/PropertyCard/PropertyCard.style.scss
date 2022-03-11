@@ -24,6 +24,7 @@
     cursor: pointer;
     border-radius: 5px;
     background-color: white;
+    color: black;
 
     @include mobile {
         flex-shrink: 0;
@@ -34,6 +35,12 @@
         border: none;
         border-top: 1px solid var(--controls-color);
         width: 100%;
+    }
+
+    &-Link {
+        &:link {
+            text-decoration: none;
+        }
     }
 
     &-Images {
