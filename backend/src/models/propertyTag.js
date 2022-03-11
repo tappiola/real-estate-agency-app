@@ -1,6 +1,6 @@
 const sequelize = require('../util/database');
-const Property = require("./property");
-const Tag = require("./tag");
+const Property = require('./property');
+const Tag = require('./tag');
 
 const PropertyTag = sequelize.define('property_tag', { }, {timestamps: false});
 

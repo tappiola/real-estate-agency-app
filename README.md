@@ -9,14 +9,12 @@ TODO:
 - fix big heart
 - fix heart animation
 - wishlist UI
-- AdvancedSearchForm add component
 - property page UI
 - home page UI
 - add logo
 - GA?
 
 - (R) refresh token
-- (R) imports without ../../
 - (R) rewrite login with await + parse error message from response in case of 500 error
 - (R) search returns empty list for not logged in user
 - (R) token expiration

@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 const express = require('express');
 const sequelize = require('./util/database');
 
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const authentication = require('./middlewares/authentication')
+const authentication = require('./middlewares/authentication');
 
 const City = require('./models/city');
 const Property = require('./models/property');
@@ -16,7 +17,6 @@ const Image = require('./models/images');
 const Tag = require('./models/tag');
 const Type = require('./models/type');
 const PropertyTag = require('./models/propertyTag');
-
 
 const { graphqlHTTP  } = require('express-graphql');
 

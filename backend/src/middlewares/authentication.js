@@ -3,7 +3,7 @@ const { SECRET } = require('../constants');
 
 module.exports = function parseAuthorization(req, res, next){
     const authHeader = req.headers.authorization;
-        
+
     if(typeof authHeader === 'undefined'){
         req.isAuthenticated = false;
         return next();
@@ -22,4 +22,4 @@ module.exports = function parseAuthorization(req, res, next){
     }
 
     next();
-}
+};
