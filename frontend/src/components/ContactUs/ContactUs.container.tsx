@@ -10,6 +10,7 @@ const ContactUsContainer = () => {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [message, setMessage] = useState('');
 
     const dispatch = useAppDispatch();
 
@@ -17,7 +18,7 @@ const ContactUsContainer = () => {
         e.preventDefault();
 
         saveClientRequest({
-            firstName, lastName, email, phoneNumber
+            firstName, lastName, email, phoneNumber, message
         }).then(() => dispatch(enqueueToast({
             message: 'Your request has been submitted',
             type: ToastTypes.Success
@@ -29,12 +30,14 @@ const ContactUsContainer = () => {
         email={email}
         firstName={firstName}
         lastName={lastName}
+        message={message}
         onFormSubmit={onFormSubmit}
         phoneNumber={phoneNumber}
         setEmail={setEmail}
         setFirstName={setFirstName}
         setLastName={setLastName}
         setPhoneNumber={setPhoneNumber}
+        setMessage={setMessage}
       />
     );
 };

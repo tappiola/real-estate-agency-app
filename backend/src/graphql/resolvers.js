@@ -224,9 +224,9 @@ const removeFromWishlist =  async ({propertyId}, req) => {
     }
 };
 
-const saveClientRequest = async ({firstName, lastName, email, phone}) => {
+const saveClientRequest = async ({firstName, lastName, email, phone, message}) => {
     try {
-        await ClientRequest.create({firstName, lastName, email, phone});
+        await ClientRequest.create({firstName, lastName, email, phone, message});
         return {success: true};
     } catch {
         return {success: false};

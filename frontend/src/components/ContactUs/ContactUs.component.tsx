@@ -10,8 +10,21 @@ const ContactUsComponent: React.FC<{
     email: string,
     setEmail: (email: string) => void,
     phoneNumber: string,
-    setPhoneNumber: (phone: string) => void }> = ({
-    onFormSubmit, firstName, setFirstName, lastName, setLastName, email, setEmail, phoneNumber, setPhoneNumber
+    setPhoneNumber: (phone: string) => void,
+    message: string,
+    setMessage: (phone: string) => void
+}> = ({
+    onFormSubmit,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    email,
+    setEmail,
+    phoneNumber,
+    setPhoneNumber,
+    message,
+    setMessage
 }) => (
   <form className="ContactUs" onSubmit={onFormSubmit}>
     <h2>Contact us</h2>
@@ -19,6 +32,7 @@ const ContactUsComponent: React.FC<{
     <input placeholder="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
     <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
     <input placeholder="Phone number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+    <textarea placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)} />
     <button type="submit">Send message</button>
   </form>
 );

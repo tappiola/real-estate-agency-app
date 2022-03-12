@@ -148,13 +148,14 @@ export const getWishlist = () => {
 };
 
 export const saveClientRequest = ({
-    firstName, lastName, email, phoneNumber
+    firstName, lastName, email, phoneNumber, message
 }: SaveClientRequest) => {
     const graphqlQuery = {
         query: `
              mutation {
               saveClientRequest(
-              firstName: "${firstName}", lastName: "${lastName}", email: "${email}", phone: "${phoneNumber}")
+              firstName: "${firstName}", lastName: "${lastName}", email: "${email}", phone: "${phoneNumber}",
+              message: "${message}")
                 {
                     success
               }
