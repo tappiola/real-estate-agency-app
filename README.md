@@ -30,5 +30,5 @@ TODO:
 - queries to apollo gql
 - configure cors whitelist urls
 - not use volumes on prod
-- (R) login with wrong password
-- remove User is not authenticated when opening wishlist
++ (R) login with wrong password
++ remove User is not authenticated when opening wishlist

@@ -51,9 +51,10 @@ module.exports = buildSchema(`
         password: String
     }
 
-    type AuthData {
-        token: String!
-        userId: String!
+    type LoginResult {
+        success: Boolean!
+        token: String
+        errorMessage: String
     }
 
     input UserInputData {
@@ -69,7 +70,6 @@ module.exports = buildSchema(`
     }
 
     type RootQuery {
-        login(email: String!, password: String!): AuthData!
         getProperties(adType: String!, page: Int!, cityId: Int, propertyTypeId: Int, minPrice: Int, maxPrice: Int, minBeds: String, maxBeds: String): Properties
         getProperty(id: Int!): Property!
         getWishlist: [Property!]!
@@ -78,6 +78,7 @@ module.exports = buildSchema(`
     }
 
     type RootMutation {
+        login(email: String!, password: String!): LoginResult!
         createUser(userInput: UserInputData): User!
         addToWishlist(propertyId: String!): Status!
         removeFromWishlist(propertyId: String!): Status!

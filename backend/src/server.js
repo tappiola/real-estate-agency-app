@@ -47,13 +47,17 @@ app.use(
         schema: graphqlSchema,
         rootValue: graphqlResolver,
         graphiql: true,
-        customFormatErrorFn: (error) => ({
-            message: error.message,
-            locations: error.locations,
-            stack: error.stack ? error.stack.split('\n') : [],
-            path: error.path,
-            extensions: error.extensions,
-        })
+        customFormatErrorFn: (error) => {
+            console.log({error});
+
+            return {
+                message: error.message,
+                locations: error.locations,
+                stack: error.stack ? error.stack.split('\n') : [],
+                path: error.path,
+                extensions: error.extensions,
+            };
+        }
     })
 );
 

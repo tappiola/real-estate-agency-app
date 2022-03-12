@@ -1,10 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
-import { ToastTypes } from '../constants';
-import { login } from '../queries';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getSavedToken } from '../util';
-import { enqueueToast } from './notifier';
 
 interface UserState {
     authToken: string | null,
@@ -16,57 +12,30 @@ const initialState: UserState = {
     isAuthorized: !!getSavedToken()
 };
 
-interface LoginUserPayload {
-    email: string,
-    password: string,
-}
-
-export const loginUser = createAsyncThunk(
-    'currentUser/loginUser',
-    async ({ email, password } : LoginUserPayload, { dispatch }) => {
-        const response = await login(email, password)
-            .catch((err) => {
-                dispatch(enqueueToast({
-                    message: err.message || 'Something went wrong',
-                    type: ToastTypes.Error
-                }));
-
-                throw err;
-            });
-
-        dispatch(enqueueToast({
-            message: 'Login successful',
-            type: ToastTypes.Success
-        }));
-
-        return response.json();
-    }
-);
-
-export const logoutUser = createAsyncThunk(
-    'currentUser/logoutUser',
-    () => localStorage.removeItem('token')
-);
-
 const user = createSlice({
     name: 'currentUser',
     initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(loginUser.fulfilled, (state, action) => {
-            const { data: { login: { token } } } = action.payload || {};
+    reducers: {
+        loginSuccessful(state, action: PayloadAction<string>) {
+            const token = action.payload;
+
             state.isAuthorized = true;
             state.authToken = token;
+
             localStorage.setItem('token', token);
-        });
-        builder.addCase(loginUser.rejected, (state) => {
+        },
+        loginFailed(state) {
             state.isAuthorized = false;
-        });
-        builder.addCase(logoutUser.fulfilled, (state) => {
+        },
+        logoutUser(state) {
             state.isAuthorized = false;
             state.authToken = null;
-        });
+
+            localStorage.removeItem('token');
+        }
     }
 });
+
+export const { loginSuccessful, loginFailed, logoutUser } = user.actions;
 
 export default user.reducer;

@@ -25,11 +25,16 @@ const authLink = setContext((_, { headers }) => {
     };
 });
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-    console.log('Caught GraphQL error', { graphQLErrors, networkError });
+const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
+    console.log('Caught GraphQL error', { operation, graphQLErrors, networkError });
 
     if (graphQLErrors) {
         if (graphQLErrors[0].extensions.code === 'NOT_AUTHENTICATED') {
+            // No need to handle authentication error for wishlist query
+            if (operation.operationName === 'GetWishlist') {
+                return;
+            }
+
             store.dispatch(enqueueToast({
                 message: graphQLErrors[0].message,
                 type: ToastTypes.Error

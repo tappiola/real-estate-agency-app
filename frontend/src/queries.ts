@@ -30,21 +30,6 @@ export const removeFromWishlist = (id: number) => {
     return sendGraphqlRequest(graphqlQuery);
 };
 
-export const login = (email: string, password: string) => {
-    const graphqlQuery = {
-        query: `
-        query {
-          login(email: "${email}", password: "${password}") {
-            userId
-            token
-          }
-        }
-      `
-    };
-
-    return sendGraphqlRequest(graphqlQuery);
-};
-
 export const register = (email: string, name: string, password: string) => {
     const graphqlQuery = {
         query: `
@@ -123,23 +108,6 @@ export const getProperty = (id: number) => {
                     floorPlan
                     price
                     type {id name}
-              }
-            }`
-    };
-
-    return sendGraphqlRequest(graphqlQuery);
-};
-
-export const getWishlist = () => {
-    const graphqlQuery = {
-        query: `
-            {
-              getWishlist {
-                id
-                title
-                description
-                city { id name }
-                propertyType { id name }
               }
             }`
     };
