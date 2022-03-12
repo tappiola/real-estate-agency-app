@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParallax } from 'react-scroll-parallax';
-import CitiesSelect from '../BaseSearchForm';
+import BaseSearchForm from '../BaseSearchForm';
 import ContactUs from '../ContactUs';
 import './HomePage.style.scss';
 import GetInTouch from '../GetInTouch';
@@ -13,7 +13,7 @@ const HomePage = () => {
     return (
       <div className="HomePage">
         <div className="TopBanner" />
-        <CitiesSelect />
+        <BaseSearchForm />
         <div className="MidBanner" ref={parallax.ref as React.RefObject<HTMLDivElement>} />
         <div className="HomePage-Bottom">
           <svg className="PuddleShape" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
