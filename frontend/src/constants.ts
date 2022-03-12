@@ -1,4 +1,4 @@
-export const HOST = 'http://192.168.0.15';
+export const HOST = 'http://localhost';
 
 export enum ToastTypes {
     Success = 'Success',
