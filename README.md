@@ -13,6 +13,7 @@ TODO:
 - home page UI
 - add logo
 - GA?
+- add message field
 
 - (R) refresh token
 - (R) rewrite login with await + parse error message from response in case of 500 error

@@ -1,10 +1,10 @@
 export const HOST = 'http://192.168.0.15';
 
 export enum ToastTypes {
-    Success,
-    Error,
-    Warning,
-    Info
+    Success = 'Success',
+    Error = 'Error',
+    Warning = 'Warning',
+    Info = 'Info'
 }
 
 export const accessToken = 'pk.eyJ1IjoidGFwcGlvbGEiLCJhIjoiY2t6eHhuM2N6MDYyMTJ2cDcxcDVsem8zNiJ9.OByK2fsCvb8XsvT2OYUEjA';
