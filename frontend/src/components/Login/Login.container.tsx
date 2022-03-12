@@ -1,8 +1,8 @@
 import { useMutation } from '@apollo/client';
-import { FormEvent, useState } from 'react';
+import { FormEvent, FormEventHandler, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LOGIN } from '../../apollo/queries';
-import { LoginResponse } from '../../apollo/types';
+import { LoginResult } from '../../apollo/types';
 import { ToastTypes } from '../../constants';
 import { useAppDispatch } from '../../redux/hooks';
 import { enqueueToast } from '../../redux/notifier';
@@ -14,9 +14,9 @@ const LoginContainer = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const [loginUser] = useMutation<LoginResponse>(LOGIN);
+    const [loginUser] = useMutation<LoginResult>(LOGIN);
 
-    const loginHandler = async (event: FormEvent<HTMLFormElement>) => {
+    const loginHandler: FormEventHandler = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         await loginUser({

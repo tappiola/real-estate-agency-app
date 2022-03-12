@@ -14,7 +14,7 @@ const ClientRequest = require('../models/clientRequests');
 const Type = require('../models/type');
 const Tag = require('../models/tag');
 
-const { NotAuthenticatedError, UserAlreadyExistsError } = require('./errors');
+const { NotAuthenticatedError } = require('./errors');
 
 const createUser = async ({ userInput })  => {
     const {email, name, password} = userInput;
@@ -29,22 +29,27 @@ const createUser = async ({ userInput })  => {
     }
 
     if (errors.length > 0) {
-        const error = new Error('Invalid input.');
-        error.data = errors;
-        error.code = 422;
-        throw error;
+        return {
+            success: false,
+            errorMessage: `Validation errors: ${errors.join(', ')}`
+        };
     }
 
     const existingUser = await User.findOne({where: { email }});
 
     if (existingUser) {
-        throw new UserAlreadyExistsError();
+        return {
+            success: false,
+            errorMessage: 'User already exists'
+        };
     }
 
     const hashedPw = await bcrypt.hash(userInput.password, 12);
     const user = new User({email, name, password: hashedPw});
 
-    return await user.save();
+    await user.save();
+
+    return {success: true};
 };
 
 const login = async ({ email, password }) => {

@@ -53,7 +53,12 @@ module.exports = buildSchema(`
 
     type LoginResult {
         success: Boolean!
+        errorMessage: String
         token: String
+    }
+    
+    type RegistrationResult {
+        success: Boolean!
         errorMessage: String
     }
 
@@ -79,7 +84,7 @@ module.exports = buildSchema(`
 
     type RootMutation {
         login(email: String!, password: String!): LoginResult!
-        createUser(userInput: UserInputData): User!
+        createUser(userInput: UserInputData): RegistrationResult!
         addToWishlist(propertyId: String!): Status!
         removeFromWishlist(propertyId: String!): Status!
         saveClientRequest(firstName: String!, lastName: String, email: String, phone: String, message: String): Status!

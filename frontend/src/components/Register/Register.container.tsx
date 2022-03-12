@@ -1,34 +1,40 @@
-import { FormEventHandler, useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { FormEvent, FormEventHandler, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { register } from '../../queries';
+import { REGISTER } from '../../apollo/queries';
+import { RegistrationResult } from '../../apollo/types';
+import { ToastTypes } from '../../constants';
+import { useAppDispatch } from '../../redux/hooks';
+import { enqueueToast } from '../../redux/notifier';
 import Register from './Register.component';
 
 const RegisterContainer = () => {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const [register] = useMutation<RegistrationResult>(REGISTER);
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const navigate = useNavigate();
-
-    const signupHandler: FormEventHandler = (event) => {
+    const signupHandler: FormEventHandler = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        register(email, name, password).then((res) => res.json())
-            .then((resData) => {
-                if (resData.errors && resData.errors[0].status === 422) {
-                    throw new Error(
-                        'This email is already registered.'
-                    );
+        await register({
+            variables: { userInput: { email, name, password } },
+            onCompleted: (data) => {
+                if (!data.createUser.success) {
+                    dispatch(enqueueToast({
+                        type: ToastTypes.Error,
+                        message: data.createUser.errorMessage
+                    }));
+
+                    return;
                 }
 
-                if (resData.errors) {
-                    throw new Error('User creation failed!');
-                }
                 navigate('/', { replace: true });
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+            }
+        });
     };
 
     return (

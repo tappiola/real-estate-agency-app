@@ -30,21 +30,6 @@ export const removeFromWishlist = (id: number) => {
     return sendGraphqlRequest(graphqlQuery);
 };
 
-export const register = (email: string, name: string, password: string) => {
-    const graphqlQuery = {
-        query: `
-        mutation {
-          createUser(userInput: {email: "${email}", name:"${name}", password:"${password}"}) {
-            id
-            email
-          }
-        }
-      `
-    };
-
-    return sendGraphqlRequest(graphqlQuery);
-};
-
 export const searchProperties = (params: any) => {
     const {
         adType, page, city, propertyType, minPrice, maxPrice, minBeds, maxBeds
