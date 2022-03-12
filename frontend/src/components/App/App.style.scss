@@ -48,10 +48,11 @@ input {
   padding: 10px;
   background: transparent;
   outline: none;
-  font-size: 14px;
+  font-size: 16px;
 
   &::placeholder {
     font-weight: 500;
     letter-spacing: 0.05em;
+    font-family: Relative-Book, sans-serif;
   }
 }

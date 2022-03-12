@@ -1,0 +1,53 @@
+@mixin mobile {
+    @media (max-width: 810px) {
+        @content;
+    }
+}
+
+.GetInTouch {
+    background-color: #343343;
+    font-family: 'Relative-Faux', sans-serif;
+    letter-spacing: 0.05em;
+    position: absolute;
+    right: 0;
+    top: -80px;
+    z-index: 100;
+    padding: 33px 38px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    text-align: left;
+    width: 40%;
+    height: fit-content;
+
+    @include mobile {
+        width: 100%;
+        position: static;
+    }
+
+    &-ContactLink {
+        color: white;
+
+        &:link {
+            text-decoration: none;
+        }
+
+        &:hover {
+            color: #0056b3;
+        }
+    }
+
+    &-Label {
+        color: hsla(0, 0%, 100%, .51);
+        padding: 0 10px;
+    }
+
+    &-Title {
+        padding-bottom: 30px;
+    }
+
+    &-Contact {
+        display: flex;
+        align-items: center;
+    }
+}
