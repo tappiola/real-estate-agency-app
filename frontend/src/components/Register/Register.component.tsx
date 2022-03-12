@@ -1,9 +1,9 @@
-import React, { FormEvent } from 'react';
+import React, { FormEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 import './Register.style.scss';
 
 const Register: React.FC<{
-    signupHandler: (event: FormEvent<HTMLFormElement>) => void,
+    signupHandler: FormEventHandler,
     name: string,
     setName: (name: string) => void,
     email: string,

@@ -1,4 +1,4 @@
-import React, { MouseEvent, useState } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
 import { addToWishlist, removeFromWishlist } from '../../queries';
 import { Property } from '../../types';
 import ToggleWishlist from './ToggleWishlist.component';
@@ -13,7 +13,7 @@ const ToggleWishlistContainer: React.FC<{ property: Property, inWishlist: boolea
 
     const dispatch = useAppDispatch();
 
-    const onWishlistToggle: (e: MouseEvent<HTMLParagraphElement>) => Promise<void> = async (e: MouseEvent) => {
+    const onWishlistToggle: MouseEventHandler<HTMLParagraphElement> = async (e) => {
         e.stopPropagation();
 
         if (!isAuthorized) {

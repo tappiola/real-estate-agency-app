@@ -39,6 +39,7 @@ const PropertyCardComponent: React.FC<{
                 className="PropertyCard-CarouselImg"
                 src={image.link}
                 alt={`Property${image.position}`}
+                loading="lazy"
               />
             </div>
           </CarouselItem>
@@ -53,6 +54,7 @@ const PropertyCardComponent: React.FC<{
             className="PropertyCard-CarouselImg"
             src={images[0]?.link || IMAGE_PLACEHOLDER}
             alt="Property"
+            loading="lazy"
           />
         );
     };

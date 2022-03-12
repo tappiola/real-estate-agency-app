@@ -3,6 +3,7 @@ import { useParallax } from 'react-scroll-parallax';
 import CitiesSelect from '../BaseSearchForm';
 import ContactUs from '../ContactUs';
 import './HomePage.style.scss';
+import GetInTouch from '../GetInTouch';
 
 const HomePage = () => {
     const parallax = useParallax({
@@ -20,6 +21,7 @@ const HomePage = () => {
           </svg>
           <ContactUs />
           <div className="Banner3" ref={parallax.ref as React.RefObject<HTMLDivElement>} />
+          <GetInTouch />
         </div>
       </div>
     );

@@ -2,7 +2,6 @@ Create backup: `docker exec real-estate-agency-db-1 sh -c 'exec mysqldump -uadmi
 Restore backup: `docker exec -i real-estate-agency-db-1 sh -c 'exec mysql -uadmin -pbigsnorlax flats' < ./flats-dump.sql`
 
 TODO:
-- eslint for BE
 - react-content-loader for placeholders on property page https://skeletonreact.com/
 - add next / prev for pagination
 - favicon

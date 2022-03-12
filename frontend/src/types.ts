@@ -57,4 +57,5 @@ export type SaveClientRequest = {
     lastName: string,
     email: string,
     phoneNumber: string,
+    message: string
 };

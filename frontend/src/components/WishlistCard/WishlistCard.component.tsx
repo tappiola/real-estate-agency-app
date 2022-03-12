@@ -1,12 +1,12 @@
 import './WishlistCard.style.scss';
-import React, { MouseEvent } from 'react';
+import React, { MouseEventHandler } from 'react';
 import CloseIcon from '../CloseIcon';
 import { Property } from '../../types';
 
 const WishlistCard: React.FC<{
     property: Property,
-    onWishlistRemove: (event: MouseEvent<HTMLDivElement>) => void,
-    loadProperty: (event: MouseEvent<HTMLDivElement>) => void
+    onWishlistRemove: MouseEventHandler<HTMLDivElement>,
+    loadProperty: MouseEventHandler<HTMLDivElement>
 }> = ({
     property,
     onWishlistRemove,

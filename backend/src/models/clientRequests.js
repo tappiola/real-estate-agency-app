@@ -13,6 +13,7 @@ const ClientRequest = sequelize.define('client_requests', {
     lastName: Sequelize.STRING,
     email: Sequelize.STRING,
     phone: Sequelize.STRING,
+    message: Sequelize.TEXT
 });
 
 module.exports = ClientRequest;

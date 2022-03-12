@@ -1,5 +1,5 @@
 import React, {
-    useCallback, useEffect, useRef, useState, TouchEvent, MouseEvent, ReactChild, ReactElement
+    useCallback, useEffect, useRef, useState, MouseEvent, ReactChild, ReactElement, TouchEventHandler
 } from 'react';
 import Carousel from './Carousel.component';
 
@@ -129,18 +129,18 @@ const CarouselContainer: React.FC<{
         }
     }, [activeIndex, automaticSlideInterval, autoplay, isMouseOver, toNextSlide]);
 
-    const handleTouchStart = (e: TouchEvent<HTMLDivElement>) => {
+    const handleTouchStart: TouchEventHandler<HTMLDivElement> = (e) => {
         setTouchStartX(e.changedTouches[0]?.clientX);
     };
 
-    const handleTouchMove = (e: TouchEvent<HTMLDivElement>) => {
+    const handleTouchMove: TouchEventHandler<HTMLDivElement> = (e) => {
         const moveBy = e.changedTouches[0]!.clientX - touchStartX;
 
         removeAnimation();
         adjustPosition(activeIndex, moveBy);
     };
 
-    const handleTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
+    const handleTouchEnd: TouchEventHandler<HTMLDivElement> = (e) => {
         const touchEndX = e.changedTouches[0].clientX;
         const moveBy = touchEndX - touchStartX;
 
