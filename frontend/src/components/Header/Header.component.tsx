@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { AdType } from '../../constants';
 import AdvancedSearchForm from '../AdvancedSearchForm';
 import './Header.style.scss';
@@ -52,6 +53,7 @@ const HeaderComponent: React.FC<{
     return (
       <>
         <header className="Header">
+          <Link className="HomeLink" to="/">Home</Link>
           {renderChildren()}
           <div className="Actions">
             <div
