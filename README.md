@@ -16,8 +16,8 @@ TODO:
 - add message field
 
 - (R) refresh token
-- (R) rewrite login with await + parse error message from response in case of 500 error
-- (R) search returns empty list for not logged in user
++ (R) rewrite login with await + parse error message from response in case of 500 error
++ (R) search returns empty list for not logged in user
 - (R) token expiration
   - when user logs out, remove token from local storage
   - when token expires, return 401 (?) and frontend should remove token from local storage + redirect to home page

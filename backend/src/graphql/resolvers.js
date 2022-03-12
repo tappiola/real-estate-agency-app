@@ -50,7 +50,7 @@ const createUser = async ({ userInput })  => {
 const login = async ({ email, password }) => {
     const user = await User.findOne({where: { email }});
     if (!user) {
-        return { success: false, errorMessage: 'User does not exists'};
+        return { success: false, errorMessage: 'User does not exist'};
     }
 
     const isEqual = await bcrypt.compare(password, user.password);
