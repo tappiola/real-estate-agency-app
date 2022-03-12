@@ -1,9 +1,9 @@
-import React, { FormEvent } from 'react';
+import React, { FormEventHandler } from 'react';
 import './Login.style.scss';
 import { Link } from 'react-router-dom';
 
 const Login : React.FC<{
-    loginHandler: (event: FormEvent<HTMLFormElement>) => void,
+    loginHandler: FormEventHandler,
     email: string,
     setEmail: (email: string) => void,
     password: string,

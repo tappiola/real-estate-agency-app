@@ -1,8 +1,8 @@
-import React, { FormEvent } from 'react';
+import React, { FormEventHandler } from 'react';
 import './ContactUs.style.scss';
 
 const ContactUsComponent: React.FC<{
-    onFormSubmit: (e: FormEvent<HTMLFormElement>) => void,
+    onFormSubmit: FormEventHandler,
     firstName: string,
     setFirstName: (name: string) => void,
     lastName: string,

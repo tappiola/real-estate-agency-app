@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEventHandler, useState } from 'react';
 import { ToastTypes } from '../../constants';
 import ContactUs from './ContactUs.component';
 import { enqueueToast } from '../../redux/notifier';
@@ -13,7 +13,7 @@ const ContactUsContainer = () => {
 
     const dispatch = useAppDispatch();
 
-    const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const onFormSubmit: FormEventHandler = (e) => {
         e.preventDefault();
 
         saveClientRequest({

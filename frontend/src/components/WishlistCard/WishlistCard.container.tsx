@@ -1,5 +1,5 @@
 import './WishlistCard.style.scss';
-import React, { MouseEvent } from 'react';
+import React, { MouseEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { Property } from '../../types';
@@ -19,12 +19,12 @@ const WishlistCardContainer: React.FC<{
         refetchQueries: [GET_WISHLIST]
     });
 
-    const loadProperty = (event: MouseEvent<HTMLDivElement>) => {
+    const loadProperty: MouseEventHandler<HTMLDivElement> = (event) => {
         event.stopPropagation();
         navigate(`/property/${property.id}`);
     };
 
-    const onWishlistRemove = async (e: MouseEvent<HTMLDivElement>) => {
+    const onWishlistRemove: MouseEventHandler<HTMLDivElement> = async (e) => {
         e.stopPropagation();
 
         const { id } = property;

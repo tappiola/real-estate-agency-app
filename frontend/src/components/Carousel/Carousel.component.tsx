@@ -1,13 +1,13 @@
 import React, {
-    ReactChild, RefObject, TouchEvent, MouseEvent
+    ReactChild, RefObject, MouseEvent, TouchEventHandler
 } from 'react';
 import './Carousel.style.scss';
 import clsx from 'clsx';
 
 const CarouselComponent: React.FC<{
-    handleTouchEnd: (e: TouchEvent<HTMLDivElement>) => void,
-    handleTouchStart: (e: TouchEvent<HTMLDivElement>) => void,
-    handleTouchMove: (e: TouchEvent<HTMLDivElement>) => void,
+    handleTouchEnd: TouchEventHandler<HTMLDivElement>,
+    handleTouchStart: TouchEventHandler<HTMLDivElement>,
+    handleTouchMove: TouchEventHandler<HTMLDivElement>,
     toNextSlide: (e?: MouseEvent<HTMLDivElement>) => void,
     toPrevSlide: (e?: MouseEvent<HTMLDivElement>) => void,
     changeSlide: (index: number) => void,
