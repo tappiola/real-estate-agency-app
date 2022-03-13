@@ -71,6 +71,7 @@ const login = async ({ email, password }) => {
         SECRET,
         { expiresIn: '1h' }
     );
+
     return { success: true, token };
 };
 

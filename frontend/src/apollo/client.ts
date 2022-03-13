@@ -3,10 +3,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
-import store from '../redux/store';
-import { enqueueToast } from '../redux/notifier';
-import { HOST, ToastTypes } from '../constants';
-import { logoutUser } from '../redux/user';
+import { HOST } from '../constants';
 
 const httpLink = createHttpLink({
     uri: `${HOST}/graphql`
@@ -26,28 +23,8 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
+    // eslint-disable-next-line no-console
     console.log('Caught GraphQL error', { operation, graphQLErrors, networkError });
-
-    if (graphQLErrors) {
-        if (graphQLErrors[0].extensions.code === 'NOT_AUTHENTICATED') {
-            // No need to handle authentication error for wishlist query
-            if (operation.operationName === 'GetWishlist') {
-                return;
-            }
-
-            store.dispatch(enqueueToast({
-                message: graphQLErrors[0].message,
-                type: ToastTypes.Error
-            }));
-
-            store.dispatch(logoutUser());
-        } else {
-            store.dispatch(enqueueToast({
-                message: `Something went wrong: ${graphQLErrors[0].message}`,
-                type: ToastTypes.Error
-            }));
-        }
-    }
 });
 
 const client = new ApolloClient({

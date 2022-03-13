@@ -1,21 +1,19 @@
 import { gql } from '@apollo/client';
 
-export const GET_WISHLIST = gql`
-query GetWishlist {
-    getWishlist {
+export const GET_CITIES = gql`
+query GetCities {
+    getCities {
         id
-        title
-        description
-        city { id name }
-        propertyType { id name }
+        name
     }
 }
 `;
 
-export const REMOVE_WISHLIST_ITEM = gql`
-mutation RemoveFromWishlist($propertyId: String!) {
-    removeFromWishlist(propertyId: $propertyId) {
-        success
+export const GET_PROPERTY_TYPES = gql`
+query GetPropertyTypes {
+    getPropertyTypes {
+        id
+        name
     }
 }
 `;
@@ -35,6 +33,26 @@ mutation Register($userInput: UserInputData!) {
     createUser(userInput: $userInput) {
         success
         errorMessage
+    }
+}
+`;
+
+export const GET_WISHLIST = gql`
+query GetWishlist {
+    getWishlist {
+        id
+        title
+        description
+        city { id name }
+        propertyType { id name }
+    }
+}
+`;
+
+export const REMOVE_WISHLIST_ITEM = gql`
+mutation RemoveFromWishlist($propertyId: String!) {
+    removeFromWishlist(propertyId: $propertyId) {
+        success
     }
 }
 `;
