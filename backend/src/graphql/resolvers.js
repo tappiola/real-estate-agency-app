@@ -99,7 +99,7 @@ const getProperties = async (args, req) => {
         ...maxBedsCondition
     };
 
-    const items = await Property.findAll( {
+    const items = await Property.findAll({
         where: condition,
         offset: (page - 1) * ITEMS_PER_PAGE,
         limit: ITEMS_PER_PAGE,
@@ -118,23 +118,24 @@ const getProperties = async (args, req) => {
         }, {
             model: Tag,
             as: 'tags'
-        }
-        ]
+        }]
     });
 
-    const allItems = await Property.findAll( {where: condition, include: [{
-        model: City,
-        as: 'city'
-    }, {
-        model: PropertyType,
-        as: 'propertyType'
-    }, {
-        model: Type,
-        as: 'type'
-    }
-    ]});
-    const count = allItems.length;
+    const allItems = await Property.findAll({
+        where: condition,
+        include: [{
+            model: City,
+            as: 'city'
+        }, {
+            model: PropertyType,
+            as: 'propertyType'
+        }, {
+            model: Type,
+            as: 'type'
+        }]
+    });
 
+    const count = allItems.length;
     const pages = Math.ceil(count / ITEMS_PER_PAGE);
 
     if(req.isAuthenticated){
@@ -151,23 +152,24 @@ const getProperties = async (args, req) => {
 };
 
 const getProperty = async ({id}, req) => {
-    const property = await Property.findOne({where: {id}, include: [{
-        model: City,
-        as: 'city'
-    }, {
-        model: PropertyType,
-        as: 'propertyType'
-    }, {
-        model: Image,
-        as: 'images'
-    }, {
-        model: Type,
-        as: 'type'
-    }, {
-        model: Tag,
-        as: 'tags'
-    }
-    ]
+    const property = await Property.findOne({
+        where: {id},
+        include: [{
+            model: City,
+            as: 'city'
+        }, {
+            model: PropertyType,
+            as: 'propertyType'
+        }, {
+            model: Image,
+            as: 'images'
+        }, {
+            model: Type,
+            as: 'type'
+        }, {
+            model: Tag,
+            as: 'tags'
+        }]
     });
 
     if(req.isAuthenticated){
@@ -194,7 +196,8 @@ const getWishlist = async (args, req) => {
     }
 
     return Property.findAll({
-        where: {id: {[Op.or]: propertyIds}}, include: [{
+        where: {id: {[Op.or]: propertyIds}},
+        include: [{
             model: City,
             as: 'city'
         }, {

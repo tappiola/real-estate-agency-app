@@ -7,14 +7,6 @@ class NotAuthenticatedError extends GraphQLError {
     }
 }
 
-class UserAlreadyExistsError extends GraphQLError {
-    constructor() {
-        super('User already exists');
-        this.extensions.code = 'USER_ALREADY_EXISTS';
-    }
-}
-
 module.exports = {
     NotAuthenticatedError,
-    UserAlreadyExistsError,
 };

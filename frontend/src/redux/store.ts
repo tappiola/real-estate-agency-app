@@ -2,12 +2,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import searchReducer from './search';
 import notificationsReducer from './notifier';
 import userReducer from './user';
-import referenceData from './referenceData';
+import referenceDataReducer from './referenceData';
 
 const store = configureStore({
     reducer: {
         notifier: notificationsReducer,
-        referenceData,
+        referenceData: referenceDataReducer,
         search: searchReducer,
         user: userReducer
     },
