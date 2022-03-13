@@ -11,11 +11,7 @@
   box-sizing: border-box;
 }
 
-@mixin mobile {
-  @media (max-width: 810px) {
-    @content;
-  }
-}
+§
 
 .App {
   text-align: center;
