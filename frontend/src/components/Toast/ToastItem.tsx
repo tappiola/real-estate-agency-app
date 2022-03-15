@@ -13,13 +13,21 @@ const TOAST_ICONS = {
 };
 
 const ToastItem: React.FC<{
-    message: string, duration: number, type: ToastTypes, onExpire: () => void, onRemove: () => void
+    message: string,
+    duration: number,
+    type: ToastTypes,
+    onExpire: () => void,
+    onRemove: () => void
 }> = ({
-    message, duration, type, onExpire, onRemove
+    message,
+    duration,
+    type,
+    onExpire,
+    onRemove
 }) => {
     const toastRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => { setTimeout(() => onExpire(), duration); }, []);
+    useEffect(() => { setTimeout(() => onExpire(), duration); }, [duration, onExpire]);
 
     return (
       <div

@@ -13,6 +13,10 @@
 .Property {
     &-Container {
         width: 100%;
+
+        .Preview-Images{
+            cursor: zoom-in;
+        }
     }
 
     &-Price {

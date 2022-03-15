@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import ToggleWishlist from '../ToggleWishlist';
 import './PropertyCard.style.scss';
 import { Property, Image } from '../../types';
@@ -20,6 +20,8 @@ const PropertyCardComponent: React.FC<{
     const loadCarouselImages = () => {
         const { images } = property;
 
+        const sortedImages = useMemo(() => sortByKey(images, 'position').slice(0, 15), [images]);
+
         if (!images.length) {
             return (
               <CarouselItem>
@@ -32,7 +34,7 @@ const PropertyCardComponent: React.FC<{
             );
         }
 
-        return sortByKey(images, 'position').slice(0, 15).map((image: Image) => (
+        return sortedImages.map((image: Image) => (
           <CarouselItem key={image.id}>
             <div className="PropertyCard-ImageContainer">
               <img

@@ -19,6 +19,8 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
         activeProperty, properties, pages, count, activeSearch
     } = useAppSelector(({ search }) => search);
 
+    const { page } = activeSearch;
+
     useEffect(() => {
         if (!searchParams.get('city')) {
             dispatch(enqueueToast({
@@ -40,14 +42,14 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
 
         fetchProperties();
         setIsLoading(false);
-    }, [adType, searchParams]);
+    }, [adType, dispatch, searchParams]);
 
     useEffect(() => {
         if (!isMobile) {
             return;
         }
 
-        if (properties.length && activeProperty + 1 === properties.length && activeSearch.page < pages) {
+        if (properties.length && activeProperty + 1 === properties.length && page < pages) {
             const fetchMoreProperties = async () => {
                 try {
                     dispatch(getProperties({ adType, searchParams, requestMore: true }));
@@ -59,7 +61,7 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
 
             fetchMoreProperties();
         }
-    }, [isMobile, activeProperty, properties, count]);
+    }, [isMobile, activeProperty, properties, count, page, pages, dispatch, adType, searchParams]);
 
     return (
       <SearchResults

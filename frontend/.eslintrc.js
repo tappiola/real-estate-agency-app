@@ -19,6 +19,7 @@ module.exports = {
     plugins: [
         'react',
         '@typescript-eslint',
+        'react-hooks'
     ],
     ignorePatterns: ['.eslintrc.js'],
     rules: {
@@ -127,6 +128,7 @@ module.exports = {
         ],
         "react/no-array-index-key": "off",
         "jsx-a11y/click-events-have-key-events": "off",
-        "linebreak-style": "off",
+        "react-hooks/exhaustive-deps": "warn",
+        "linebreak-style": "off"
     },
 };

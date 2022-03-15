@@ -4,13 +4,19 @@
   }
 }
 
+@mixin tablet {
+  @media (min-width: 811px) {
+    @content;
+  }
+}
+
 @mixin desktop {
   @media (min-width: 1025px) {
     @content;
   }
 }
 
-header {
+.Header {
   width: 100%;
   height: var(--header-height);
   position: fixed;
@@ -23,13 +29,32 @@ header {
   justify-content: center;
   padding-left: 20px;
 
-  @include mobile {
-    justify-content: space-between;
+  &-HomeLink {
+    height: 100%;
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+    margin-right: 12px;
+
+    &:link {
+      text-decoration: none;
+    }
   }
 
-  .HomeLink {
-    @include mobile {
-      order: 2;
+  &-Logo {
+    height: 26px;
+    object-fit: contain;
+
+    &Title {
+      font-family: 'Relative-Faux', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: white;
+      font-weight: 700;
+      width: min-content;
+      font-size: 7px;
+      text-align: center;
+      margin: 0;
     }
   }
 
@@ -39,7 +64,7 @@ header {
     align-items: center;
     order: 3;
 
-    @include desktop {
+    @include tablet {
       margin-left: auto;
     }
   }
@@ -50,6 +75,11 @@ header {
     &:hover {
       background-color: white;
     }
+  }
+
+  &-Filter {
+    margin-left: auto;
+    margin-right: 12px;
   }
 
   .WishlistIcon {

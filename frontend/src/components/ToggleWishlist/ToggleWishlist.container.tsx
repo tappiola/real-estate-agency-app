@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useState } from 'react';
+import React, { MouseEventHandler, useCallback, useState } from 'react';
 import { addToWishlist, removeFromWishlist } from '../../queries';
 import { Property } from '../../types';
 import ToggleWishlist from './ToggleWishlist.component';
@@ -10,10 +10,9 @@ const ToggleWishlistContainer: React.FC<{ property: Property, inWishlist: boolea
     const [isInWishlist, setIsInWishlist] = useState(inWishlist);
     const { isAuthorized } = useAppSelector(({ user }) => user);
     const [isClicked, setIsClicked] = useState<boolean>(false);
-
     const dispatch = useAppDispatch();
 
-    const onWishlistToggle: MouseEventHandler<HTMLParagraphElement> = async (e) => {
+    const onWishlistToggle: MouseEventHandler<HTMLParagraphElement> = useCallback(async (e) => {
         e.stopPropagation();
 
         if (!isAuthorized) {
@@ -32,7 +31,7 @@ const ToggleWishlistContainer: React.FC<{ property: Property, inWishlist: boolea
         const { id } = property;
 
         const resp = isInWishlist ? await removeFromWishlist(id) : await addToWishlist(id);
-        setIsClicked(!isClicked);
+        setIsClicked((prevIsClicked) => !prevIsClicked);
 
         dispatch(enqueueToast({
             message: isInWishlist ? 'Removed from wishlist' : 'Added to wishlist',
@@ -43,9 +42,9 @@ const ToggleWishlistContainer: React.FC<{ property: Property, inWishlist: boolea
         const { data: { [key]: { success } } } = await resp.json();
 
         if (success) {
-            setIsInWishlist(!isInWishlist);
+            setIsInWishlist((prevInWishlist) => !prevInWishlist);
         }
-    };
+    }, [dispatch, isAuthorized, isInWishlist, property]);
 
     return (
       <ToggleWishlist

@@ -1,4 +1,4 @@
-import { FormEventHandler, useState } from 'react';
+import { FormEventHandler, useCallback, useState } from 'react';
 import { ToastTypes } from '../../constants';
 import ContactUs from './ContactUs.component';
 import { enqueueToast } from '../../redux/notifier';
@@ -14,7 +14,7 @@ const ContactUsContainer = () => {
 
     const dispatch = useAppDispatch();
 
-    const onFormSubmit: FormEventHandler = (e) => {
+    const onFormSubmit: FormEventHandler = useCallback((e) => {
         e.preventDefault();
 
         saveClientRequest({
@@ -23,7 +23,7 @@ const ContactUsContainer = () => {
             message: 'Your request has been submitted',
             type: ToastTypes.Success
         })));
-    };
+    }, [dispatch, email, firstName, lastName, message, phoneNumber]);
 
     return (
       <ContactUs

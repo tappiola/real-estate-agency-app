@@ -14,10 +14,10 @@ const CarouselComponent: React.FC<{
     activeIndex: number,
     getLeftOffset: (slideIndex: number, moveBy?: number) => string,
     setIsMouseOver: (status: boolean) => void,
-    getCarouselWidth: () => number,
+    carouselItemsWidth: number,
     getIsSlideActive: (index: number) => boolean,
-    getIsNextArrowDisabled: () => boolean,
-    getIsPrevArrowDisabled: () => boolean,
+    isNextArrowDisabled: boolean,
+    isPrevArrowDisabled: boolean,
     style: object,
     items: ReactChild[],
     carouselRef : RefObject<HTMLDivElement>,
@@ -34,10 +34,10 @@ const CarouselComponent: React.FC<{
         activeIndex,
         getLeftOffset,
         setIsMouseOver,
-        getCarouselWidth,
+        carouselItemsWidth,
         getIsSlideActive,
-        getIsNextArrowDisabled,
-        getIsPrevArrowDisabled,
+        isNextArrowDisabled,
+        isPrevArrowDisabled,
         style,
         items,
         carouselRef,
@@ -76,7 +76,7 @@ const CarouselComponent: React.FC<{
         role="button"
         tabIndex={0}
         className={clsx('Carousel-Arrow', 'Carousel-Arrow_InnerLeft', {
-            'Carousel-Arrow_Disabled': getIsPrevArrowDisabled()
+            'Carousel-Arrow_Disabled': isPrevArrowDisabled
         })}
       >
         <i className="fa fa-angle-left" />
@@ -89,7 +89,7 @@ const CarouselComponent: React.FC<{
         role="button"
         tabIndex={0}
         className={clsx('Carousel-Arrow', 'Carousel-Arrow_InnerRight', {
-            'Carousel-Arrow_Disabled': getIsNextArrowDisabled()
+            'Carousel-Arrow_Disabled': isNextArrowDisabled
         })}
       >
         <i className="fa fa-angle-right" />
@@ -110,7 +110,7 @@ const CarouselComponent: React.FC<{
             className="Carousel-Items"
             ref={slidesRef}
             style={{
-                width: `${getCarouselWidth()}px`,
+                width: `${carouselItemsWidth}px`,
                 left: getLeftOffset(activeIndex),
                 height: '100%'
             }}

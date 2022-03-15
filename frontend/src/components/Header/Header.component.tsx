@@ -6,6 +6,7 @@ import './Header.style.scss';
 import WishlistIcon from '../WishlistIcon';
 import Curtain from '../Curtain';
 import FilterIcon from '../FilterIcon';
+import logo from './logo.png';
 
 const HeaderComponent: React.FC<{
     onLogoutClick: () => void,
@@ -34,6 +35,7 @@ const HeaderComponent: React.FC<{
         if (isMobile) {
             return (
               <div
+                className="Header-Filter"
                 role="menu"
                 tabIndex={0}
                 onClick={() => setIsCurtainActive(true)}
@@ -53,7 +55,10 @@ const HeaderComponent: React.FC<{
     return (
       <>
         <header className="Header">
-          <Link className="HomeLink" to="/">Home</Link>
+          <Link className="Header-HomeLink" to="/">
+            <img className="Header-Logo" src={logo} alt="company-logo" />
+            <p className="Header-LogoTitle">Tappiola estate</p>
+          </Link>
           {renderChildren()}
           <div className="Actions">
             <div

@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { AdType, ToastTypes } from '../../constants';
 import './Header.style.scss';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -17,23 +17,24 @@ const HeaderContainer = () => {
 
     const { isAuthorized } = useAppSelector(({ user }) => user);
 
-    const onLoginClick = () => {
+    const onLoginClick = useCallback(() => {
         navigate('/login');
-    };
+    }, [navigate]);
 
-    const onLogoutClick = async () => {
+    const onLogoutClick = useCallback(async () => {
         await dispatch(logoutUser());
 
         dispatch(enqueueToast({
             message: 'Logout successful',
             type: ToastTypes.Success
         }));
-    };
-    const onWishlistIconClick = () => {
-        navigate('/favorites');
-    };
+    }, [dispatch]);
 
-    const getSearchType = () => {
+    const onWishlistIconClick = useCallback(() => {
+        navigate('/favorites');
+    }, [navigate]);
+
+    const searchType = useMemo(() => {
         if (pathname === `/${AdType.Rent}`) {
             return AdType.Rent;
         }
@@ -43,14 +44,14 @@ const HeaderContainer = () => {
         }
 
         return null;
-    };
+    }, [pathname]);
 
     return (
       <Header
         onLogoutClick={onLogoutClick}
         onLoginClick={onLoginClick}
         isAuthorized={isAuthorized}
-        searchType={getSearchType()}
+        searchType={searchType}
         isMobile={isMobile}
         onWishlistIconClick={onWishlistIconClick}
         isCurtainActive={isCurtainActive}

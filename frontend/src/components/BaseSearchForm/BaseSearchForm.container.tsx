@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BaseSearchForm from './BaseSearchForm.component';
 import { enqueueToast } from '../../redux/notifier';
@@ -11,7 +11,7 @@ const BaseSearchFormContainer: React.FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const onButtonClick = (adType: AdType) => {
+    const onButtonClick = useCallback((adType: AdType) => {
         if (!selectedCity) {
             dispatch(enqueueToast({
                 message: 'Please, select city',
@@ -22,7 +22,7 @@ const BaseSearchFormContainer: React.FC = () => {
         }
 
         navigate(`/${adType}?city=${selectedCity}`);
-    };
+    }, [dispatch, navigate, selectedCity]);
 
     return (
       <BaseSearchForm

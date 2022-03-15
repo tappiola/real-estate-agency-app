@@ -1,6 +1,6 @@
 // @ts-ignore
 import inView from 'in-view';
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import './PropertiesList.style.scss';
 import PropertiesLoader from '../PropertiesLoader/PropertiesLoader.component';
 import PropertiesList from './PropertiesList.component';
@@ -18,7 +18,7 @@ const PropertiesListContainer: React.FC<{
     const { activeProperty, properties, activeSearch } = useAppSelector(({ search }) => search);
     const { page, ...otherParams } = activeSearch;
 
-    const getTopVisible = () => {
+    const getTopVisible = useCallback(() => {
     // Active list item is top-most fully-visible item
         const visibleListItems = Array.from(
             document.getElementsByClassName('PropertyCard')
@@ -26,19 +26,19 @@ const PropertiesListContainer: React.FC<{
 
         // If it's a new one, update active list item
         return visibleListItems.indexOf(true);
-    };
+    }, []);
 
-    const scrollListener = () => {
+    const scrollListener = useCallback(() => {
         const topMostVisible = getTopVisible();
 
         if (topMostVisible !== activeProperty && topMostVisible !== -1) {
             dispatch(setActiveProperty(topMostVisible));
         }
-    };
+    }, [activeProperty, dispatch, getTopVisible]);
 
-    const changeListener = (index: number) => {
+    const changeListener = useCallback((index: number) => {
         dispatch(setActiveProperty(index));
-    };
+    }, [dispatch]);
 
     useEffect(() => inView.offset(200), []);
 
@@ -55,7 +55,7 @@ const PropertiesListContainer: React.FC<{
                 }
             }
         }, 0);
-    }, [listRef, activeProperty, properties]);
+    }, [listRef, activeProperty, properties, getTopVisible]);
 
     if (isLoading) {
         return <PropertiesLoader />;
@@ -75,4 +75,4 @@ const PropertiesListContainer: React.FC<{
     );
 };
 
-export default PropertiesListContainer;
+export default React.memo(PropertiesListContainer);

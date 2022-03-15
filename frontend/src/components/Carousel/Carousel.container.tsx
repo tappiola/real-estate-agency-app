@@ -1,5 +1,5 @@
 import React, {
-    useCallback, useEffect, useRef, useState, MouseEvent, ReactChild, ReactElement, TouchEventHandler
+    useCallback, useEffect, useRef, useState, MouseEvent, ReactChild, ReactElement, TouchEventHandler, useMemo
 } from 'react';
 import Carousel from './Carousel.component';
 
@@ -35,9 +35,9 @@ const CarouselContainer: React.FC<{
 
     const [touchStartX, setTouchStartX] = useState<number>(0);
 
-    const updateWidth = () => setCarouselWidth(carouselRef.current!.offsetWidth);
+    const updateWidth = useCallback(() => setCarouselWidth(carouselRef.current!.offsetWidth), []);
 
-    useEffect(updateWidth, [carouselRef]);
+    useEffect(updateWidth, []);
 
     useEffect(() => {
         window.addEventListener('resize', updateWidth);
@@ -58,13 +58,13 @@ const CarouselContainer: React.FC<{
         slidesRef.current!.style.left = getLeftOffset(slideIndex, moveBy);
     }, [getLeftOffset]);
 
-    const resetPosition = () => adjustPosition(activeIndex, 0);
+    const resetPosition = useCallback(() => adjustPosition(activeIndex, 0), [activeIndex, adjustPosition]);
 
     const addAnimation = useCallback(
         () => { slidesRef.current!.style.transition = `left ${slideDuration}ms ease 0s`; },
         [slideDuration]
     );
-    const removeAnimation = () => { slidesRef.current!.style.transition = 'none'; };
+    const removeAnimation = useCallback(() => { slidesRef.current!.style.transition = 'none'; }, []);
 
     const items: ReactChild[] = React.Children.toArray(children)
         .map((child) => child as ReactElement)
@@ -92,7 +92,7 @@ const CarouselContainer: React.FC<{
                 }
             }, slideDuration);
         }
-    }, [addAnimation, adjustPosition, items.length, slideDuration]);
+    }, [addAnimation, adjustPosition, changeHandler, items.length, removeAnimation, slideDuration]);
 
     const toPrevSlide = useCallback((e?: MouseEvent<HTMLDivElement>) => {
         if (e) {
@@ -107,6 +107,7 @@ const CarouselContainer: React.FC<{
 
     const toNextSlide = useCallback((e?: MouseEvent<HTMLDivElement>) => {
         if (e) {
+            e.preventDefault();
             e.stopPropagation();
         }
 
@@ -129,16 +130,16 @@ const CarouselContainer: React.FC<{
         }
     }, [activeIndex, automaticSlideInterval, autoplay, isMouseOver, toNextSlide]);
 
-    const handleTouchStart: TouchEventHandler<HTMLDivElement> = (e) => {
+    const handleTouchStart: TouchEventHandler<HTMLDivElement> = useCallback((e) => {
         setTouchStartX(e.changedTouches[0]?.clientX);
-    };
+    }, []);
 
-    const handleTouchMove: TouchEventHandler<HTMLDivElement> = (e) => {
+    const handleTouchMove: TouchEventHandler<HTMLDivElement> = useCallback((e) => {
         const moveBy = e.changedTouches[0]!.clientX - touchStartX;
 
         removeAnimation();
         adjustPosition(activeIndex, moveBy);
-    };
+    }, [activeIndex, adjustPosition, touchStartX]);
 
     const handleTouchEnd: TouchEventHandler<HTMLDivElement> = (e) => {
         const touchEndX = e.changedTouches[0].clientX;
@@ -163,13 +164,19 @@ const CarouselContainer: React.FC<{
         }
     };
 
-    const getCarouselWidth = () => (items.length + virtualSlidesCount) * carouselWidth;
+    const carouselItemsWidth = useMemo(
+        () => (items.length + virtualSlidesCount) * carouselWidth,
+        [carouselWidth, items.length]
+    );
 
     const getIsSlideActive = (index: number) => ((activeIndex + items.length) % items.length) === index;
 
-    const getIsNextArrowDisabled = () => !infinite && activeIndex === items.length - 1;
+    const isNextArrowDisabled = useMemo(
+        () => !infinite && activeIndex === items.length - 1,
+        [activeIndex, infinite, items.length]
+    );
 
-    const getIsPrevArrowDisabled = () => !infinite && activeIndex === 0;
+    const isPrevArrowDisabled = useMemo(() => !infinite && activeIndex === 0, [activeIndex, infinite]);
 
     return (
       <Carousel
@@ -182,10 +189,10 @@ const CarouselContainer: React.FC<{
         activeIndex={activeIndex}
         getLeftOffset={getLeftOffset}
         setIsMouseOver={setIsMouseOver}
-        getCarouselWidth={getCarouselWidth}
+        carouselItemsWidth={carouselItemsWidth}
         getIsSlideActive={getIsSlideActive}
-        getIsNextArrowDisabled={getIsNextArrowDisabled}
-        getIsPrevArrowDisabled={getIsPrevArrowDisabled}
+        isNextArrowDisabled={isNextArrowDisabled}
+        isPrevArrowDisabled={isPrevArrowDisabled}
         style={style}
         items={items}
         carouselRef={carouselRef}
@@ -195,4 +202,4 @@ const CarouselContainer: React.FC<{
     );
 };
 
-export default CarouselContainer;
+export default React.memo(CarouselContainer);

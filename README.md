@@ -3,16 +3,14 @@ Restore backup: `docker exec -i real-estate-agency-db-1 sh -c 'exec mysql -uadmi
 
 TODO:
 - react-content-loader for placeholders on property page https://skeletonreact.com/
-- add next / prev for pagination
 - favicon
 - fix big heart
 - fix heart animation
 - wishlist UI
 - property page UI
 - home page UI
-- add logo
 - GA?
-- add message field
+- remove properties without pics
 
 - (R) refresh token
 + (R) rewrite login with await + parse error message from response in case of 500 error

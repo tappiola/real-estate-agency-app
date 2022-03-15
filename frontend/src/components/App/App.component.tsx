@@ -32,8 +32,8 @@ const App : React.FC<{ isAuthorized: boolean }> = ({ isAuthorized }) => (
           </Routes>
         </main>
       </BrowserRouter>
-
     </div>
+    <div id="fullscreen-gallery" />
     <Notification />
   </ToastQueueProvider>
 );

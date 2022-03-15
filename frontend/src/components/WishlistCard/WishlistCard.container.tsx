@@ -1,5 +1,5 @@
 import './WishlistCard.style.scss';
-import React, { MouseEventHandler } from 'react';
+import React, { MouseEventHandler, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { Property } from '../../types';
@@ -15,21 +15,22 @@ const WishlistCardContainer: React.FC<{
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
+    const { id: propertyId } = property;
+
     const [removeWishlistItem] = useMutation(REMOVE_WISHLIST_ITEM, {
         refetchQueries: [GET_WISHLIST]
     });
 
-    const loadProperty: MouseEventHandler<HTMLDivElement> = (event) => {
+    const loadProperty: MouseEventHandler<HTMLDivElement> = useCallback((event) => {
         event.stopPropagation();
-        navigate(`/property/${property.id}`);
-    };
+        navigate(`/property/${propertyId}`);
+    }, [navigate, propertyId]);
 
-    const onWishlistRemove: MouseEventHandler<HTMLDivElement> = async (e) => {
+    const onWishlistRemove: MouseEventHandler<HTMLDivElement> = useCallback(async (e) => {
         e.stopPropagation();
 
-        const { id } = property;
         await removeWishlistItem({
-            variables: { propertyId: id },
+            variables: { propertyId },
             onCompleted: () => {
                 dispatch(enqueueToast({
                     message: 'Removed from wishlist',
@@ -37,10 +38,14 @@ const WishlistCardContainer: React.FC<{
                 }));
             }
         });
-    };
+    }, [dispatch, propertyId, removeWishlistItem]);
 
     return (
-      <WishlistCard property={property} onWishlistRemove={onWishlistRemove} loadProperty={loadProperty} />
+      <WishlistCard
+        property={property}
+        onWishlistRemove={onWishlistRemove}
+        loadProperty={loadProperty}
+      />
     );
 };
 

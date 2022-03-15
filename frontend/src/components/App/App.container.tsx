@@ -12,7 +12,7 @@ const AppContainer = () => {
     useEffect(() => {
         dispatch(getCities());
         dispatch(getPropertyTypes());
-    }, []);
+    }, [dispatch]);
 
     return <App isAuthorized={isAuthorized} />;
 };
