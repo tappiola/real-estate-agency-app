@@ -4,8 +4,12 @@ import MultiPreview from './MultiPreview.component';
 import { Image } from '../../types';
 
 const MultiPreviewContainer : React.FC<{
-    images: Image[]
-}> = ({ images = [] }) => {
+    images: Image[],
+    onPreviewClick?: () => void
+}> = ({
+    images = [],
+    onPreviewClick = () => {}
+}) => {
     const [firstImageIndex, setFirstImageIndex] = useState(0);
 
     const scrollBack = () => setFirstImageIndex((images.length + firstImageIndex - 1) % images.length);
@@ -19,6 +23,7 @@ const MultiPreviewContainer : React.FC<{
         thirdImage={images[(firstImageIndex + 2) % images.length]}
         scrollBack={scrollBack}
         scrollForward={scrollForward}
+        onPreviewClick={onPreviewClick}
       />
     );
 };

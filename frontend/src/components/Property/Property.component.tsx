@@ -10,9 +10,14 @@ const Property: React.FC<{
     property: PropertyType,
     isInWishlist: boolean,
     isMobile: boolean,
-    navigateBack: () => void
+    navigateBack: () => void,
+    onPreviewClick: () => void
 }> = ({
-    property, isInWishlist, isMobile, navigateBack
+    property,
+    isInWishlist,
+    isMobile,
+    navigateBack,
+    onPreviewClick
 }) => {
     const descRef = useRef<HTMLDivElement>(null);
 
@@ -50,7 +55,7 @@ const Property: React.FC<{
             );
         }
 
-        return <MultiPreview images={sortedImages} />;
+        return <MultiPreview images={sortedImages} onPreviewClick={onPreviewClick} />;
     };
 
     return (

@@ -10,9 +10,15 @@ const MultiPreview: React.FC<{
     secondImage: Image,
     thirdImage: Image,
     scrollBack: () => void,
-    scrollForward: () => void
+    scrollForward: () => void,
+    onPreviewClick: () => void
 }> = ({
-    firstImage, secondImage, thirdImage, scrollBack, scrollForward
+    firstImage,
+    secondImage,
+    thirdImage,
+    scrollBack,
+    scrollForward,
+    onPreviewClick
 }) => (
   <div className="Preview-Container">
     <div
@@ -22,7 +28,7 @@ const MultiPreview: React.FC<{
     >
       <ChevronIcon direction={Direction.Left} />
     </div>
-    <div className="Preview-Images">
+    <div className="Preview-Images" onClick={onPreviewClick} role="button" tabIndex={-1}>
       <img className="Preview-Image1" src={firstImage?.link || IMAGE_PLACEHOLDER} alt="photo1" />
       <img className="Preview-Image2" src={secondImage?.link || IMAGE_PLACEHOLDER} alt="photo2" />
       <img className="Preview-Image3" src={thirdImage?.link || IMAGE_PLACEHOLDER} alt="photo3" />

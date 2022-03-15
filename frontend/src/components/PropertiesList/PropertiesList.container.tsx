@@ -34,7 +34,7 @@ const PropertiesListContainer: React.FC<{
         if (topMostVisible !== activeProperty && topMostVisible !== -1) {
             dispatch(setActiveProperty(topMostVisible));
         }
-    }, [activeProperty, dispatch]);
+    }, [activeProperty, dispatch, getTopVisible]);
 
     const changeListener = useCallback((index: number) => {
         dispatch(setActiveProperty(index));
@@ -55,7 +55,7 @@ const PropertiesListContainer: React.FC<{
                 }
             }
         }, 0);
-    }, [listRef, activeProperty, properties]);
+    }, [listRef, activeProperty, properties, getTopVisible]);
 
     if (isLoading) {
         return <PropertiesLoader />;

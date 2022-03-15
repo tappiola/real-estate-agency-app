@@ -92,7 +92,7 @@ const AdvancedSearchFormContainer: React.FC<{
         return Array.from(Array(MAX_BEDROOMS + 1).keys())
             .filter((beds) => !maxBeds || beds <= Number(maxBeds))
             .map((count) => ({ id: count, name: getBedroomsLabel(count) }));
-    }, [filterSettings]);
+    }, [filterSettings, getBedroomsLabel]);
 
     const maxBedroomsOptions = useMemo(() => {
         const minBeds = filterSettings[Filter.MinBeds];
@@ -100,7 +100,7 @@ const AdvancedSearchFormContainer: React.FC<{
         return Array.from(Array(MAX_BEDROOMS + 1).keys())
             .filter((beds) => !minBeds || beds >= Number(minBeds))
             .map((count) => ({ id: count, name: getBedroomsLabel(count) }));
-    }, [filterSettings]);
+    }, [filterSettings, getBedroomsLabel]);
 
     const updateParam = useCallback((name: Filter, value: string) => {
         if (value) {

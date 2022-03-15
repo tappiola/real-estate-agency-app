@@ -1,0 +1,25 @@
+.FullscreenGallery {
+    width: 100%;
+    z-index: 110;
+    min-height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+    cursor: zoom-out;
+
+    &-Image {
+        width: 100%;
+    }
+
+    &-Close {
+        position: fixed;
+        top: 12px;
+        right: 16px;
+        z-index: 111;
+        cursor: pointer;
+
+        i {
+            font-size: 30px;
+        }
+    }
+}

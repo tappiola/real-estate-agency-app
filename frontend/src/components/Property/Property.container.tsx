@@ -5,11 +5,13 @@ import { getProperty } from '../../queries';
 import Loader from '../Loader';
 import { Property as PropertyType } from '../../types';
 import useIsMobile from '../IsMobile';
+import FullscreenGallery from '../FullscreenGallery';
 
 const PropertyContainer = () => {
     const [property, setProperty] = useState<PropertyType | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isInWishlist, setIsInWishlist] = useState(false);
+    const [isGalleryOpen, setIsGalleryOpen] = useState(false);
     const params = useParams();
     const { id } = params;
     const isMobile = useIsMobile();
@@ -39,6 +41,8 @@ const PropertyContainer = () => {
 
     const navigateBack = useCallback(() => navigate(-1), [navigate]);
 
+    const openGallery = () => setIsGalleryOpen(true);
+
     if (isLoading) {
         return <Loader />;
     }
@@ -48,12 +52,21 @@ const PropertyContainer = () => {
     }
 
     return (
-      <Property
-        property={property}
-        isInWishlist={isInWishlist}
-        isMobile={isMobile}
-        navigateBack={navigateBack}
-      />
+      <>
+        <Property
+          property={property}
+          isInWishlist={isInWishlist}
+          isMobile={isMobile}
+          navigateBack={navigateBack}
+          onPreviewClick={openGallery}
+        />
+        {isGalleryOpen && (
+        <FullscreenGallery
+          images={property.images}
+          onGalleryClose={() => setIsGalleryOpen(false)}
+        />
+        )}
+      </>
     );
 };
 

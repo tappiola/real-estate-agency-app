@@ -31,7 +31,7 @@ const ToggleWishlistContainer: React.FC<{ property: Property, inWishlist: boolea
         const { id } = property;
 
         const resp = isInWishlist ? await removeFromWishlist(id) : await addToWishlist(id);
-        setIsClicked(!isClicked);
+        setIsClicked((prevIsClicked) => !prevIsClicked);
 
         dispatch(enqueueToast({
             message: isInWishlist ? 'Removed from wishlist' : 'Added to wishlist',
@@ -42,9 +42,9 @@ const ToggleWishlistContainer: React.FC<{ property: Property, inWishlist: boolea
         const { data: { [key]: { success } } } = await resp.json();
 
         if (success) {
-            setIsInWishlist(!isInWishlist);
+            setIsInWishlist((prevInWishlist) => !prevInWishlist);
         }
-    }, [dispatch, isAuthorized, isClicked, isInWishlist, property]);
+    }, [dispatch, isAuthorized, isInWishlist, property]);
 
     return (
       <ToggleWishlist

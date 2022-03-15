@@ -37,7 +37,7 @@ const CarouselContainer: React.FC<{
 
     const updateWidth = useCallback(() => setCarouselWidth(carouselRef.current!.offsetWidth), []);
 
-    useEffect(updateWidth, [carouselRef]);
+    useEffect(updateWidth, []);
 
     useEffect(() => {
         window.addEventListener('resize', updateWidth);
@@ -92,7 +92,7 @@ const CarouselContainer: React.FC<{
                 }
             }, slideDuration);
         }
-    }, [addAnimation, adjustPosition, changeHandler, items.length, slideDuration]);
+    }, [addAnimation, adjustPosition, changeHandler, items.length, removeAnimation, slideDuration]);
 
     const toPrevSlide = useCallback((e?: MouseEvent<HTMLDivElement>) => {
         if (e) {
