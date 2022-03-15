@@ -35,7 +35,7 @@ const CarouselContainer: React.FC<{
 
     const [touchStartX, setTouchStartX] = useState<number>(0);
 
-    const updateWidth = () => setCarouselWidth(carouselRef.current!.offsetWidth);
+    const updateWidth = useCallback(() => setCarouselWidth(carouselRef.current!.offsetWidth), []);
 
     useEffect(updateWidth, [carouselRef]);
 
@@ -58,13 +58,13 @@ const CarouselContainer: React.FC<{
         slidesRef.current!.style.left = getLeftOffset(slideIndex, moveBy);
     }, [getLeftOffset]);
 
-    const resetPosition = () => adjustPosition(activeIndex, 0);
+    const resetPosition = useCallback(() => adjustPosition(activeIndex, 0), [activeIndex, adjustPosition]);
 
     const addAnimation = useCallback(
         () => { slidesRef.current!.style.transition = `left ${slideDuration}ms ease 0s`; },
         [slideDuration]
     );
-    const removeAnimation = () => { slidesRef.current!.style.transition = 'none'; };
+    const removeAnimation = useCallback(() => { slidesRef.current!.style.transition = 'none'; }, []);
 
     const items: ReactChild[] = React.Children.toArray(children)
         .map((child) => child as ReactElement)
@@ -130,16 +130,16 @@ const CarouselContainer: React.FC<{
         }
     }, [activeIndex, automaticSlideInterval, autoplay, isMouseOver, toNextSlide]);
 
-    const handleTouchStart: TouchEventHandler<HTMLDivElement> = (e) => {
+    const handleTouchStart: TouchEventHandler<HTMLDivElement> = useCallback((e) => {
         setTouchStartX(e.changedTouches[0]?.clientX);
-    };
+    }, []);
 
-    const handleTouchMove: TouchEventHandler<HTMLDivElement> = (e) => {
+    const handleTouchMove: TouchEventHandler<HTMLDivElement> = useCallback((e) => {
         const moveBy = e.changedTouches[0]!.clientX - touchStartX;
 
         removeAnimation();
         adjustPosition(activeIndex, moveBy);
-    };
+    }, [activeIndex, adjustPosition, touchStartX]);
 
     const handleTouchEnd: TouchEventHandler<HTMLDivElement> = (e) => {
         const touchEndX = e.changedTouches[0].clientX;

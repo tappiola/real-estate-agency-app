@@ -1,4 +1,4 @@
-import { FormEventHandler, useState } from 'react';
+import { FormEventHandler, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Login from './Login.component';
 import { useAppDispatch } from '../../redux/hooks';
@@ -10,12 +10,12 @@ const LoginContainer = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const loginHandler: FormEventHandler = async (event) => {
+    const loginHandler: FormEventHandler = useCallback(async (event) => {
         event.preventDefault();
 
         await dispatch(loginUser({ email, password }));
         navigate('/', { replace: true });
-    };
+    }, [dispatch, email, navigate, password]);
 
     return (
       <Login
