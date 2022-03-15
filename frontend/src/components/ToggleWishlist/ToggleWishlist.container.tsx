@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useState } from 'react';
+import React, { MouseEventHandler, useCallback, useState } from 'react';
 import { addToWishlist, removeFromWishlist } from '../../queries';
 import { Property } from '../../types';
 import ToggleWishlist from './ToggleWishlist.component';
@@ -10,10 +10,9 @@ const ToggleWishlistContainer: React.FC<{ property: Property, inWishlist: boolea
     const [isInWishlist, setIsInWishlist] = useState(inWishlist);
     const { isAuthorized } = useAppSelector(({ user }) => user);
     const [isClicked, setIsClicked] = useState<boolean>(false);
-
     const dispatch = useAppDispatch();
 
-    const onWishlistToggle: MouseEventHandler<HTMLParagraphElement> = async (e) => {
+    const onWishlistToggle: MouseEventHandler<HTMLParagraphElement> = useCallback(async (e) => {
         e.stopPropagation();
 
         if (!isAuthorized) {
@@ -45,7 +44,7 @@ const ToggleWishlistContainer: React.FC<{ property: Property, inWishlist: boolea
         if (success) {
             setIsInWishlist(!isInWishlist);
         }
-    };
+    }, [dispatch, isAuthorized, isClicked, isInWishlist, property]);
 
     return (
       <ToggleWishlist

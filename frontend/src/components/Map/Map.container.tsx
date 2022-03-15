@@ -1,7 +1,7 @@
 import mapboxgl, { LngLatLike } from 'mapbox-gl';
 import './Map.style.scss';
 import { Feature, Point } from 'geojson';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { accessToken, IMAGE_PLACEHOLDER } from '../../constants';
 import { formatPrice, getHouseTitle } from '../../util';
 import { Image, Property } from '../../types';
@@ -21,10 +21,16 @@ const MapContainer : React.FC = () => {
         return `<img width="100%" src="${imgSrc}" alt="img"/><b>${heading}</b><p class="Map-Price">${priceStr}</p>`;
     };
 
-    const generateFeature = (property: Property, index: number) => {
+    const generateFeature = useCallback((property: Property, index: number) => {
         const {
-            bedroomCount, images, longitude, latitude, propertyType: { name }, price
+            bedroomCount,
+            images,
+            longitude,
+            latitude,
+            propertyType: { name },
+            price
         } = property;
+
         const heading = getHouseTitle(bedroomCount, name);
 
         return {
@@ -38,7 +44,7 @@ const MapContainer : React.FC = () => {
                 coordinates: [longitude, latitude]
             }
         } as Feature<Point>;
-    };
+    }, []);
 
     useEffect(() => {
         mapboxgl.accessToken = accessToken;
@@ -110,7 +116,7 @@ const MapContainer : React.FC = () => {
                 center: getCoordinates(properties[activeProperty])
             });
         }
-    }, [activeProperty, properties]);
+    }, [activeProperty, map, properties]);
 
     useEffect(() => {
         if (!map || !map.getSource('places')) {
@@ -123,7 +129,7 @@ const MapContainer : React.FC = () => {
             type: 'FeatureCollection',
             features: data.map(generateFeature)
         });
-    }, [properties]);
+    }, [generateFeature, map, properties]);
 
     return <div id="map" />;
 };

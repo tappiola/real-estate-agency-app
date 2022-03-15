@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Property from './Property.component';
 import { getProperty } from '../../queries';
@@ -37,7 +37,7 @@ const PropertyContainer = () => {
         fetchProperty();
     }, [id]);
 
-    const navigateBack = () => navigate(-1);
+    const navigateBack = useCallback(() => navigate(-1), [navigate]);
 
     if (isLoading) {
         return <Loader />;

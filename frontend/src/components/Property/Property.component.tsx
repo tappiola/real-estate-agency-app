@@ -20,7 +20,7 @@ const Property: React.FC<{
         if (descRef.current) {
             descRef.current.innerHTML = property.title;
         }
-    }, [descRef.current, descRef]);
+    }, [property.title]);
 
     const renderImage = (image:Image) => (
       <CarouselItem key={image.id}>

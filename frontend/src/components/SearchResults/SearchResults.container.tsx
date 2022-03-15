@@ -43,7 +43,7 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
 
         fetchProperties();
         setIsLoading(false);
-    }, [adType, searchParams]);
+    }, [adType, dispatch, searchParams]);
 
     useEffect(() => {
         if (!isMobile) {
@@ -63,7 +63,7 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
 
             fetchMoreProperties();
         }
-    }, [isMobile, activeProperty, properties, count, page]);
+    }, [isMobile, activeProperty, properties, count, page, pages, dispatch, adType, searchParams]);
 
     return (
       <SearchResults

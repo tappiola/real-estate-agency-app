@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 
 import { processToast } from '../../redux/notifier';
 import { ToastQueueContext } from '../Toast';
@@ -8,7 +8,7 @@ import { DEFAULT_DURATION } from '../Toast/ToastQueueProvider';
 const Notification = () => {
     const { notifications } = useAppSelector(({ notifier }) => notifier);
     const dispatch = useAppDispatch();
-    const onToastProcess = () => dispatch(processToast());
+    const onToastProcess = useCallback(() => dispatch(processToast()), [dispatch]);
 
     const { addToast } = useContext(ToastQueueContext);
 
@@ -19,7 +19,7 @@ const Notification = () => {
             addToast(message, type, duration);
             onToastProcess();
         }
-    }, [notifications]);
+    }, [addToast, notifications, onToastProcess]);
 
     return null;
 };

@@ -1,8 +1,7 @@
 import clsx from 'clsx';
 import './PageLink.style.scss';
 import { Link } from 'react-router-dom';
-import React from 'react';
-import { FilterParams } from '../../types';
+import React, { useMemo } from 'react';
 
 const PageLink : React.FC<{
     pageNumber: number,
@@ -13,9 +12,9 @@ const PageLink : React.FC<{
     isCurrent,
     searchParams
 }) => {
-    const getParams = (prevParams: FilterParams) => {
+    const adjustedParams = useMemo(() => {
         const pageKey = 'page';
-        const params = new URLSearchParams(prevParams.toString());
+        const params = new URLSearchParams(searchParams.toString());
 
         if (+pageNumber === 1) {
             params.delete(pageKey);
@@ -24,12 +23,12 @@ const PageLink : React.FC<{
         }
 
         return params;
-    };
+    }, [pageNumber, searchParams]);
 
     return (
       <Link
         className={clsx('PageLink', isCurrent && 'PageLink_isCurrent')}
-        to={`?${getParams(searchParams).toString()}`}
+        to={`?${adjustedParams.toString()}`}
       >
         {pageNumber}
       </Link>

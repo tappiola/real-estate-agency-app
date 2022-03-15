@@ -1,5 +1,5 @@
 import React, {
-    useCallback, useEffect, useRef, useState, MouseEvent, ReactChild, ReactElement, TouchEventHandler
+    useCallback, useEffect, useRef, useState, MouseEvent, ReactChild, ReactElement, TouchEventHandler, useMemo
 } from 'react';
 import Carousel from './Carousel.component';
 
@@ -92,7 +92,7 @@ const CarouselContainer: React.FC<{
                 }
             }, slideDuration);
         }
-    }, [addAnimation, adjustPosition, items.length, slideDuration]);
+    }, [addAnimation, adjustPosition, changeHandler, items.length, slideDuration]);
 
     const toPrevSlide = useCallback((e?: MouseEvent<HTMLDivElement>) => {
         if (e) {
@@ -164,13 +164,19 @@ const CarouselContainer: React.FC<{
         }
     };
 
-    const getCarouselWidth = () => (items.length + virtualSlidesCount) * carouselWidth;
+    const carouselItemsWidth = useMemo(
+        () => (items.length + virtualSlidesCount) * carouselWidth,
+        [carouselWidth, items.length]
+    );
 
     const getIsSlideActive = (index: number) => ((activeIndex + items.length) % items.length) === index;
 
-    const getIsNextArrowDisabled = () => !infinite && activeIndex === items.length - 1;
+    const isNextArrowDisabled = useMemo(
+        () => !infinite && activeIndex === items.length - 1,
+        [activeIndex, infinite, items.length]
+    );
 
-    const getIsPrevArrowDisabled = () => !infinite && activeIndex === 0;
+    const isPrevArrowDisabled = useMemo(() => !infinite && activeIndex === 0, [activeIndex, infinite]);
 
     return (
       <Carousel
@@ -183,10 +189,10 @@ const CarouselContainer: React.FC<{
         activeIndex={activeIndex}
         getLeftOffset={getLeftOffset}
         setIsMouseOver={setIsMouseOver}
-        getCarouselWidth={getCarouselWidth}
+        carouselItemsWidth={carouselItemsWidth}
         getIsSlideActive={getIsSlideActive}
-        getIsNextArrowDisabled={getIsNextArrowDisabled}
-        getIsPrevArrowDisabled={getIsPrevArrowDisabled}
+        isNextArrowDisabled={isNextArrowDisabled}
+        isPrevArrowDisabled={isPrevArrowDisabled}
         style={style}
         items={items}
         carouselRef={carouselRef}

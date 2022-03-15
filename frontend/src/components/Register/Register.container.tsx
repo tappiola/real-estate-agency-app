@@ -1,4 +1,4 @@
-import { FormEventHandler, useState } from 'react';
+import { FormEventHandler, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../../queries';
 import Register from './Register.component';
@@ -10,7 +10,7 @@ const RegisterContainer = () => {
 
     const navigate = useNavigate();
 
-    const signupHandler: FormEventHandler = (event) => {
+    const signupHandler: FormEventHandler = useCallback((event) => {
         event.preventDefault();
 
         register(email, name, password).then((res) => res.json())
@@ -29,7 +29,7 @@ const RegisterContainer = () => {
             .catch((err) => {
                 console.log(err);
             });
-    };
+    }, [email, name, navigate, password]);
 
     return (
       <Register

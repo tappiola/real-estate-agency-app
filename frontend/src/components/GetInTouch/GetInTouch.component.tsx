@@ -2,7 +2,7 @@ import MessageIcon from '../MessageIcon';
 import PhoneIcon from '../PhoneIcon';
 import './GetInTouch.style.scss';
 
-const EMAIL = 'enquery@tappiola-agency.com';
+const EMAIL = 'enquiry@tappiola-estate.com';
 const PHONE = '+44 7507 625 808';
 
 const GetInTouch = () => (
