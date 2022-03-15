@@ -47,7 +47,14 @@ const PropertyContainer = () => {
         return <p>Not found</p>;
     }
 
-    return <Property property={property} isInWishlist={isInWishlist} isMobile={isMobile} navigateBack={navigateBack} />;
+    return (
+      <Property
+        property={property}
+        isInWishlist={isInWishlist}
+        isMobile={isMobile}
+        navigateBack={navigateBack}
+      />
+    );
 };
 
 export default PropertyContainer;

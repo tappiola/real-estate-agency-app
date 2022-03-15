@@ -75,4 +75,4 @@ const PropertiesListContainer: React.FC<{
     );
 };
 
-export default PropertiesListContainer;
+export default React.memo(PropertiesListContainer);

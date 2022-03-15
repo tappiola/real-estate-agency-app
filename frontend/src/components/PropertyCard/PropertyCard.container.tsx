@@ -14,4 +14,4 @@ const PropertyCardContainer: React.FC<{ property: Property, index: number }> = (
     );
 };
 
-export default PropertyCardContainer;
+export default React.memo(PropertyCardContainer);

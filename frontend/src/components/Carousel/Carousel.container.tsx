@@ -107,6 +107,7 @@ const CarouselContainer: React.FC<{
 
     const toNextSlide = useCallback((e?: MouseEvent<HTMLDivElement>) => {
         if (e) {
+            e.preventDefault();
             e.stopPropagation();
         }
 
@@ -195,4 +196,4 @@ const CarouselContainer: React.FC<{
     );
 };
 
-export default CarouselContainer;
+export default React.memo(CarouselContainer);

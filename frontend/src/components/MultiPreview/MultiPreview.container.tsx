@@ -23,4 +23,4 @@ const MultiPreviewContainer : React.FC<{
     );
 };
 
-export default MultiPreviewContainer;
+export default React.memo(MultiPreviewContainer);

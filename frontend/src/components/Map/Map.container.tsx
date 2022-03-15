@@ -128,4 +128,4 @@ const MapContainer : React.FC = () => {
     return <div id="map" />;
 };
 
-export default MapContainer;
+export default React.memo(MapContainer);
