@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client';
-import { FormEvent, FormEventHandler, useState } from 'react';
+import { FormEventHandler, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LOGIN } from '../../apollo/queries';
 import { LoginResult } from '../../apollo/types';
@@ -16,7 +16,7 @@ const LoginContainer = () => {
     const dispatch = useAppDispatch();
     const [loginUser] = useMutation<LoginResult>(LOGIN);
 
-    const loginHandler: FormEventHandler = async (event: FormEvent<HTMLFormElement>) => {
+    const loginHandler: FormEventHandler = async (event) => {
         event.preventDefault();
 
         await loginUser({

@@ -34,7 +34,6 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
                 await dispatch(getProperties({ adType, searchParams }));
                 setIsLoading(false);
             } catch (e) {
-                console.log(e);
                 setIsLoading(false);
             }
         };
@@ -54,7 +53,6 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
                     dispatch(getProperties({ adType, searchParams, requestMore: true }));
                     setIsLoading(false);
                 } catch (e) {
-                    console.log(e);
                     setIsLoading(false);
                 }
             };
