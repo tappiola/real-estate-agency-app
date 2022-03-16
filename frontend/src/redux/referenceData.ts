@@ -20,13 +20,13 @@ export const getCities = createAsyncThunk(
     async (arg, { dispatch }) => {
         try {
             return await fetchCities();
-        } catch (err) {
+        } catch (e) {
             dispatch(enqueueToast({
-                message: err.message || 'Failed to load list of cities',
+                message: `Failed to fetch cities: ${e.message}`,
                 type: ToastTypes.Error
             }));
 
-            throw err;
+            throw e;
         }
     }
 );
@@ -36,13 +36,13 @@ export const getPropertyTypes = createAsyncThunk(
     async (arg, { dispatch }) => {
         try {
             return await fetchPropertyTypes();
-        } catch (err) {
+        } catch (e) {
             dispatch(enqueueToast({
-                message: err.message || 'Failed to fetch property types',
+                message: `Failed to fetch property types: ${e.message}`,
                 type: ToastTypes.Error
             }));
 
-            throw err;
+            throw e;
         }
     }
 );

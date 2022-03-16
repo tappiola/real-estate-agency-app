@@ -47,7 +47,7 @@ export const loginUser = createAsyncThunk(
                 type: ToastTypes.Error
             }));
 
-            return rejectWithValue(e);
+            return rejectWithValue(e.message);
         }
     }
 );

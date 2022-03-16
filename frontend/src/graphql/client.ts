@@ -6,7 +6,7 @@ import { GraphqlResponse, JwtDecodeResult } from './types';
 export const getToken = () => {
     let authToken = getSavedToken();
 
-    if (authToken && authToken !== 'null') {
+    if (authToken) {
         const decodedToken = jwt_decode<JwtDecodeResult>(authToken);
 
         // If token has expired, there is no sense to pass it to server
@@ -42,8 +42,7 @@ export const sendGraphqlRequest = async <T>(query: string, variables = {}): Prom
     const { data, errors }: GraphqlResponse<T> = await response.json();
 
     if (errors || !data) {
-        // return Promise.reject(new Error((errors && errors[0].message) ?? 'Something went wrong'));
-        throw new Error((errors && errors[0].message) ?? 'Something went wrong');
+        return Promise.reject(new Error((errors && errors[0].message) ?? 'Something went wrong'));
     }
 
     return Promise.resolve<T>(data);
