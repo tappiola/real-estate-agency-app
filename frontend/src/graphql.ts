@@ -46,5 +46,3 @@ export const sendGraphqlRequest = (graphqlQuery: SendGraphqlParams) => {
         body: JSON.stringify(graphqlQuery)
     });
 };
-
-export const isAuthorized = () => localStorage.getItem('token');

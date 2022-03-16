@@ -1,3 +1,12 @@
+export type JwtDecodeResult = {
+    exp: number,
+};
+
+export type GraphqlResponse<T> = {
+    data?: T
+    errors?: Array<{ message: string }>
+};
+
 export type GetCitiesResponse = {
     getCities: [{
         id: number
@@ -18,6 +27,12 @@ export type LoginResult = {
         errorMessage: string
         token: string
     }
+};
+
+export type RegistrationRequest = {
+    email: string
+    name: string
+    password: string
 };
 
 export type RegistrationResult = {

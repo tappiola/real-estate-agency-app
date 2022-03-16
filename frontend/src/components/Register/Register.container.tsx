@@ -1,41 +1,26 @@
-import { useMutation } from '@apollo/client';
-import { FormEvent, FormEventHandler, useState } from 'react';
+import { FormEventHandler, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { REGISTER } from '../../apollo/queries';
-import { RegistrationResult } from '../../apollo/types';
-import { ToastTypes } from '../../constants';
 import { useAppDispatch } from '../../redux/hooks';
-import { enqueueToast } from '../../redux/notifier';
+import { registerUser } from '../../redux/user';
 import Register from './Register.component';
 
 const RegisterContainer = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const [register] = useMutation<RegistrationResult>(REGISTER);
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const signupHandler: FormEventHandler = async (event: FormEvent<HTMLFormElement>) => {
+    const signupHandler: FormEventHandler = useCallback(async (event) => {
         event.preventDefault();
 
-        await register({
-            variables: { userInput: { email, name, password } },
-            onCompleted: (data) => {
-                if (!data.createUser.success) {
-                    dispatch(enqueueToast({
-                        type: ToastTypes.Error,
-                        message: data.createUser.errorMessage
-                    }));
+        const registrationResult = await dispatch(registerUser({ email, name, password })).unwrap();
 
-                    return;
-                }
-
-                navigate('/', { replace: true });
-            }
-        });
-    };
+        if (registrationResult.createUser.success) {
+            navigate('/', { replace: true });
+        }
+    }, [email, name, navigate, password]);
 
     return (
       <Register

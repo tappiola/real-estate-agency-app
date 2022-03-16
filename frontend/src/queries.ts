@@ -118,31 +118,3 @@ export const saveClientRequest = ({
 
     return sendGraphqlRequest(graphqlQuery);
 };
-
-export const fetchCities = () => {
-    const graphqlQuery = {
-        query: `
-            {
-              getCities {
-                id
-                name
-              }
-            }`
-    };
-
-    return sendGraphqlRequest(graphqlQuery);
-};
-
-export const fetchPropertyTypes = () => {
-    const graphqlQuery = {
-        query: `
-            {
-              getPropertyTypes {
-                id
-                name
-              }
-            }`
-    };
-
-    return sendGraphqlRequest(graphqlQuery);
-};

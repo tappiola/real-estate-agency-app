@@ -40,4 +40,7 @@ export const getFullTitle = (property : Property) => {
     return `${title} in ${property.city?.name} ${preposition} ${property.type.name}`;
 };
 
-export const getSavedToken = () => localStorage.getItem('token');
+export const getSavedToken = () => {
+    const token = localStorage.getItem('token');
+    return (token && token !== 'null') ? token : null;
+};

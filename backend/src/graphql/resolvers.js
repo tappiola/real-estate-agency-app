@@ -21,17 +21,17 @@ const createUser = async ({ userInput })  => {
     const errors = [];
 
     if (!validator.isEmail(email)) {
-        errors.push({ message: 'Invalid email.' });
+        errors.push('Invalid email');
     }
 
     if (validator.isEmpty(password) || !validator.isLength(password, { min: 6 })) {
-        errors.push({ message: 'Password is too short!' });
+        errors.push('Password is too short');
     }
 
     if (errors.length > 0) {
         return {
             success: false,
-            errorMessage: `Validation errors: ${errors.join(', ')}`
+            errorMessage: `Validation errors: '${errors.join(', ')}'`
         };
     }
 

@@ -9,7 +9,6 @@ const useIsMobile = () => {
 
     useEffect(() => {
         window.addEventListener('resize', handleWindowSizeChange);
-        console.log('use effect');
 
         return () => {
             window.removeEventListener('resize', handleWindowSizeChange);

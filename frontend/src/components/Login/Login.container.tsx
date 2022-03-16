@@ -1,12 +1,7 @@
-import { useMutation } from '@apollo/client';
-import { FormEventHandler, useState } from 'react';
+import { FormEventHandler, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LOGIN } from '../../apollo/queries';
-import { LoginResult } from '../../apollo/types';
-import { ToastTypes } from '../../constants';
 import { useAppDispatch } from '../../redux/hooks';
-import { enqueueToast } from '../../redux/notifier';
-import { loginFailed, loginSuccessful } from '../../redux/user';
+import { loginUser } from '../../redux/user';
 import Login from './Login.component';
 
 const LoginContainer = () => {
@@ -14,34 +9,16 @@ const LoginContainer = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const [loginUser] = useMutation<LoginResult>(LOGIN);
 
-    const loginHandler: FormEventHandler = async (event) => {
+    const loginHandler: FormEventHandler = useCallback(async (event) => {
         event.preventDefault();
 
-        await loginUser({
-            variables: { email, password },
-            onCompleted: (data) => {
-                if (data.login.success) {
-                    const { login: { token } } = data;
+        const loginResult = await dispatch(loginUser({ email, password })).unwrap();
 
-                    dispatch(loginSuccessful(token));
-                    dispatch(enqueueToast({
-                        type: ToastTypes.Success,
-                        message: 'Successfully logged in'
-                    }));
-
-                    navigate('/', { replace: true });
-                } else {
-                    dispatch(loginFailed());
-                    dispatch(enqueueToast({
-                        type: ToastTypes.Error,
-                        message: data.login.errorMessage
-                    }));
-                }
-            }
-        });
-    };
+        if (loginResult.login.success) {
+            navigate('/', { replace: true });
+        }
+    }, [dispatch, email, navigate, password]);
 
     return (
       <Login
