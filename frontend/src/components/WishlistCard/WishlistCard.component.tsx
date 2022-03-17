@@ -2,7 +2,7 @@ import React, { MouseEventHandler, useEffect, useRef } from 'react';
 import './WishlistCard.style.scss';
 import CloseIcon from '../CloseIcon';
 import { Property } from '../../types';
-import { getFullTitle } from '../../util';
+import { formatPrice, getFullTitle } from '../../util';
 import { IMAGE_PLACEHOLDER } from '../../constants';
 
 const WishlistCard: React.FC<{
@@ -44,7 +44,8 @@ const WishlistCard: React.FC<{
         <div>
           {loadImage()}
         </div>
-        <h2 className="WishlistCard-Title">{getFullTitle(property)}</h2>
+        <h2 className="WishlistCard-Price">{formatPrice(property.price)}</h2>
+        <h3 className="WishlistCard-Title">{getFullTitle(property)}</h3>
         <p className="WishlistCard-Description" ref={descriptionRef}>{property.title}</p>
         <div
           role="button"

@@ -25,6 +25,10 @@
         border-radius: 20px;
     }
 
+    &-Empty {
+        margin-left: 15px;
+    }
+
     &-Properties {
         display: grid;
 
@@ -34,6 +38,44 @@
 
         @include desktop {
             grid-template-columns: repeat(4, 25%);
+        }
+    }
+
+    &-Title {
+        margin: 0 0 15px;
+        letter-spacing: 0.05em;
+        font-size: 30px;
+
+        @include tablet {
+            margin: 0;
+        }
+    }
+
+    &-ToggleLeft {
+        border-radius: 10px 0 0 10px;
+        height: 40px;
+    }
+
+    &-ToggleRight {
+        border-radius: 0 10px 10px 0;
+        height: 40px;
+    }
+
+    &-ToggleActive {
+        background-color: var(--primary-bright-color);
+        color: white;
+    }
+
+    &-Header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 0 15px;
+        padding: 25px 0 15px;
+
+        @include tablet {
+            flex-direction: row;
+            align-items: center;
         }
     }
 }

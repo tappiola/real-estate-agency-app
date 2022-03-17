@@ -23,6 +23,7 @@
          padding: 10px;
          position: relative;
          cursor: pointer;
+         border-radius: 3px;
      }
 
     &-Remove {
@@ -45,9 +46,12 @@
         }
     }
 
+    &-Price {
+        margin: 10px 0;
+    }
+
     &-Title {
-        font-family: 'Relative-Faux', sans-serif;
-        letter-spacing: 0.07em;
+        margin: 10px 0;
     }
 
     &-Description {

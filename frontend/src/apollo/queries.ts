@@ -11,6 +11,7 @@ query GetWishlist {
         type { id name }
         bedroomCount
         images {id link}
+        price
     }
 }
 `;

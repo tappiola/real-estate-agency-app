@@ -1,12 +1,26 @@
 import { useQuery } from '@apollo/client';
+import { useMemo, useState } from 'react';
 import Wishlist from './Wishlist.component';
 import Loader from '../Loader';
 import { useAppSelector } from '../../redux/hooks';
 import { GET_WISHLIST } from '../../apollo/queries';
+import { AdType } from '../../constants';
+import { Property } from '../../types';
 
 const WishlistContainer = () => {
+    const [adType, setAdType] = useState(AdType.Sale);
     const { isAuthorized } = useAppSelector(({ user }) => user);
     const { loading, error, data } = useQuery(GET_WISHLIST);
+
+    const propertiesData = useMemo(() => {
+        if (!data) {
+            return [];
+        }
+
+        const { getWishlist = [] } = data;
+
+        return getWishlist.filter((property: Property) => property.type.name === adType);
+    }, [adType, data]);
 
     if (loading) {
         return <Loader />;
@@ -14,9 +28,11 @@ const WishlistContainer = () => {
 
     return (
       <Wishlist
-        properties={data?.getWishlist}
+        properties={propertiesData}
         isAuthorized={isAuthorized}
         hasError={!!error}
+        adType={adType}
+        setAdType={setAdType}
       />
     );
 };
