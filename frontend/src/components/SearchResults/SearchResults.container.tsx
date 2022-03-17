@@ -16,7 +16,11 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
     const [searchParams] = useSearchParams();
 
     const {
-        activeProperty, properties, pages, count, activeSearch
+        activeProperty,
+        properties,
+        pages,
+        count,
+        activeSearch
     } = useAppSelector(({ search }) => search);
 
     const { page } = activeSearch;
@@ -24,9 +28,10 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
     useEffect(() => {
         if (!searchParams.get('city')) {
             dispatch(enqueueToast({
-                message: 'City is required 2',
+                message: 'City is required',
                 type: ToastTypes.Warning
             }));
+
             setIsLoading(false);
             return;
         }
@@ -34,8 +39,7 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
         const fetchProperties = async () => {
             try {
                 await dispatch(getProperties({ adType, searchParams }));
-                setIsLoading(false);
-            } catch (e) {
+            } finally {
                 setIsLoading(false);
             }
         };
@@ -55,6 +59,8 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
                     dispatch(getProperties({ adType, searchParams, requestMore: true }));
                     setIsLoading(false);
                 } catch (e) {
+                    setIsLoading(false);
+                } finally {
                     setIsLoading(false);
                 }
             };

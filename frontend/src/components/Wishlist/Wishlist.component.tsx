@@ -1,6 +1,7 @@
 import React from 'react';
 import WishlistCard from '../WishlistCard';
 import { Property } from '../../types';
+import './Wishlist.style.scss';
 
 const Wishlist: React.FC<{
     properties: Property[],
@@ -8,7 +9,7 @@ const Wishlist: React.FC<{
     hasError: boolean,
 }> = ({ properties, isAuthorized, hasError }) => {
     if (!isAuthorized) {
-        return <h4>Please, login to work with wishlist</h4>;
+        return <h4 className="Wishlist-NotAuthorized">Please, login to work with wishlist</h4>;
     }
 
     if (hasError) {
@@ -21,8 +22,10 @@ const Wishlist: React.FC<{
 
     return (
       <>
-        <h1>Wishlist</h1>
-        {properties.map((p: Property) => <WishlistCard key={p.id} property={p} />)}
+        <h1>Saved Properties</h1>
+        <div className="Wishlist-Properties">
+          {properties.map((p: Property) => <WishlistCard key={p.id} property={p} />)}
+        </div>
       </>
     );
 };

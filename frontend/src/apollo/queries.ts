@@ -8,6 +8,9 @@ query GetWishlist {
         description
         city { id name }
         propertyType { id name }
+        type { id name }
+        bedroomCount
+        images {id link}
     }
 }
 `;

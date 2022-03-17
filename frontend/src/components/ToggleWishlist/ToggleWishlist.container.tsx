@@ -1,4 +1,6 @@
-import React, { MouseEventHandler, useCallback, useState } from 'react';
+import React, {
+    MouseEventHandler, useCallback, useEffect, useState
+} from 'react';
 import { addToWishlist, removeFromWishlist } from '../../queries';
 import { Property } from '../../types';
 import ToggleWishlist from './ToggleWishlist.component';
@@ -45,6 +47,12 @@ const ToggleWishlistContainer: React.FC<{ property: Property, inWishlist: boolea
             setIsInWishlist((prevInWishlist) => !prevInWishlist);
         }
     }, [dispatch, isAuthorized, isInWishlist, property]);
+
+    useEffect(() => {
+        if (!isAuthorized) {
+            setIsInWishlist(false);
+        }
+    }, [isAuthorized]);
 
     return (
       <ToggleWishlist

@@ -13,7 +13,12 @@ const SearchResults: React.FC<{
     searchParams: URLSearchParams,
     isMobile: boolean
 }> = ({
-    count, properties, isLoading, pages, searchParams, isMobile
+    count,
+    properties,
+    isLoading,
+    pages,
+    searchParams,
+    isMobile
 }) => {
     const renderMap = () => {
         if (!properties.length) {
@@ -34,9 +39,7 @@ const SearchResults: React.FC<{
     return (
       <div className="SearchResults-Container">
         <p className="SearchResults-Count">
-          {count || 'No'}
-          {' '}
-          results
+          {`${count || 'No'} results`}
         </p>
         <div className="SearchResults-Pane SearchResults-Properties">
           <PropertiesListContainer

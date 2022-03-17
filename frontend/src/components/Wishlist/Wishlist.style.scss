@@ -1,0 +1,39 @@
+@mixin mobile {
+    @media (max-width: 810px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: 811px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: 1025px) {
+        @content;
+    }
+}
+
+.Wishlist {
+    &-NotAuthorized {
+        padding: 20px 30px;
+        border: 2px solid var(--primary-bright-color);
+        width: fit-content;
+        margin: calc(var(--header-height) + 24px) auto 0;
+        border-radius: 20px;
+    }
+
+    &-Properties {
+        display: grid;
+
+        @include tablet {
+            grid-template-columns: repeat(2, 50%);
+        }
+
+        @include desktop {
+            grid-template-columns: repeat(4, 25%);
+        }
+    }
+}

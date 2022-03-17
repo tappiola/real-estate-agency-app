@@ -37,7 +37,12 @@ export const getProperties = createAsyncThunk(
             .reduce((acc, value) => ({ ...acc, [value]: searchParams.get(value) }), {});
 
         const {
-            page, city, propertyType, minPrice, maxPrice, minBeds, maxBeds
+            page,
+            city,
+            propertyType,
+            minPrice, maxPrice,
+            minBeds,
+            maxBeds
         } = params;
 
         const state = getState();
@@ -48,7 +53,14 @@ export const getProperties = createAsyncThunk(
         const pageNumber = requestMore ? oldPage + 1 : (page || oldPage || 1);
 
         const activeSearch = {
-            adType, city, propertyType, minPrice, maxPrice, minBeds, maxBeds, page: pageNumber
+            adType,
+            city,
+            propertyType,
+            minPrice,
+            maxPrice,
+            minBeds,
+            maxBeds,
+            page: pageNumber
         };
 
         const hasSearchChanged = JSON.stringify(oldSearch) !== JSON.stringify(activeSearch);

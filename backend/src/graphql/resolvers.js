@@ -204,6 +204,14 @@ const getWishlist = async (args, req) => {
         }, {
             model: PropertyType,
             as: 'propertyType'
+        },
+        {
+            model: Image,
+            as: 'images',
+            limit: 1
+        }, {
+            model: Type,
+            as: 'type'
         }]
     });
 };
