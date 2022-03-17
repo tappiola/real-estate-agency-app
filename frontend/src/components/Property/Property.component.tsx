@@ -5,8 +5,10 @@ import MultiPreview from '../MultiPreview';
 import { formatPrice, getFullTitle, sortByKey } from '../../util';
 import './Property.style.scss';
 import { Carousel, CarouselItem } from '../Carousel';
-import PlainMap from '../PlainMap';
+import Map from '../Map';
 import Loader from '../Loader';
+import BedroomIconComponent from '../BedroomIcon';
+import BathroomIconComponent from '../BathroomIcon';
 
 const Property: React.FC<{
     property: PropertyType,
@@ -77,14 +79,22 @@ const Property: React.FC<{
         </div>
         {renderImages()}
         <div className="Property-Information">
-          <div className="Property-Summary">
-            <h2 className="Property-Price">{formatPrice(property.price)}</h2>
-            <ToggleWishlist property={property} inWishlist={isInWishlist} />
+          <div className="Property-Text">
+            <div className="Property-Summary">
+              <h2 className="Property-Price">{formatPrice(property.price)}</h2>
+              <ToggleWishlist property={property} inWishlist={isInWishlist} />
+            </div>
+            <p className="Property-Title">{getFullTitle(property)}</p>
+            <p className="Property-Address">{property.address}</p>
+            <p className="Property-Amenities">
+              <BedroomIconComponent />
+              {`${property.bedroomCount} ${property.bedroomCount === 1 ? 'bedroom' : 'bedrooms'}`}
+              <BathroomIconComponent />
+              {`${property.bathroomCount} ${property.bathroomCount === 1 ? 'bathroom' : 'bathrooms'}`}
+            </p>
+            <div className="Property-Description" ref={descRef}>{property.title}</div>
           </div>
-          <p className="Property-Title">{getFullTitle(property)}</p>
-          <p className="Property-Address">{property.address}</p>
-          <div className="Property-Description" ref={descRef}>{property.title}</div>
-          <PlainMap property={property} />
+          <Map property={property} />
         </div>
       </div>
     );

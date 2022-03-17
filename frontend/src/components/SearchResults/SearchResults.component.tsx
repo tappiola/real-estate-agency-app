@@ -3,7 +3,7 @@ import Pagination from '../Pagination';
 import { Property } from '../../types';
 import './SearchResults.style.scss';
 import PropertiesListContainer from '../PropertiesList';
-import MapContainer from '../Map';
+import Map from '../DynamicMap';
 
 const SearchResults: React.FC<{
     count: number,
@@ -25,7 +25,7 @@ const SearchResults: React.FC<{
             return null;
         }
 
-        return <MapContainer />;
+        return <Map />;
     };
 
     const renderPagination = () => {

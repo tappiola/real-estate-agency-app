@@ -21,6 +21,10 @@
 
     &-Price {
         text-align: left;
+
+        @include desktop {
+            margin: 10px 0;
+        }
     }
 
     &-Title {
@@ -28,6 +32,10 @@
         font-size: 18px;
         margin: 10px 0;
         font-weight: 600;
+
+        @include desktop {
+            font-size: 24px;
+        }
     }
 
     &-Information {
@@ -38,6 +46,23 @@
         @include mobile {
             padding: 0 30px;
             width: 100%;
+        }
+
+        @include desktop {
+            display: flex;
+            margin: 40px auto;
+        }
+
+        #map {
+            @include desktop {
+                flex: 0 0 40%;
+            }
+        }
+    }
+
+    &-Text {
+        @include desktop {
+            margin-right: 30px;
         }
     }
 
@@ -66,10 +91,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-
-        .WishlistToggle-Label {
-            //display: none;
-        }
     }
 
     &-NavigateBack {
@@ -84,6 +105,19 @@
 
         i {
             margin-right: 13px;
+        }
+    }
+
+    &-Amenities {
+        display: flex;
+        color: var(--dark-gray);
+
+        .BedroomIcon {
+            margin-right: 10px;
+        }
+
+        .BathroomIcon {
+            margin: 0 10px 0 18px;
         }
     }
 }

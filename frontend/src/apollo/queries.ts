@@ -10,6 +10,7 @@ query GetWishlist {
         propertyType { id name }
         type { id name }
         bedroomCount
+        bathroomCount
         images {id link}
         price
     }
