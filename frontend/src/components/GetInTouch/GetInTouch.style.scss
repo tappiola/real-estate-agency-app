@@ -39,6 +39,7 @@
     &-Label {
         color: hsla(0, 0%, 100%, .51);
         padding: 0 10px;
+        white-space: nowrap;
     }
 
     &-Title {
@@ -47,6 +48,5 @@
 
     &-Contact {
         display: flex;
-        align-items: center;
     }
 }

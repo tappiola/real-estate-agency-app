@@ -5,6 +5,8 @@ import MultiPreview from '../MultiPreview';
 import { formatPrice, getFullTitle, sortByKey } from '../../util';
 import './Property.style.scss';
 import { Carousel, CarouselItem } from '../Carousel';
+import PlainMap from '../PlainMap';
+import Loader from '../Loader';
 
 const Property: React.FC<{
     property: PropertyType,
@@ -58,6 +60,10 @@ const Property: React.FC<{
         return <MultiPreview images={sortedImages} onPreviewClick={onPreviewClick} />;
     };
 
+    if (!property) {
+        return <Loader />;
+    }
+
     return (
       <div className="Property-Container">
         <div
@@ -78,6 +84,7 @@ const Property: React.FC<{
           <p className="Property-Title">{getFullTitle(property)}</p>
           <p className="Property-Address">{property.address}</p>
           <div className="Property-Description" ref={descRef}>{property.title}</div>
+          <PlainMap property={property} />
         </div>
       </div>
     );
