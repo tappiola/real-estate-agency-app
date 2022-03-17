@@ -12,7 +12,6 @@ const Loader = () => (
       viewBox="0 0 52 100"
       enableBackground="new 0 0 0 0"
       xmlSpace="preserve"
-      className=""
     >
       <circle fill="none" stroke="none" cx="6" cy="50" r="5">
         <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.1" />
