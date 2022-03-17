@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Image } from '../../types';
 import './FullscreenGallery.style.scss';
+import CloseIcon from '../CloseIcon';
 
 const FullscreenGallery: React.FC<{
     images: Image[],
@@ -31,7 +32,7 @@ const FullscreenGallery: React.FC<{
               />
             ))}
             <div className="FullscreenGallery-Close">
-              <i className="fa fa-close" />
+              <CloseIcon />
             </div>
           </div>,
           document.getElementById('fullscreen-gallery')!

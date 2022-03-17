@@ -36,6 +36,10 @@
     flex-direction: column;
     margin-right: 12px;
 
+    @include mobile {
+      margin-right: auto;
+    }
+
     &:link {
       text-decoration: none;
     }
@@ -83,9 +87,15 @@
   }
 
   .WishlistIcon {
-    fill: white;
-    width: 32px;
+    fill: #efefef;
+    stroke: #efefef;
+    width: 28px;
     height: 32px;
+
+    &:hover {
+      fill: white;
+      stroke: white;
+    }
 
     &-Container {
       height: 32px;

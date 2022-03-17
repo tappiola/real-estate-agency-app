@@ -11,7 +11,7 @@
     &-Item {
         position: relative;
         font-size: 0.875rem;
-        color: #ffffff;
+        color: white;
         background-color: #313131;
         border-radius: 4px;
         line-height: 1.43;
@@ -28,17 +28,14 @@
 
     &-Info {
         background-color: #043e5c;
-        color: #ffffff;
     }
 
     &-Warning {
         background-color: #b06d01;
-        color: #ffffff;
     }
 
     &-Error {
-        background-color: #790707;
-        color: #ffffff;
+        background-color: #313131;
     }
 
     &-Label {
@@ -51,7 +48,7 @@
         width: 16px;
         right: 6px;
         top: 6px;
-        fill: #ffffff;
+        fill: white;
 
         &:hover {
             transform: scale(1.15);
@@ -60,7 +57,7 @@
 
     &-Icon {
         width: 20px;
-        fill: #ffffff;
+        fill: white;
         margin-right: 5px;
     }
 

@@ -100,6 +100,10 @@ const user = createSlice({
         builder.addCase(loginUser.fulfilled, (state, action) => {
             const { login: { token } } = action.payload || {};
 
+            if (!token) {
+                return;
+            }
+
             state.isAuthorized = true;
             state.authToken = token;
 

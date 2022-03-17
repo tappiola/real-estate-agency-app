@@ -13,7 +13,7 @@ const ToggleWishlistContainer: React.FC<{ property: Property, inWishlist: boolea
     const dispatch = useAppDispatch();
 
     const onWishlistToggle: MouseEventHandler<HTMLParagraphElement> = useCallback(async (e) => {
-        e.stopPropagation();
+        e.preventDefault();
 
         if (!isAuthorized) {
             dispatch(enqueueToast({
@@ -31,7 +31,7 @@ const ToggleWishlistContainer: React.FC<{ property: Property, inWishlist: boolea
         const { id } = property;
 
         const resp = isInWishlist ? await removeFromWishlist(id) : await addToWishlist(id);
-        setIsClicked((prevIsClicked) => !prevIsClicked);
+        setIsClicked(true);
 
         dispatch(enqueueToast({
             message: isInWishlist ? 'Removed from wishlist' : 'Added to wishlist',
@@ -51,6 +51,7 @@ const ToggleWishlistContainer: React.FC<{ property: Property, inWishlist: boolea
         onWishlistToggle={onWishlistToggle}
         isInWishlist={isInWishlist}
         isClicked={isClicked}
+        onHeartBlur={() => setIsClicked(false)}
       />
     );
 };

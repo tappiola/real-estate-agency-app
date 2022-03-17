@@ -54,13 +54,14 @@ const createUser = async ({ userInput })  => {
 
 const login = async ({ email, password }) => {
     const user = await User.findOne({where: { email }});
+
     if (!user) {
-        return { success: false, errorMessage: 'User does not exist'};
+        return { success: false, errorMessage: 'Please, check the email you entered'};
     }
 
     const isEqual = await bcrypt.compare(password, user.password);
     if (!isEqual) {
-        return { success: false, errorMessage: 'Password is wrong'};
+        return { success: false, errorMessage: 'Please, check the password you entered'};
     }
 
     const token = jwt.sign(

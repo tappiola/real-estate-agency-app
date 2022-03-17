@@ -4,17 +4,17 @@ Restore backup: `docker exec -i real-estate-agency-db-1 sh -c 'exec mysql -uadmi
 TODO:
 - react-content-loader for placeholders on property page https://skeletonreact.com/
 - favicon
-- fix big heart
 - fix heart animation
 - wishlist UI
 - property page UI
 - home page UI
 - GA?
 - remove properties without pics
+- forms validation client form
+- change useMobile hook to smth
+- color variables
 
-- (R) refresh token
-+ (R) rewrite login with await + parse error message from response in case of 500 error
-+ (R) search returns empty list for not logged in user
+
 - (R) token expiration
   - when user logs out, remove token from local storage
   - when token expires, return 401 (?) and frontend should remove token from local storage + redirect to home page
@@ -27,5 +27,4 @@ TODO:
 - queries to apollo gql
 - configure cors whitelist urls
 - not use volumes on prod
-+ (R) login with wrong password
-+ remove User is not authenticated when opening wishlist
+
