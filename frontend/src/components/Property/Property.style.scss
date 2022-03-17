@@ -44,7 +44,7 @@
         padding-top: 20px;
 
         @include mobile {
-            padding: 0 30px;
+            padding: 0 25px;
             width: 100%;
         }
 
@@ -85,6 +85,7 @@
 
     &-ImageContainer {
         height: 100%;
+        padding-top: 15px;
     }
 
     &-Summary {
@@ -99,12 +100,16 @@
         font-size: 15px;
         padding-top: 16px;
         text-align: left;
-        width: 80%;
-        margin: auto;
+        margin-left: 12px;
         cursor: pointer;
 
         i {
             margin-right: 13px;
+        }
+
+        @include desktop {
+            width: 80%;
+            margin: auto;
         }
     }
 
