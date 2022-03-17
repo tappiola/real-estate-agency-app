@@ -10,7 +10,7 @@ TODO:
 - forms validation client form
 - change useMobile hook to smth
 - color variables
-
+- extract puddle
 
 - (R) token expiration
   - when user logs out, remove token from local storage

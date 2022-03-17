@@ -25,55 +25,11 @@
         }
     }
 
-    .PuddleShape{
+    .PuddleShape {
         position: absolute;
         left: 80px;
         width: 750px;
         z-index: 0;
         top: -330px;
-    }
-
-    .TopBanner {
-        background-image: url('midBanner.png');
-        height: 400px;
-        background-repeat: no-repeat;
-        background-position: 0 80%;
-        background-size: cover;
-
-        @include mobile {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 600px;
-        }
-    }
-
-    .MidBanner {
-        background-image: url('img.png');
-        height: 500px;
-        width: 60%;
-        background-repeat: no-repeat;
-        background-position: 0 80%;
-        background-size: cover;
-        z-index: 10;
-    }
-
-    .Banner3 {
-        background-image: url('plants.png');
-        height: 550px;
-        width: 63%;
-        background-repeat: no-repeat;
-        background-position: 0 80%;
-        background-size: cover;
-        margin-left: auto;
-        margin-right: 0;
-
-        @include mobile {
-            width: 100%;
-            height: 350px;
-            position: relative;
-            top: 40px;
-        }
     }
 }
