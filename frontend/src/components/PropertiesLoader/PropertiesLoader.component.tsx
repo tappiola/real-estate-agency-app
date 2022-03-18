@@ -1,27 +1,23 @@
-import ContentLoader from 'react-content-loader';
 import './PropertiesLoader.style.scss';
+import React from 'react';
 
-const PropertiesLoader = () => (
-  <div className="Properties-List">
-    {[...Array(5)].map((_, i) => (
-      <div className="Loader-Container" key={i}>
-        <ContentLoader
-          speed={2}
-          width={800}
-          height={315}
-          viewBox="0 0 800 315"
-          backgroundColor="#f3f3f3"
-          foregroundColor="#b3b3b3"
-        >
-          <rect x="510" y="15" rx="7" ry="7" width="105" height="24" />
-          <rect x="510" y="55" rx="7" ry="7" width="68" height="24" />
-          <rect x="0" y="0" rx="0" ry="0" width="495" height="315" />
-          <rect x="510" y="95" rx="7" ry="7" width="280" height="20" />
-          <rect x="510" y="131" rx="7" ry="7" width="280" height="20" />
-        </ContentLoader>
-      </div>
-    ))}
-  </div>
-);
+const PropertiesLoader: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
+    const loadersCount = isMobile ? 1 : 3;
+
+    return (
+      <>
+        {[...Array(loadersCount)].map((_, i) => (
+          <div className="PropertiesLoader-Container" key={i}>
+            <div className="Placeholder PropertiesLoader-Image" />
+            <div className="PropertiesLoader-Info">
+              <div className="Placeholder Placeholder-Text" />
+              <div className="Placeholder Placeholder-Text" />
+              <div className="Placeholder Placeholder-Text" />
+            </div>
+          </div>
+        ))}
+      </>
+    );
+};
 
 export default PropertiesLoader;

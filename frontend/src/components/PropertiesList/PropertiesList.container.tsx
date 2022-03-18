@@ -57,13 +57,16 @@ const PropertiesListContainer: React.FC<{
     }, [listRef, activeProperty, properties, getTopVisible]);
 
     if (isLoading) {
-        return <PropertiesLoader />;
+        return <PropertiesLoader isMobile={isMobile} />;
+    }
+
+    if (!properties.length) {
+        return null;
     }
 
     return (
       <PropertiesList
         properties={properties}
-        isLoading={isLoading}
         listRef={listRef}
         scrollListener={scrollListener}
         changeListener={changeListener}
