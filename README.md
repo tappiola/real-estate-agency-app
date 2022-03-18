@@ -2,12 +2,10 @@ Create backup: `docker exec real-estate-agency-db-1 sh -c 'exec mysqldump -uadmi
 Restore backup: `docker exec -i real-estate-agency-db-1 sh -c 'exec mysql -uadmin -pbigsnorlax flats' < ./flats-dump.sql`
 
 TODO:
-- react-content-loader for placeholders on property + wishlist page https://skeletonreact.com/
 - GA?
 - remove properties without pics
 - forms validation client form
 - color variables
-- loaders on each page
 
 
 - (R) token expiration

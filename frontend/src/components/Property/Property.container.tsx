@@ -2,11 +2,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Property from './Property.component';
 import { getProperty } from '../../queries';
-import Loader from '../Loader';
 import { Property as PropertyType } from '../../types';
 import FullscreenGallery from '../FullscreenGallery';
 import { useAppSelector } from '../../redux/hooks';
 import GenericMessage from '../GenericMessage';
+import PropertyLoader from '../PropertyLoader';
 
 const PropertyContainer = () => {
     const [property, setProperty] = useState<PropertyType | null>(null);
@@ -48,7 +48,7 @@ const PropertyContainer = () => {
     const openGallery = () => setIsGalleryOpen(true);
 
     if (isLoading) {
-        return <Loader />;
+        return <PropertyLoader />;
     }
 
     if (hasError) {

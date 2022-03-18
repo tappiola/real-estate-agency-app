@@ -6,7 +6,6 @@ import { formatPrice, getFullTitle, sortByKey } from '../../util';
 import './Property.style.scss';
 import { Carousel, CarouselItem } from '../Carousel';
 import Map from '../Map';
-import Loader from '../Loader';
 import BedroomIconComponent from '../BedroomIcon';
 import BathroomIconComponent from '../BathroomIcon';
 
@@ -61,10 +60,6 @@ const Property: React.FC<{
 
         return <MultiPreview images={sortedImages} onPreviewClick={onPreviewClick} />;
     };
-
-    if (!property) {
-        return <Loader />;
-    }
 
     return (
       <div className="Property-Container">

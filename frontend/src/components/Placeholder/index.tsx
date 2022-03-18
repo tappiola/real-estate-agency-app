@@ -1,1 +1,1 @@
-export { PlaceholderBlock, PlaceholderText } from './PropertiesLoader.component';
+export { PlaceholderBlock, PlaceholderText } from './Placeholder.component';

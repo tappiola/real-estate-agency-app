@@ -18,6 +18,11 @@
     animation-iteration-count: infinite;
     animation-fill-mode: forwards;
 
+    &-Block {
+        height: 100%;
+        width: 100%;
+    }
+
     &-Text {
         margin-block: 10px;
         border-radius: 15px;
