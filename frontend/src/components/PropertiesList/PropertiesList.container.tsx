@@ -2,7 +2,7 @@
 import inView from 'in-view';
 import React, { useCallback, useEffect, useRef } from 'react';
 import './PropertiesList.style.scss';
-import PropertiesLoader from '../PropertiesLoader/PropertiesLoader.component';
+import PropertiesLoader from '../PropertiesLoader';
 import PropertiesList from './PropertiesList.component';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { setActiveProperty } from '../../redux/search';

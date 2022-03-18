@@ -2,7 +2,7 @@ import './PropertiesLoader.style.scss';
 import React from 'react';
 import { PlaceholderBlock, PlaceholderText } from '../Placeholder';
 
-const PropertiesLoader: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
+const PropertiesLoader: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
     const loadersCount = isMobile ? 1 : 3;
 
     return (

@@ -5,26 +5,29 @@ import { Property } from '../../types';
 import './Wishlist.style.scss';
 import { AdType } from '../../constants';
 import GenericMessage from '../GenericMessage';
+import WishlistLoader from '../WishlistLoader';
 
 const Wishlist: React.FC<{
     properties: Property[],
     isAuthorized: boolean,
     hasError: boolean,
     adType: AdType,
-    setAdType: (type: AdType) => void
+    setAdType: (type: AdType) => void,
+    isLoading: boolean
 }> = ({
     properties,
     isAuthorized,
     hasError,
     adType,
-    setAdType
+    setAdType,
+    isLoading
 }) => {
     if (!isAuthorized) {
         return <GenericMessage>Please, login to work with wishlist</GenericMessage>;
     }
 
     if (hasError) {
-        return <h4>Wishlist fetching failed...</h4>;
+        return <GenericMessage>Wishlist fetching failed</GenericMessage>;
     }
 
     const renderHeader = () => (
@@ -50,8 +53,12 @@ const Wishlist: React.FC<{
     );
 
     const renderProperties = () => {
+        if (isLoading) {
+            return <WishlistLoader />;
+        }
+
         if (!properties.length) {
-            return <h4 className="Wishlist-Empty">No saved properties</h4>;
+            return <GenericMessage>No saved properties</GenericMessage>;
         }
 
         return (
