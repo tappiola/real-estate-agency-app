@@ -8,8 +8,8 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { setActiveProperty } from '../../redux/search';
 
 const PropertiesListContainer: React.FC<{
-    isLoading: boolean }
-> = ({ isLoading }) => {
+    isLoading: boolean
+}> = ({ isLoading }) => {
     const listRef = useRef<HTMLDivElement>(null);
 
     const dispatch = useAppDispatch();
