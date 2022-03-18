@@ -6,6 +6,7 @@ import { useAppSelector } from '../../redux/hooks';
 import { GET_WISHLIST } from '../../apollo/queries';
 import { AdType } from '../../constants';
 import { Property } from '../../types';
+import GenericMessage from '../GenericMessage';
 
 const WishlistContainer = () => {
     const [adType, setAdType] = useState(AdType.Sale);
@@ -24,6 +25,10 @@ const WishlistContainer = () => {
 
     if (loading) {
         return <Loader />;
+    }
+
+    if (error) {
+        return <GenericMessage>Fetching wishlist failed</GenericMessage>;
     }
 
     return (

@@ -4,6 +4,7 @@ import WishlistCard from '../WishlistCard';
 import { Property } from '../../types';
 import './Wishlist.style.scss';
 import { AdType } from '../../constants';
+import GenericMessage from '../GenericMessage';
 
 const Wishlist: React.FC<{
     properties: Property[],
@@ -19,7 +20,7 @@ const Wishlist: React.FC<{
     setAdType
 }) => {
     if (!isAuthorized) {
-        return <h4 className="Wishlist-NotAuthorized">Please, login to work with wishlist</h4>;
+        return <GenericMessage>Please, login to work with wishlist</GenericMessage>;
     }
 
     if (hasError) {

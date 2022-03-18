@@ -1,4 +1,13 @@
 .NotFound {
+    &-Container {
+        width: fit-content;
+        margin: auto;
+    }
+
+    &-Image {
+        width: 100%;
+    }
+
     &-Title {
         font-size: 36px;
         letter-spacing: 0.3em;

@@ -6,10 +6,12 @@ import Loader from '../Loader';
 import { Property as PropertyType } from '../../types';
 import FullscreenGallery from '../FullscreenGallery';
 import { useAppSelector } from '../../redux/hooks';
+import GenericMessage from '../GenericMessage';
 
 const PropertyContainer = () => {
     const [property, setProperty] = useState<PropertyType | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [hasError, setHasError] = useState(false);
     const [isInWishlist, setIsInWishlist] = useState(false);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
@@ -31,8 +33,9 @@ const PropertyContainer = () => {
                 const propertyData = data.getProperty;
                 setProperty(propertyData);
                 setIsInWishlist(propertyData.isInWishlist);
-                setIsLoading(false);
             } catch (e) {
+                setHasError(true);
+            } finally {
                 setIsLoading(false);
             }
         };
@@ -48,8 +51,12 @@ const PropertyContainer = () => {
         return <Loader />;
     }
 
+    if (hasError) {
+        return <GenericMessage>Fetching property failed</GenericMessage>;
+    }
+
     if (!property) {
-        return <p>Not found</p>;
+        return <GenericMessage>Property not found</GenericMessage>;
     }
 
     return (

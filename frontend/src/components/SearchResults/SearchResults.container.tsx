@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { AdType, ToastTypes } from '../../constants';
 import { enqueueToast } from '../../redux/notifier';
 import { getProperties } from '../../redux/search';
+import GenericMessage from '../GenericMessage';
 
 const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
     const [isLoading, setIsLoading] = useState(true);
@@ -59,9 +60,8 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
             const fetchMoreProperties = async () => {
                 try {
                     dispatch(getProperties({ adType, searchParams, requestMore: true }));
-                    setIsLoading(false);
                 } catch (e) {
-                    setIsLoading(false);
+                    setHasError(true);
                 } finally {
                     setIsLoading(false);
                 }
@@ -72,7 +72,7 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
     }, [isMobile, activeProperty, properties, count, page, pages, dispatch, adType, searchParams]);
 
     if (hasError) {
-        return <div>ERROR</div>;
+        return <GenericMessage>Fetching properties failed</GenericMessage>;
     }
 
     return (

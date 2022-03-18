@@ -6,9 +6,9 @@ TODO:
 - GA?
 - remove properties without pics
 - forms validation client form
-- change useMobile hook to smth
 - color variables
 - loaders on each page
+
 
 - (R) token expiration
   - when user logs out, remove token from local storage
@@ -23,3 +23,4 @@ TODO:
 - configure cors whitelist urls
 - not use volumes on prod
 - remove __typename from response
+- handle BE getProperty property doesn't exist (return 404?)
