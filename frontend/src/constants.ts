@@ -11,7 +11,8 @@ export const accessToken = 'pk.eyJ1IjoidGFwcGlvbGEiLCJhIjoiY2t6eHhuM2N6MDYyMTJ2c
 
 export const TEN_MINUTES = 600000;
 
-export const IMAGE_PLACEHOLDER = 'https://homes.madeeasy.app/img/no-propertyfound.png';
+// eslint-disable-next-line max-len
+export const IMAGE_PLACEHOLDER = 'https://tappiola-real-estate-agency-bucket.s3.eu-west-1.amazonaws.com/no-photo-available.jpg';
 
 export enum AdType {
     Rent = 'rent',

@@ -1,11 +1,17 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
+import { setIsMobile } from '../redux/config';
+import { useAppDispatch } from '../redux/hooks';
 
 const useIsMobile = () => {
-    const [width, setWidth] = useState<number>(window.innerWidth);
+    const dispatch = useAppDispatch();
 
     const handleWindowSizeChange = useCallback(() => {
-        setWidth(window.innerWidth);
-    }, []);
+        dispatch(setIsMobile(window.innerWidth <= 810));
+    }, [dispatch]);
+
+    useEffect(() => {
+        handleWindowSizeChange();
+    }, [handleWindowSizeChange]);
 
     useEffect(() => {
         window.addEventListener('resize', handleWindowSizeChange);
@@ -14,10 +20,6 @@ const useIsMobile = () => {
             window.removeEventListener('resize', handleWindowSizeChange);
         };
     }, [handleWindowSizeChange]);
-
-    const isMobile = width <= 810;
-
-    return isMobile;
 };
 
 export default useIsMobile;

@@ -4,7 +4,6 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import './PropertiesList.style.scss';
 import PropertiesLoader from '../PropertiesLoader/PropertiesLoader.component';
 import PropertiesList from './PropertiesList.component';
-import useIsMobile from '../IsMobile';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { setActiveProperty } from '../../redux/search';
 
@@ -13,9 +12,9 @@ const PropertiesListContainer: React.FC<{
 > = ({ isLoading }) => {
     const listRef = useRef<HTMLDivElement>(null);
 
-    const isMobile = useIsMobile();
     const dispatch = useAppDispatch();
     const { activeProperty, properties, activeSearch } = useAppSelector(({ search }) => search);
+    const { isMobile } = useAppSelector(({ config }) => config);
     const { page, ...otherParams } = activeSearch;
 
     const getTopVisible = useCallback(() => {

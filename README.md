@@ -22,5 +22,4 @@ TODO:
 - queries to apollo gql
 - configure cors whitelist urls
 - not use volumes on prod
-- IMAGE_PLACEHOLDER to amazon s3
 - remove __typename from response

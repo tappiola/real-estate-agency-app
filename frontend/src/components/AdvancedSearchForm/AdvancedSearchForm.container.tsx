@@ -3,14 +3,13 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import CitiesSelect from '../CitiesSelect';
 import { enqueueToast } from '../../redux/notifier';
 import { AdType, Filter, ToastTypes } from '../../constants';
-import { useAppDispatch } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import PropertyTypesSelect from '../PropertyTypesSelect/PropertyTypesSelect.container';
 import Select from '../Select';
 import { MAX_BEDROOMS, PRICE_RANGE } from './AdvancedSearchForm.config';
 import { formatPrice } from '../../util';
 import { FilterParams } from '../../types';
 import { setActiveProperty } from '../../redux/search';
-import useIsMobile from '../IsMobile';
 
 import './AdvancedSearchForm.style.scss';
 
@@ -24,7 +23,7 @@ const AdvancedSearchFormContainer: React.FC<{
     const [searchParams] = useSearchParams();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const isMobile = useIsMobile();
+    const { isMobile } = useAppSelector(({ config }) => config);
 
     const filterParams = useMemo(() => Object.values(Filter).reduce(
         (prev, param) => {

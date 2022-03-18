@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 import PropertyCard from './PropertyCard.component';
 import { Property } from '../../types';
-import useIsMobile from '../IsMobile';
+import { useAppSelector } from '../../redux/hooks';
 
 const PropertyCardContainer: React.FC<{ property: Property, index: number }> = ({ property, index }) => {
-    const isMobile = useIsMobile();
+    const { isMobile } = useAppSelector(({ config }) => config);
 
     return (
       <Link className="PropertyCard-Link" to={`/property/${property.id}`}>

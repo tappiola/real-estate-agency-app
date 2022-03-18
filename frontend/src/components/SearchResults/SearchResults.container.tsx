@@ -4,14 +4,14 @@ import SearchResults from './SearchResults.component';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { AdType, ToastTypes } from '../../constants';
 import { enqueueToast } from '../../redux/notifier';
-import useIsMobile from '../IsMobile';
 import { getProperties } from '../../redux/search';
 
 const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
     const [isLoading, setIsLoading] = useState(true);
+    const [hasError, setHasError] = useState(false);
     const dispatch = useAppDispatch();
 
-    const isMobile = useIsMobile();
+    const { isMobile } = useAppSelector(({ config }) => config);
 
     const [searchParams] = useSearchParams();
 
@@ -39,6 +39,8 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
         const fetchProperties = async () => {
             try {
                 await dispatch(getProperties({ adType, searchParams }));
+            } catch (e) {
+                setHasError(true);
             } finally {
                 setIsLoading(false);
             }
@@ -68,6 +70,10 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
             fetchMoreProperties();
         }
     }, [isMobile, activeProperty, properties, count, page, pages, dispatch, adType, searchParams]);
+
+    if (hasError) {
+        return <div>ERROR</div>;
+    }
 
     return (
       <SearchResults

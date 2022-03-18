@@ -4,18 +4,20 @@ import Property from './Property.component';
 import { getProperty } from '../../queries';
 import Loader from '../Loader';
 import { Property as PropertyType } from '../../types';
-import useIsMobile from '../IsMobile';
 import FullscreenGallery from '../FullscreenGallery';
+import { useAppSelector } from '../../redux/hooks';
 
 const PropertyContainer = () => {
     const [property, setProperty] = useState<PropertyType | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isInWishlist, setIsInWishlist] = useState(false);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+
     const params = useParams();
     const { id } = params;
-    const isMobile = useIsMobile();
     const navigate = useNavigate();
+
+    const { isMobile } = useAppSelector(({ config }) => config);
 
     useEffect(() => {
         if (!id) {

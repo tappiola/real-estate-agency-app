@@ -7,7 +7,6 @@ import GetInTouch from '../GetInTouch';
 import midBanner from './midBanner.png';
 import bottomBanner from './bottomBanner.png';
 import topBanner from './topBanner.png';
-import useIsMobile from '../IsMobile';
 import Puddle from '../Puddle';
 
 const TopBanner: React.FC<{ isMobile: boolean }> = ({ isMobile }) => (
@@ -60,8 +59,7 @@ const BottomBanner: React.FC<{ isMobile: boolean }> = ({ isMobile }) => (
   />
 );
 
-const HomePage = () => {
-    const isMobile = useIsMobile();
+const HomePage : React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
     const parallax = useParallax({ speed: 7 });
 
     return (
