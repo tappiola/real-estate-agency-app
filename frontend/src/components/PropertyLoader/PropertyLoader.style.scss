@@ -68,6 +68,7 @@
         @include desktop {
             margin-top: 0;
             flex-basis: 40%;
+            height: 300px;
         }
     }
 
@@ -78,6 +79,7 @@
         padding: 20px;
 
         @include desktop {
+            padding: 0;
             flex-direction: row;
             margin-top: 50px;
         }
