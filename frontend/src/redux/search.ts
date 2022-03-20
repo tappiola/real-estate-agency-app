@@ -50,7 +50,7 @@ export const getProperties = createAsyncThunk(
         const lastUpdated = lastUpdatedSelector(state);
         const { page: oldPage } = oldSearch;
 
-        const pageNumber = requestMore ? oldPage + 1 : (page || oldPage || 1);
+        const pageNumber = requestMore ? oldPage + 1 : (page || 1);
 
         const activeSearch = {
             adType,
