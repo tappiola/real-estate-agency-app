@@ -1,4 +1,4 @@
-import './PropertiesLoader.style.scss';
+import './Placeholder.style.scss';
 import React from 'react';
 import clsx from 'clsx';
 

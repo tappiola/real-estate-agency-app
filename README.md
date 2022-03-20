@@ -20,5 +20,4 @@ TODO:
 - queries to apollo gql
 - configure cors whitelist urls
 - not use volumes on prod
-- remove __typename from response
 - handle BE getProperty property doesn't exist (return 404?)
