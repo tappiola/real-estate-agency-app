@@ -1,8 +1,8 @@
 import React, { FormEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 import './Register.style.scss';
-import { UseInputType } from '../../hooks/useInput2';
-import Input2 from '../Input2/Input.component';
+import { UseInputType } from '../../hooks/useInput';
+import Input from '../Input/Input.component';
 
 const Register: React.FC<{
     signupHandler: FormEventHandler,
@@ -12,7 +12,7 @@ const Register: React.FC<{
     formInputs
 }) => (
   <form className="Register" onSubmit={signupHandler} noValidate>
-    {formInputs.map((input) => <Input2 key={input.name} input={input} />)}
+    {formInputs.map((input) => <Input key={input.name} input={input} />)}
     <button type="submit">Register</button>
     <p className="AlreadyRegistered">
       Already registered?

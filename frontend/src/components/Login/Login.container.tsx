@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
 import { loginUser, LoginUserPayload } from '../../redux/user';
 import Login from './Login.component';
-import useInput from '../../hooks/useInput2';
+import useInput from '../../hooks/useInput';
 import { enqueueToast } from '../../redux/notifier';
 import { ToastTypes } from '../../constants';
 import { LoginFormConfig } from './Login.config';

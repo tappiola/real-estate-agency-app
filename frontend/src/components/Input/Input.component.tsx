@@ -1,37 +1,18 @@
 import clsx from 'clsx';
 import React from 'react';
-import { UseInputType } from '../../hooks/useInput';
 import './Input.style.scss';
+import { InputType, TagType } from './Input.config';
+import { UseInputType } from '../../hooks/useInput';
 
-export enum InputType {
-    Text = 'text',
-    Email = 'email',
-    Password = 'password',
-    Textarea = 'textarea',
-    Phone = 'tel'
-}
-
-enum TagType {
-    Input = 'input',
-    Textarea = 'textarea'
-}
-
-const Input : React.FC<{
-    input: UseInputType,
-    placeholder: string,
-    name: string,
-    type?: InputType
-}> = ({
-    input,
-    placeholder,
-    name,
-    type = InputType.Text
-}) => {
+const Input : React.FC<{ input: UseInputType }> = ({ input }) => {
     const {
         value,
         valueChangeHandler,
         inputBlurHandler,
-        errorMessage
+        errorMessage,
+        type,
+        placeholder,
+        name
     } = input;
 
     const hasError = !!errorMessage;

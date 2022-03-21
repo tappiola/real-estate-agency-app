@@ -1,6 +1,6 @@
 import { AdType } from './constants';
 import { Property } from './types';
-import { UseInputType } from './hooks/useInput2';
+import { UseInputType } from './hooks/useInput';
 
 export const sortByKey = <T extends object, U extends keyof T> (values: T[], sortKey: U) => [...values].sort(
     (a, b) => {

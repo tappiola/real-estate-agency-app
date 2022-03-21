@@ -4,7 +4,7 @@ import ContactUs from './ContactUs.component';
 import { enqueueToast } from '../../redux/notifier';
 import { useAppDispatch } from '../../redux/hooks';
 import { saveClientRequest } from '../../queries';
-import useInput from '../../hooks/useInput2';
+import useInput from '../../hooks/useInput';
 import { SaveClientRequest } from '../../types';
 import { transformFormData } from '../../util';
 import { EmailFormConfig } from './ContactUs.config';

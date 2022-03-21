@@ -1,5 +1,4 @@
-import { ValidationType } from '../../hooks/useInput2';
-import { InputType } from '../Input/Input.component';
+import { InputType, ValidationType } from '../Input/Input.config';
 
 // eslint-disable-next-line import/prefer-default-export
 export const LoginFormConfig = [

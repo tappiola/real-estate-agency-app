@@ -1,4 +1,5 @@
 import { ChangeEventHandler, FocusEventHandler, useReducer } from 'react';
+import { InputConfigType, InputType, ValidationType } from '../components/Input/Input.config';
 
 const initialInputState = {
     value: '',
@@ -23,7 +24,11 @@ export type UseInputType = {
     inputBlurHandler: FocusEventHandler,
     validate: () => void,
     reset: () => void,
-    errorMessage: string | null
+    errorMessage: string | null,
+    placeholder: string,
+    name: string,
+    type?: InputType,
+    apiField?: string
 };
 
 export enum Action {
@@ -33,19 +38,13 @@ export enum Action {
     Validate
 }
 
-export const PASSWORD_MIN_LENGTH = 6;
+const PASSWORD_MIN_LENGTH = 6;
 
 type ValidatorType = {
     validateValue: (value: string) => boolean,
     message: string
 };
 
-export enum ValidationType {
-    isRequired,
-    isEmail,
-    isLongEnough,
-    noValidate
-}
 const validators: { [key in ValidationType]: ValidatorType } = {
     [ValidationType.isRequired]: {
         validateValue: (value: string) => value.trim() !== '',
@@ -98,7 +97,13 @@ const inputStateReducer = (state: StateType, action: ActionType) : StateType => 
     return state;
 };
 
-const useInput = (validationType: ValidationType) : UseInputType => {
+const useInput = ({
+    validationType,
+    placeholder,
+    name,
+    type,
+    apiField
+}: InputConfigType) : UseInputType => {
     const [inputState, dispatch] = useReducer(
         inputStateReducer,
         initialInputState
@@ -135,7 +140,11 @@ const useInput = (validationType: ValidationType) : UseInputType => {
         inputBlurHandler,
         validate,
         reset,
-        errorMessage
+        errorMessage,
+        placeholder,
+        name,
+        type,
+        apiField
     };
 };
 

@@ -5,7 +5,7 @@ import { registerUser, RegisterUserPayload } from '../../redux/user';
 import Register from './Register.component';
 import { enqueueToast } from '../../redux/notifier';
 import { ToastTypes } from '../../constants';
-import useInput from '../../hooks/useInput2';
+import useInput from '../../hooks/useInput';
 import { RegisterFormConfig } from './Register.config';
 import { transformFormData } from '../../util';
 
