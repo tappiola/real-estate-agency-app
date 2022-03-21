@@ -1,50 +1,31 @@
-import React, { ChangeEventHandler, FocusEventHandler, FormEventHandler } from 'react';
+import React, { FormEventHandler } from 'react';
 import './Login.style.scss';
 import { Link } from 'react-router-dom';
-import clsx from 'clsx';
-import { PASSWORD_MIN_LENGTH } from '../../hooks/useInput';
+import { UseInputType } from '../../hooks/useInput';
+import Input, { InputType } from '../Input/Input.component';
 
 const Login : React.FC<{
     loginHandler: FormEventHandler,
-    email: string,
-    emailHasError: boolean,
-    setEmail: ChangeEventHandler<HTMLInputElement>,
-    emailBlurHandler: FocusEventHandler,
-    password: string,
-    passwordHasError: boolean,
-    setPassword: ChangeEventHandler<HTMLInputElement>,
-    passwordBlurHandler: FocusEventHandler,
+    emailInput: UseInputType,
+    passwordInput: UseInputType
 }> = ({
     loginHandler,
-    email,
-    emailHasError,
-    setEmail,
-    emailBlurHandler,
-    password,
-    passwordHasError,
-    setPassword,
-    passwordBlurHandler
+    emailInput,
+    passwordInput
 }) => (
   <form className="Login" onSubmit={loginHandler} noValidate>
-    <input
-      className={clsx(emailHasError && 'InvalidInput')}
-      type="email"
+    <Input
+      input={emailInput}
       placeholder="Email"
       name="email"
-      value={email}
-      onChange={setEmail}
-      onBlur={emailBlurHandler}
+      type={InputType.Email}
     />
-    {emailHasError && <span className="InvalidInputMessage">Not a valid email</span>}
-    <input
-      className={clsx(emailHasError && 'InvalidInput')}
-      type="password"
+    <Input
+      input={passwordInput}
       placeholder="Password"
-      value={password}
-      onChange={setPassword}
-      onBlur={passwordBlurHandler}
+      name="password"
+      type={InputType.Password}
     />
-    {passwordHasError && <span className="InvalidInputMessage">{`Minimum ${PASSWORD_MIN_LENGTH} symbols`}</span>}
     <button type="submit">Login</button>
     <p className="NotRegistered">
       Not registered yet?

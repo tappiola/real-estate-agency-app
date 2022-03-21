@@ -1,9 +1,9 @@
-import { FormEventHandler, useCallback } from 'react';
+import { FormEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
 import { loginUser } from '../../redux/user';
 import Login from './Login.component';
-import useInput, { validators } from '../../hooks/useInput';
+import useInput, { ValidationType } from '../../hooks/useInput';
 import { enqueueToast } from '../../redux/notifier';
 import { ToastTypes } from '../../constants';
 
@@ -11,26 +11,13 @@ const LoginContainer = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const {
-        value: email,
-        isValid: emailIsValid,
-        hasError: emailHasError,
-        valueChangeHandler: setEmail,
-        inputBlurHandler: emailBlurHandler
-    } = useInput(validators.isEmail);
+    const emailInput = useInput(ValidationType.isEmail);
+    const passwordInput = useInput(ValidationType.isLongEnough);
 
-    const {
-        value: password,
-        isValid: passwordIsValid,
-        hasError: passwordHasError,
-        valueChangeHandler: setPassword,
-        inputBlurHandler: passwordBlurHandler
-    } = useInput(validators.isLongEnough);
-
-    const loginHandler: FormEventHandler = useCallback(async (event) => {
+    const loginHandler: FormEventHandler = async (event) => {
         event.preventDefault();
 
-        if (!emailIsValid || !passwordIsValid) {
+        if (!emailInput.isValid || !passwordInput.isValid) {
             dispatch(enqueueToast({
                 message: 'Please, fill in all the fields with valid data',
                 type: ToastTypes.Warning
@@ -39,23 +26,20 @@ const LoginContainer = () => {
             return;
         }
 
-        const loginResult = await dispatch(loginUser({ email, password })).unwrap();
+        const loginResult = await dispatch(loginUser({
+            email: emailInput.value,
+            password: passwordInput.value
+        })).unwrap();
 
         if (loginResult.login.success) {
             navigate('/', { replace: true });
         }
-    }, [dispatch, email, emailIsValid, navigate, password, passwordIsValid]);
+    };
 
     return (
       <Login
-        email={email}
-        setEmail={setEmail}
-        emailHasError={emailHasError}
-        emailBlurHandler={emailBlurHandler}
-        password={password}
-        setPassword={setPassword}
-        passwordHasError={passwordHasError}
-        passwordBlurHandler={passwordBlurHandler}
+        emailInput={emailInput}
+        passwordInput={passwordInput}
         loginHandler={loginHandler}
       />
     );

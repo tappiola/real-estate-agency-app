@@ -1,22 +1,35 @@
 import React, { FormEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 import './Register.style.scss';
+import { UseInputType } from '../../hooks/useInput';
+import Input, { InputType } from '../Input/Input.component';
 
 const Register: React.FC<{
     signupHandler: FormEventHandler,
-    name: string,
-    setName: (name: string) => void,
-    email: string,
-    setEmail: (email: string) => void,
-    password: string,
-    setPassword: (password: string) => void
+    nameInput: UseInputType,
+    emailInput: UseInputType,
+    passwordInput: UseInputType
 }> = ({
-    signupHandler, name, setName, email, setEmail, password, setPassword
+    signupHandler, nameInput, emailInput, passwordInput
 }) => (
-  <form className="Register" onSubmit={signupHandler}>
-    <input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-    <input placeholder="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-    <input placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+  <form className="Register" onSubmit={signupHandler} noValidate>
+    <Input
+      input={nameInput}
+      placeholder="Name"
+      name="name"
+    />
+    <Input
+      input={emailInput}
+      placeholder="Email"
+      name="email"
+      type={InputType.Email}
+    />
+    <Input
+      input={passwordInput}
+      placeholder="Password"
+      name="password"
+      type={InputType.Password}
+    />
     <button type="submit">Register</button>
     <p className="AlreadyRegistered">
       Already registered?

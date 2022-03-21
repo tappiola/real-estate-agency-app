@@ -1,38 +1,30 @@
 import React, { FormEventHandler } from 'react';
 import './ContactUs.style.scss';
+import { UseInputType } from '../../hooks/useInput';
+import Input, { InputType } from '../Input/Input.component';
 
 const ContactUsComponent: React.FC<{
     onFormSubmit: FormEventHandler,
-    firstName: string,
-    setFirstName: (name: string) => void,
-    lastName: string,
-    setLastName: (name: string) => void,
-    email: string,
-    setEmail: (email: string) => void,
-    phoneNumber: string,
-    setPhoneNumber: (phone: string) => void,
-    message: string,
-    setMessage: (phone: string) => void
+    firstNameInput: UseInputType,
+    lastNameInput: UseInputType,
+    emailInput: UseInputType,
+    phoneInput: UseInputType,
+    messageInput: UseInputType
 }> = ({
     onFormSubmit,
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-    email,
-    setEmail,
-    phoneNumber,
-    setPhoneNumber,
-    message,
-    setMessage
+    firstNameInput,
+    lastNameInput,
+    emailInput,
+    phoneInput,
+    messageInput
 }) => (
   <form className="ContactUs" onSubmit={onFormSubmit}>
     <h2>Contact us</h2>
-    <input placeholder="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-    <input placeholder="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-    <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-    <input placeholder="Phone number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
-    <textarea placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)} />
+    <Input input={firstNameInput} placeholder="First name" name="firstName" />
+    <Input input={lastNameInput} placeholder="Last name" name="lastName" />
+    <Input input={emailInput} placeholder="Email" name="email" type={InputType.Email} />
+    <Input input={phoneInput} placeholder="Phone number" name="phone" type={InputType.Phone} />
+    <Input input={messageInput} placeholder="Message" name="message" type={InputType.Textarea} />
     <button type="submit">Send message</button>
   </form>
 );

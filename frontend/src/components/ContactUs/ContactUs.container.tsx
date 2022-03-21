@@ -1,55 +1,38 @@
-import { FormEventHandler, useCallback, useState } from 'react';
+import { FormEventHandler } from 'react';
 import { ToastTypes } from '../../constants';
 import ContactUs from './ContactUs.component';
 import { enqueueToast } from '../../redux/notifier';
 import { useAppDispatch } from '../../redux/hooks';
 import { saveClientRequest } from '../../queries';
+import useInput, { ValidationType } from '../../hooks/useInput';
 
 const ContactUsContainer = () => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [message, setMessage] = useState('');
+    const firstNameInput = useInput(ValidationType.isRequired);
+    const lastNameInput = useInput(ValidationType.noValidate);
+    const emailInput = useInput(ValidationType.isEmail);
+    const phoneInput = useInput(ValidationType.noValidate);
+    const messageInput = useInput(ValidationType.isRequired);
 
     const dispatch = useAppDispatch();
 
-    const onFormSubmit: FormEventHandler = useCallback(async (e) => {
+    const onFormSubmit: FormEventHandler = async (e) => {
         e.preventDefault();
 
-        if (!firstName.trim()) {
+        if (!firstNameInput.isValid || !emailInput.isValid || !messageInput.isValid) {
             dispatch(enqueueToast({
-                message: 'Please, enter your first name',
-                type: ToastTypes.Success
-            }));
-
-            return;
-        }
-
-        if (!email.trim() && !phoneNumber.trim()) {
-            dispatch(enqueueToast({
-                message: 'Please, make should you provided phone or email',
-                type: ToastTypes.Success
-            }));
-
-            return;
-        }
-
-        if (!message.trim()) {
-            dispatch(enqueueToast({
-                message: 'Please, specify the reason for contacting us in Message field',
-                type: ToastTypes.Success
+                message: 'Please, fill in all the fields with valid data',
+                type: ToastTypes.Warning
             }));
 
             return;
         }
 
         await saveClientRequest({
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
-            message
+            firstName: firstNameInput.value,
+            lastName: lastNameInput.value,
+            email: emailInput.value,
+            phoneNumber: phoneInput.value,
+            message: messageInput.value
         });
 
         dispatch(enqueueToast({
@@ -57,26 +40,21 @@ const ContactUsContainer = () => {
             type: ToastTypes.Success
         }));
 
-        setFirstName('');
-        setLastName('');
-        setEmail('');
-        setPhoneNumber('');
-        setMessage('');
-    }, [dispatch, email, firstName, lastName, message, phoneNumber]);
+        firstNameInput.reset();
+        lastNameInput.reset();
+        emailInput.reset();
+        phoneInput.reset();
+        messageInput.reset();
+    };
 
     return (
       <ContactUs
-        email={email}
-        firstName={firstName}
-        lastName={lastName}
-        message={message}
+        emailInput={emailInput}
+        firstNameInput={firstNameInput}
+        lastNameInput={lastNameInput}
+        messageInput={messageInput}
+        phoneInput={phoneInput}
         onFormSubmit={onFormSubmit}
-        phoneNumber={phoneNumber}
-        setEmail={setEmail}
-        setFirstName={setFirstName}
-        setLastName={setLastName}
-        setPhoneNumber={setPhoneNumber}
-        setMessage={setMessage}
       />
     );
 };
