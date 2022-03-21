@@ -1,35 +1,18 @@
 import React, { FormEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 import './Register.style.scss';
-import { UseInputType } from '../../hooks/useInput';
-import Input, { InputType } from '../Input/Input.component';
+import { UseInputType } from '../../hooks/useInput2';
+import Input2 from '../Input2/Input.component';
 
 const Register: React.FC<{
     signupHandler: FormEventHandler,
-    nameInput: UseInputType,
-    emailInput: UseInputType,
-    passwordInput: UseInputType
+    formInputs: UseInputType[]
 }> = ({
-    signupHandler, nameInput, emailInput, passwordInput
+    signupHandler,
+    formInputs
 }) => (
   <form className="Register" onSubmit={signupHandler} noValidate>
-    <Input
-      input={nameInput}
-      placeholder="Name"
-      name="name"
-    />
-    <Input
-      input={emailInput}
-      placeholder="Email"
-      name="email"
-      type={InputType.Email}
-    />
-    <Input
-      input={passwordInput}
-      placeholder="Password"
-      name="password"
-      type={InputType.Password}
-    />
+    {formInputs.map((input) => <Input2 key={input.name} input={input} />)}
     <button type="submit">Register</button>
     <p className="AlreadyRegistered">
       Already registered?

@@ -1,26 +1,26 @@
 import { FormEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
-import { loginUser } from '../../redux/user';
+import { loginUser, LoginUserPayload } from '../../redux/user';
 import Login from './Login.component';
-import useInput, { ValidationType } from '../../hooks/useInput';
+import useInput from '../../hooks/useInput2';
 import { enqueueToast } from '../../redux/notifier';
 import { ToastTypes } from '../../constants';
+import { LoginFormConfig } from './Login.config';
+import { transformFormData } from '../../util';
 
 const LoginContainer = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const emailInput = useInput(ValidationType.isEmail);
-    const passwordInput = useInput(ValidationType.isLongEnough);
+    const formInputs = LoginFormConfig.map((config) => useInput(config));
 
     const loginHandler: FormEventHandler = async (event) => {
         event.preventDefault();
 
-        emailInput.validate();
-        passwordInput.validate();
+        formInputs.forEach((input) => input.validate());
 
-        if (!emailInput.isValid || !passwordInput.isValid) {
+        if (!formInputs.every((input) => input.isValid)) {
             dispatch(enqueueToast({
                 message: 'Please, fill in all the fields with valid data',
                 type: ToastTypes.Warning
@@ -29,10 +29,7 @@ const LoginContainer = () => {
             return;
         }
 
-        const loginResult = await dispatch(loginUser({
-            email: emailInput.value,
-            password: passwordInput.value
-        })).unwrap();
+        const loginResult = await dispatch(loginUser(transformFormData(formInputs) as LoginUserPayload)).unwrap();
 
         if (loginResult.login.success) {
             navigate('/', { replace: true });
@@ -41,9 +38,8 @@ const LoginContainer = () => {
 
     return (
       <Login
-        emailInput={emailInput}
-        passwordInput={passwordInput}
         loginHandler={loginHandler}
+        formInputs={formInputs}
       />
     );
 };

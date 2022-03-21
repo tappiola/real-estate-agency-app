@@ -1,28 +1,26 @@
 import { FormEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
-import { registerUser } from '../../redux/user';
+import { registerUser, RegisterUserPayload } from '../../redux/user';
 import Register from './Register.component';
 import { enqueueToast } from '../../redux/notifier';
 import { ToastTypes } from '../../constants';
-import useInput, { ValidationType } from '../../hooks/useInput';
+import useInput from '../../hooks/useInput2';
+import { RegisterFormConfig } from './Register.config';
+import { transformFormData } from '../../util';
 
 const RegisterContainer = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const nameInput = useInput(ValidationType.isRequired);
-    const emailInput = useInput(ValidationType.isEmail);
-    const passwordInput = useInput(ValidationType.isLongEnough);
+    const formInputs = RegisterFormConfig.map((config) => useInput(config));
 
     const signupHandler: FormEventHandler = async (event) => {
         event.preventDefault();
 
-        nameInput.validate();
-        emailInput.validate();
-        passwordInput.validate();
+        formInputs.forEach((input) => input.validate());
 
-        if (!emailInput.isValid || !passwordInput.isValid || !nameInput.isValid) {
+        if (!formInputs.every((input) => input.isValid)) {
             dispatch(enqueueToast({
                 message: 'Please, fill in all the fields with valid data',
                 type: ToastTypes.Warning
@@ -31,11 +29,9 @@ const RegisterContainer = () => {
             return;
         }
 
-        const registrationResult = await dispatch(registerUser({
-            email: emailInput.value,
-            name: nameInput.value,
-            password: nameInput.value
-        })).unwrap();
+        const registrationResult = await dispatch(
+            registerUser(transformFormData(formInputs) as RegisterUserPayload)
+        ).unwrap();
 
         if (registrationResult.createUser.success) {
             navigate('/', { replace: true });
@@ -44,10 +40,8 @@ const RegisterContainer = () => {
 
     return (
       <Register
-        emailInput={emailInput}
-        nameInput={nameInput}
-        passwordInput={passwordInput}
         signupHandler={signupHandler}
+        formInputs={formInputs}
       />
     );
 };

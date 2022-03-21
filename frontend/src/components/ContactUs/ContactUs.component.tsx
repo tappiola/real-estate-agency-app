@@ -1,30 +1,18 @@
 import React, { FormEventHandler } from 'react';
 import './ContactUs.style.scss';
-import { UseInputType } from '../../hooks/useInput';
-import Input, { InputType } from '../Input/Input.component';
+import { UseInputType } from '../../hooks/useInput2';
+import Input2 from '../Input2/Input.component';
 
 const ContactUsComponent: React.FC<{
     onFormSubmit: FormEventHandler,
-    firstNameInput: UseInputType,
-    lastNameInput: UseInputType,
-    emailInput: UseInputType,
-    phoneInput: UseInputType,
-    messageInput: UseInputType
+    formInputs: UseInputType[],
 }> = ({
     onFormSubmit,
-    firstNameInput,
-    lastNameInput,
-    emailInput,
-    phoneInput,
-    messageInput
+    formInputs
 }) => (
-  <form className="ContactUs" onSubmit={onFormSubmit}>
+  <form className="ContactUs" onSubmit={onFormSubmit} noValidate>
     <h2>Contact us</h2>
-    <Input input={firstNameInput} placeholder="First name" name="firstName" />
-    <Input input={lastNameInput} placeholder="Last name" name="lastName" />
-    <Input input={emailInput} placeholder="Email" name="email" type={InputType.Email} />
-    <Input input={phoneInput} placeholder="Phone number" name="phone" type={InputType.Phone} />
-    <Input input={messageInput} placeholder="Message" name="message" type={InputType.Textarea} />
+    {formInputs.map((input) => <Input2 key={input.name} input={input} />)}
     <button type="submit">Send message</button>
   </form>
 );
