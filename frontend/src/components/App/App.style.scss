@@ -41,6 +41,7 @@ button {
 input {
   border: none;
   border-bottom: 1px solid #4d4d4d;
+  border-radius: 0;
   padding: 10px;
   background: transparent;
   outline: none;
@@ -59,6 +60,7 @@ textarea {
   border: none;
   background-color: transparent;
   border-bottom: 1px solid #4d4d4d;
+  border-radius: 0;
   font-family: Relative-Book, sans-serif;
   font-size: 16px;
   padding-left: 10px;

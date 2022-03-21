@@ -87,6 +87,10 @@
     margin-right: 12px;
   }
 
+  .WishlistIcon-Container:focus {
+    outline: none;
+  }
+
   .WishlistIcon {
     fill: #efefef;
     stroke: #efefef;

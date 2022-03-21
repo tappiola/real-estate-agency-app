@@ -48,7 +48,6 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
         };
 
         fetchProperties();
-        setIsLoading(false);
     }, [adType, dispatch, searchParams]);
 
     useEffect(() => {

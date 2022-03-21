@@ -4,6 +4,7 @@ import { Property } from '../../types';
 import './SearchResults.style.scss';
 import PropertiesListContainer from '../PropertiesList';
 import Map from '../DynamicMap';
+import { PlaceholderBlock } from '../Placeholder';
 
 const SearchResults: React.FC<{
     count: number,
@@ -21,6 +22,10 @@ const SearchResults: React.FC<{
     isMobile
 }) => {
     const renderMap = () => {
+        if (isLoading) {
+            return <PlaceholderBlock />;
+        }
+
         if (!properties.length) {
             return null;
         }
