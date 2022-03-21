@@ -18,6 +18,12 @@ const ContactUsContainer = () => {
     const onFormSubmit: FormEventHandler = async (e) => {
         e.preventDefault();
 
+        firstNameInput.validate();
+        lastNameInput.validate();
+        emailInput.validate();
+        phoneInput.validate();
+        messageInput.validate();
+
         if (!firstNameInput.isValid || !emailInput.isValid || !messageInput.isValid) {
             dispatch(enqueueToast({
                 message: 'Please, fill in all the fields with valid data',

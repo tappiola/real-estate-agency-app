@@ -49,7 +49,9 @@ const Input : React.FC<{
           onChange={valueChangeHandler}
           onBlur={inputBlurHandler}
         />
-        { hasError && <span className="InvalidInputMessage">{errorMessage}</span> }
+        { hasError
+            ? <span className="InvalidInputMessage">{errorMessage}</span>
+            : <span className="MessagePlaceholder" /> }
       </>
     );
 };

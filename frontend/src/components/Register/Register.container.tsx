@@ -18,6 +18,10 @@ const RegisterContainer = () => {
     const signupHandler: FormEventHandler = async (event) => {
         event.preventDefault();
 
+        nameInput.validate();
+        emailInput.validate();
+        passwordInput.validate();
+
         if (!emailInput.isValid || !passwordInput.isValid || !nameInput.isValid) {
             dispatch(enqueueToast({
                 message: 'Please, fill in all the fields with valid data',

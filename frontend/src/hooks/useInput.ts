@@ -21,6 +21,7 @@ export type UseInputType = {
     isValid: boolean,
     valueChangeHandler: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>,
     inputBlurHandler: FocusEventHandler,
+    validate: () => void,
     reset: () => void,
     errorMessage: string | null
 };
@@ -28,7 +29,8 @@ export type UseInputType = {
 export enum Action {
     Input,
     Blur,
-    Reset
+    Reset,
+    Validate
 }
 
 export const PASSWORD_MIN_LENGTH = 6;
@@ -52,7 +54,7 @@ const validators: { [key in ValidationType]: ValidatorType } = {
     [ValidationType.isEmail]: {
         validateValue: (value: string) => /^(([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\.([a-zA-Z]{2,5}){1,25})+$/
             .test(value),
-        message: 'Not a valid email'
+        message: 'Invalid email'
     },
     [ValidationType.isLongEnough]: {
         validateValue: (value: string) => value.trim().length >= PASSWORD_MIN_LENGTH,
@@ -86,6 +88,13 @@ const inputStateReducer = (state: StateType, action: ActionType) : StateType => 
         };
     }
 
+    if (action.type === Action.Validate) {
+        return {
+            isTouched: true,
+            value: state.value
+        };
+    }
+
     return state;
 };
 
@@ -107,8 +116,12 @@ const useInput = (validationType: ValidationType) : UseInputType => {
         });
     };
 
-    const inputBlurHandler : FocusEventHandler = () => {
+    const inputBlurHandler = () => {
         dispatch({ type: Action.Blur });
+    };
+
+    const validate = () => {
+        dispatch({ type: Action.Validate });
     };
 
     const reset = () => {
@@ -120,6 +133,7 @@ const useInput = (validationType: ValidationType) : UseInputType => {
         isValid: valueIsValid,
         valueChangeHandler,
         inputBlurHandler,
+        validate,
         reset,
         errorMessage
     };

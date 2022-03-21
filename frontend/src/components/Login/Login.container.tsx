@@ -17,6 +17,9 @@ const LoginContainer = () => {
     const loginHandler: FormEventHandler = async (event) => {
         event.preventDefault();
 
+        emailInput.validate();
+        passwordInput.validate();
+
         if (!emailInput.isValid || !passwordInput.isValid) {
             dispatch(enqueueToast({
                 message: 'Please, fill in all the fields with valid data',

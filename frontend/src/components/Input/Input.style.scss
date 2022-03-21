@@ -1,3 +1,6 @@
+:root {
+    --error-message-height: 14px;
+}
 input {
     border: none;
     border-bottom: 1px solid #4d4d4d;
@@ -28,6 +31,11 @@ input {
     letter-spacing: 0.05em;
     padding-left: 10px;
     color: var(--validation-error-color);
+    line-height: var(--error-message-height);
+}
+
+.MessagePlaceholder {
+    height: var(--error-message-height);
 }
 
 textarea {
