@@ -4,7 +4,6 @@ Restore backup: `docker exec -i real-estate-agency-db-1 sh -c 'exec mysql -uadmi
 TODO:
 - GA?
 - remove properties without pics
-- forms validation client form
 - color variables
 
 

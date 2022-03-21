@@ -16,7 +16,7 @@ export const EmailFormConfig = [
         name: 'email',
         type: InputType.Email
     }, {
-        validationType: ValidationType.isRequired,
+        validationType: ValidationType.noValidate,
         placeholder: 'Phone number',
         name: 'phone',
         apiField: 'phoneNumber',
