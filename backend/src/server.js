@@ -1,24 +1,17 @@
 /* eslint-disable no-unused-vars */
-const express = require('express');
-const sequelize = require('./util/database');
-
-const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const express = require('express');
+const { graphqlHTTP  } = require('express-graphql');
+const sequelize = require('./util/database');
+
 const authentication = require('./middlewares/authentication');
 
 const City = require('./models/city');
 const Property = require('./models/property');
 const PropertyType = require('./models/propertyType');
-const User = require('./models/user');
-const ClientRequests = require('./models/clientRequests');
-const UserWishlist = require('./models/userWishlist');
 const Image = require('./models/images');
-const Tag = require('./models/tag');
 const Type = require('./models/type');
-const PropertyTag = require('./models/propertyTag');
-
-const { graphqlHTTP  } = require('express-graphql');
 
 const graphqlSchema = require('./graphql/schema');
 const graphqlResolver = require('./graphql/resolvers');
@@ -34,6 +27,8 @@ Property.hasMany(Image);
 
 Property.belongsTo(Type);
 Type.hasMany(Property);
+
+const app = express();
 
 app.use(cors());
 
@@ -67,5 +62,5 @@ app.use('/', (req, res) => {
 
 sequelize.sync({alter: true})
     .then(
-        app.listen(80)
+        app.listen(process.env.PORT || 5000)
     );

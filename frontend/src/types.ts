@@ -51,11 +51,3 @@ export type Toast = {
     type: ToastTypes,
     duration: number
 };
-
-export type SaveClientRequest = {
-    firstName: string,
-    lastName: string,
-    email: string,
-    phoneNumber: string,
-    message: string
-};

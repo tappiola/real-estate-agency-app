@@ -1,5 +1,5 @@
 import jwt_decode from 'jwt-decode';
-import { HOST } from '../constants';
+import compress from 'graphql-query-compress';
 import { getSavedToken } from '../util';
 import { GraphqlResponse, JwtDecodeResult } from './types';
 
@@ -30,11 +30,11 @@ export const sendGraphqlRequest = async <T>(query: string, variables = {}): Prom
         headers.set('Authorization', `Bearer ${authToken}`);
     }
 
-    const response = await fetch(`${HOST}/graphql`, {
+    const response = await fetch('/graphql', {
         method: 'POST',
         headers,
         body: JSON.stringify({
-            query,
+            query: compress(query),
             variables
         })
     });

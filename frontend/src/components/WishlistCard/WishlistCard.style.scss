@@ -1,20 +1,4 @@
-@mixin mobile {
-    @media (max-width: 810px) {
-        @content;
-    }
-}
-
-@mixin tablet {
-    @media (min-width: 811px) {
-        @content;
-    }
-}
-
-@mixin desktop {
-    @media (min-width: 1025px) {
-        @content;
-    }
-}
+@import "../../styles/mixins";
 
 .WishlistCard {
      &-Wrapper {

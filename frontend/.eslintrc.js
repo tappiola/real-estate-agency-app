@@ -21,7 +21,7 @@ module.exports = {
         '@typescript-eslint',
         'react-hooks'
     ],
-    ignorePatterns: ['.eslintrc.js'],
+    ignorePatterns: ['.eslintrc.js', 'setupProxy.js'],
     rules: {
         'import/extensions': [
             'error',

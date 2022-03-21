@@ -1,8 +1,4 @@
-@mixin mobile {
-    @media (max-width: 810px) {
-        @content;
-    }
-}
+@import "../../styles/mixins";
 
 .HomePage {
     background-color: #d0d4d4;

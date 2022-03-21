@@ -4,23 +4,23 @@ module.exports = buildSchema(`
     type City {
         id: ID!
         name: String!
-     }
+    }
      
-     type PropertyType {
+    type PropertyType {
         id: ID!
         name: String!
-     }
+    }
      
-     type Image {
+    type Image {
         id: ID!
         link: String!
         position: Int!
-     }
+    }
      
-     type Type {
+    type Type {
         id: ID!
         name: String!
-     }
+    }
 
     type Property {
         id: ID!
@@ -39,9 +39,15 @@ module.exports = buildSchema(`
         type: Type
         floorPlan: String
     }
+    
+    type LocatedProperty {
+        found: Boolean!
+        propertyData: Property
+    }
    
     type Status {
         success: Boolean!
+        errorMessage: String
     }
     
     type User {
@@ -68,6 +74,25 @@ module.exports = buildSchema(`
         password: String!
     }
     
+    input ClientRequestData {
+        firstName: String!
+        lastName: String
+        email: String!
+        phone: String
+        message: String!
+    }
+    
+    input PropertySearchParams {
+        adType: String!
+        page: Int!
+        cityId: Int
+        propertyTypeId: Int
+        minPrice: Int
+        maxPrice: Int
+        minBeds: Int
+        maxBeds: Int
+    }
+    
     type Properties {
         count: Int!
         pages: Int!
@@ -75,8 +100,8 @@ module.exports = buildSchema(`
     }
 
     type RootQuery {
-        getProperties(adType: String!, page: Int!, cityId: Int, propertyTypeId: Int, minPrice: Int, maxPrice: Int, minBeds: String, maxBeds: String): Properties
-        getProperty(id: Int!): Property!
+        getProperties(searchParams: PropertySearchParams!): Properties
+        getProperty(id: Int!): LocatedProperty!
         getWishlist: [Property!]!
         getCities: [City!]!
         getPropertyTypes: [PropertyType!]!
@@ -87,7 +112,7 @@ module.exports = buildSchema(`
         createUser(userInput: UserInputData): RegistrationResult!
         addToWishlist(propertyId: String!): Status!
         removeFromWishlist(propertyId: String!): Status!
-        saveClientRequest(firstName: String!, lastName: String, email: String, phone: String, message: String): Status!
+        saveClientRequest(clientRequest: ClientRequestData!): Status!
     }
 
     schema {

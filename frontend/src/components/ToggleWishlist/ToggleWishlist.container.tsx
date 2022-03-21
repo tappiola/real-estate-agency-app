@@ -1,7 +1,7 @@
 import React, {
     MouseEventHandler, useCallback, useEffect, useState
 } from 'react';
-import { addToWishlist, removeFromWishlist } from '../../queries';
+import { addToWishlist, removeFromWishlist } from '../../graphql/queries';
 import { Property } from '../../types';
 import ToggleWishlist from './ToggleWishlist.component';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -30,21 +30,35 @@ const ToggleWishlistContainer: React.FC<{ property: Property, inWishlist: boolea
             return;
         }
 
-        const { id } = property;
+        try {
+            const { id } = property;
+            let success;
 
-        const resp = isInWishlist ? await removeFromWishlist(id) : await addToWishlist(id);
-        setIsClicked(true);
+            if (!isInWishlist) {
+                const result = await addToWishlist(id);
+                success = result.addToWishlist.success;
+            } else {
+                const result = await removeFromWishlist(id);
+                success = result.removeFromWishlist.success;
+            }
 
-        dispatch(enqueueToast({
-            message: isInWishlist ? 'Removed from wishlist' : 'Added to wishlist',
-            type: ToastTypes.Success
-        }));
+            if (success) {
+                dispatch(enqueueToast({
+                    message: isInWishlist ? 'Removed from wishlist' : 'Added to wishlist',
+                    type: ToastTypes.Success
+                }));
 
-        const key = isInWishlist ? 'removeFromWishlist' : 'addToWishlist';
-        const { data: { [key]: { success } } } = await resp.json();
-
-        if (success) {
-            setIsInWishlist((prevInWishlist) => !prevInWishlist);
+                setIsInWishlist((prevInWishlist) => !prevInWishlist);
+            }
+        } catch (err) {
+            dispatch(enqueueToast({
+                message: isInWishlist
+                    ? 'Unable to remove property from wishlist'
+                    : 'Unable to add property to wishlist',
+                type: ToastTypes.Error
+            }));
+        } finally {
+            setIsClicked(true);
         }
     }, [dispatch, isAuthorized, isInWishlist, property]);
 

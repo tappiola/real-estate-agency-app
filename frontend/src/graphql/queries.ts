@@ -1,6 +1,17 @@
+import { MAX_BEDROOMS } from '../components/AdvancedSearchForm/AdvancedSearchForm.config';
 import { sendGraphqlRequest } from './client';
 import {
-    GetCitiesResponse, GetPropertyTypesResponse, LoginResult, RegistrationResult, RegistrationRequest
+    GetCitiesResponse,
+    GetPropertyTypesResponse,
+    GetPropertyResponse,
+    LoginResult,
+    RegistrationResult,
+    RegistrationRequest,
+    AddToWishlistResult,
+    RemoveFromWishlistResult,
+    ClientRequest,
+    SaveClientRequestResult,
+    GetPropertiesResponse
 } from './types';
 
 export const fetchCities = () => {
@@ -25,6 +36,116 @@ export const fetchPropertyTypes = () => {
         }`;
 
     return sendGraphqlRequest<GetPropertyTypesResponse>(graphqlQuery);
+};
+
+export const getProperty = (id: number) => {
+    const graphqlQuery = `
+        query GetProperty($id: Int!) {
+            getProperty(id: $id) {
+                found
+                propertyData {
+                    id
+                    title
+                    description
+                    address
+                    bedroomCount
+                    bathroomCount
+                    city {
+                        id
+                        name
+                    }
+                    propertyType {
+                        id
+                        name
+                    }
+                    images {
+                        id
+                        link
+                        position
+                    }
+                    isInWishlist
+                    longitude
+                    latitude
+                    floorPlan
+                    price
+                    type {
+                        id
+                        name
+                    }
+                }
+            }
+        }`;
+
+    const variables = {
+        id
+    };
+
+    return sendGraphqlRequest<GetPropertyResponse>(graphqlQuery, variables);
+};
+
+export const searchProperties = (params: any) => {
+    const graphqlQuery = `
+        query GetProperties($searchParams: PropertySearchParams!) {
+            getProperties(searchParams: $searchParams) {
+                count
+                pages
+                items {
+                    id
+                    title
+                    description
+                    address
+                    bedroomCount
+                    bathroomCount
+                    city {
+                        id
+                        name
+                    }
+                    propertyType {
+                        id
+                        name
+                    }
+                    images {
+                        id
+                        link
+                        position
+                    }
+                    isInWishlist
+                    longitude
+                    latitude
+                    price
+                    type {
+                        id
+                        name
+                    }
+                }
+            }
+        }`;
+
+    const {
+        adType,
+        page,
+        city,
+        propertyType,
+        minPrice,
+        maxPrice,
+        minBeds,
+        maxBeds
+    } = params;
+
+    const variables = {
+        searchParams: {
+            adType,
+            page: +page,
+            cityId: city ? +city : undefined,
+            propertyTypeId: propertyType ? +propertyType : undefined,
+            minPrice: minPrice ? +minPrice : undefined,
+            maxPrice: maxPrice ? +maxPrice : undefined,
+            minBeds: minBeds ? +minBeds : undefined,
+            maxBeds: +maxBeds === MAX_BEDROOMS ? undefined : +maxBeds
+        }
+    };
+
+    return sendGraphqlRequest<GetPropertiesResponse>(graphqlQuery, variables);
 };
 
 export const login = (email: string, password: string) => {
@@ -59,4 +180,50 @@ export const register = (userInput: RegistrationRequest) => {
     };
 
     return sendGraphqlRequest<RegistrationResult>(graphqlQuery, variables);
+};
+
+export const addToWishlist = (id: number) => {
+    const graphqlQuery = `
+        mutation AddToWishlist($id: String!) {
+            addToWishlist(propertyId: $id) {
+                success
+            }
+        }`;
+
+    const variables = {
+        id
+    };
+
+    return sendGraphqlRequest<AddToWishlistResult>(graphqlQuery, variables);
+};
+
+export const removeFromWishlist = (id: number) => {
+    const graphqlQuery = `
+        mutation RemoveFromWishlist($id: String!) {
+            removeFromWishlist(propertyId: $id) {
+                success
+            }
+        }`;
+
+    const variables = {
+        id
+    };
+
+    return sendGraphqlRequest<RemoveFromWishlistResult>(graphqlQuery, variables);
+};
+
+export const saveClientRequest = (clientRequest: ClientRequest) => {
+    const graphqlQuery = `
+        mutation SaveClientRequest($clientRequest: ClientRequestData!) {
+            saveClientRequest(clientRequest: $clientRequest) {
+                success
+                errorMessage
+            }
+        }`;
+
+    const variables = {
+        clientRequest
+    };
+
+    return sendGraphqlRequest<SaveClientRequestResult>(graphqlQuery, variables);
 };

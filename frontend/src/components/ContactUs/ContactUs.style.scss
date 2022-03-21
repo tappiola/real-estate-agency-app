@@ -1,8 +1,4 @@
-@mixin mobile {
-    @media (max-width: 810px) {
-        @content;
-    }
-}
+@import "../../styles/mixins";
 
 .ContactUs {
     background-color: var(--perfect-salmon-color);

@@ -1,4 +1,9 @@
-export const HOST = 'http://localhost';
+export const accessToken = 'pk.eyJ1IjoidGFwcGlvbGEiLCJhIjoiY2t6eHhuM2N6MDYyMTJ2cDcxcDVsem8zNiJ9.OByK2fsCvb8XsvT2OYUEjA';
+
+export const TEN_MINUTES = 600000;
+
+// eslint-disable-next-line max-len
+export const IMAGE_PLACEHOLDER = 'https://tappiola-real-estate-agency-bucket.s3.eu-west-1.amazonaws.com/no-photo-available.jpg';
 
 export enum ToastTypes {
     Success = 'Success',
@@ -6,13 +11,6 @@ export enum ToastTypes {
     Warning = 'Warning',
     Info = 'Info'
 }
-
-export const accessToken = 'pk.eyJ1IjoidGFwcGlvbGEiLCJhIjoiY2t6eHhuM2N6MDYyMTJ2cDcxcDVsem8zNiJ9.OByK2fsCvb8XsvT2OYUEjA';
-
-export const TEN_MINUTES = 600000;
-
-// eslint-disable-next-line max-len
-export const IMAGE_PLACEHOLDER = 'https://tappiola-real-estate-agency-bucket.s3.eu-west-1.amazonaws.com/no-photo-available.jpg';
 
 export enum AdType {
     Rent = 'rent',

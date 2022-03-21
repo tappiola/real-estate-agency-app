@@ -1,26 +1,35 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FilterParams, Property } from '../types';
-import { searchProperties } from '../queries';
-import { enqueueToast } from './notifier';
 import { AdType, TEN_MINUTES, ToastTypes } from '../constants';
+import { searchProperties } from '../graphql/queries';
+import { FilterParams, Property } from '../types';
+import { enqueueToast } from './notifier';
 
 interface NavigationState {
     activeProperty: number,
-    activeSearch: any,
+    activeSearch: ActiveSearch,
     properties: Property[],
     pages: number,
     count: number,
     lastUpdated: number
 }
 
-interface SearchState {
-    adType: AdType, searchParams: URLSearchParams, requestMore?: boolean
+interface ActiveSearch {
+    adType?: AdType
+    city?: string
+    propertyType?: string
+    minPrice?: string
+    maxPrice?: string
+    minBeds?: string
+    maxBeds?: string
+    page: number
 }
 
 const initialState: NavigationState = {
     activeProperty: 0,
-    activeSearch: {},
+    activeSearch: {
+        page: 1
+    },
     properties: [],
     count: 0,
     pages: 1,
@@ -29,6 +38,12 @@ const initialState: NavigationState = {
 
 const searchSelector = (state: any) => state.search.activeSearch;
 const lastUpdatedSelector = (state: any) => state.search.lastUpdated;
+
+interface SearchState {
+    adType: AdType,
+    searchParams: URLSearchParams,
+    requestMore?: boolean
+}
 
 export const getProperties = createAsyncThunk(
     'search/getProperties',
@@ -40,7 +55,8 @@ export const getProperties = createAsyncThunk(
             page,
             city,
             propertyType,
-            minPrice, maxPrice,
+            minPrice,
+            maxPrice,
             minBeds,
             maxBeds
         } = params;
@@ -50,7 +66,7 @@ export const getProperties = createAsyncThunk(
         const lastUpdated = lastUpdatedSelector(state);
         const { page: oldPage } = oldSearch;
 
-        const pageNumber = requestMore ? oldPage + 1 : (page || oldPage || 1);
+        const pageNumber = requestMore ? oldPage + 1 : (page || 1);
 
         const activeSearch = {
             adType,
@@ -66,21 +82,20 @@ export const getProperties = createAsyncThunk(
         const hasSearchChanged = JSON.stringify(oldSearch) !== JSON.stringify(activeSearch);
 
         if (!hasSearchChanged && Date.now() - lastUpdated < TEN_MINUTES) {
-            throw new Error('No need to rerequest');
+            throw new Error('No need to re-request');
         }
 
-        const response = await searchProperties(activeSearch)
-            .catch((err) => {
-                dispatch(enqueueToast({
-                    message: err.message || 'Failed to fetch properties',
-                    type: ToastTypes.Error
-                }));
+        try {
+            const { getProperties: data } = await searchProperties(activeSearch);
+            return { data, activeSearch, shouldExtend: requestMore };
+        } catch (err) {
+            dispatch(enqueueToast({
+                message: err.message || 'Failed to fetch properties',
+                type: ToastTypes.Error
+            }));
 
-                throw err;
-            });
-
-        const { data } = await response.json();
-        return { data, activeSearch, shouldExtend: requestMore };
+            throw err;
+        }
     }
 );
 
@@ -90,14 +105,11 @@ const search = createSlice({
     reducers: {
         setActiveProperty(state, action: PayloadAction<number>) {
             state.activeProperty = action.payload;
-        },
-        setActiveSearch(state, action: PayloadAction<URLSearchParams>) {
-            state.activeSearch = action.payload;
         }
     },
     extraReducers: (builder) => {
         builder.addCase(getProperties.fulfilled, (state, action) => {
-            const { data: { getProperties: { items, pages, count } }, activeSearch, shouldExtend } = action.payload;
+            const { data: { items, pages, count }, activeSearch, shouldExtend } = action.payload;
 
             state.properties = shouldExtend ? [...state.properties, ...items] : items;
             state.pages = pages;

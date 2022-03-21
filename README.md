@@ -7,17 +7,8 @@ TODO:
 - forms validation client form
 - color variables
 
-
-- (R) token expiration
-  - when user logs out, remove token from local storage
-  - when token expires, return 401 (?) and frontend should remove token from local storage + redirect to home page
-- (R) error handling for not authorized + wishlist (super ugly now)
-- (R) use library to construct gql requests
 - (R) where: {'$type.id$': 'rent'} doesn't work
 - (R) replace croissant
-- (R) move mixins to one file
 - fix any and ts-ignore
-- queries to apollo gql
-- configure cors whitelist urls
 - not use volumes on prod
-- handle BE getProperty property doesn't exist (return 404?)
+- handle issue with ugly undefined

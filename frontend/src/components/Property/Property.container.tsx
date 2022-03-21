@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { getProperty } from '../../graphql/queries';
+import NotFound from '../NotFound';
 import Property from './Property.component';
-import { getProperty } from '../../queries';
 import { Property as PropertyType } from '../../types';
 import FullscreenGallery from '../FullscreenGallery';
 import { useAppSelector } from '../../redux/hooks';
@@ -28,11 +29,12 @@ const PropertyContainer = () => {
 
         const fetchProperty = async () => {
             try {
-                const response = await getProperty(+id);
-                const { data } = await response.json();
-                const propertyData = data.getProperty;
-                setProperty(propertyData);
-                setIsInWishlist(propertyData.isInWishlist);
+                const { getProperty: { found, propertyData } } = await getProperty(+id);
+
+                if (found) {
+                    setProperty(propertyData);
+                    setIsInWishlist(propertyData.isInWishlist);
+                }
             } catch (e) {
                 setHasError(true);
             } finally {
@@ -56,7 +58,7 @@ const PropertyContainer = () => {
     }
 
     if (!property) {
-        return <GenericMessage>Property not found</GenericMessage>;
+        return <NotFound />;
     }
 
     return (

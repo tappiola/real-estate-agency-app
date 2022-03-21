@@ -1,8 +1,4 @@
-@mixin mobile {
-    @media (max-width: 810px) {
-        @content;
-    }
-}
+@import "../../styles/mixins";
 
 .BaseSearch {
     background-color: #262637;

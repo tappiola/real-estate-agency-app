@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
+const { Op } = require('sequelize');
 
 const User = require('../models/user');
 const Property = require('../models/property');
@@ -8,11 +9,9 @@ const City = require('../models/city');
 const PropertyType = require('../models/propertyType');
 const UserWishlist = require('../models/userWishlist');
 const Image = require('../models/images');
-const {SECRET, ITEMS_PER_PAGE} = require('../constants');
-const { Op } = require('sequelize');
+const {JWT_SECRET, ITEMS_PER_PAGE} = require('../constants');
 const ClientRequest = require('../models/clientRequests');
 const Type = require('../models/type');
-const Tag = require('../models/tag');
 
 const { NotAuthenticatedError } = require('./errors');
 
@@ -69,24 +68,21 @@ const login = async ({ email, password }) => {
             userId: user.id.toString(),
             email: user.email
         },
-        SECRET,
+        JWT_SECRET,
         { expiresIn: '1h' }
     );
 
     return { success: true, token };
 };
 
-const getProperties = async (args, req) => {
-    const { adType, page, cityId, propertyTypeId, minPrice, maxPrice, minBeds, maxBeds } = args;
+const getProperties = async ({ searchParams }, req) => {
+    const { adType, page, cityId, propertyTypeId, minPrice, maxPrice, minBeds, maxBeds } = searchParams;
 
     const cityCondition = cityId ? {cityId} : {};
     const propertyTypeCondition = propertyTypeId ? {propertyTypeId} : {};
 
-    const minPriceCondition = minPrice ? {price: {[Op.gte]: minPrice}}: {};
-    const maxPriceCondition = maxPrice ? {price: {[Op.lte]: maxPrice}}: {};
-
-    const minBedsCondition = minBeds ? {bedroomCount: {[Op.gte]: +minBeds}}: {};
-    const maxBedsCondition = maxBeds && !maxBeds.endsWith('+') ? {bedroomCount: {[Op.lte]: maxBeds}}: {};
+    const priceCondition = generateIntervalCondition('price', minPrice, maxPrice);
+    const bedsCondition = generateIntervalCondition('bedroomCount', minBeds, maxBeds);
 
     const {id: typeId} = await Type.findOne({where: {name: adType}});
 
@@ -94,10 +90,8 @@ const getProperties = async (args, req) => {
         typeId,
         ...cityCondition,
         ...propertyTypeCondition,
-        ...minPriceCondition,
-        ...maxPriceCondition,
-        ...minBedsCondition,
-        ...maxBedsCondition
+        ...priceCondition,
+        ...bedsCondition
     };
 
     const items = await Property.findAll({
@@ -116,9 +110,6 @@ const getProperties = async (args, req) => {
         }, {
             model: Type,
             as: 'type'
-        }, {
-            model: Tag,
-            as: 'tags'
         }]
     });
 
@@ -152,6 +143,22 @@ const getProperties = async (args, req) => {
     return {count, pages, items};
 };
 
+const generateIntervalCondition = (field, from, to) => {
+    if(from && to){
+        return {[field]: {[Op.between]: [from, to]}};
+    }
+
+    if(from && !to){
+        return {[field]: {[Op.gte]: from}};
+    }
+
+    if(!from && to){
+        return {[field]: {[Op.lte]: to}};
+    }
+
+    return {};
+};
+
 const getProperty = async ({id}, req) => {
     const property = await Property.findOne({
         where: {id},
@@ -167,11 +174,12 @@ const getProperty = async ({id}, req) => {
         }, {
             model: Type,
             as: 'type'
-        }, {
-            model: Tag,
-            as: 'tags'
         }]
     });
+
+    if(!property){
+        return {found: false, propertyData: null};
+    }
 
     if(req.isAuthenticated){
         const propertyInWishlist = await UserWishlist.findOne({
@@ -181,7 +189,7 @@ const getProperty = async ({id}, req) => {
         property.isInWishlist = !!propertyInWishlist;
     }
 
-    return property;
+    return {found: true, propertyData: property};
 };
 
 const getWishlist = async (args, req) => {
@@ -238,12 +246,17 @@ const removeFromWishlist =  async ({propertyId}, req) => {
     }
 };
 
-const saveClientRequest = async ({firstName, lastName, email, phone, message}) => {
+const saveClientRequest = async (clientRequest) => {
     try {
-        await ClientRequest.create({firstName, lastName, email, phone, message});
+        const { firstName, lastName, email, phone, message } = clientRequest;
+
+        await ClientRequest.create({
+            firstName, lastName, email, phone, message
+        });
+
         return {success: true};
-    } catch {
-        return {success: false};
+    } catch(e) {
+        return {success: false, errorMessage: e.message};
     }
 };
 

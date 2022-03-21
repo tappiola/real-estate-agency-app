@@ -1,3 +1,5 @@
+import { Property } from '../types';
+
 export type JwtDecodeResult = {
     exp: number,
 };
@@ -21,6 +23,21 @@ export type GetPropertyTypesResponse = {
     }]
 };
 
+export type GetPropertyResponse = {
+    getProperty: {
+        found: boolean
+        propertyData: Property
+    }
+};
+
+export type GetPropertiesResponse = {
+    getProperties: {
+        count: number
+        pages: number
+        items: [Property]
+    }
+};
+
 export type LoginResult = {
     login: {
         success: boolean
@@ -37,6 +54,33 @@ export type RegistrationRequest = {
 
 export type RegistrationResult = {
     createUser: {
+        success: boolean
+        errorMessage: string
+    }
+};
+
+export type AddToWishlistResult = {
+    addToWishlist: {
+        success: boolean
+    }
+};
+
+export type RemoveFromWishlistResult = {
+    removeFromWishlist: {
+        success: boolean
+    }
+};
+
+export type ClientRequest = {
+    firstName: string
+    lastName: string
+    email: string
+    phone: string
+    message: string
+};
+
+export type SaveClientRequestResult = {
+    saveClientRequest: {
         success: boolean
         errorMessage: string
     }

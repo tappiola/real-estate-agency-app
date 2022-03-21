@@ -12,7 +12,7 @@ services:
     volumes:
       - mysql-docker:/var/lib/mysql
     ports:
-    - "3306:3306"
+      - "3306:3306"
 
   backend:
     depends_on:
@@ -25,8 +25,6 @@ services:
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
       JWT_SECRET: ${JWT_SECRET}
-    volumes:
-      - ./backend/src:/app/src
 
   front:
     depends_on:
@@ -36,10 +34,7 @@ services:
       PORT: 3000
       BACKEND_URL: http://backend:5000
     ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend/src:/app/src
-      - ./frontend/public:/app/public
+      - "80:3000"
 
 volumes:
   mysql-docker:
