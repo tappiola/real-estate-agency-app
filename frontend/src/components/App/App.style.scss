@@ -5,6 +5,7 @@
   --header-height: 56px;
   --dark-gray: #767676;
   --controls-color: #c6c6c6;
+  --validation-error-color: darkred;
 }
 
 * {
@@ -48,12 +49,26 @@ input {
   font-size: 16px;
   font-family: Relative-Book, sans-serif;
   letter-spacing: 0.05em;
+  margin: 15px 0 5px;
+
+  &.InvalidInput {
+    border-color: var(--validation-error-color);
+  }
 
   &::placeholder {
     font-weight: 500;
     letter-spacing: 0.05em;
     font-family: Relative-Book, sans-serif;
   }
+}
+
+.InvalidInputMessage {
+  margin: 0;
+  font-size: 11px;
+  font-family: 'Relative-Book', sans-serif;
+  letter-spacing: 0.05em;
+  padding-left: 10px;
+  color: var(--validation-error-color);
 }
 
 textarea {
