@@ -14,15 +14,54 @@ const ContactUsContainer = () => {
 
     const dispatch = useAppDispatch();
 
-    const onFormSubmit: FormEventHandler = useCallback((e) => {
+    const onFormSubmit: FormEventHandler = useCallback(async (e) => {
         e.preventDefault();
 
-        saveClientRequest({
-            firstName, lastName, email, phoneNumber, message
-        }).then(() => dispatch(enqueueToast({
+        if (!firstName.trim()) {
+            dispatch(enqueueToast({
+                message: 'Please, enter your first name',
+                type: ToastTypes.Success
+            }));
+
+            return;
+        }
+
+        if (!email.trim() && !phoneNumber.trim()) {
+            dispatch(enqueueToast({
+                message: 'Please, make should you provided phone or email',
+                type: ToastTypes.Success
+            }));
+
+            return;
+        }
+
+        if (!message.trim()) {
+            dispatch(enqueueToast({
+                message: 'Please, specify the reason for contacting us in Message field',
+                type: ToastTypes.Success
+            }));
+
+            return;
+        }
+
+        await saveClientRequest({
+            firstName,
+            lastName,
+            email,
+            phoneNumber,
+            message
+        });
+
+        dispatch(enqueueToast({
             message: 'Your request has been submitted',
             type: ToastTypes.Success
-        })));
+        }));
+
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setPhoneNumber('');
+        setMessage('');
     }, [dispatch, email, firstName, lastName, message, phoneNumber]);
 
     return (
