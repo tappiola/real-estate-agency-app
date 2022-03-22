@@ -1,0 +1,62 @@
+:root {
+    --error-message-height: 14px;
+}
+input {
+    border: none;
+    border-bottom: 1px solid #4d4d4d;
+    border-radius: 0;
+    padding: 10px;
+    background: transparent;
+    outline: none;
+    font-size: 16px;
+    font-family: Relative-Book, sans-serif;
+    letter-spacing: 0.05em;
+    margin: 15px 0 5px;
+
+    &.InvalidInput {
+        border-color: var(--validation-error-color);
+    }
+
+    &::placeholder {
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        font-family: Relative-Book, sans-serif;
+    }
+}
+
+.InvalidInputMessage {
+    margin: 0;
+    font-size: 11px;
+    font-family: 'Relative-Book', sans-serif;
+    letter-spacing: 0.05em;
+    padding-left: 10px;
+    color: var(--validation-error-color);
+    line-height: var(--error-message-height);
+}
+
+.MessagePlaceholder {
+    height: var(--error-message-height);
+}
+
+textarea {
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid #4d4d4d;
+    border-radius: 0;
+    font-family: Relative-Book, sans-serif;
+    font-size: 16px;
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-top: 14px;
+    letter-spacing: 0.05em;
+    width: 100%;
+    outline-color: var(--primary-bright-color);
+
+    &::placeholder {
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        font-family: Relative-Book, sans-serif;
+        color: #4d4d4d;
+        line-height: 18px;
+    }
+}

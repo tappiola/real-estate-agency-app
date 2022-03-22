@@ -15,7 +15,7 @@ const initialState: UserState = {
     isAuthorized: !!getSavedToken()
 };
 
-interface LoginUserPayload {
+export interface LoginUserPayload {
     email: string,
     password: string,
 }
@@ -52,7 +52,7 @@ export const loginUser = createAsyncThunk(
     }
 );
 
-interface RegisterUserPayload {
+export interface RegisterUserPayload {
     email: string,
     name: string,
     password: string,

@@ -151,7 +151,7 @@ const CarouselContainer: React.FC<{
         }
 
         // Decide if we want to switch slide after swipe ended
-        if (Math.abs(moveBy) >= carouselWidth * 0.35) {
+        if (Math.abs(moveBy) >= carouselWidth * 0.25) {
             if (moveBy < 0) {
                 toNextSlide();
             } else {

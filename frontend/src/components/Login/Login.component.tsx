@@ -1,18 +1,18 @@
 import React, { FormEventHandler } from 'react';
 import './Login.style.scss';
 import { Link } from 'react-router-dom';
+import { UseInputType } from '../../hooks/useInput';
+import Input from '../Input/Input.component';
 
 const Login : React.FC<{
     loginHandler: FormEventHandler,
-    email: string,
-    setEmail: (email: string) => void,
-    password: string,
-    setPassword: (password: string) => void }> = ({
-    loginHandler, email, setEmail, password, setPassword
+    formInputs: UseInputType[]
+}> = ({
+    loginHandler,
+    formInputs
 }) => (
-  <form className="Login" onSubmit={loginHandler}>
-    <input type="email" placeholder="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+  <form className="Login" onSubmit={loginHandler} noValidate>
+    {formInputs.map((input) => <Input key={input.name} input={input} />)}
     <button type="submit">Login</button>
     <p className="NotRegistered">
       Not registered yet?

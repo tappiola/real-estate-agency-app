@@ -1,5 +1,6 @@
 import { AdType } from './constants';
 import { Property } from './types';
+import { UseInputType } from './hooks/useInput';
 
 export const sortByKey = <T extends object, U extends keyof T> (values: T[], sortKey: U) => [...values].sort(
     (a, b) => {
@@ -41,3 +42,8 @@ export const getFullTitle = (property : Property) => {
 };
 
 export const getSavedToken = () => localStorage.getItem('token');
+
+export const transformFormData = (data: UseInputType[]) => data.reduce((prev, field) => ({
+    ...prev,
+    [field.apiField || field.name]: field.value
+}), {});

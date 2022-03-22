@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getCities, getPropertyTypes } from '../../redux/referenceData';
 import App from './App.component';
-import useIsMobile from '../IsMobile';
+import useIsMobile from '../../hooks/useIsMobile';
 
 const AppContainer = () => {
     const { isAuthorized } = useAppSelector(({ user }) => user);

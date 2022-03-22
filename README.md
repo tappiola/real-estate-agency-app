@@ -6,7 +6,6 @@ Run on server: `docker-compose -f docker-compose.prod.yml up`
 TODO:
 - GA?
 - remove properties without pics
-- forms validation client form
 - color variables
 
 - (R) where: {'$type.id$': 'rent'} doesn't work

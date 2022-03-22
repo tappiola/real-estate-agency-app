@@ -1,32 +1,45 @@
-import { FormEventHandler, useCallback, useState } from 'react';
+import { FormEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
-import { loginUser } from '../../redux/user';
+import { loginUser, LoginUserPayload } from '../../redux/user';
 import Login from './Login.component';
+import useInput from '../../hooks/useInput';
+import { enqueueToast } from '../../redux/notifier';
+import { ToastTypes } from '../../constants';
+import { LoginFormConfig } from './Login.config';
+import { transformFormData } from '../../util';
 
 const LoginContainer = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const loginHandler: FormEventHandler = useCallback(async (event) => {
+    const formInputs = LoginFormConfig.map((config) => useInput(config));
+
+    const loginHandler: FormEventHandler = async (event) => {
         event.preventDefault();
 
-        const loginResult = await dispatch(loginUser({ email, password })).unwrap();
+        formInputs.forEach((input) => input.validate());
+
+        if (!formInputs.every((input) => input.isValid)) {
+            dispatch(enqueueToast({
+                message: 'Please, fill in all the fields with valid data',
+                type: ToastTypes.Warning
+            }));
+
+            return;
+        }
+
+        const loginResult = await dispatch(loginUser(transformFormData(formInputs) as LoginUserPayload)).unwrap();
 
         if (loginResult.login.success) {
             navigate('/', { replace: true });
         }
-    }, [dispatch, email, navigate, password]);
+    };
 
     return (
       <Login
-        email={email}
         loginHandler={loginHandler}
-        password={password}
-        setEmail={setEmail}
-        setPassword={setPassword}
+        formInputs={formInputs}
       />
     );
 };
