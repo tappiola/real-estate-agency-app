@@ -1,5 +1,5 @@
 import HomePage from './HomePage.component';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '../../store/hooks';
 
 const HomePageContainer = () => {
     const { isMobile } = useAppSelector(({ config }) => config);

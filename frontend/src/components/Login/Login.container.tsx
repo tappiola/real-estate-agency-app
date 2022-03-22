@@ -1,10 +1,10 @@
 import { FormEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../redux/hooks';
-import { loginUser, LoginUserPayload } from '../../redux/user';
+import { useAppDispatch } from '../../store/hooks';
+import { loginUser, LoginUserPayload } from '../../store/user';
 import Login from './Login.component';
 import useInput from '../../hooks/useInput';
-import { enqueueToast } from '../../redux/notifier';
+import { enqueueToast } from '../../store/notifier';
 import { ToastTypes } from '../../constants';
 import { LoginFormConfig } from './Login.config';
 import { transformFormData } from '../../util';

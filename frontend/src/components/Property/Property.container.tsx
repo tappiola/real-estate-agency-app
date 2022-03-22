@@ -5,7 +5,7 @@ import NotFound from '../NotFound';
 import Property from './Property.component';
 import { Property as PropertyType } from '../../types';
 import FullscreenGallery from '../FullscreenGallery';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '../../store/hooks';
 import GenericMessage from '../GenericMessage';
 import PropertyLoader from '../PropertyLoader';
 

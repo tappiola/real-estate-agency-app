@@ -5,8 +5,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { accessToken, IMAGE_PLACEHOLDER } from '../../constants';
 import { formatPrice, getHouseTitle } from '../../util';
 import { Image, Property } from '../../types';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { setActiveProperty } from '../../redux/search';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { setActiveProperty } from '../../store/search';
 
 const DynamicMapContainer : React.FC = () => {
     const [map, setMap] = useState<mapboxgl.Map>();

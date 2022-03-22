@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from 'react';
-import { setIsMobile } from '../redux/config';
-import { useAppDispatch } from '../redux/hooks';
+import { setIsMobile } from '../store/config';
+import { useAppDispatch } from '../store/hooks';
 
 const useIsMobile = () => {
     const dispatch = useAppDispatch();

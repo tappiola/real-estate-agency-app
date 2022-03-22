@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BaseSearchForm from './BaseSearchForm.component';
-import { enqueueToast } from '../../redux/notifier';
+import { enqueueToast } from '../../store/notifier';
 import { AdType, ToastTypes } from '../../constants';
-import { useAppDispatch } from '../../redux/hooks';
+import { useAppDispatch } from '../../store/hooks';
 
 const BaseSearchFormContainer: React.FC = () => {
     const [selectedCity, setSelectedCity] = useState<string>('');

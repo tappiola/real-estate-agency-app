@@ -1,7 +1,7 @@
 import './App.style.scss';
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { getCities, getPropertyTypes } from '../../redux/referenceData';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { getCities, getPropertyTypes } from '../../store/referenceData';
 import App from './App.component';
 import useIsMobile from '../../hooks/useIsMobile';
 

@@ -1,15 +1,15 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import CitiesSelect from '../CitiesSelect';
-import { enqueueToast } from '../../redux/notifier';
+import { enqueueToast } from '../../store/notifier';
 import { AdType, Filter, ToastTypes } from '../../constants';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import PropertyTypesSelect from '../PropertyTypesSelect/PropertyTypesSelect.container';
 import Select from '../Select';
 import { MAX_BEDROOMS, PRICE_RANGE } from './AdvancedSearchForm.config';
 import { formatPrice } from '../../util';
 import { FilterParams } from '../../types';
-import { setActiveProperty } from '../../redux/search';
+import { setActiveProperty } from '../../store/search';
 
 import './AdvancedSearchForm.style.scss';
 

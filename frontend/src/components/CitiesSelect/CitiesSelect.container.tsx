@@ -1,6 +1,6 @@
 import React from 'react';
 import Select from '../Select';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '../../store/hooks';
 
 const CitiesSelect: React.FC<{
     selectedOption: string,

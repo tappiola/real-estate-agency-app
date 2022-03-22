@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { useMemo, useState } from 'react';
 import Wishlist from './Wishlist.component';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '../../store/hooks';
 import { GET_WISHLIST } from '../../apollo/queries';
 import { AdType } from '../../constants';
 import { Property } from '../../types';

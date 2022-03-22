@@ -2,10 +2,10 @@ import { FormEventHandler } from 'react';
 import { ToastTypes } from '../../constants';
 import { saveClientRequest } from '../../graphql/queries';
 import ContactUs from './ContactUs.component';
-import { enqueueToast } from '../../redux/notifier';
-import { useAppDispatch } from '../../redux/hooks';
+import { enqueueToast } from '../../store/notifier';
+import { useAppDispatch } from '../../store/hooks';
 import useInput from '../../hooks/useInput';
-import { SaveClientRequest } from '../../types';
+import { ClientRequest } from '../../graphql/types';
 import { transformFormData } from '../../util';
 import { EmailFormConfig } from './ContactUs.config';
 
@@ -28,11 +28,7 @@ const ContactUsContainer = () => {
             return;
         }
 
-        await saveClientRequest(transformFormData(formInputs) as SaveClientRequest);
-
-        const result = await saveClientRequest({
-            firstName, lastName, email, phone: phoneNumber, message
-        });
+        const result = await saveClientRequest(transformFormData(formInputs) as ClientRequest);
 
         if (!result.saveClientRequest.success) {
             dispatch(enqueueToast({

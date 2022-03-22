@@ -4,7 +4,7 @@ import './index.scss';
 import { Provider } from 'react-redux';
 import { ApolloProvider } from '@apollo/client';
 import AppComponent from './components/App';
-import store from './redux/store';
+import store from './store';
 import apolloClient from './apollo/client';
 
 ReactDOM.render(

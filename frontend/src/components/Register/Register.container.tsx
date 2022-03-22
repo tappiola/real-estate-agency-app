@@ -1,9 +1,9 @@
 import { FormEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../redux/hooks';
-import { registerUser, RegisterUserPayload } from '../../redux/user';
+import { useAppDispatch } from '../../store/hooks';
+import { registerUser, RegisterUserPayload } from '../../store/user';
 import Register from './Register.component';
-import { enqueueToast } from '../../redux/notifier';
+import { enqueueToast } from '../../store/notifier';
 import { ToastTypes } from '../../constants';
 import useInput from '../../hooks/useInput';
 import { RegisterFormConfig } from './Register.config';

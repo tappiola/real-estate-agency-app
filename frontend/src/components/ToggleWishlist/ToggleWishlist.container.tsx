@@ -4,8 +4,8 @@ import React, {
 import { addToWishlist, removeFromWishlist } from '../../graphql/queries';
 import { Property } from '../../types';
 import ToggleWishlist from './ToggleWishlist.component';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { enqueueToast } from '../../redux/notifier';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { enqueueToast } from '../../store/notifier';
 import { ToastTypes } from '../../constants';
 
 const ToggleWishlistContainer: React.FC<{ property: Property, inWishlist: boolean }> = ({ property, inWishlist }) => {

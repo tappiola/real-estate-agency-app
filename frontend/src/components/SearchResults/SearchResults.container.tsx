@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import SearchResults from './SearchResults.component';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { AdType, ToastTypes } from '../../constants';
-import { enqueueToast } from '../../redux/notifier';
-import { getProperties } from '../../redux/search';
+import { enqueueToast } from '../../store/notifier';
+import { getProperties } from '../../store/search';
 import GenericMessage from '../GenericMessage';
 
 const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {

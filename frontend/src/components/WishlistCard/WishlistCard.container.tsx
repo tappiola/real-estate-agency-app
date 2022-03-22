@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { Property } from '../../types';
 import WishlistCard from './WishlistCard.component';
-import { useAppDispatch } from '../../redux/hooks';
-import { enqueueToast } from '../../redux/notifier';
+import { useAppDispatch } from '../../store/hooks';
+import { enqueueToast } from '../../store/notifier';
 import { ToastTypes } from '../../constants';
 import { GET_WISHLIST, REMOVE_WISHLIST_ITEM } from '../../apollo/queries';
 

@@ -1,8 +1,8 @@
 import { useCallback, useContext, useEffect } from 'react';
 
-import { processToast } from '../../redux/notifier';
+import { processToast } from '../../store/notifier';
 import { ToastQueueContext } from '../Toast';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { DEFAULT_DURATION } from '../Toast/ToastQueueProvider';
 
 const Notification = () => {
