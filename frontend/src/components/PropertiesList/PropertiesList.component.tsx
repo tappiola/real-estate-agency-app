@@ -11,20 +11,17 @@ const PropertiesList: React.FC<{
     changeListener: (index: number) => void,
     isMobile: boolean,
     activeProperty: number,
-    searchKey: string
 }> = ({
     properties,
     listRef,
     scrollListener, changeListener,
     isMobile,
-    activeProperty,
-    searchKey
+    activeProperty
 }) => {
     if (isMobile) {
         return (
           <div className="Properties-List" ref={listRef}>
             <Carousel
-              key={searchKey}
               width="100vw"
               height="50vw"
               showIndicators={false}

@@ -40,6 +40,12 @@ const CarouselContainer: React.FC<{
     useEffect(updateWidth, []);
 
     useEffect(() => {
+        if (activeIndex !== initialIndex) {
+            setActiveIndex(initialIndex);
+        }
+    }, [activeIndex, initialIndex]);
+
+    useEffect(() => {
         window.addEventListener('resize', updateWidth);
 
         return () => window.removeEventListener('resize', updateWidth);
@@ -139,7 +145,7 @@ const CarouselContainer: React.FC<{
 
         removeAnimation();
         adjustPosition(activeIndex, moveBy);
-    }, [activeIndex, adjustPosition, touchStartX]);
+    }, [activeIndex, adjustPosition, removeAnimation, touchStartX]);
 
     const handleTouchEnd: TouchEventHandler<HTMLDivElement> = (e) => {
         const touchEndX = e.changedTouches[0].clientX;

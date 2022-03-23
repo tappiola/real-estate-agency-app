@@ -13,9 +13,8 @@ const PropertiesListContainer: React.FC<{
     const listRef = useRef<HTMLDivElement>(null);
 
     const dispatch = useAppDispatch();
-    const { activeProperty, properties, activeSearch } = useAppSelector(({ search }) => search);
+    const { activeProperty, properties } = useAppSelector(({ search }) => search);
     const { isMobile } = useAppSelector(({ config }) => config);
-    const { page, ...otherParams } = activeSearch;
 
     const getTopVisible = useCallback(() => {
     // Active list item is top-most fully-visible item
@@ -72,7 +71,6 @@ const PropertiesListContainer: React.FC<{
         changeListener={changeListener}
         isMobile={isMobile}
         activeProperty={activeProperty}
-        searchKey={JSON.stringify(otherParams)}
       />
     );
 };
