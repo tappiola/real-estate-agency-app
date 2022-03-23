@@ -8,7 +8,9 @@ const BaseSearchForm: React.FC<{
     setSelectedCity: (city: string) => void,
     onButtonClick: (type: AdType) => void }
 > = ({
-    selectedCity, setSelectedCity, onButtonClick
+    selectedCity,
+    setSelectedCity,
+    onButtonClick
 }) => (
   <div className="BaseSearch-Container">
     <div className="BaseSearch">

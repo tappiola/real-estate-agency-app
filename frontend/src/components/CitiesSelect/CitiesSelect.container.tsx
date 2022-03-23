@@ -6,7 +6,11 @@ const CitiesSelect: React.FC<{
     selectedOption: string,
     onOptionSelect: (option: string) => void,
     placeholder: string
-}> = ({ selectedOption, onOptionSelect, placeholder }) => {
+}> = ({
+    selectedOption,
+    onOptionSelect,
+    placeholder
+}) => {
     const { cities } = useAppSelector(({ referenceData }) => referenceData);
 
     return (

@@ -5,7 +5,10 @@ import './Pagination.style.scss';
 const Pagination : React.FC<{
     pages: number,
     searchParams: URLSearchParams
-}> = ({ pages, searchParams }) => {
+}> = ({
+    pages,
+    searchParams
+}) => {
     const currentPage = Number(searchParams.get('page')) || 1;
 
     return (

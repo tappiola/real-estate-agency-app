@@ -56,11 +56,6 @@ app.use(
     })
 );
 
-app.use('/', (req, res) => {
-    res.send('404');
-});
+app.use('/', (req, res) => res.send('404'));
 
-sequelize.sync({alter: true})
-    .then(
-        app.listen(process.env.PORT || 5000)
-    );
+sequelize.sync({alter: true}).then(app.listen(process.env.PORT || 5000));

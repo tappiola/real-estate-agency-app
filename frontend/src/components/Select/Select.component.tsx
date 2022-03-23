@@ -10,7 +10,10 @@ const Select: React.FC<{
     onOptionSelect: (value: string) => void,
     placeholder: string
 }> = ({
-    options, selectedOption, onOptionSelect, placeholder
+    options,
+    selectedOption,
+    onOptionSelect,
+    placeholder
 }) => {
     const isExpanded = false;
 

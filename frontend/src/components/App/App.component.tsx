@@ -1,6 +1,5 @@
 import './App.style.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { ParallaxProvider } from 'react-scroll-parallax';
 import React from 'react';
 import Register from '../Register';
 import Login from '../Login';
@@ -21,7 +20,7 @@ const App : React.FC<{ isAuthorized: boolean }> = ({ isAuthorized }) => (
         <HeaderComponent />
         <main>
           <Routes>
-            <Route path={Path.HomePage} element={<ParallaxProvider><HomePage /></ParallaxProvider>} />
+            <Route path={Path.HomePage} element={<HomePage />} />
             {!isAuthorized && <Route path={Path.Register} element={<Register />} />}
             {!isAuthorized && <Route path={Path.Login} element={<Login />} />}
             <Route path={Path.Wishlist} element={<Wishlist />} />
