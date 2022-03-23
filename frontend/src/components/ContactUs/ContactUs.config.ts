@@ -18,8 +18,8 @@ export const EmailFormConfig = [
     }, {
         validationType: ValidationType.noValidate,
         placeholder: 'Phone number',
-        name: 'phone',
-        apiField: 'phoneNumber',
+        name: 'phoneNumber',
+        apiField: 'phone',
         type: InputType.Phone
     }, {
         validationType: ValidationType.isRequired,
