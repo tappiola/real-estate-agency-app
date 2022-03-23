@@ -5,7 +5,7 @@ import { loginUser, LoginUserPayload } from '../../store/user';
 import Login from './Login.component';
 import useInput from '../../hooks/useInput';
 import { enqueueToast } from '../../store/notifier';
-import { ToastTypes } from '../../constants';
+import { Path, ToastTypes } from '../../constants';
 import { LoginFormConfig } from './Login.config';
 import { transformFormData } from '../../util';
 
@@ -32,7 +32,7 @@ const LoginContainer = () => {
         const loginResult = await dispatch(loginUser(transformFormData(formInputs) as LoginUserPayload)).unwrap();
 
         if (loginResult.login.success) {
-            navigate('/', { replace: true });
+            navigate(Path.HomePage, { replace: true });
         }
     };
 

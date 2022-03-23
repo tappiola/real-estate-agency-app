@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AdType } from '../../constants';
+import { AdType, Path } from '../../constants';
 import AdvancedSearchForm from '../AdvancedSearchForm';
 import './Header.style.scss';
 import WishlistIcon from '../WishlistIcon';
@@ -55,7 +55,7 @@ const HeaderComponent: React.FC<{
     return (
       <>
         <header className="Header">
-          <Link className="Header-HomeLink" to="/">
+          <Link className="Header-HomeLink" to={Path.HomePage}>
             <img className="Header-Logo" src={logo} alt="company-logo" />
             <p className="Header-LogoTitle">Tappiola estate</p>
           </Link>

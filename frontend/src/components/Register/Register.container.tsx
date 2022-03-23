@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../store/hooks';
 import { registerUser, RegisterUserPayload } from '../../store/user';
 import Register from './Register.component';
 import { enqueueToast } from '../../store/notifier';
-import { ToastTypes } from '../../constants';
+import { Path, ToastTypes } from '../../constants';
 import useInput from '../../hooks/useInput';
 import { RegisterFormConfig } from './Register.config';
 import { transformFormData } from '../../util';
@@ -34,7 +34,7 @@ const RegisterContainer = () => {
         ).unwrap();
 
         if (registrationResult.createUser.success) {
-            navigate('/', { replace: true });
+            navigate(Path.HomePage, { replace: true });
         }
     };
 

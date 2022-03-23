@@ -3,6 +3,7 @@ import './Login.style.scss';
 import { Link } from 'react-router-dom';
 import { UseInputType } from '../../hooks/useInput';
 import Input from '../Input/Input.component';
+import { Path } from '../../constants';
 
 const Login : React.FC<{
     loginHandler: FormEventHandler,
@@ -16,7 +17,7 @@ const Login : React.FC<{
     <button type="submit">Login</button>
     <p className="NotRegistered">
       Not registered yet?
-      <Link className="RegistrationLink" to="/register">Register</Link>
+      <Link className="RegistrationLink" to={Path.Register}>Register</Link>
     </p>
   </form>
 );

@@ -26,3 +26,15 @@ export enum Filter {
     MaxBeds = 'maxBeds',
     Page = 'page'
 }
+
+export enum Path {
+    HomePage = '/',
+    Register = '/register',
+    Login = '/login',
+    Wishlist = '/favorites',
+    Property = '/property',
+    PropertiesToRent = '/rent',
+    PropertiesForSale = '/sale'
+}
+
+export const GRAPHQL_PATH = '/graphql';

@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCallback, useMemo, useState } from 'react';
-import { AdType, ToastTypes } from '../../constants';
+import { AdType, Path, ToastTypes } from '../../constants';
 import './Header.style.scss';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { logoutUser } from '../../store/user';
@@ -17,7 +17,7 @@ const HeaderContainer = () => {
     const { isMobile } = useAppSelector(({ config }) => config);
 
     const onLoginClick = useCallback(() => {
-        navigate('/login');
+        navigate(Path.Login);
     }, [navigate]);
 
     const onLogoutClick = useCallback(async () => {
@@ -30,15 +30,15 @@ const HeaderContainer = () => {
     }, [dispatch]);
 
     const onWishlistIconClick = useCallback(() => {
-        navigate('/favorites');
+        navigate(Path.Wishlist);
     }, [navigate]);
 
     const searchType = useMemo(() => {
-        if (pathname === `/${AdType.Rent}`) {
+        if (pathname === Path.PropertiesToRent) {
             return AdType.Rent;
         }
 
-        if (pathname === `/${AdType.Sale}`) {
+        if (pathname === Path.PropertiesForSale) {
             return AdType.Sale;
         }
 

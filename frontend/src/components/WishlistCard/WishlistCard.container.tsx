@@ -6,7 +6,7 @@ import { Property } from '../../types';
 import WishlistCard from './WishlistCard.component';
 import { useAppDispatch } from '../../store/hooks';
 import { enqueueToast } from '../../store/notifier';
-import { ToastTypes } from '../../constants';
+import { Path, ToastTypes } from '../../constants';
 import { GET_WISHLIST, REMOVE_WISHLIST_ITEM } from '../../apollo/queries';
 
 const WishlistCardContainer: React.FC<{
@@ -23,7 +23,7 @@ const WishlistCardContainer: React.FC<{
 
     const loadProperty: MouseEventHandler<HTMLDivElement> = useCallback((event) => {
         event.stopPropagation();
-        navigate(`/property/${propertyId}`);
+        navigate(`${Path.Property}/${propertyId}`);
     }, [navigate, propertyId]);
 
     const onWishlistRemove: MouseEventHandler<HTMLDivElement> = useCallback(async (e) => {

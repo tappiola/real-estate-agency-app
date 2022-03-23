@@ -18,7 +18,7 @@ const DynamicMapContainer : React.FC = () => {
     const getDescription = (heading: string, price: number, images: Image[]) => {
         const imgSrc = images[0]?.link || IMAGE_PLACEHOLDER;
         const priceStr = formatPrice(price);
-        return `<img width="100%" src="${imgSrc}" alt="img"/><b>${heading}</b><p class="Map-Price">${priceStr}</p>`;
+        return `<img width="100%" src="${imgSrc}" alt="img" /><b>${heading}</b><p class="Map-Price">${priceStr}</p>`;
     };
 
     const generateFeature = useCallback((property: Property, index: number) => {
