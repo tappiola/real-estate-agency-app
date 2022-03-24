@@ -28,6 +28,7 @@ Run on server: `docker-compose -f docker-compose.prod.yml up`
 - Font awesome icons
 - SCSS
 - Responsive layout
+- Lazy loading and split into chunks
 
 ### Backend
 - MariaDB

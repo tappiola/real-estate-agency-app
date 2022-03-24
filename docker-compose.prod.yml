@@ -29,7 +29,9 @@ services:
   front:
     depends_on:
       - backend
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-prod
     environment:
       PORT: 3000
       BACKEND_URL: http://backend:5000
