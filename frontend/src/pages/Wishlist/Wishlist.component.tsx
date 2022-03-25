@@ -1,11 +1,11 @@
 import React from 'react';
 import clsx from 'clsx';
-import WishlistCard from '../WishlistCard';
+import WishlistCard from '../../components/WishlistCard';
 import { Property } from '../../types';
 import './Wishlist.style.scss';
 import { AdType } from '../../constants';
-import GenericMessage from '../GenericMessage';
-import WishlistLoader from '../WishlistLoader';
+import GenericMessage from '../../components/GenericMessage';
+import WishlistLoader from '../../components/WishlistLoader';
 
 const Wishlist: React.FC<{
     properties: Property[],

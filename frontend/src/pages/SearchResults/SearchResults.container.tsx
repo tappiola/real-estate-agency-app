@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { AdType, ToastTypes } from '../../constants';
 import { enqueueToast } from '../../store/notifier';
 import { getProperties } from '../../store/search';
-import GenericMessage from '../GenericMessage';
+import GenericMessage from '../../components/GenericMessage';
 
 const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
     const [isLoading, setIsLoading] = useState(true);

@@ -1,19 +1,19 @@
 import './App.style.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React, { Suspense } from 'react';
-import NotFound from '../NotFound';
-import Notification from '../Notification';
-import { ToastQueueProvider } from '../Toast';
-import { AdType, Path } from '../../constants';
-import HeaderComponent from '../Header';
-import Loader from '../Loader';
+import NotFound from '../components/NotFound';
+import Notification from '../components/Notification';
+import { ToastQueueProvider } from '../components/Toast';
+import { AdType, Path } from '../constants';
+import HeaderComponent from '../components/Header';
+import Loader from '../components/Loader';
 
-const Login = React.lazy(() => import('../Login'));
-const HomePage = React.lazy(() => import('../HomePage'));
-const Property = React.lazy(() => import('../Property'));
-const Register = React.lazy(() => import('../Register'));
-const SearchResults = React.lazy(() => import('../SearchResults'));
-const Wishlist = React.lazy(() => import('../Wishlist'));
+const Login = React.lazy(() => import('../pages/Login'));
+const HomePage = React.lazy(() => import('../pages/HomePage'));
+const Property = React.lazy(() => import('../pages/Property'));
+const Register = React.lazy(() => import('../pages/Register'));
+const SearchResults = React.lazy(() => import('../pages/SearchResults'));
+const Wishlist = React.lazy(() => import('../pages/Wishlist'));
 
 const App : React.FC<{ isAuthorized: boolean }> = ({ isAuthorized }) => (
   <ToastQueueProvider>

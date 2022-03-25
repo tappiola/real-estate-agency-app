@@ -2,7 +2,7 @@ import React, { FormEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 import './Register.style.scss';
 import { UseInputType } from '../../hooks/useInput';
-import Input from '../Input/Input.component';
+import Input from '../../components/Input/Input.component';
 import { Path } from '../../constants';
 
 const Register: React.FC<{

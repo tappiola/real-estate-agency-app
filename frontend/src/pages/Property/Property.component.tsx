@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { Image, Property as PropertyType } from '../../types';
-import ToggleWishlist from '../ToggleWishlist';
-import MultiPreview from '../MultiPreview';
+import ToggleWishlist from '../../components/ToggleWishlist';
+import MultiPreview from '../../components/MultiPreview';
 import { formatPrice, getFullTitle, sortByKey } from '../../util';
 import './Property.style.scss';
-import { Carousel, CarouselItem } from '../Carousel';
-import Map from '../Map';
-import BedroomIconComponent from '../BedroomIcon';
-import BathroomIconComponent from '../BathroomIcon';
+import { Carousel, CarouselItem } from '../../components/Carousel';
+import Map from '../../components/Map';
+import BedroomIconComponent from '../../components/BedroomIcon';
+import BathroomIconComponent from '../../components/BathroomIcon';
 
 const Property: React.FC<{
     property: PropertyType,
