@@ -93,7 +93,7 @@ const PropertyCardComponent: React.FC<{
           </p>
           <h4 className="PropertyCard-Title">{getFullTitle(property)}</h4>
           <p className="PropertyCard-Address">{property.address}</p>
-          <ToggleWishlist property={property} inWishlist={property.isInWishlist} />
+          <ToggleWishlist key={property.id} property={property} inWishlist={property.isInWishlist} />
         </div>
       </div>
     );

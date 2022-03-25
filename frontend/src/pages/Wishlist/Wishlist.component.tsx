@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import WishlistCard from '../../components/WishlistCard';
 import { Property } from '../../types';
 import './Wishlist.style.scss';
@@ -32,7 +33,10 @@ const Wishlist: React.FC<{
 
     const renderHeader = () => (
       <div className="Wishlist-Header">
-        <h1 className="Wishlist-Title">Saved Properties</h1>
+        <h1 className="Wishlist-Title">
+          Saved Properties
+          {properties.length && <small>{` (${properties.length})`}</small>}
+        </h1>
         <div className="Wishlist-Buttons">
           <button
             className={clsx('Wishlist-ToggleLeft', adType === AdType.Sale && 'Wishlist-ToggleActive')}
@@ -52,6 +56,12 @@ const Wishlist: React.FC<{
       </div>
     );
 
+    const renderProperty = (property: Property) => (
+      <CSSTransition key={property.id} timeout={400} classNames="fade">
+        <WishlistCard property={property} />
+      </CSSTransition>
+    );
+
     const renderProperties = () => {
         if (isLoading) {
             return <WishlistLoader />;
@@ -62,9 +72,9 @@ const Wishlist: React.FC<{
         }
 
         return (
-          <div className="Wishlist-Properties">
-            {properties.map((p: Property) => <WishlistCard key={p.id} property={p} />)}
-          </div>
+          <TransitionGroup className="Wishlist-Properties">
+            {properties.map((property: Property) => renderProperty(property))}
+          </TransitionGroup>
         );
     };
 
