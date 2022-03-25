@@ -33,7 +33,6 @@ services:
       - backend
     build: ./frontend
     environment:
-      PORT: 3000
       BACKEND_URL: http://backend:5000
     ports:
       - "3000:3000"
