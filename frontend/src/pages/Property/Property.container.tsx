@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getProperty } from '../../graphql/queries';
-import NotFound from '../NotFound';
+import NotFound from '../../components/NotFound';
 import Property from './Property.component';
 import { Property as PropertyType } from '../../types';
-import FullscreenGallery from '../FullscreenGallery';
+import FullscreenGallery from '../../components/FullscreenGallery';
 import { useAppSelector } from '../../store/hooks';
-import GenericMessage from '../GenericMessage';
-import PropertyLoader from '../PropertyLoader';
+import GenericMessage from '../../components/GenericMessage';
+import PropertyLoader from '../../components/PropertyLoader';
 
 const PropertyContainer = () => {
     const [property, setProperty] = useState<PropertyType | null>(null);

@@ -1,10 +1,10 @@
 import React from 'react';
-import Pagination from '../Pagination';
+import Pagination from '../../components/Pagination';
 import { Property } from '../../types';
 import './SearchResults.style.scss';
-import PropertiesListContainer from '../PropertiesList';
-import Map from '../DynamicMap';
-import { PlaceholderBlock } from '../Placeholder';
+import PropertiesListContainer from '../../components/PropertiesList';
+import Map from '../../components/DynamicMap';
+import { PlaceholderBlock } from '../../components/Placeholder';
 
 const SearchResults: React.FC<{
     count: number,

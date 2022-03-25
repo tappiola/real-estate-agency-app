@@ -1,13 +1,13 @@
 import React from 'react';
 import { ParallaxBanner, useParallax } from 'react-scroll-parallax';
-import BaseSearchForm from '../BaseSearchForm';
-import ContactUs from '../ContactUs';
+import BaseSearchForm from '../../components/BaseSearchForm';
+import ContactUs from '../../components/ContactUs';
 import './HomePage.style.scss';
-import GetInTouch from '../GetInTouch';
+import GetInTouch from '../../components/GetInTouch';
 import midBanner from './midBanner.png';
 import bottomBanner from './bottomBanner.png';
 import topBanner from './topBanner.png';
-import Puddle from '../Puddle';
+import Puddle from '../../components/Puddle';
 
 const TopBanner: React.FC<{ isMobile: boolean }> = ({ isMobile }) => (
   <ParallaxBanner

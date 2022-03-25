@@ -24,6 +24,11 @@
         @include tablet {
             margin: 0;
         }
+
+        small {
+            color: var(--dark-gray);
+            font-weight: 400;
+        }
     }
 
     &-ToggleLeft {
@@ -53,4 +58,13 @@
             align-items: center;
         }
     }
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
 }

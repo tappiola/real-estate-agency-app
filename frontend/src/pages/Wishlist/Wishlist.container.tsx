@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Wishlist from './Wishlist.component';
 import { useAppSelector } from '../../store/hooks';
 import { GET_WISHLIST } from '../../apollo/queries';
@@ -9,7 +9,13 @@ import { Property } from '../../types';
 const WishlistContainer = () => {
     const [adType, setAdType] = useState(AdType.Sale);
     const { isAuthorized } = useAppSelector(({ user }) => user);
-    const { loading, error, data } = useQuery(GET_WISHLIST);
+    const {
+        loading, error, data, refetch
+    } = useQuery(GET_WISHLIST);
+
+    useEffect(() => {
+        refetch();
+    }, []);
 
     const propertiesData = useMemo(() => {
         if (!data) {

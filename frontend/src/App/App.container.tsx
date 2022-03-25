@@ -1,9 +1,9 @@
 import './App.style.scss';
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { getCities, getPropertyTypes } from '../../store/referenceData';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { getCities, getPropertyTypes } from '../store/referenceData';
 import App from './App.component';
-import useIsMobile from '../../hooks/useIsMobile';
+import useIsMobile from '../hooks/useIsMobile';
 
 const AppContainer = () => {
     const { isAuthorized } = useAppSelector(({ user }) => user);

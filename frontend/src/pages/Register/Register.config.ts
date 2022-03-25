@@ -1,7 +1,12 @@
-import { InputType, ValidationType } from '../Input/Input.config';
+import { InputType, ValidationType } from '../../components/Input/Input.config';
 
 // eslint-disable-next-line import/prefer-default-export
-export const LoginFormConfig = [
+export const RegisterFormConfig = [
+    {
+        validationType: ValidationType.isRequired,
+        placeholder: 'Name',
+        name: 'name'
+    },
     {
         validationType: ValidationType.isEmail,
         placeholder: 'Email',
