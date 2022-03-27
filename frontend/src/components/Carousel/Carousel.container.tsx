@@ -40,7 +40,7 @@ const CarouselContainer: React.FC<{
     useEffect(updateWidth, []);
 
     useEffect(() => {
-        if (activeIndex !== initialIndex) {
+        if (initialIndex && activeIndex !== initialIndex) {
             setActiveIndex(initialIndex);
         }
     }, [activeIndex, initialIndex]);

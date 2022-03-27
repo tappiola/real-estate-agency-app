@@ -14,6 +14,7 @@ Run on server: `docker-compose -f docker-compose.prod.yml up`
 - Slider (own implementation, with support of touch devices and endless scroll)
 - 2 types of picture galleries (own implementation, including, fullscreen gallery)
 - parallax effect for banners (usage of 3rd party library)
+- react-transition-group for animations
 - GraphQL (including Apollo client, queries compression)
 - Typescript
 - Dynamic search results loading
@@ -28,6 +29,7 @@ Run on server: `docker-compose -f docker-compose.prod.yml up`
 - Font awesome icons
 - SCSS
 - Responsive layout
+- Lazy loading and split into chunks
 
 ### Backend
 - MariaDB

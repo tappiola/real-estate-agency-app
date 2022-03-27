@@ -29,12 +29,11 @@ services:
   front:
     depends_on:
       - backend
-    build: ./frontend
-    environment:
-      PORT: 3000
-      BACKEND_URL: http://backend:5000
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-prod
     ports:
-      - "80:3000"
+      - "80:80"
 
 volumes:
   mysql-docker:
