@@ -67,7 +67,7 @@ const PropertyCardComponent: React.FC<{
         }
 
         return (
-          <Carousel width="35vw" height="100%" infinite>
+          <Carousel aspectRatio="3 / 2" height="100%" infinite>
             {loadCarouselImages()}
           </Carousel>
         );

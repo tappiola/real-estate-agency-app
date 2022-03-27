@@ -8,6 +8,6 @@
 
     @include mobile {
         width: 100vw;
-        height: 50vw;
+        aspect-ratio: 2 / 1;
     }
 }

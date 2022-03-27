@@ -52,7 +52,7 @@ const Property: React.FC<{
 
         if (isMobile) {
             return (
-              <Carousel width="100vw" height="65vw">
+              <Carousel aspectRatio="4 / 3">
                 {images.map((image: Image) => renderImage(image))}
               </Carousel>
             );

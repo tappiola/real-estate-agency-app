@@ -6,14 +6,8 @@
     }
 
     &-Properties {
-        @include tablet {
-            display: grid;
-            grid-template-columns: repeat(2, 50%);
-        }
-
-        @include desktop {
-            grid-template-columns: repeat(4, 25%);
-        }
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, auto));
     }
 
     &-Title {
