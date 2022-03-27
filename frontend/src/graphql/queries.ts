@@ -136,12 +136,12 @@ export const searchProperties = (params: any) => {
         searchParams: {
             adType,
             page: +page,
-            cityId: city ? +city : undefined,
-            propertyTypeId: propertyType ? +propertyType : undefined,
-            minPrice: minPrice ? +minPrice : undefined,
-            maxPrice: maxPrice ? +maxPrice : undefined,
-            minBeds: minBeds ? +minBeds : undefined,
-            maxBeds: +maxBeds === MAX_BEDROOMS ? undefined : +maxBeds
+            ...(city && { cityId: +city }),
+            ...(propertyType && { propertyTypeId: +propertyType }),
+            ...(minPrice && { minPrice: +minPrice }),
+            ...(maxPrice && { maxPrice: +maxPrice }),
+            ...(minBeds && { minBeds: +minBeds }),
+            ...(maxBeds && { maxBeds: +maxBeds === MAX_BEDROOMS ? undefined : +maxBeds })
         }
     };
 

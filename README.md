@@ -57,7 +57,4 @@ TODO:
 - color variables
 
 - (R) where: {'$type.id$': 'rent'} doesn't work
-- (R) replace croissant
 - fix any and ts-ignore
-- not use volumes on prod
-- handle issue with ugly undefined
