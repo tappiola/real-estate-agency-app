@@ -31,7 +31,7 @@
         @include desktop {
             height: 500px;
             grid-gap: 15px;
-            grid-template-columns: 4fr 2fr;
+            grid-template-columns: 2fr 1fr;
             grid-template-rows: 1fr 1fr;
             grid-template-areas:
                 'first second'
