@@ -31,8 +31,8 @@
 }
 
 @keyframes pulse {
-    0% { -webkit-transform: scale(1); -webkit-animation-timing-function: ease-out; }
-    35% { -webkit-transform: scale(0.85); -webkit-animation-timing-function: ease-in; }
-    65% { -webkit-transform: scale(1.1); -webkit-animation-timing-function: ease-in; }
-    100% { -webkit-transform: scale(1); -webkit-animation-timing-function: ease-out; }
+    0% { transform: scale(1); animation-timing-function: ease-out; }
+    35% { transform: scale(0.85); animation-timing-function: ease-in; }
+    65% { transform: scale(1.1); animation-timing-function: ease-in; }
+    100% { transform: scale(1); animation-timing-function: ease-out; }
 }
