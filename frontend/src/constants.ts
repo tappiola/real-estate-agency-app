@@ -1,4 +1,7 @@
-export const accessToken = 'pk.eyJ1IjoidGFwcGlvbGEiLCJhIjoiY2t6eHhuM2N6MDYyMTJ2cDcxcDVsem8zNiJ9.OByK2fsCvb8XsvT2OYUEjA';
+// eslint-disable-next-line max-len
+export const MAPBOX_GL_TOKEN = 'pk.eyJ1IjoidGFwcGlvbGEiLCJhIjoiY2t6eHhuM2N6MDYyMTJ2cDcxcDVsem8zNiJ9.OByK2fsCvb8XsvT2OYUEjA';
+
+export const GRAPHQL_PATH = '/graphql';
 
 export const TEN_MINUTES = 600000;
 
@@ -36,5 +39,3 @@ export enum Path {
     PropertiesToRent = '/rent',
     PropertiesForSale = '/sale'
 }
-
-export const GRAPHQL_PATH = '/graphql';

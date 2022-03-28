@@ -2,7 +2,7 @@ import mapboxgl, { LngLatLike } from 'mapbox-gl';
 import './Map.style.scss';
 import { Feature, Point } from 'geojson';
 import React, { useCallback, useEffect } from 'react';
-import { accessToken } from '../../constants';
+import { MAPBOX_GL_TOKEN } from '../../constants';
 import { Property } from '../../types';
 
 const MapContainer : React.FC<{ property: Property }> = ({ property }) => {
@@ -21,7 +21,7 @@ const MapContainer : React.FC<{ property: Property }> = ({ property }) => {
     }, []);
 
     useEffect(() => {
-        mapboxgl.accessToken = accessToken;
+        mapboxgl.accessToken = MAPBOX_GL_TOKEN;
 
         // Create the map
         const mapRef = new mapboxgl.Map({
@@ -44,7 +44,7 @@ const MapContainer : React.FC<{ property: Property }> = ({ property }) => {
                     }
                 },
                 layout: {
-                    'icon-image': 'bakery-11',
+                    'icon-image': 'lodging-11',
                     'icon-size': 1.5
                 }
             });

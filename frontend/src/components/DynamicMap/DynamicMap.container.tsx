@@ -1,8 +1,8 @@
-import mapboxgl, { LngLatLike } from 'mapbox-gl';
+import mapboxgl, { GeoJSONSource, LngLatLike } from 'mapbox-gl';
 import './DynamicMap.style.scss';
 import { Feature, Point } from 'geojson';
 import React, { useCallback, useEffect, useState } from 'react';
-import { accessToken, IMAGE_PLACEHOLDER } from '../../constants';
+import { MAPBOX_GL_TOKEN, IMAGE_PLACEHOLDER } from '../../constants';
 import { formatPrice, getHouseTitle } from '../../util';
 import { Image, Property } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -47,7 +47,7 @@ const DynamicMapContainer : React.FC = () => {
     }, []);
 
     useEffect(() => {
-        mapboxgl.accessToken = accessToken;
+        mapboxgl.accessToken = MAPBOX_GL_TOKEN;
 
         // Create the map
         const mapRef = new mapboxgl.Map({
@@ -70,7 +70,7 @@ const DynamicMapContainer : React.FC = () => {
                     }
                 },
                 layout: {
-                    'icon-image': 'bakery-11',
+                    'icon-image': 'lodging-11',
                     'icon-size': 1.5,
                     'icon-allow-overlap': true
                 }
@@ -124,8 +124,8 @@ const DynamicMapContainer : React.FC = () => {
         }
         const data = [...properties];
 
-        // @ts-ignore
-        map.getSource('places').setData({
+        const source = map.getSource('places') as GeoJSONSource;
+        source.setData({
             type: 'FeatureCollection',
             features: data.map(generateFeature)
         });
