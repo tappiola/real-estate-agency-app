@@ -6,10 +6,10 @@ export const PlaceholderBlock : React.FC<{
     classes?: string[]
 }> = ({
     classes = []
-}) => <div className={clsx('Placeholder', 'Placeholder-Block', ...classes)} />;
+}) => <div className={clsx('Placeholder-Block', ...classes)} />;
 
 export const PlaceholderText : React.FC<{
     classes?: string[]
 }> = ({
     classes = []
-}) => <div className={clsx('Placeholder', 'Placeholder-Text', ...classes)} />;
+}) => <div className={clsx('Placeholder-Text', ...classes)} />;

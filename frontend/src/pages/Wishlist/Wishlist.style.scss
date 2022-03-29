@@ -1,3 +1,4 @@
+@import "../../styles/constants";
 @import "../../styles/mixins";
 
 .Wishlist {
@@ -8,6 +9,15 @@
     &-Properties {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, auto));
+
+        .fade-exit {
+            opacity: 1;
+        }
+
+        .fade-exit-active {
+            opacity: 0;
+            transition: opacity 0.4s ease-out;
+        }
     }
 
     &-Title {
@@ -20,7 +30,7 @@
         }
 
         small {
-            color: var(--dark-gray);
+            color: $dark-gray;
             font-weight: 400;
         }
     }
@@ -36,7 +46,7 @@
     }
 
     &-ToggleActive {
-        background-color: var(--primary-bright-color);
+        background-color: $primary-bright-color;
         color: white;
     }
 
@@ -52,13 +62,4 @@
             align-items: center;
         }
     }
-}
-
-.fade-exit {
-    opacity: 1;
-}
-
-.fade-exit-active {
-    opacity: 0;
-    transition: opacity 0.4s ease-out;
 }

@@ -1,24 +1,28 @@
+@import "../../styles/constants";
+
+@mixin fully-colored {
+    stroke: $primary-bright-color;
+    fill: $primary-bright-color;
+}
+
 .WishlistIcon {
     stroke: black;
 
     &:hover {
-        stroke: var(--primary-bright-color);
-        fill: var(--primary-bright-color);
+        @include fully-colored;
 
         &.WishlistIcon_isClicked {
             fill: none;
             stroke: black;
 
             &.WishlistIcon_isActive {
-                fill: var(--primary-bright-color);
-                stroke: var(--primary-bright-color);
+                @include fully-colored;
             }
         }
     }
 
     &_isActive {
-        fill: var(--primary-bright-color);
-        stroke: var(--primary-bright-color);
+        @include fully-colored;
     }
 
     &_isClicked {
@@ -31,8 +35,20 @@
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); animation-timing-function: ease-out; }
-    35% { transform: scale(0.85); animation-timing-function: ease-in; }
-    65% { transform: scale(1.1); animation-timing-function: ease-in; }
-    100% { transform: scale(1); animation-timing-function: ease-out; }
+    0% {
+        transform: scale(1);
+        animation-timing-function: ease-out;
+    }
+    35% {
+        transform: scale(0.85);
+        animation-timing-function: ease-in;
+    }
+    65% {
+        transform: scale(1.1);
+        animation-timing-function: ease-in;
+    }
+    100% {
+        transform: scale(1);
+        animation-timing-function: ease-out;
+    }
 }

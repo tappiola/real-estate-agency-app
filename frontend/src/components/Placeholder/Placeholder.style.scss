@@ -1,8 +1,9 @@
+@import "../../styles/constants";
+
 @keyframes placeHolderShimmer {
     0% {
         background-position: -200% 0;
     }
-
     100% {
         background-position: 200% 0;
     }
@@ -19,11 +20,15 @@
     animation-fill-mode: forwards;
 
     &-Block {
+        @extend .Placeholder;
+
         height: 100%;
         width: 100%;
     }
 
     &-Text {
+        @extend .Placeholder;
+
         margin-block: 10px;
         border-radius: 15px;
         height: 30px;

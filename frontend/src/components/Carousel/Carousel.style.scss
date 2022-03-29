@@ -1,15 +1,17 @@
+@import "../../styles/constants";
+
 .Carousel {
     position: relative;
     overflow: hidden;
 
     &-DotIcon {
         font-size: 8px;
-        color: var(--controls-color);
+        color: $controls-color;
         padding: 5px 3px;
         cursor: pointer;
 
         &_Active {
-            color: var(--primary-bright-color);
+            color: $primary-bright-color;
         }
     }
 
@@ -36,7 +38,7 @@
         position: absolute;
         top: 50%;
         font-size: 24px;
-        color: var(--controls-color);
+        color: $controls-color;
         cursor: pointer;
         padding: 5px;
         z-index: 5;

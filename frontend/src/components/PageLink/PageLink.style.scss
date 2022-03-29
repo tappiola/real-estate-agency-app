@@ -1,6 +1,8 @@
+@import "../../styles/constants";
+
 .PageLink {
   border-radius: 50%;
-  background-color: var(--controls-color);
+  background-color: $controls-color;
   margin: 10px 7px;
   width: 30px;
   height: 30px;
@@ -13,6 +15,6 @@
 
   &_isCurrent {
     color: white;
-    background-color: var(--primary-bright-color);
+    background-color: $primary-bright-color;
   }
 }

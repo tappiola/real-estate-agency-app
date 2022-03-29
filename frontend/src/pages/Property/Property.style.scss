@@ -1,10 +1,11 @@
+@import "../../styles/constants";
 @import "../../styles/mixins";
 
 .Property {
     &-Container {
         width: 100%;
 
-        .Preview-Images{
+        .Preview-Images {
             cursor: zoom-in;
         }
     }
@@ -58,7 +59,7 @@
     }
 
     &-Address {
-        color: var(--dark-gray);
+        color: $dark-gray;
         margin: 0;
         font-size: 18px;
         text-align: left;
@@ -87,7 +88,7 @@
 
     &-NavigateBack {
         font-family: 'Gilroy-Bold', sans-serif;
-        color: var(--primary-bright-color);
+        color: $primary-bright-color;
         font-size: 15px;
         padding-top: 16px;
         text-align: left;
@@ -106,7 +107,7 @@
 
     &-Amenities {
         display: flex;
-        color: var(--dark-gray);
+        color: $dark-gray;
 
         .BedroomIcon {
             margin-right: 10px;

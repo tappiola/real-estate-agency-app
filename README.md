@@ -52,9 +52,8 @@ Run on server:
 - Amazon S3 bucket for images hosting
 
 TODO:
-- GA?
 - remove properties without pics
-- color variables
+- color variables + add _variables partial
 
 - (R) where: {'$type.id$': 'rent'} doesn't work
 - fix any and ts-ignore

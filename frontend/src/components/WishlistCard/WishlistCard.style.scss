@@ -1,8 +1,9 @@
 @import "../../styles/mixins";
+@import "../../styles/constants";
 
 .WishlistCard {
      &-Wrapper {
-         border: 2px solid var(--primary-bright-color);
+         border: 2px solid $primary-bright-color;
          margin: 15px;
          padding: 10px;
          position: relative;
@@ -37,6 +38,8 @@
         -webkit-line-clamp: 3;
         line-clamp: 3;
         -webkit-box-orient: vertical;
+        -moz-box-orient: vertical;
+        box-orient: vertical;
         min-height: 58px;
         max-height: 72px;
     }

@@ -1,4 +1,6 @@
+@import "../../styles/constants";
+
 .BedroomIcon {
-    fill: var(--dark-gray);
+    fill: $dark-gray;
     height: 20px;
 }

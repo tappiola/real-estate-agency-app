@@ -1,8 +1,9 @@
+@import "../../styles/constants";
 @import "../../styles/mixins";
 
 .PropertyCard {
     display: flex;
-    border: 1px solid var(--controls-color);
+    border: 1px solid $controls-color;
     margin: 15px 20px;
     height: 22vw;
     cursor: pointer;
@@ -17,7 +18,7 @@
         overflow-y: hidden;
         margin: 0;
         border: none;
-        border-top: 1px solid var(--controls-color);
+        border-top: 1px solid $controls-color;
         width: 100%;
     }
 
@@ -58,7 +59,7 @@
 
     &-Amenities {
         display: flex;
-        color: var(--dark-gray);
+        color: $dark-gray;
 
         .BedroomIcon {
             margin-right: 10px;
@@ -80,7 +81,7 @@
 
         @include desktop {
             display: block;
-            color: var(--dark-gray);
+            color: $dark-gray;
             margin: 0;
             font-size: 14px;
         }

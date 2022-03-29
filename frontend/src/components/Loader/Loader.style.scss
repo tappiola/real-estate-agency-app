@@ -1,3 +1,5 @@
+@import "../../styles/constants";
+
 .Loader {
     width: 56px;
     position: fixed;
@@ -7,6 +9,6 @@
     z-index: 120;
 
     circle {
-        fill: var(--primary-bright-color);
+        fill: $primary-bright-color;
     }
 }

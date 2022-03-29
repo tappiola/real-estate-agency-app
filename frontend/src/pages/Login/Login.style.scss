@@ -1,3 +1,5 @@
+@import "../../styles/constants";
+
 .Login {
     display: flex;
     flex-direction: column;
@@ -5,16 +7,18 @@
     margin: auto;
 
     button {
-        background-color: var(--primary-bright-color);
-        color:white;
+        background-color: $primary-bright-color;
+        color: white;
         margin-top: 15px;
     }
 
     .RegistrationLink {
-        margin-top: 15px;
-        margin-left: 10px;
+        margin: {
+            top: 15px;
+            left: 10px;
+        }
         font-family: "Gilroy-Bold", sans-serif;
-        color: var(--primary-bright-color);
+        color: $primary-bright-color;
     }
 
     .NotRegistered {

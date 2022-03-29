@@ -1,3 +1,5 @@
+@import "../../styles/constants";
+
 .AdvancedSearch {
   &-Buttons {
     width: 100%;
@@ -20,7 +22,7 @@
   }
 
   &-Search {
-    background-color: var(--primary-bright-color);
+    background-color: $primary-bright-color;
     color: white;
   }
 }

@@ -1,8 +1,10 @@
+@import "../../styles/constants";
+
 .CloseIcon {
-    fill: var(--color-black);
+    fill: black;
 
     &:hover {
-        fill: var(--primary-bright-color);
+        fill: $primary-bright-color;
     }
 
     cursor: pointer;

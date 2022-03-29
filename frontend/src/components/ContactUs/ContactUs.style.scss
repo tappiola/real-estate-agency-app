@@ -1,7 +1,8 @@
+@import "../../styles/constants";
 @import "../../styles/mixins";
 
 .ContactUs {
-    background-color: var(--perfect-salmon-color);
+    background-color: $perfect-salmon-color;
     padding: 40px;
     border-radius: 40px;
     display: flex;
@@ -22,7 +23,7 @@
 
     input {
         margin-top: 20px;
-        font-family: 'Relative-Faux', sans-serif;
+        font-family: 'Relative-Faux', monospace;
         letter-spacing: 0.05em;
 
         &::placeholder {
@@ -31,8 +32,8 @@
     }
 
     button {
-        background-color: var(--primary-bright-color);
-        color: var(--pale-yellow-color);
+        background-color: $primary-bright-color;
+        color: $pale-yellow-color;
         font-weight: 600;
         letter-spacing: 0.05em;
         font-size: 16px;

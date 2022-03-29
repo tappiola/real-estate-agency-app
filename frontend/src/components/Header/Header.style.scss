@@ -1,12 +1,13 @@
+@import "../../styles/constants";
 @import "../../styles/mixins";
 
 .Header {
   width: 100%;
-  height: var(--header-height);
+  height: $header-height;
   position: fixed;
   left: 0;
   top: 0;
-  background-color: var(--primary-bright-color);
+  background-color: $primary-bright-color;
   z-index: 100;
   display: flex;
   align-items: center;
@@ -35,7 +36,7 @@
     object-fit: contain;
 
     &Title {
-      font-family: 'Relative-Faux', sans-serif;
+      font-family: 'Relative-Faux', monospace;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: white;

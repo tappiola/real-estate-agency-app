@@ -1,6 +1,7 @@
-:root {
-    --error-message-height: 14px;
-}
+@import "../../styles/constants";
+
+$error-message-height: 14px;
+
 input {
     border: none;
     border-bottom: 1px solid #4d4d4d;
@@ -14,7 +15,7 @@ input {
     margin: 15px 0 5px;
 
     &.InvalidInput {
-        border-color: var(--validation-error-color);
+        border-color: $validation-error-color;
     }
 
     &::placeholder {
@@ -30,12 +31,12 @@ input {
     font-family: 'Relative-Book', sans-serif;
     letter-spacing: 0.05em;
     padding-left: 10px;
-    color: var(--validation-error-color);
-    line-height: var(--error-message-height);
+    color: $validation-error-color;
+    line-height: $error-message-height;
 }
 
 .MessagePlaceholder {
-    height: var(--error-message-height);
+    height: $error-message-height;
 }
 
 textarea {
@@ -50,7 +51,7 @@ textarea {
     margin-top: 14px;
     letter-spacing: 0.05em;
     width: 100%;
-    outline-color: var(--primary-bright-color);
+    outline-color: $primary-bright-color;
 
     &::placeholder {
         font-weight: 500;
