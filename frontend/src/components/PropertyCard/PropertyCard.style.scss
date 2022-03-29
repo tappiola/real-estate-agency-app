@@ -3,7 +3,7 @@
 
 .PropertyCard {
     display: flex;
-    border: 1px solid $controls-color;
+    border: 1px solid $light-muted-color;
     margin: 15px 20px;
     height: 22vw;
     cursor: pointer;
@@ -18,7 +18,7 @@
         overflow-y: hidden;
         margin: 0;
         border: none;
-        border-top: 1px solid $controls-color;
+        border-top: 1px solid $light-muted-color;
         width: 100%;
     }
 
@@ -59,7 +59,7 @@
 
     &-Amenities {
         display: flex;
-        color: $dark-gray;
+        color: $muted-color;
 
         .BedroomIcon {
             margin-right: 10px;
@@ -81,7 +81,7 @@
 
         @include desktop {
             display: block;
-            color: $dark-gray;
+            color: $muted-color;
             margin: 0;
             font-size: 14px;
         }

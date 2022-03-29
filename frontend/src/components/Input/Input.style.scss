@@ -4,7 +4,7 @@ $error-message-height: 14px;
 
 input {
     border: none;
-    border-bottom: 1px solid #4d4d4d;
+    border-bottom: 1px solid $semi-dark-muted-color;
     border-radius: 0;
     padding: 10px;
     background: transparent;
@@ -42,7 +42,7 @@ input {
 textarea {
     border: none;
     background-color: transparent;
-    border-bottom: 1px solid #4d4d4d;
+    border-bottom: 1px solid $semi-dark-muted-color;
     border-radius: 0;
     font-family: Relative-Book, sans-serif;
     font-size: 16px;
@@ -57,7 +57,7 @@ textarea {
         font-weight: 500;
         letter-spacing: 0.05em;
         font-family: Relative-Book, sans-serif;
-        color: #4d4d4d;
+        color: $light-muted-color;
         line-height: 18px;
     }
 }

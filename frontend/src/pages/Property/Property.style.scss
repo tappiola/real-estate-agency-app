@@ -59,7 +59,7 @@
     }
 
     &-Address {
-        color: $dark-gray;
+        color: $muted-color;
         margin: 0;
         font-size: 18px;
         text-align: left;
@@ -107,7 +107,7 @@
 
     &-Amenities {
         display: flex;
-        color: $dark-gray;
+        color: $muted-color;
 
         .BedroomIcon {
             margin-right: 10px;

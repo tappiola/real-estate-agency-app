@@ -1,3 +1,5 @@
+@import "../../styles/constants";
+
 .Toast {
     &-Container {
         position: fixed;
@@ -12,7 +14,7 @@
         position: relative;
         font-size: 0.875rem;
         color: white;
-        background-color: #313131;
+        background-color: $dark-muted-color;
         border-radius: 4px;
         line-height: 1.43;
         margin: 6px 0;
@@ -22,20 +24,20 @@
     }
 
     &-Success {
-        color: #c1e2bc;
-        background-color: #072521;
+        color: $success-light-color;
+        background-color: $success-dark-color;
     }
 
     &-Info {
-        background-color: #043e5c;
+        background-color: $complementary-semi-dark-color;
     }
 
     &-Warning {
-        background-color: #b06d01;
+        background-color: $warning-color;
     }
 
     &-Error {
-        background-color: #313131;
+        background-color: $dark-muted-color;
     }
 
     &-Label {

@@ -1,7 +1,8 @@
+@import "../../styles/constants";
 @import "../../styles/mixins";
 
 .GetInTouch {
-    background-color: #343343;
+    background-color: $complementary-semi-dark-color;
     font-family: 'Relative-Faux', monospace;
     letter-spacing: 0.05em;
     position: absolute;
@@ -28,7 +29,7 @@
         }
 
         &:hover {
-            color: #0056b3;
+            color:$complementary-bright-color;
         }
     }
 
