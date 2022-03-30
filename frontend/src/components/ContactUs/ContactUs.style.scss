@@ -25,7 +25,10 @@
         margin-top: 20px;
         font-family: 'Relative-Faux', monospace;
         letter-spacing: 0.05em;
+    }
 
+    input,
+    textarea {
         &::placeholder {
             color: darkslategray;
         }

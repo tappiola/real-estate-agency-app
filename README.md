@@ -54,5 +54,6 @@ Run on server:
 TODO:
 - remove properties without pics
 
+- wishlist after timeout
 - (R) where: {'$type.id$': 'rent'} doesn't work
 - fix any and ts-ignore
