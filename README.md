@@ -53,7 +53,6 @@ Run on server:
 
 TODO:
 - remove properties without pics
-- color variables + add _variables partial
 
 - (R) where: {'$type.id$': 'rent'} doesn't work
 - fix any and ts-ignore
