@@ -1,28 +1,11 @@
-import jwt_decode from 'jwt-decode';
 import compress from 'graphql-query-compress';
-import { getSavedToken } from '../util';
-import { GraphqlResponse, JwtDecodeResult } from './types';
+import { getAuthToken } from '../util';
+import { GraphqlResponse } from './types';
 import { GRAPHQL_PATH } from '../constants';
 
-export const getToken = () => {
-    let authToken = getSavedToken();
-
-    if (authToken) {
-        const decodedToken = jwt_decode<JwtDecodeResult>(authToken);
-
-        // If token has expired, there is no sense to pass it to server
-        // Ideally, we should have token refresh flow here
-        if (decodedToken.exp * 1000 < new Date().getTime()) {
-            authToken = null;
-            localStorage.removeItem('token');
-        }
-    }
-
-    return authToken;
-};
-
+// eslint-disable-next-line import/prefer-default-export
 export const sendGraphqlRequest = async <T>(query: string, variables = {}): Promise<T> => {
-    const authToken = getToken();
+    const authToken = getAuthToken();
 
     const headers: HeadersInit = new Headers();
     headers.set('Content-Type', 'application/json');
