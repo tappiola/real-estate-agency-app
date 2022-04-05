@@ -34,7 +34,7 @@ const SearchResults: React.FC<{
     };
 
     const renderPagination = () => {
-        if (isMobile || pages <= 1) {
+        if (isMobile || pages <= 1 || !properties.length) {
             return null;
         }
 

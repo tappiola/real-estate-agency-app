@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import SearchResults from './SearchResults.component';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { AdType, ToastTypes } from '../../constants';
@@ -15,6 +15,7 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
     const { isMobile } = useAppSelector(({ config }) => config);
 
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
 
     const {
         activeProperty,
@@ -49,6 +50,13 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
 
         fetchProperties();
     }, [adType, dispatch, searchParams]);
+
+    useEffect(() => {
+        if (page > pages) {
+            searchParams.delete('page');
+            navigate(`?${searchParams.toString()}`);
+        }
+    }, [searchParams, page, pages]);
 
     useEffect(() => {
         if (!isMobile) {
