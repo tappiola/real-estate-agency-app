@@ -1,4 +1,5 @@
 import React, { MouseEventHandler, useEffect, useRef } from 'react';
+import sanitizeHtml from 'sanitize-html';
 import './WishlistCard.style.scss';
 import CloseIcon from '../CloseIcon';
 import { Property } from '../../types';
@@ -18,7 +19,7 @@ const WishlistCard: React.FC<{
 
     useEffect(() => {
         if (descriptionRef.current) {
-            descriptionRef.current.innerHTML = property.title;
+            descriptionRef.current.innerHTML = sanitizeHtml(property.title);
         }
     }, [property.title]);
 

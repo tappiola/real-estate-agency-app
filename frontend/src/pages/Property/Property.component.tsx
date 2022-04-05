@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import sanitizeHtml from 'sanitize-html';
 import { Image, Property as PropertyType } from '../../types';
 import ToggleWishlist from '../../components/ToggleWishlist';
 import MultiPreview from '../../components/MultiPreview';
@@ -26,7 +27,7 @@ const Property: React.FC<{
 
     useEffect(() => {
         if (descRef.current) {
-            descRef.current.innerHTML = property.title;
+            descRef.current.innerHTML = sanitizeHtml(property.title);
         }
     }, [property.title]);
 

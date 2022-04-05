@@ -5,6 +5,7 @@
   "dependencies": {
     "@apollo/client": "^3.5.9",
     "@reduxjs/toolkit": "^1.7.2",
+    "@types/sanitize-html": "^2.6.2",
     "clsx": "^1.1.1",
     "graphql-query-compress": "^1.2.4",
     "http-proxy-middleware": "^2.0.4",
@@ -21,7 +22,8 @@
     "react-transition-group": "^4.4.2",
     "redux": "^4.1.2",
     "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.4.1"
+    "redux-thunk": "^2.4.1",
+    "sanitize-html": "^2.7.0"
   },
   "scripts": {
     "start": "react-scripts start",
