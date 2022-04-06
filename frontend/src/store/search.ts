@@ -42,12 +42,15 @@ const lastUpdatedSelector = (state: any) => state.search.lastUpdated;
 interface SearchState {
     adType: AdType,
     searchParams: URLSearchParams,
-    requestMore?: boolean
+    requestMore?: boolean,
+    isMobile?: boolean
 }
 
 export const getProperties = createAsyncThunk(
     'search/getProperties',
-    async ({ adType, searchParams, requestMore = false }: SearchState, { dispatch, getState }) => {
+    async ({
+        adType, searchParams, requestMore = false, isMobile = false
+    }: SearchState, { dispatch, getState }) => {
         const params: FilterParams = Array.from(searchParams.keys())
             .reduce((acc, value) => ({ ...acc, [value]: searchParams.get(value) }), {});
 
@@ -66,7 +69,7 @@ export const getProperties = createAsyncThunk(
         const lastUpdated = lastUpdatedSelector(state);
         const { page: oldPage } = oldSearch;
 
-        const pageNumber = requestMore ? oldPage + 1 : (page || 1);
+        const pageNumber = (requestMore ? oldPage + 1 : isMobile ? oldPage : page) || 1;
 
         const activeSearch = {
             adType,

@@ -131,6 +131,7 @@ module.exports = {
         "react-hooks/exhaustive-deps": "warn",
         "linebreak-style": "off",
         "@typescript-eslint/no-return-await": "off",
-        "@typescript-eslint/return-await": "off"
+        "@typescript-eslint/return-await": "off",
+        "no-nested-ternary": "off"
     },
 };

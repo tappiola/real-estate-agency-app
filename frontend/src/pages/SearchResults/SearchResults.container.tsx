@@ -40,7 +40,7 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
 
         const fetchProperties = async () => {
             try {
-                await dispatch(getProperties({ adType, searchParams }));
+                await dispatch(getProperties({ adType, searchParams, isMobile }));
             } catch (e) {
                 setHasError(true);
             } finally {
@@ -49,14 +49,14 @@ const SearchResultsContainer: React.FC<{ adType: AdType }> = ({ adType }) => {
         };
 
         fetchProperties();
-    }, [adType, dispatch, searchParams]);
+    }, [adType, dispatch, isMobile, searchParams]);
 
     useEffect(() => {
         if (page > pages) {
             searchParams.delete('page');
             navigate(`?${searchParams.toString()}`);
         }
-    }, [searchParams, page, pages]);
+    }, [searchParams, page, pages, navigate]);
 
     useEffect(() => {
         if (!isMobile) {
