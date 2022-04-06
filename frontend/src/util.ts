@@ -1,4 +1,6 @@
+import jwt_decode from 'jwt-decode';
 import { AdType } from './constants';
+import { JwtDecodeResult } from './graphql/types';
 import { Property } from './types';
 import { UseInputType } from './hooks/useInput';
 
@@ -41,7 +43,24 @@ export const getFullTitle = (property : Property) => {
     return `${title} in ${property.city?.name} ${preposition} ${property.type.name}`;
 };
 
-export const getSavedToken = () => localStorage.getItem('token');
+export const getAuthToken = () => {
+    let authToken = localStorage.getItem('token');
+
+    if (authToken) {
+        const decodedToken = jwt_decode<JwtDecodeResult>(authToken);
+
+        console.log({ expTime: decodedToken.exp * 1000, currentTime: new Date().getTime() });
+
+        // If token has expired, there is no sense to pass it to server
+        // Ideally, we should have token refresh flow here
+        if (decodedToken.exp * 1000 < new Date().getTime()) {
+            authToken = null;
+            localStorage.removeItem('token');
+        }
+    }
+
+    return authToken;
+};
 
 export const transformFormData = (data: UseInputType[]) => data.reduce((prev, field) => ({
     ...prev,

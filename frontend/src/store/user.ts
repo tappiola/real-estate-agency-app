@@ -2,7 +2,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ToastTypes } from '../constants';
 import { login, register } from '../graphql/queries';
-import { getSavedToken } from '../util';
+import { getAuthToken } from '../util';
 import { enqueueToast } from './notifier';
 
 interface UserState {
@@ -11,8 +11,8 @@ interface UserState {
 }
 
 const initialState: UserState = {
-    authToken: getSavedToken(),
-    isAuthorized: !!getSavedToken()
+    authToken: getAuthToken(),
+    isAuthorized: !!getAuthToken()
 };
 
 export interface LoginUserPayload {
