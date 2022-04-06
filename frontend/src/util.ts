@@ -49,10 +49,6 @@ export const getAuthToken = () => {
     if (authToken) {
         const decodedToken = jwt_decode<JwtDecodeResult>(authToken);
 
-        console.log({ expTime: decodedToken.exp * 1000, currentTime: new Date().getTime() });
-
-        // If token has expired, there is no sense to pass it to server
-        // Ideally, we should have token refresh flow here
         if (decodedToken.exp * 1000 < new Date().getTime()) {
             authToken = null;
             localStorage.removeItem('token');
