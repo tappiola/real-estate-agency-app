@@ -1,0 +1,8 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "integrationFolder": "cypress/tests",
+  "component": {
+    "componentFolder": "src",
+    "testFiles": "**/__tests__/*.spec.tsx"
+  }
+}

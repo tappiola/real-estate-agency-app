@@ -48,9 +48,27 @@ const HeaderComponent: React.FC<{
         return <AdvancedSearchForm searchType={searchType} />;
     };
 
-    const renderLogin = () => <button type="button" className="AuthButton" onClick={onLoginClick}>Login</button>;
+    const renderLogin = () => (
+      <button
+        type="button"
+        className="AuthButton"
+        data-cy="login"
+        onClick={onLoginClick}
+      >
+        Login
+      </button>
+    );
 
-    const renderLogout = () => <button type="button" className="AuthButton" onClick={onLogoutClick}>Logout</button>;
+    const renderLogout = () => (
+      <button
+        type="button"
+        className="AuthButton"
+        data-cy="logout"
+        onClick={onLogoutClick}
+      >
+        Logout
+      </button>
+    );
 
     return (
       <>
