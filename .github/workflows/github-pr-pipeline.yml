@@ -15,11 +15,15 @@ jobs:
       - name: Wait
         run: sleep 30
 
-      - name: Wait until app is ready
-        run: curl http://localhost:3000
-
       - name: Get containers status
         run: docker ps -a
 
+      - name: Log container status
+        run: docker-compose logs
+
       - name: Cypress run
         uses: cypress-io/github-action@v2
+        with:
+#          install: false
+          working-directory: frontend
+          wait-on: 'http://localhost:3000'
