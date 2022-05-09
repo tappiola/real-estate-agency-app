@@ -31,7 +31,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cypress:open": "npx cypress open",
-    "cypress:run": "npx cypress run --browser chrome"
+    "cypress:run": "npx cypress run --browser chrome",
+    "eslint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "browserslist": {
     "production": [
