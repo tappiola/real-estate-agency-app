@@ -2,7 +2,7 @@ name: PR pipeline
 on: [pull_request]
 
 jobs:
-  run-pr-pipeline:
+  cypress-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -39,7 +39,7 @@ jobs:
           node-version: '14.x'
 
       - name: Install Dependencies
-        run: yarn
+        run: npm i
 
       - name: Lint JS
-        run: yarn eslint
+        run: npx eslint

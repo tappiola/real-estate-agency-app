@@ -18,6 +18,7 @@
  */
 module.exports = (on, config) => {
     if (config.testingType === 'component') {
+        // eslint-disable-next-line global-require,import/no-extraneous-dependencies
         require('@cypress/react/plugins/react-scripts')(on, config);
     }
 
