@@ -1,6 +1,5 @@
 name: PR pipeline
-on: [push]
-#on: [pull_request]
+on: [pull_request]
 
 jobs:
   run-pr-pipeline:
@@ -14,23 +13,8 @@ jobs:
         env:
           ENV_FILE: ${{ secrets.ENV_FILE }}
 
-      - name: Debug - list files
-        run: ls -la
-
-      - name: Debug - log file content
-        run: cat .env | base64
-
       - name: Run app
         run: docker-compose up -d
-
-      - name: Wait
-        run: sleep 30
-
-      - name: Get containers status
-        run: docker ps -a
-
-      - name: Log container status
-        run: docker-compose logs
 
       - name: Cypress run
         uses: cypress-io/github-action@v2
