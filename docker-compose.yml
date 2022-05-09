@@ -27,6 +27,7 @@ services:
       JWT_SECRET: ${JWT_SECRET}
     volumes:
       - ./backend/src:/app/src
+    command: [ "./wait-for-it.sh", "db:3306", "--", "npm", "start" ]
 
   front:
     depends_on:
