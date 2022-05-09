@@ -9,6 +9,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Prepare file with secrets
+        run: 'echo "$ENV_FILE" > .env'
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+
+      - name: Debug - list files
+        run: ls -la
+
+      - name: Debug - log file content
+        run: cat .env | base64
+
       - name: Run app
         run: docker-compose up -d
 
@@ -24,6 +35,10 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-#          install: false
+          browser: chrome
           working-directory: frontend
+          record: true
           wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
