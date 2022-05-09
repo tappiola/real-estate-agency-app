@@ -1,0 +1,25 @@
+name: PR pipeline
+on: [push]
+#on: [pull_request]
+
+jobs:
+  run-pr-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run app
+        run: docker-compose up -d
+
+      - name: Wait
+        run: sleep 30
+
+      - name: Wait until app is ready
+        run: curl http://localhost:3000
+
+      - name: Get containers status
+        run: docker ps -a
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
