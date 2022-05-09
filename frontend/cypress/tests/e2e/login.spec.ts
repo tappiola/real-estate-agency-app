@@ -13,12 +13,12 @@ describe('Registration and login', () => {
         cy.get('[name="email"]').type(loginData.email);
         cy.get('[name="password"]').type(loginData.password);
         cy.get('[data-cy="register-button"]').click();
-        cy.url().should('eq', Cypress.config().baseUrl + '/')
+        cy.url().should('eq', `${Cypress.config().baseUrl}/`);
 
         cy.get('@login').click();
         cy.get('[name="email"]').type(loginData.email);
         cy.get('[name="password"]').type(loginData.password);
         cy.get('[data-cy="login-button"]').click();
-        cy.get('[data-cy="logout"]').should('be.visible');
+        cy.get('[data-cy="logout"]').should('exist');
     });
-})
+});

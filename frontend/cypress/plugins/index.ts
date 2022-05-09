@@ -1,6 +1,7 @@
+// @ts-nocheck
 /// <reference types="cypress" />
 // ***********************************************************
-// This example plugins/index.js can be used to load plugins
+// This example plugins/index.ts can be used to load plugins
 //
 // You can change the location of this file or turn off loading
 // the plugins file with the 'pluginsFile' configuration option.
@@ -15,11 +16,10 @@
 /**
  * @type {Cypress.PluginConfig}
  */
-// eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
     if (config.testingType === 'component') {
-        require('@cypress/react/plugins/react-scripts')(on, config)
+        require('@cypress/react/plugins/react-scripts')(on, config);
     }
 
     return config;
-}
+};
