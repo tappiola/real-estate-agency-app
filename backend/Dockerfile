@@ -2,11 +2,15 @@ FROM node
 
 WORKDIR /app
 
-COPY package.json /app
+COPY package.json ./
 
-RUN npm install --legacy-peer-deps
+RUN npm install
 
-COPY . /app
+COPY . ./
+
+# Helper script for waiting until DB is ready when we run container
+ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh ./
+RUN chmod +x ./wait-for-it.sh
 
 EXPOSE 5000
 

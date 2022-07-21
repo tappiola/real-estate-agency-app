@@ -29,7 +29,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "npx cypress open",
+    "cypress:run": "npx cypress run --browser chrome",
+    "eslint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "browserslist": {
     "production": [
@@ -44,6 +47,8 @@
     ]
   },
   "devDependencies": {
+    "@cypress/react": "^5.12.4",
+    "@cypress/webpack-dev-server": "^1.8.4",
     "@types/mapbox-gl": "^2.6.3",
     "@types/node": "^16.11.25",
     "@types/react": "^17.0.39",
@@ -51,6 +56,7 @@
     "@types/react-transition-group": "^4.4.4",
     "@typescript-eslint/eslint-plugin": "^5.14.0",
     "@typescript-eslint/parser": "^5.14.0",
+    "cypress": "^9.6.0",
     "eslint": "^8.10.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^16.1.0",
@@ -58,6 +64,7 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.3",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "webpack-dev-server": "^4.9.0"
   }
 }

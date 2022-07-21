@@ -14,10 +14,10 @@ const Login : React.FC<{
 }) => (
   <form className="Login" onSubmit={loginHandler} noValidate>
     {formInputs.map((input) => <Input key={input.name} input={input} />)}
-    <button type="submit">Login</button>
+    <button type="submit" data-cy="login-button">Login</button>
     <p className="NotRegistered">
       Not registered yet?
-      <Link className="RegistrationLink" to={Path.Register}>Register</Link>
+      <Link className="RegistrationLink" data-cy="register-link" to={Path.Register}>Register</Link>
     </p>
   </form>
 );

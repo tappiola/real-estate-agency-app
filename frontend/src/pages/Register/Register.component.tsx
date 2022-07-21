@@ -14,7 +14,7 @@ const Register: React.FC<{
 }) => (
   <form className="Register" onSubmit={signupHandler} noValidate>
     {formInputs.map((input) => <Input key={input.name} input={input} />)}
-    <button type="submit">Register</button>
+    <button type="submit" data-cy="register-button">Register</button>
     <p className="AlreadyRegistered">
       Already registered?
       <Link className="LoginLink" to={Path.Login}>Login</Link>
