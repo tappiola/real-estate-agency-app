@@ -64,3 +64,13 @@ Usage without docker is not so easy, because you need to have MySQL running loca
 4. Pull the latest code: `git pull`
 5. Rebuild images and run containers again: `docker-compose -f docker-compose.prod.yml up --build -d`
 6. Check output to be sure that there are no unexpected errors: `docker-compose -f docker-compose.prod.yml logs -f`
+
+### Deployment - Digitalocean
+
+Frontend:
+1. Build new image: `docker build -f Dockerfile-prod --platform=linux/amd64 -t registry.digitalocean.com/real-estate-agency/frontend:latest .`
+2. Tag image: `docker push registry.digitalocean.com/real-estate-agency/frontend:latest`
+
+Backend:
+1. Build new image: `docker build --platform=linux/amd64 -t registry.digitalocean.com/real-estate-agency/backend:latest .`
+2. Tag image: `docker push registry.digitalocean.com/real-estate-agency/backend:latest`

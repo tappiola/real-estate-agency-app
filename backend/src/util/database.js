@@ -6,7 +6,13 @@ const sequelize = new Sequelize(
     constants.DB_USERNAME,
     constants.DB_PASSWORD, {
         dialect: 'mariadb',
-        host: constants.DB_HOST
+        host: constants.DB_HOST,
+        port: constants.DB_PORT,
+        dialectOptions: {
+            ssl: {
+                rejectUnauthorized: false
+            },
+        }
     });
 
 module.exports = sequelize;
