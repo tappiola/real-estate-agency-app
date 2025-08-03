@@ -2,11 +2,12 @@ FROM node:22
 
 WORKDIR /app
 
-COPY package.json /app
+COPY package.json ./
+COPY package-lock.json ./
 
-RUN npm install
+RUN npm ci
 
-COPY . /app
+COPY . ./
 
 EXPOSE 3000
 
