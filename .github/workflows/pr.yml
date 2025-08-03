@@ -27,7 +27,8 @@ jobs:
 #        env:
 #          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
-  lint:
+  frontend:
+    name: Frontend checks
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -45,3 +46,23 @@ jobs:
 
       - name: Lint JS
         run: npx eslint
+
+      - name: Create production build
+        run: npm run build
+
+  backend:
+    name: Backend checks
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: backend/.nvmrc
+
+      - name: Install Dependencies
+        run: npm ci

@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   db:
     image: mariadb:latest
@@ -13,11 +11,17 @@ services:
       - mysql-docker:/var/lib/mysql
     ports:
     - "3306:3306"
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   backend:
-    depends_on:
-      - db
-    build: ./backend
+    build:
+      context: ./backend
+      target: dev
     environment:
       PORT: 5000
       DB_HOST: ${DB_HOST}
@@ -27,12 +31,16 @@ services:
       JWT_SECRET: ${JWT_SECRET}
     volumes:
       - ./backend/src:/app/src
-    command: [ "./wait-for-it.sh", "db:3306", "--", "npm", "start" ]
+    depends_on:
+      db:
+        condition: service_healthy
 
   front:
     depends_on:
       - backend
-    build: ./frontend
+    build:
+      context: ./frontend
+      target: dev
     environment:
       BACKEND_URL: http://backend:5000
     ports:
