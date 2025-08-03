@@ -56,6 +56,7 @@ const CarouselComponent: React.FC<{
               <span
                 role="button"
                 tabIndex={-1}
+                aria-label={`Go to slide ${index + 1}`}
                 className={clsx('Carousel-DotIcon', {
                 // Make dot active immediately, including cases with infinite scroll and virtual slides
                     'Carousel-DotIcon_Active': getIsSlideActive(index)
@@ -74,6 +75,7 @@ const CarouselComponent: React.FC<{
       <div
         onClick={toPrevSlide}
         role="button"
+        aria-label="Go to previous slide"
         tabIndex={0}
         className={clsx('Carousel-Arrow', 'Carousel-Arrow_InnerLeft', {
             'Carousel-Arrow_Disabled': isPrevArrowDisabled
@@ -88,6 +90,7 @@ const CarouselComponent: React.FC<{
         onClick={toNextSlide}
         role="button"
         tabIndex={0}
+        aria-label="Go to next slide"
         className={clsx('Carousel-Arrow', 'Carousel-Arrow_InnerRight', {
             'Carousel-Arrow_Disabled': isNextArrowDisabled
         })}

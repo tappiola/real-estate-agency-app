@@ -1,5 +1,5 @@
 # Stage 0, build app in the production mode
-FROM node:17 as build-stage
+FROM node:22 as build-stage
 
 WORKDIR /app
 
