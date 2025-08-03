@@ -1,4 +1,6 @@
 terraform {
+  required_version = ">= 1.5.0"
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -6,11 +8,16 @@ terraform {
     }
   }
 
-  required_version = ">= 1.5.0"
+  backend "s3" {
+    bucket  = "tappiola-terraform-state"
+    key     = "real-estate-agency-app/terraform.tfstate"
+    region  = "eu-west-2"
+    encrypt = true
+  }
 }
 
 provider "aws" {
-  region  = "eu-west-2"
+  region = "eu-west-2"
 }
 
 resource "aws_s3_bucket" "images" {
