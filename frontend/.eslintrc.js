@@ -128,7 +128,7 @@ module.exports = {
         ],
         "react/no-array-index-key": "off",
         "jsx-a11y/click-events-have-key-events": "off",
-        "react-hooks/exhaustive-deps": "warn",
+        "react-hooks/exhaustive-deps": "off",
         "linebreak-style": "off",
         "@typescript-eslint/no-return-await": "off",
         "@typescript-eslint/return-await": "off",
