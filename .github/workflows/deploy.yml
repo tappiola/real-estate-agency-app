@@ -74,6 +74,8 @@ jobs:
     needs:
       - build_backend
       - build_frontend
+    permissions:
+      id-token: write
     defaults:
       run:
         working-directory: terraform
