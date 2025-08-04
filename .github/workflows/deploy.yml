@@ -27,6 +27,10 @@ jobs:
           role-to-assume: ${{ env.AWS_ECR_PUSH_ROLE }}
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Login to AWS ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
       - uses: docker/setup-buildx-action@v3
 
       - name: Build and push
@@ -34,7 +38,7 @@ jobs:
         with:
           context: backend
           push: true
-          tags: 208822006106.dkr.ecr.eu-west-2.amazonaws.com/real-estate-backend:${{ env.VERSION }}
+          tags: ${{ steps.login-ecr.outputs.registry }}/real-estate-backend:${{ env.VERSION }}
 
   build_frontend:
     name: Build - Frontend
@@ -51,6 +55,10 @@ jobs:
           role-to-assume: ${{ env.AWS_ECR_PUSH_ROLE }}
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Login to AWS ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
       - uses: docker/setup-buildx-action@v3
 
       - name: Build and push
@@ -58,7 +66,7 @@ jobs:
         with:
           context: frontend
           push: true
-          tags: 208822006106.dkr.ecr.eu-west-2.amazonaws.com/real-estate-frontend:${{ env.VERSION }}
+          tags: ${{ steps.login-ecr.outputs.registry }}/real-estate-frontend:${{ env.VERSION }}
 
   deploy:
     name: Deploy
