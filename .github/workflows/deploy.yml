@@ -8,7 +8,7 @@ on:
 
 env:
   AWS_REGION: eu-west-2
-  AWS_ECR_PUSH_ROLE: arn:aws:iam::208822006106:role/GithubActions
+  AWS_ROLE: arn:aws:iam::208822006106:role/GithubActions
   VERSION: 0.0.${{ github.run_number }}-${{ github.sha }}
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ env.AWS_ECR_PUSH_ROLE }}
+          role-to-assume: ${{ env.AWS_ROLE }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to AWS ECR
@@ -52,7 +52,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ env.AWS_ECR_PUSH_ROLE }}
+          role-to-assume: ${{ env.AWS_ROLE }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to AWS ECR
@@ -74,10 +74,26 @@ jobs:
     needs:
       - build_backend
       - build_frontend
+    defaults:
+      run:
+        working-directory: terraform
 
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-
       - uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Terraform - Init
+        run: terraform init
+
+      - name: Terraform - Plan
+        run: terraform plan -var "version=${{ env.VERSION }}" -out=tfplan
+
+#      - name: Terraform - Apply
+#        run: terraform apply -auto-approve tfplan
