@@ -24,11 +24,19 @@ resource "aws_db_subnet_group" "mariadb" {
 }
 
 resource "aws_security_group" "mariadb" {
-  name        = "real-estate-db"
+  name_prefix = "real-estate-db-${var.environment_name}-"
   description = "Real estate app DB"
   vpc_id      = var.vpc_id
 
   ingress {
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "tcp"
+    security_groups = [aws_security_group.backend_ecs_task.id]
+  }
+
+  ingress {
+    description = "Allow access from the laptop"
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
@@ -40,5 +48,13 @@ resource "aws_security_group" "mariadb" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "real-estate-db-${var.environment_name}"
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }

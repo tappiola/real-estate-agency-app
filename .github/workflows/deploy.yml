@@ -95,7 +95,7 @@ jobs:
         run: terraform init
 
       - name: Terraform - Plan
-        run: terraform plan -var "version=${{ env.VERSION }}" -out=tfplan
+        run: terraform plan -var "app_version=${{ env.VERSION }}" -out=tfplan
 
 #      - name: Terraform - Apply
 #        run: terraform apply -auto-approve tfplan
