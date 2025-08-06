@@ -1,18 +1,28 @@
-FROM node:22
+FROM node:22-alpine AS base
 
-WORKDIR /app
+WORKDIR /usr/src
+EXPOSE 5000
 
-COPY package.json ./
-COPY package-lock.json ./
+COPY package*.json ./
+
+
+FROM base AS dev
 
 RUN npm ci
 
-COPY . ./
+COPY . .
+USER node
 
-# Helper script for waiting until DB is ready when we run container
-ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh ./
-RUN chmod +x ./wait-for-it.sh
+CMD ["npm", "run", "start"]
 
-EXPOSE 5000
 
-CMD ["npm", "start"]
+FROM base AS prod
+
+ENV NODE_ENV=production
+
+RUN npm ci --omit=dev
+
+COPY . .
+USER node
+
+CMD ["node", "src/server.js"]

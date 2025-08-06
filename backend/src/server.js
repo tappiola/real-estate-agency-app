@@ -56,6 +56,6 @@ app.use(
     })
 );
 
-app.use('/', (req, res) => res.send('404'));
+app.use('/health', (req, res) => res.send('200'));
 
 sequelize.sync({alter: true}).then(app.listen(process.env.PORT || 5000));
