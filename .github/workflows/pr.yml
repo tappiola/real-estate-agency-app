@@ -18,13 +18,15 @@ jobs:
           ENV_FILE: ${{ secrets.ENV_FILE }}
         run: 'echo "$ENV_FILE" > .env'
 
+      - name: Run app
+        run: docker-compose up -d
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
           record: true
           working-directory: frontend
-          start: docker compose up
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 120
         env:
