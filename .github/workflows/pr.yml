@@ -19,7 +19,7 @@ jobs:
         run: 'echo "$ENV_FILE" > .env'
 
       - name: Run app
-        run: docker-compose up -d
+        run: docker compose up -d
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
