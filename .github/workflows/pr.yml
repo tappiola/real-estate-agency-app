@@ -3,6 +3,7 @@ on: [pull_request]
 
 jobs:
   cypress-tests:
+    name: Cypress E2E tests
     runs-on: ubuntu-latest
     container:
       image: cypress/included:latest
