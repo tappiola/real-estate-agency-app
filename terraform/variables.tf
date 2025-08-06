@@ -23,3 +23,8 @@ variable "ssl_certificate_arn" {
   type    = string
   default = "arn:aws:acm:eu-west-2:208822006106:certificate/d1618914-c826-484f-b5c3-441f2a395f63"
 }
+
+variable "jwt_secret" {
+  type = string
+  default = "somesupersecretsecret"
+}

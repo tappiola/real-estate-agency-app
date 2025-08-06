@@ -1,3 +1,7 @@
+locals {
+  rds_master_user_credentials = jsondecode(data.aws_secretsmanager_secret_version.rds_master_user.secret_string)
+}
+
 resource "aws_ecs_service" "backend" {
   name                  = "backend"
   cluster               = aws_ecs_cluster.this.id
@@ -51,15 +55,15 @@ resource "aws_ecs_task_definition" "backend" {
         },
         {
           name  = "DB_USERNAME"
-          value = aws_db_instance.mariadb.username
+          value = local.rds_master_user_credentials["username"]
         },
         {
           name  = "DB_PASSWORD"
-          value = "yjgVS2TxC<bX||G[!6UCwfN>Y.1k"
+          value = local.rds_master_user_credentials["password"]
         },
         {
           name  = "JWT_SECRET"
-          value = "somesupersecretsecret"
+          value = var.jwt_secret
         },
       ]
 
