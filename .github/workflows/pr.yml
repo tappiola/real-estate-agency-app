@@ -27,7 +27,6 @@ jobs:
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 120
         env:
-          CYPRESS_INSTALL_BINARY: 0
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
   frontend:
