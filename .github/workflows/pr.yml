@@ -24,7 +24,7 @@ jobs:
           browser: chrome
           record: true
           working-directory: frontend
-          start: docker-compose up
+          start: docker compose up
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 120
         env:
