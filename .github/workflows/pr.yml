@@ -2,30 +2,33 @@ name: PR
 on: [pull_request]
 
 jobs:
-#  cypress-tests:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v4
-#
-#      - name: Prepare file with secrets
-#        run: 'echo "$ENV_FILE" > .env'
-#        env:
-#          ENV_FILE: ${{ secrets.ENV_FILE }}
-#
-#      - name: Run app
-#        run: docker-compose up -d
-#
-#      - name: Cypress run
-#        uses: cypress-io/github-action@v2
-#        with:
-#          browser: chrome
-#          working-directory: frontend
-#          record: true
-#          wait-on: 'http://localhost:3000'
-#          wait-on-timeout: 120
-#        env:
-#          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+  cypress-tests:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/included:latest
+      options: --user 1001
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Prepare file with secrets
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+        run: 'echo "$ENV_FILE" > .env'
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          record: true
+          working-directory: frontend
+          start: docker-compose up
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
   frontend:
     name: Frontend checks
