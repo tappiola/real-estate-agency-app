@@ -31,6 +31,8 @@ services:
       JWT_SECRET: ${JWT_SECRET}
     volumes:
       - ./backend/src:/app/src
+    ports:
+      - "5001:5000"
     depends_on:
       db:
         condition: service_healthy

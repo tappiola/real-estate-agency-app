@@ -40,13 +40,6 @@ resource "aws_ecs_task_definition" "frontend" {
         }
       ]
 
-      environment = [
-        {
-          name  = "BACKEND_URL"
-          value = "https://localhost:5000"
-        },
-      ]
-
       logConfiguration = {
         logDriver = "awslogs"
         options = {
