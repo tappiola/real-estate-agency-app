@@ -1,76 +1,62 @@
-# Real estate agency website
+# Real Estate Agency App
 
-Live URL: https://real-estate.tappiola.com/
+A full-stack real estate application built with React, Node.js, GraphQL, and MariaDB. This platform allows users to search, view, and manage property listings with features like user authentication, wishlist functionality, and interactive maps.
 
-## Core features
+**Live URL**: https://real-estate.tappiola.co.uk
+
+## 🏗️ Tech Stack
 
 ### Frontend
-- React Hooks (including custom hooks )
-- React Router v6
-- Redux (i.e. `@reduxjs/toolkit`)
-- `clsx` for setting classes dynamically
-- Skeleton loaders (own implementation)
-- Slider (own implementation, with support of touch devices and endless scroll)
-- 2 types of picture galleries (own implementation, including, fullscreen gallery)
-- Parallax effect for banners (usage of 3rd party library)
-- `react-transition-group` for animations
-- GraphQL (including Apollo GraphQL client in few areas)
-- Typescript
-- Dynamic search results loading
-- Pagination
-- Inputs validation
-- Custom Toast notifications
-- Storing previous search results and page position on navigate back (no refetching from the server) 
-- User authentication
-- Dynamic map custom implementation based on Mapbox
-- ESLint
-- Font awesome icons
-- SCSS
-- Responsive layout
-- Lazy loading and split into chunks
+- **React 17** with TypeScript and Hooks
+- **Redux Toolkit** for state management
+- **React Router v6** for navigation
+- **Apollo Client** for GraphQL integration
+- **Mapbox GL** for interactive maps
+- **SCSS** for styling with responsive design
+- **Cypress** for end-to-end testing
 
 ### Backend
-- `express` server
-- MariaDB
-- Sequelize ORM
-- Auth middleware
-- JWT tokens
-- GraphQL
-- ESLint
-- dotenv files for secrets
+- **Node.js** with Express server
+- **GraphQL** with express-graphql
+- **Sequelize ORM** with MariaDB
+- **JWT** authentication with middleware
+- **bcryptjs** for password hashing
+- **ESLint** for code quality
 
-### Architecture
-- 3 Docker containers for Frontend, Backend and Database
-- `docker-compose` for simplifying containers startup
-- Using docker multi-stage build for production frontend image
-- DigitalOcean VM used for hosting
-- Custom domain name and HTTPS
-- Amazon S3 bucket for images hosting
+### Infrastructure & Deployment
+- **Docker** containers for Frontend, Backend, and Database
+- **Docker Compose** for development environment
+- **AWS ECS** and **Terraform** for production deployment
+- **Amazon S3** for image storage
+
+GitHub actions are used to deploy changes automatically after every PR is merged.
+
+## 🚀 Key Features
+
+### User Experience
+- Advanced property search with filters
+- Dynamic search results with pagination
+- Interactive maps with property locations
+- User authentication and registration
+- Wishlist functionality for saved properties
+- Responsive mobile-first design
+- Custom image galleries with fullscreen view
+- Parallax effects and smooth animations
+- Toast notifications for user feedback
+- Skeleton loaders for better UX
+
+### Technical Features
+- Custom slider implementation with touch support
+- State persistence for search results and navigation
+- Lazy loading and code splitting
+- Input validation and sanitization
+- Custom hooks for reusable logic
+- Dynamic class management with clsx
 
 ### DB backup/restore
-Create backup: `docker exec real-estate-agency-db-1 sh -c 'exec mysqldump -uadmin -pbigsnorlax flats' > ./flats-dump.sql`
 
-Restore backup: `docker exec -i real-estate-agency-db-1 sh -c 'exec mysql -uadmin -pbigsnorlax flats' < ./flats-dump.sql`
+DB backup could be restored from `flats-dump-prod.sql.zip`.
 
 ### How to run locally
-Using docker-compose: `docker-compose up --build`
 
-Usage without docker is not so easy, because you need to have MySQL running locally. 
-
-### Deployment
-1. Login to server via SSH
-2. Navigate to app directory: `cd ~/real-estate-agency-app`
-3. Stop running containers: `docker-compose -f docker-compose.prod.yml down`
-4. Pull the latest code: `git pull`
-5. Rebuild images and run containers again: `docker-compose -f docker-compose.prod.yml up --build -d`
-6. Check output to be sure that there are no unexpected errors: `docker-compose -f docker-compose.prod.yml logs -f`
-
-### Deployment - Digitalocean
-
-Frontend:
-1. Build new image: `docker build -f Dockerfile-prod --platform=linux/amd64 -t registry.digitalocean.com/real-estate-agency/frontend:latest .`
-2. Tag image: `docker push registry.digitalocean.com/real-estate-agency/frontend:latest`
-
-Backend:
-1. Build new image: `docker build --platform=linux/amd64 -t registry.digitalocean.com/real-estate-agency/backend:latest .`
-2. Tag image: `docker push registry.digitalocean.com/real-estate-agency/backend:latest`
+Using docker-compose: `docker compose up --build`
