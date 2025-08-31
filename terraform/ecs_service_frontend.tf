@@ -3,8 +3,13 @@ resource "aws_ecs_service" "frontend" {
   cluster               = aws_ecs_cluster.this.id
   task_definition       = aws_ecs_task_definition.frontend.arn
   desired_count         = 1
-  launch_type           = "FARGATE"
   wait_for_steady_state = true
+
+  capacity_provider_strategy {
+    capacity_provider = "FARGATE_SPOT"
+    base              = 1
+    weight            = 1
+  }
 
   load_balancer {
     container_name   = "app"

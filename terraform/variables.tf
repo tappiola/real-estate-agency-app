@@ -25,6 +25,6 @@ variable "ssl_certificate_arn" {
 }
 
 variable "jwt_secret" {
-  type = string
+  type    = string
   default = "somesupersecretsecret"
 }

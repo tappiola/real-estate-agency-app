@@ -1,14 +1,15 @@
-locals {
-  rds_master_user_credentials = jsondecode(data.aws_secretsmanager_secret_version.rds_master_user.secret_string)
-}
-
 resource "aws_ecs_service" "backend" {
   name                  = "backend"
   cluster               = aws_ecs_cluster.this.id
   task_definition       = aws_ecs_task_definition.backend.arn
   desired_count         = 1
-  launch_type           = "FARGATE"
   wait_for_steady_state = true
+
+  capacity_provider_strategy {
+    capacity_provider = "FARGATE_SPOT"
+    base              = 1
+    weight            = 1
+  }
 
   load_balancer {
     container_name   = "app"
@@ -54,16 +55,19 @@ resource "aws_ecs_task_definition" "backend" {
           value = "flats"
         },
         {
-          name  = "DB_USERNAME"
-          value = local.rds_master_user_credentials["username"]
-        },
-        {
-          name  = "DB_PASSWORD"
-          value = local.rds_master_user_credentials["password"]
-        },
-        {
           name  = "JWT_SECRET"
           value = var.jwt_secret
+        },
+      ]
+
+      secrets = [
+        {
+          name      = "DB_USERNAME",
+          valueFrom = "${data.aws_secretsmanager_secret.rds_master_user.arn}:username::",
+        },
+        {
+          name      = "DB_PASSWORD",
+          valueFrom = "${data.aws_secretsmanager_secret.rds_master_user.arn}:password::",
         },
       ]
 
@@ -133,4 +137,22 @@ resource "aws_iam_role" "backend_ecs_task_execution" {
 resource "aws_iam_role_policy_attachment" "backend_ecs_task_execution_policy" {
   role       = aws_iam_role.backend_ecs_task_execution.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}
+
+resource "aws_iam_role_policy" "backend_ecs_secrets_manager_access" {
+  role = aws_iam_role.backend_ecs_task_execution.name
+
+  name   = "SecretsManagerAccess"
+  policy = data.aws_iam_policy_document.backend_ecs_secrets_manager_access.json
+}
+
+data "aws_iam_policy_document" "backend_ecs_secrets_manager_access" {
+  statement {
+    actions = [
+      "secretsmanager:GetSecretValue",
+    ]
+    resources = [
+      data.aws_secretsmanager_secret.rds_master_user.arn,
+    ]
+  }
 }

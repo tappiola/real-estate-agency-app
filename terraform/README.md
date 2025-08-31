@@ -1,3 +1,11 @@
 ## Terraform module for the application
 
-TODO
+Init:
+```
+terraform init
+```
+
+Apply:
+```
+terraform apply -var app_version=XXX
+```
