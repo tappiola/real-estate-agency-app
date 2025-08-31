@@ -77,7 +77,7 @@ resource "aws_ecs_task_definition" "backend" {
           Name       = "datadog"
           Host       = "http-intake.logs.datadoghq.com"
           dd_service = "real-estate-backend"
-          dd_source  = "backend"
+          dd_source  = "app"
           TLS        = "on"
           provider   = "ecs"
         }
@@ -125,13 +125,23 @@ resource "aws_ecs_task_definition" "backend" {
       }
 
       logConfiguration = {
-        logDriver = "awslogs"
-        options = {
-          awslogs-group         = aws_cloudwatch_log_group.backend_ecs_task.name
-          awslogs-region        = "eu-west-2"
-          awslogs-stream-prefix = "dd-agent"
+          logDriver = "awsfirelens"
+          options = {
+            Name       = "datadog"
+            Host       = "http-intake.logs.datadoghq.com"
+            dd_service = "real-estate-backend"
+            dd_source  = "datadog-agent"
+            TLS        = "on"
+            provider   = "ecs"
+          }
+
+          secretOptions = [
+            {
+              name      = "apikey"
+              valueFrom = data.aws_secretsmanager_secret_version.datadog.arn
+            }
+          ]
         }
-      }
     },
     {
       name      = "log_router"
