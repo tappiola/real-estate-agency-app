@@ -5,3 +5,11 @@ data "aws_secretsmanager_secret" "rds_master_user" {
 data "aws_secretsmanager_secret_version" "rds_master_user" {
   secret_id = data.aws_secretsmanager_secret.rds_master_user.id
 }
+
+data "aws_secretsmanager_secret" "datadog" {
+  name = "DataDog/ApiKey"
+}
+
+data "aws_secretsmanager_secret_version" "datadog" {
+  secret_id = data.aws_secretsmanager_secret.datadog.id
+}

@@ -1,5 +1,5 @@
 {
-  "name": "basic",
+  "name": "real-estate-backend",
   "version": "1.0.0",
   "main": "express.js",
   "scripts": {
@@ -13,6 +13,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
+    "dd-trace": "^5.64.0",
     "express": "^4.17.2",
     "express-graphql": "^0.12.0",
     "graphql": "^15.3.0",

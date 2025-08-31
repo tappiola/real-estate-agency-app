@@ -72,11 +72,76 @@ resource "aws_ecs_task_definition" "backend" {
       ]
 
       logConfiguration = {
+        logDriver = "awsfirelens"
+        options = {
+          Name       = "datadog"
+          Host       = "http-intake.logs.datadoghq.com"
+          dd_service = "real-estate-backend"
+          dd_source  = "backend"
+          TLS        = "on"
+          provider   = "ecs"
+        }
+
+        secretOptions = [
+          {
+            name      = "apikey"
+            valueFrom = data.aws_secretsmanager_secret_version.datadog.arn
+          }
+        ]
+      }
+    },
+    {
+      name  = "datadog-agent"
+      image = "public.ecr.aws/datadog/agent:latest"
+
+      environment = [
+        {
+          name  = "ECS_FARGATE"
+          value = "true"
+        }
+      ]
+
+      secrets = [
+        {
+          name      = "DD_API_KEY"
+          valueFrom = data.aws_secretsmanager_secret_version.datadog.arn
+        }
+      ]
+
+      portMappings = [
+        {
+          "hostPort" : 8126,
+          "protocol" : "tcp",
+          "containerPort" : 8126
+        }
+      ]
+
+      healthCheck = {
+        command     = ["CMD-SHELL", "agent health"]
+        interval    = 30
+        timeout     = 5
+        retries     = 3
+        startPeriod = 60
+      }
+
+      logConfiguration = {
         logDriver = "awslogs"
         options = {
           awslogs-group         = aws_cloudwatch_log_group.backend_ecs_task.name
           awslogs-region        = "eu-west-2"
-          awslogs-stream-prefix = "backend"
+          awslogs-stream-prefix = "dd-agent"
+        }
+      }
+    },
+    {
+      name      = "log_router"
+      image     = "amazon/aws-for-fluent-bit:stable"
+      essential = true
+
+      firelensConfiguration = {
+        type = "fluentbit"
+        options = {
+          "enable-ecs-log-metadata" = "true"
         }
       }
     }
@@ -153,6 +218,7 @@ data "aws_iam_policy_document" "backend_ecs_secrets_manager_access" {
     ]
     resources = [
       data.aws_secretsmanager_secret.rds_master_user.arn,
+      data.aws_secretsmanager_secret.datadog.arn,
     ]
   }
 }

@@ -25,4 +25,4 @@ RUN npm ci --omit=dev
 COPY . .
 USER node
 
-CMD ["node", "src/server.js"]
+CMD ["node", "-r dd-trace/init", "src/server.js"]
