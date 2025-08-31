@@ -57,4 +57,4 @@ app.use(
 
 app.use('/health', (req, res) => res.send('200'));
 
-sequelize.sync({alter: true}).then(app.listen(process.env.PORT || 5000));
+sequelize.sync({alter: true}).then(app.listen(process.env.PORT || 4000));

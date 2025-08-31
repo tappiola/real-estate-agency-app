@@ -13,7 +13,7 @@ resource "aws_ecs_service" "backend" {
 
   load_balancer {
     container_name   = "app"
-    container_port   = 5000
+    container_port   = 4000
     target_group_arn = aws_lb_target_group.backend.arn
   }
 
@@ -40,7 +40,7 @@ resource "aws_ecs_task_definition" "backend" {
 
       portMappings = [
         {
-          containerPort = 5000
+          containerPort = 4000
           protocol      = "tcp"
         }
       ]
@@ -57,6 +57,14 @@ resource "aws_ecs_task_definition" "backend" {
         {
           name  = "JWT_SECRET"
           value = var.jwt_secret
+        },
+        {
+          name  = "DD_ENV"
+          value = "prod"
+        },
+        {
+          name  = "DD_VERSION"
+          value = var.app_version
         },
       ]
 
@@ -169,8 +177,8 @@ resource "aws_security_group" "backend_ecs_task" {
   vpc_id      = var.vpc_id
 
   ingress {
-    from_port       = 5000
-    to_port         = 5000
+    from_port       = 4000
+    to_port         = 4000
     protocol        = "tcp"
     security_groups = [aws_security_group.alb.id]
   }

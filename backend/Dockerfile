@@ -1,7 +1,7 @@
 FROM node:22-alpine AS base
 
 WORKDIR /usr/src
-EXPOSE 5000
+EXPOSE 4000
 
 COPY package*.json ./
 

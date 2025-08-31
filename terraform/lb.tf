@@ -51,7 +51,7 @@ resource "aws_lb_listener" "https" {
 # Target Group for Backend
 resource "aws_lb_target_group" "backend" {
   name                 = "real-estate-backend-${var.environment_name}"
-  port                 = 5000
+  port                 = 4000
   protocol             = "HTTP"
   vpc_id               = var.vpc_id
   target_type          = "ip"
